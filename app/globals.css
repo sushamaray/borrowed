@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
-/* Locked project palette: dark teal + lime */
+/* Locked project palette: violet + lavender */
 :root {
-  --background: #f4f8f2;
-  --foreground: #0f1f22;
+  --background: #f8f7fc;
+  --foreground: #221b3d;
   --surface: #ffffff;
-  --surface-soft: #edf4ec;
-  --border: #d7e1da;
-  --primary: #00272c;
-  --primary-hover: #001c20;
-  --primary-active: #001317;
-  --primary-soft: #dce8e9;
-  --accent: #c1ff51;
-  --accent-hover: #abd94f;
-  --accent-soft: #efffd0;
-  --text-secondary: #52686b;
-  --text-muted: #778b8e;
-  --ink: #071417;
+  --surface-soft: #f2eefb;
+  --border: #e3dcf3;
+  --primary: #3b2a80;
+  --primary-hover: #31236a;
+  --primary-active: #251a52;
+  --primary-soft: #ece7fa;
+  --accent: #d3c5f6;
+  --accent-hover: #c0afea;
+  --accent-soft: #f4efff;
+  --text-secondary: #675d8b;
+  --text-muted: #9187b0;
+  --ink: #1b1530;
 }
 
 @theme inline {
@@ -41,21 +41,21 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #f4f8f2;
-    --foreground: #0f1f22;
+    --background: #f8f7fc;
+    --foreground: #221b3d;
     --surface: #ffffff;
-    --surface-soft: #edf4ec;
-    --border: #d7e1da;
-    --primary: #00272c;
-    --primary-hover: #001c20;
-    --primary-active: #001317;
-    --primary-soft: #dce8e9;
-    --accent: #c1ff51;
-    --accent-hover: #abd94f;
-    --accent-soft: #efffd0;
-    --text-secondary: #52686b;
-    --text-muted: #778b8e;
-    --ink: #071417;
+    --surface-soft: #f2eefb;
+    --border: #e3dcf3;
+    --primary: #3b2a80;
+    --primary-hover: #31236a;
+    --primary-active: #251a52;
+    --primary-soft: #ece7fa;
+    --accent: #d3c5f6;
+    --accent-hover: #c0afea;
+    --accent-soft: #f4efff;
+    --text-secondary: #675d8b;
+    --text-muted: #9187b0;
+    --ink: #1b1530;
   }
 }
 
