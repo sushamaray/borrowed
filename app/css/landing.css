@@ -1,0 +1,172 @@
+/* Import typography */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* Main Layout Setup */
+.borrowed-layout {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Navigation Bar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 60px;
+    background-color: var(--surface-soft);
+    /* Light grey-purple background */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-box {
+    background-color: var(--primary);
+    color: white;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.logo-text {
+    font-weight: 800;
+    font-size: 24px;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.login-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+.signup-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 80px 60px;
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 650px;
+    color: white;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.badge .dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent);
+    border-radius: 50%;
+}
+
+.hero-title {
+    font-size: 68px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 20px 0;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 480px;
+    font-weight: 400;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+}
+
+.primary-btn {
+    background-color: var(--accent-soft);
+    /* Very light purple/white */
+    color: var(--primary);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.secondary-btn {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
