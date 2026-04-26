@@ -36,17 +36,6 @@ function FacebookIcon() {
   );
 }
 
-function EyeOffIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6">
-      <path
-        fill="currentColor"
-        d="M3.3 4.7 2 6l3.1 3.1C3.2 10.6 2 12 2 12s3.6 6 10 6c2 0 3.7-.6 5.1-1.4L20.7 20 22 18.7 3.3 4.7ZM12 16c-3.5 0-6-2.8-7.2-4 0 0 .7-.8 2-1.7l1.7 1.7A3.9 3.9 0 0 0 12 16Zm0-8c3.5 0 6 2.8 7.2 4-.5.6-1.6 1.8-3.2 2.8l-1.7-1.7a3.9 3.9 0 0 0-5.4-5.4L7.4 6.3C8.7 5.5 10.2 5 12 5Z"
-      />
-    </svg>
-  );
-}
-
 export default function Home() {
   return (
     <main className="login-page-layout grid min-h-screen overflow-hidden bg-white lg:grid-cols-[minmax(0,2.7fr)_minmax(30rem,2.3fr)]">
@@ -66,7 +55,7 @@ export default function Home() {
           <p className="login-page-brand-label mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/75">
             Borrowed
           </p>
-          <h1 className="login-page-hero-title text-4x1 font-extrabold leading-tight sm:text-5x1">
+          <h1 className="login-page-hero-title text-4xl font-extrabold leading-tight sm:text-5xl">
             Welcome to Borrowed
           </h1>
           <p className="login-page-hero-description mt-4 max-w-md text-sm leading-6 text-white/78 sm:text-base">
@@ -98,7 +87,6 @@ export default function Home() {
           <TextField
             type="password"
             placeholder="Password"
-            trailingIcon={<EyeOffIcon />}
           />
 
           <div className="login-form-options flex items-center justify-between gap-3 px-0.5 text-sm font-medium text-text-secondary">
