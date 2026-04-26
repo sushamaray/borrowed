@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { TextField } from "../login-components";
+import { TextField } from "../login";
 
 export default function RegisterClient() {
   return (
