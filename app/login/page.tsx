@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { LoginClient } from "../login-components";
+import LoginClient from "./LoginClient";
 
 export const metadata: Metadata = {
     title: "Login | Borrowed",
