@@ -406,3 +406,112 @@ body {
     flex-direction: column;
   }
 }
+
+.registration-page-layout {
+  background:
+    linear-gradient(135deg, rgba(248, 247, 252, 0.92), #ffffff 56%),
+    var(--background);
+}
+
+.registration-page-hero-panel {
+  background: var(--primary);
+}
+
+.registration-page-hero-image {
+  filter: saturate(1.08);
+  object-fit: cover;
+}
+
+.registration-page-hero-gradient {
+  background: linear-gradient(
+    145deg,
+    rgba(116, 194, 255, 0.72) 0%,
+    rgba(130, 110, 238, 0.72) 48%,
+    rgba(239, 83, 192, 0.66) 100%
+  );
+}
+
+.registration-page-hero-soft-light {
+  background:
+    radial-gradient(
+      circle at 16% 18%,
+      rgba(255, 255, 255, 0.25) 0%,
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 80% 84%,
+      rgba(125, 232, 255, 0.28) 0%,
+      transparent 30%
+    );
+}
+
+.registration-page-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.registration-page-brand-label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.registration-page-hero-title {
+  color: #ffffff;
+  text-shadow: 0 12px 34px rgba(34, 27, 61, 0.22);
+}
+
+.registration-page-hero-description {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.registration-page-form-panel {
+  background:
+    radial-gradient(
+      circle at 20% 12%,
+      rgba(211, 197, 246, 0.32) 0%,
+      transparent 32%
+    ),
+    #ffffff;
+}
+
+.registration-form-card {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.registration-form-title {
+  color: var(--primary);
+  letter-spacing: 0;
+}
+
+.registration-form-description {
+  color: var(--text-secondary);
+}
+
+.registration-terms-control {
+  line-height: 1.5;
+  margin-top: 0.25rem;
+}
+
+.registration-inline-link,
+.registration-login-link {
+  font-weight: 800;
+}
+
+.registration-submit-button {
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .registration-form-card {
+    border-radius: 1.25rem;
+    padding: 2.25rem 1.5rem;
+  }
+
+  .registration-form-title {
+    font-size: 3rem;
+  }
+
+  .registration-form-description,
+  .registration-login-prompt {
+    font-size: 1rem;
+  }
+}

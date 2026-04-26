@@ -1,5 +1,6 @@
 import { Divider, SocialButton, TextField } from "./login-components";
 import Image from "next/image";
+import Link from "next/link";
 
 function GoogleIcon() {
   return (
@@ -115,12 +116,12 @@ export default function Home() {
 
         <p className="sign-up-prompt mt-8 text-center text-sm font-semibold text-text-secondary">
           Don&apos;t have an account?{" "}
-          <button
-            type="button"
+          <Link
+            href="/register"
             className="sign-up-button text-primary transition-colors hover:text-primary-hover"
           >
             Sign Up Now!
-          </button>
+          </Link>
         </p>
         </div>
       </section>
