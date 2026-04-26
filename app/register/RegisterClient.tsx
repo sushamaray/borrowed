@@ -73,7 +73,7 @@ export default function RegisterClient() {
 
             <button
               type="submit"
-              className="registration-submit-button mt-2 rounded-xl bg-[linear-gradient(135deg,#7a6cf0_0%,#d86bd8_100%)] px-6 py-4 text-lg font-extrabold text-white shadow-[0_16px_32px_rgba(122,108,240,0.32)] transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
+              className="registration-submit-button mt-2 rounded-xl px-6 py-4 text-lg font-extrabold text-white transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
             >
               Sign Up
             </button>

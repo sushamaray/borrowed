@@ -108,7 +108,7 @@ export default function LoginClient() {
 
             <button
               type="submit"
-              className="login-submit-button mx-auto mt-8 block w-44 rounded-full bg-[linear-gradient(135deg,#7a6cf0_0%,#d86bd8_100%)] px-6 py-4 text-sm font-bold uppercase text-white shadow-[0_12px_24px_rgba(122,108,240,0.28)] transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
+              className="login-submit-button mx-auto mt-8 block w-44 rounded-full px-6 py-4 text-sm font-bold uppercase text-white transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
             >
               Login
             </button>
