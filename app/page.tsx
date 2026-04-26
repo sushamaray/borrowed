@@ -1,4 +1,5 @@
 import { Divider, SocialButton, TextField } from "./login-components";
+import Image from "next/image";
 
 function GoogleIcon() {
   return (
@@ -48,33 +49,51 @@ function EyeOffIcon() {
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-background">
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,var(--background)_0%,color-mix(in_srgb,var(--background)_76%,var(--accent-soft))_32%,color-mix(in_srgb,var(--background)_58%,var(--primary-soft))_68%,color-mix(in_srgb,var(--background)_72%,var(--accent))_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.42)_0%,rgba(255,255,255,0.18)_32%,rgba(255,255,255,0.04)_58%,rgba(255,255,255,0.16)_100%)]" />
-      <div className="absolute inset-x-[-12%] top-[-12%] h-[24rem] rounded-full bg-white/35 blur-3xl" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(244,239,255,0)_0%,rgba(244,239,255,0.08)_38%,rgba(244,239,255,0.26)_72%,rgba(244,239,255,0.34)_100%)]" />
+    <main className="login-page-layout grid min-h-screen overflow-hidden bg-white lg:grid-cols-[minmax(0,2.7fr)_minmax(30rem,2.3fr)]">
+      <section className="login-page-hero-panel relative min-h-[42vh] overflow-hidden bg-primary px-6 py-10 text-white sm:px-10 lg:min-h-screen lg:px-16 lg:py-20">
+        <Image
+          src="/Borrowed BG.jpeg"
+          alt="Borrowed background"
+          fill
+          priority
+          sizes="(min-width: 1024px) 60vw, 100vw"
+          className="login-page-hero-image object-cover"
+        />
+        <div className="login-page-hero-gradient absolute inset-0 bg-[linear-gradient(135deg,rgba(102,83,231,0.86)_0%,rgba(132,83,224,0.74)_42%,rgba(246,103,155,0.7)_100%)]" />
+        <div className="login-page-hero-glow absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,119,150,0.55)_0%,transparent_24%),radial-gradient(circle_at_12%_84%,rgba(255,145,92,0.42)_0%,transparent_26%)]" />
 
-      <section className="relative z-10 mx-auto flex min-h-screen w-full max-w-xl items-center px-4 py-10 sm:px-6">
-        <div className="w-full rounded-[36px] border border-border/80 bg-[color-mix(in_srgb,var(--surface)_82%,white)] px-6 py-10 shadow-[0_24px_80px_rgba(34,27,61,0.14),0_8px_24px_rgba(59,42,128,0.08)] backdrop-blur-xl sm:px-8 sm:py-12">
-        <header className="mb-12">
-          <p className="text-2xl font-bold tracking-tight text-primary">
-            Welcome to
-          </p>
-          <h1 className="text-6xl font-extrabold leading-none tracking-[-0.06em] text-primary">
+        <div className="login-page-hero-content relative z-10 flex h-full min-h-[22rem] max-w-xl flex-col justify-center">
+          <p className="login-page-brand-label mb-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/75">
             Borrowed
+          </p>
+          <h1 className="login-page-hero-title text-4x1 font-extrabold leading-tight sm:text-5x1">
+            Welcome to Borrowed
+          </h1>
+          <p className="login-page-hero-description mt-4 max-w-md text-sm leading-6 text-white/78 sm:text-base">
+            Manage your borrowed items, requests, and account access from one
+            clean dashboard.
+          </p>
+        </div>
+      </section>
+
+      <section className="login-page-form-panel flex min-h-[58vh] items-center justify-center bg-white px-6 py-12 lg:min-h-screen">
+        <div className="login-form-card w-full max-w-xl rounded-2xl border border-border/90 bg-white px-10 py-12 shadow-[0_24px_70px_rgba(34,27,61,0.12)] sm:px-12 sm:py-14">
+        <header className="login-form-header mb-9 text-center">
+          <h1 className="login-form-title text-xl font-extrabold uppercase tracking-[0.1em] text-primary">
+            User Login
           </h1>
         </header>
 
-        <div className="space-y-4">
+        <div className="social-login-button-list mb-7 flex flex-col gap-4">
           <SocialButton provider="Google" icon={<GoogleIcon />} />
           <SocialButton provider="Facebook" icon={<FacebookIcon />} />
         </div>
 
-        <div className="my-8">
+        <div className="login-divider-wrapper my-7">
           <Divider />
         </div>
 
-        <form className="space-y-4">
+        <form className="login-form-fields flex flex-col gap-4">
           <TextField placeholder="Enter Your Email or Phone Number" />
           <TextField
             type="password"
@@ -82,17 +101,17 @@ export default function Home() {
             trailingIcon={<EyeOffIcon />}
           />
 
-          <div className="flex items-center justify-between gap-4 px-1 text-base font-medium text-foreground">
-            <label className="flex items-center gap-3">
+          <div className="login-form-options flex items-center justify-between gap-3 px-0.5 text-sm font-medium text-text-secondary">
+            <label className="remember-me-control flex items-center gap-3">
               <input
                 type="checkbox"
-                className="h-4 w-4 rounded border border-primary/40 bg-transparent accent-[var(--primary)]"
+                className="remember-me-checkbox h-4 w-4 rounded border border-primary/40 bg-transparent accent-[var(--primary)]"
               />
               <span>Remember me</span>
             </label>
             <button
               type="button"
-              className="text-primary transition-colors hover:text-primary-hover"
+              className="forgot-password-button text-primary transition-colors hover:text-primary-hover"
             >
               Forgot Password?
             </button>
@@ -100,17 +119,17 @@ export default function Home() {
 
           <button
             type="submit"
-            className="mt-8 w-full rounded-[20px] bg-primary px-5 py-5 text-2xl font-bold text-white shadow-[0_16px_30px_color-mix(in_srgb,var(--primary)_28%,transparent)] transition-transform duration-200 hover:-translate-y-0.5 hover:bg-primary-hover active:bg-primary-active"
+            className="login-submit-button mx-auto mt-8 block w-44 rounded-full bg-[linear-gradient(135deg,#7a6cf0_0%,#d86bd8_100%)] px-6 py-4 text-sm font-bold uppercase text-white shadow-[0_12px_24px_rgba(122,108,240,0.28)] transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
           >
             Login
           </button>
         </form>
 
-        <p className="mt-8 text-center text-lg font-semibold text-foreground">
+        <p className="sign-up-prompt mt-8 text-center text-sm font-semibold text-text-secondary">
           Don&apos;t have an account?{" "}
           <button
             type="button"
-            className="text-primary transition-colors hover:text-primary-hover"
+            className="sign-up-button text-primary transition-colors hover:text-primary-hover"
           >
             Sign Up Now!
           </button>
