@@ -1,7 +1,11 @@
 "use client";
 
+import type { FormEvent } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import { Divider, SocialButton, TextField } from "./form-components";
 
@@ -41,6 +45,63 @@ function FacebookIcon() {
 }
 
 export default function LoginClient() {
+  const router = useRouter();
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    console.log("[login-client] Submitting login form", {
+      identifier,
+      passwordLength: password.length,
+    });
+    setError("");
+    setSuccessMessage("");
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          identifier,
+          password,
+        }),
+      });
+      const data = (await response.json()) as {
+        message?: string;
+        user?: { id: string; email: string; userName: string; name: string };
+      };
+
+      console.log("[login-client] Login response received", {
+        ok: response.ok,
+        status: response.status,
+        message: data.message,
+      });
+
+      if (!response.ok) {
+        console.warn("[login-client] Login failed", data);
+        setError(data.message ?? "Unable to log in.");
+        return;
+      }
+
+      console.log("[login-client] Login successful", data.user);
+      setSuccessMessage("Login successful. Redirecting...");
+      router.push("/");
+    } catch (error) {
+      console.error("[login-client] Network or server error", error);
+      setError("Unable to connect to the server.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <main className="login-page-layout grid min-h-screen overflow-hidden bg-white lg:grid-cols-[minmax(0,2.7fr)_minmax(30rem,2.3fr)]">
       <section className="login-page-hero-panel relative min-h-[42vh] overflow-hidden bg-primary px-6 py-10 text-white sm:px-10 lg:min-h-screen lg:px-16 lg:py-20">
@@ -86,9 +147,99 @@ export default function LoginClient() {
             <Divider />
           </div>
 
-          <form className="login-form-fields flex flex-col gap-4">
-            <TextField placeholder="Enter Your Email or Phone Number" />
-            <TextField type="password" placeholder="Password" />
+          <form className="login-form-fields flex flex-col gap-4" onSubmit={handleSubmit}>
+            <TextField
+              type="text"
+              name="identifier"
+              autoComplete="username"
+              placeholder="Enter Your Email or Username"
+              value={identifier}
+              onChange={(event) => setIdentifier(event.target.value)}
+              required
+            />
+            <TextField
+              type={showPassword ? "text" : "password"}
+              name="password"
+              autoComplete="current-password"
+              placeholder="Password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              trailingElement={
+                <button
+                  type="button"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  aria-pressed={showPassword}
+                  onClick={() => setShowPassword((current) => !current)}
+                  className="shrink-0 text-text-muted transition-colors hover:text-primary"
+                >
+                  {showPassword ? (
+                    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+                      <path
+                        d="M3 3l18 18"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                      />
+                      <path
+                        d="M10.6 10.7a3 3 0 0 0 4 4"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                      />
+                      <path
+                        d="M9.9 5.1A10.9 10.9 0 0 1 12 5c5 0 9.3 3.1 11 7-0.7 1.6-1.8 3.1-3.1 4.2"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                      />
+                      <path
+                        d="M6.6 6.7C4.8 8 3.5 9.8 3 12c1.7 3.9 6 7 11 7 1.5 0 2.9-.3 4.2-.8"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+                      <path
+                        d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                      />
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="3"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                  )}
+                </button>
+              }
+              required
+            />
+
+            {error ? (
+              <p className="text-sm font-semibold text-red-600">{error}</p>
+            ) : null}
+            {successMessage ? (
+              <p className="text-sm font-semibold text-emerald-600">{successMessage}</p>
+            ) : null}
 
             <div className="login-form-options flex items-center justify-between gap-3 px-0.5 text-sm font-medium text-text-secondary">
               <label className="remember-me-control flex items-center gap-3">
@@ -108,9 +259,10 @@ export default function LoginClient() {
 
             <button
               type="submit"
+              disabled={isSubmitting}
               className="login-submit-button mx-auto mt-8 block w-44 rounded-full px-6 py-4 text-sm font-bold uppercase text-white transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
             >
-              Login
+              {isSubmitting ? "Logging in..." : "Login"}
             </button>
           </form>
 

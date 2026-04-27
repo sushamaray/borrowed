@@ -1,11 +1,187 @@
 "use client";
 
+import type { FormEvent } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import { TextField } from "../login";
 
+function PasswordToggleButton({
+  isVisible,
+  onToggle,
+}: {
+  isVisible: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={isVisible ? "Hide password" : "Show password"}
+      aria-pressed={isVisible}
+      onClick={onToggle}
+      className="shrink-0 text-text-muted transition-colors hover:text-primary"
+    >
+      {isVisible ? (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+          <path
+            d="M3 3l18 18"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <path
+            d="M10.6 10.7a3 3 0 0 0 4 4"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <path
+            d="M9.9 5.1A10.9 10.9 0 0 1 12 5c5 0 9.3 3.1 11 7-0.7 1.6-1.8 3.1-3.1 4.2"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <path
+            d="M6.6 6.7C4.8 8 3.5 9.8 3 12c1.7 3.9 6 7 11 7 1.5 0 2.9-.3 4.2-.8"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+        </svg>
+      ) : (
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+          <path
+            d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+          <circle
+            cx="12"
+            cy="12"
+            r="3"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 export default function RegisterClient() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    userName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  function updateField(name: keyof typeof formData, value: string) {
+    setFormData((current) => ({
+      ...current,
+      [name]: value,
+    }));
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    console.log("[register-client] Submitting registration form", {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      userName: formData.userName,
+      email: formData.email,
+      passwordLength: formData.password.length,
+    });
+    setError("");
+    setSuccessMessage("");
+
+    if (formData.password !== formData.confirmPassword) {
+      console.warn("[register-client] Password confirmation mismatch");
+      setError("Passwords do not match.");
+      return;
+    }
+
+    if (!acceptedTerms) {
+      console.warn("[register-client] Terms not accepted");
+      setError("Please accept the terms to continue.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          userName: formData.userName,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+      const data = (await response.json()) as { message?: string };
+
+      console.log("[register-client] Registration response received", {
+        ok: response.ok,
+        status: response.status,
+        message: data.message,
+      });
+
+      if (!response.ok) {
+        console.warn("[register-client] Registration failed", data);
+        setError(data.message ?? "Unable to create account.");
+        return;
+      }
+
+      console.log("[register-client] Registration successful");
+      setSuccessMessage("Account created. Redirecting to login...");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        userName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+      router.push("/login");
+    } catch (error) {
+      console.error("[register-client] Network or server error", error);
+      setError("Unable to connect to the server.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <main className="registration-page-layout grid min-h-screen overflow-hidden bg-background lg:grid-cols-[minmax(0,1.05fr)_minmax(34rem,0.95fr)]">
       <section className="registration-page-hero-panel relative min-h-[36vh] overflow-hidden px-6 py-10 text-white sm:px-10 lg:min-h-screen lg:px-16 lg:py-20">
@@ -45,19 +221,87 @@ export default function RegisterClient() {
             </p>
           </header>
 
-          <form className="registration-form-fields flex flex-col gap-4">
+          <form className="registration-form-fields flex flex-col gap-4" onSubmit={handleSubmit}>
             <div className="registration-name-fields flex flex-col gap-4">
-              <TextField placeholder="First Name" />
-              <TextField placeholder="Last Name" />
+              <TextField
+                name="firstName"
+                placeholder="First Name"
+                autoComplete="given-name"
+                value={formData.firstName}
+                onChange={(event) => updateField("firstName", event.target.value)}
+                required
+              />
+              <TextField
+                name="lastName"
+                placeholder="Last Name"
+                autoComplete="family-name"
+                value={formData.lastName}
+                onChange={(event) => updateField("lastName", event.target.value)}
+                required
+              />
             </div>
 
-            <TextField type="email" placeholder="Email Address" />
-            <TextField type="password" placeholder="Password" />
-            <TextField type="password" placeholder="Confirm Password" />
+            <TextField
+              type="text"
+              name="userName"
+              placeholder="Username"
+              autoComplete="username"
+              value={formData.userName}
+              onChange={(event) => updateField("userName", event.target.value)}
+              required
+            />
+            <TextField
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              autoComplete="email"
+              value={formData.email}
+              onChange={(event) => updateField("email", event.target.value)}
+              required
+            />
+            <TextField
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              autoComplete="new-password"
+              value={formData.password}
+              onChange={(event) => updateField("password", event.target.value)}
+              trailingElement={
+                <PasswordToggleButton
+                  isVisible={showPassword}
+                  onToggle={() => setShowPassword((current) => !current)}
+                />
+              }
+              required
+            />
+            <TextField
+              type={showConfirmPassword ? "text" : "password"}
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              autoComplete="new-password"
+              value={formData.confirmPassword}
+              onChange={(event) => updateField("confirmPassword", event.target.value)}
+              trailingElement={
+                <PasswordToggleButton
+                  isVisible={showConfirmPassword}
+                  onToggle={() => setShowConfirmPassword((current) => !current)}
+                />
+              }
+              required
+            />
+
+            {error ? (
+              <p className="text-sm font-semibold text-red-600">{error}</p>
+            ) : null}
+            {successMessage ? (
+              <p className="text-sm font-semibold text-emerald-600">{successMessage}</p>
+            ) : null}
 
             <label className="registration-terms-control flex items-start gap-3 text-sm font-semibold text-text-secondary">
               <input
                 type="checkbox"
+                checked={acceptedTerms}
+                onChange={(event) => setAcceptedTerms(event.target.checked)}
                 className="registration-terms-checkbox mt-1 h-4 w-4 rounded border border-primary/40 bg-transparent accent-[var(--primary)]"
               />
               <span>
@@ -73,16 +317,17 @@ export default function RegisterClient() {
 
             <button
               type="submit"
+              disabled={isSubmitting}
               className="registration-submit-button mt-2 rounded-xl px-6 py-4 text-lg font-extrabold text-white transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
             >
-              Sign Up
+              {isSubmitting ? "Creating..." : "Sign Up"}
             </button>
           </form>
 
           <p className="registration-login-prompt mt-8 text-center text-lg font-semibold text-text-secondary">
             Already have an account?{" "}
             <Link
-              href="/"
+              href="/login"
               className="registration-login-link text-primary transition-colors hover:text-primary-hover"
             >
               Login Here!

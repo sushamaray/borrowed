@@ -17,6 +17,8 @@
   --text-secondary: #675d8b;
   --text-muted: #9187b0;
   --ink: #1b1530;
+  --font-geist-sans: "Segoe UI", "Trebuchet MS", Verdana, sans-serif;
+  --font-geist-mono: "Cascadia Code", Consolas, "Courier New", monospace;
 }
 
 @theme inline {
