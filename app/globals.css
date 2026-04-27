@@ -14,6 +14,8 @@
   --accent: #d3c5f6;
   --accent-hover: #c0afea;
   --accent-soft: #f4efff;
+  --success: #2f9e44;
+  --success-soft: #dff5e4;
   --text-secondary: #675d8b;
   --text-muted: #9187b0;
   --ink: #1b1530;
@@ -34,6 +36,8 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   --color-ink: var(--ink);
@@ -55,6 +59,8 @@
     --accent: #d3c5f6;
     --accent-hover: #c0afea;
     --accent-soft: #f4efff;
+    --success: #2f9e44;
+    --success-soft: #dff5e4;
     --text-secondary: #675d8b;
     --text-muted: #9187b0;
     --ink: #1b1530;

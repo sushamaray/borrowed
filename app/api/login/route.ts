@@ -37,6 +37,17 @@ export async function POST(req: Request) {
       return Response.json({ message: "Invalid email or userName" }, { status: 404 });
     }
 
+    if (!user.password) {
+      console.log("[login] Social-only account attempted password login", {
+        identifier: normalizedIdentifier,
+        userId: user.id,
+      });
+      return Response.json(
+        { message: "This account uses Google or Facebook sign-in." },
+        { status: 400 },
+      );
+    }
+
     // Check password
     console.log("[login] Comparing password", {
       identifier: normalizedIdentifier,
@@ -63,7 +74,7 @@ export async function POST(req: Request) {
         id: user.id,
         email: user.email,
         userName: user.userName,
-        name: user.firstName,
+        name: user.name ?? user.firstName ?? user.email,
       },
     });
   } catch (error) {
