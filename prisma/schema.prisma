@@ -29,6 +29,52 @@ model User {
   authenticators Authenticator[]
 }
 
+model Product {
+  id                 String   @id @default(cuid())
+  slug               String   @unique
+  name               String
+  category           String
+  location           String
+  postedAt           DateTime
+  priceAmount        Int
+  summary            String
+  description        String   @db.Text
+  features           Json
+  imageUrl           String
+  lenderName         String
+  lenderRating       Decimal  @db.Decimal(2, 1)
+  lenderNote         String   @db.Text
+  compensationMajor  String
+  compensationMinor  String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  billingOrders      BillingOrder[]
+}
+
+enum BillingMethod {
+  BKASH
+  NAGAD
+  ROCKET
+  CARD
+  CASH_ON_DELIVERY
+}
+
+model BillingOrder {
+  id              String        @id @default(cuid())
+  productId       String
+  fullName        String
+  email           String
+  phoneNumber     String
+  deliveryAddress String       @db.Text
+  specialNotes    String?      @db.Text
+  billingMethod   BillingMethod
+  createdAt       DateTime     @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String

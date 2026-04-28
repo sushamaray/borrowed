@@ -29,6 +29,27 @@ model User {
   authenticators Authenticator[]
 }
 
+model Product {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  name              String
+  category          String
+  location          String
+  postedAt          DateTime
+  priceAmount       Int
+  summary           String
+  description       String   @db.Text
+  features          Json
+  imageUrl          String
+  lenderName        String
+  lenderRating      Decimal  @db.Decimal(2, 1)
+  lenderNote        String   @db.Text
+  compensationMajor String
+  compensationMinor String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
