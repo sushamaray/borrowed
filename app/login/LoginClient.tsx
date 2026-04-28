@@ -93,7 +93,7 @@ export default function LoginClient() {
 
       console.log("[login-client] Login successful", data.user);
       setSuccessMessage("Login successful. Redirecting...");
-      router.push("/");
+      router.push("/dashboard/dashboard");
     } catch (error) {
       console.error("[login-client] Network or server error", error);
       setError("Unable to connect to the server.");
