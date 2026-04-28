@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE `user` ADD COLUMN `emailVerified` DATETIME(3) NULL,
+ALTER TABLE `User` ADD COLUMN `emailVerified` DATETIME(3) NULL,
     ADD COLUMN `image` VARCHAR(191) NULL,
     ADD COLUMN `name` VARCHAR(191) NULL,
     MODIFY `firstName` VARCHAR(191) NULL,
