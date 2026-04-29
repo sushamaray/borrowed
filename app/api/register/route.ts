@@ -69,6 +69,7 @@ export async function POST(req: Request) {
     console.log("[register] Creating user", { email, userName });
     await prisma.user.create({
       data: {
+        name: `${firstName} ${lastName}`.trim(),
         firstName,
         lastName,
         userName,

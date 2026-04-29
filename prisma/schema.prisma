@@ -5,6 +5,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
 }
 
 datasource db {
@@ -13,11 +14,115 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  firstName String
-  lastName  String
-  userName  String   @unique
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
+  id             String          @id @default(uuid())
+  name           String?
+  firstName      String?
+  lastName       String?
+  userName       String?         @unique
+  email          String          @unique
+  emailVerified  DateTime?
+  image          String?
+  location       String?
+  password       String?
+  createdAt      DateTime        @default(now())
+  accounts       Account[]
+  sessions       Session[]
+  authenticators Authenticator[]
+}
+
+model Product {
+  id                 String   @id @default(cuid())
+  slug               String   @unique
+  name               String
+  category           String
+  location           String
+  postedAt           DateTime
+  priceAmount        Int
+  summary            String
+  description        String   @db.Text
+  features           Json
+  imageUrl           String
+  lenderName         String
+  lenderRating       Decimal  @db.Decimal(2, 1)
+  lenderNote         String   @db.Text
+  compensationMajor  String
+  compensationMinor  String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  billingOrders      BillingOrder[]
+}
+
+enum BillingMethod {
+  BKASH
+  NAGAD
+  ROCKET
+  CARD
+  CASH_ON_DELIVERY
+}
+
+model BillingOrder {
+  id              String        @id @default(cuid())
+  productId       String
+  fullName        String
+  email           String
+  phoneNumber     String
+  deliveryAddress String       @db.Text
+  specialNotes    String?      @db.Text
+  billingMethod   BillingMethod
+  createdAt       DateTime     @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String  @db.Text
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
 }

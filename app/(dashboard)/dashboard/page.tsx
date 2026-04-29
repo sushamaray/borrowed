@@ -29,9 +29,9 @@ export default function DashboardPage() {
     messagesCount: 2,
     cartCount: 0,
     activeBorrows: [
-      { id: 1, item: "Camera", from: "Mike Davis", dueIn: 1, dueDate: "Today", status: "due-today" },
-      { id: 2, item: "Tent", from: "Alex Smith", dueIn: 3, dueDate: "Apr 30", status: "due-soon" },
-      { id: 3, item: "MacBook Pro", from: "Sarah Chen", dueIn: 7, dueDate: "May 4", status: "safe" },
+      { id: 1, item: "Camera", from: "Mike Davis", dueIn: 1, dueDate: "Today", status: "due-today" as const },
+      { id: 2, item: "Tent", from: "Alex Smith", dueIn: 3, dueDate: "Apr 30", status: "due-soon" as const },
+      { id: 3, item: "MacBook Pro", from: "Sarah Chen", dueIn: 7, dueDate: "May 4", status: "safe" as const },
     ],
   };
 
@@ -81,16 +81,35 @@ export default function DashboardPage() {
       {/* PRIORITY 1: Alert Banner - Due Items */}
       {dueTodayCount > 0 && (
         <div
-          className="rounded-lg border border-[var(--danger)] bg-[var(--danger-soft)] overflow-hidden shadow-md"
+          className="rounded-xl overflow-hidden shadow-2xl"
+          style={{
+            backgroundColor: "#ef4444",
+            boxShadow: "0 20px 50px rgba(239, 68, 68, 0.4)",
+          }}
         >
-          <div className="px-6 py-5 flex items-center justify-between gap-4">
-            <div className="flex items-start gap-4">
-              <div
-                className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-lg"
-                style={{ backgroundColor: "var(--danger)", color: "white" }}
-              >
-                <AlertCircle className="h-6 w-6" />
-              </div>
+          <div
+            className="rounded-xl overflow-hidden backdrop-blur-md m-1"
+            style={{
+              background: "linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              border: "2px solid rgba(255, 255, 255, 0.4)",
+              boxShadow: "inset 0 0 20px rgba(255, 255, 255, 0.2)",
+            }}
+          >
+            <div className="px-6 py-5 flex items-center justify-between gap-4">
+              <div className="flex items-start gap-4">
+                <div
+                  className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-lg"
+                  style={{ 
+                    background: "linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.15) 100%)",
+                    backdropFilter: "blur(10px)",
+                    color: "white",
+                    border: "1px solid rgba(255, 255, 255, 0.4)"
+                  }}
+                >
+                  <AlertCircle className="h-6 w-6" />
+                </div>
               <div>
                 <h3 className="font-bold text-[var(--foreground)]">
                   {dueTodayCount} item{dueTodayCount > 1 ? "s" : ""} due today
@@ -102,10 +121,12 @@ export default function DashboardPage() {
             </div>
             <Link
               href="/dashboard/my-borrows"
-              className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200"
+              className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 hover:bg-white/30"
               style={{
-                backgroundColor: "var(--danger)",
+                background: "linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.2) 100%)",
                 color: "white",
+                border: "1.5px solid rgba(255, 255, 255, 0.4)",
+                backdropFilter: "blur(10px)",
               }}
             >
               Return Item
@@ -113,6 +134,7 @@ export default function DashboardPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
               </svg>
             </Link>
+          </div>
           </div>
         </div>
       )}
@@ -150,7 +172,7 @@ export default function DashboardPage() {
       </div>
 
       {/* PRIORITY 1b: Active Borrows - Main Focus */}
-      <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] overflow-hidden shadow-sm">
+      <div className="rounded-lg border border-[var(--border)]/40 bg-[var(--surface)]/40 overflow-hidden shadow-sm backdrop-blur-md">
         <div className="border-b border-[var(--border)] bg-[var(--surface-soft)] px-6 py-4">
           <h2 className="text-lg font-bold text-[var(--foreground)]">Active Borrows</h2>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
@@ -234,7 +256,7 @@ function OverviewCard({
   return (
     <Link
       href={href}
-      className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4 transition-all duration-200 hover:shadow-md hover:border-[var(--primary)]/30"
+      className="rounded-lg border border-[var(--border)]/40 bg-[var(--surface)]/40 p-4 transition-all duration-200 hover:shadow-md hover:border-[var(--primary)]/30 backdrop-blur-md"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
