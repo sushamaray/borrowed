@@ -14,6 +14,8 @@
   --accent: #d3c5f6;
   --accent-hover: #c0afea;
   --accent-soft: #f4efff;
+  --success: #2f9e44;
+  --success-soft: #dff5e4;
   --text-secondary: #675d8b;
   --text-muted: #9187b0;
   --ink: #1b1530;
@@ -41,6 +43,8 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   --color-ink: var(--ink);
@@ -62,6 +66,8 @@
     --accent: #d3c5f6;
     --accent-hover: #c0afea;
     --accent-soft: #f4efff;
+    --success: #2f9e44;
+    --success-soft: #dff5e4;
     --text-secondary: #675d8b;
     --text-muted: #9187b0;
     --ink: #1b1530;
@@ -534,5 +540,626 @@ body {
   .registration-form-description,
   .registration-login-prompt {
     font-size: 1rem;
+  }
+}
+
+.product-page-shell {
+  background:
+    radial-gradient(circle at top left, rgba(211, 197, 246, 0.34), transparent 28%),
+    linear-gradient(180deg, #fcfbff 0%, #f6f2fe 100%);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.product-page-wrap {
+  margin: 0 auto;
+  max-width: 76rem;
+}
+
+.product-back-link {
+  align-items: center;
+  color: var(--primary);
+  display: inline-flex;
+  gap: 0.65rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.product-hero-panel {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(227, 220, 243, 0.95);
+  border-radius: 2rem;
+  box-shadow: 0 24px 72px rgba(34, 27, 61, 0.08);
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.95fr);
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.product-hero-copy {
+  align-self: center;
+}
+
+.product-category-pill {
+  background: var(--primary-soft);
+  border-radius: 999px;
+  color: var(--primary);
+  display: inline-flex;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 0.55rem 0.9rem;
+  text-transform: uppercase;
+}
+
+.product-page-title {
+  color: var(--ink);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-top: 1.15rem;
+}
+
+.product-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.5rem;
+  margin-top: 1.3rem;
+}
+
+.product-meta-item {
+  align-items: center;
+  color: var(--text-secondary);
+  display: inline-flex;
+  gap: 0.55rem;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.product-summary-text {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-top: 1.35rem;
+  max-width: 38rem;
+}
+
+.product-hero-image-frame {
+  display: flex;
+}
+
+.product-hero-image-shell {
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(180deg, #efe9ff 0%, #ddd2fb 100%);
+  border: 1px solid rgba(59, 42, 128, 0.08);
+  border-radius: 1.6rem;
+  min-height: 22rem;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.product-hero-image,
+.product-similar-image {
+  object-fit: cover;
+}
+
+.product-details-layout {
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(19rem, 0.8fr);
+}
+
+.product-primary-column,
+.product-secondary-column {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.product-detail-card,
+.product-price-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(227, 220, 243, 0.95);
+  border-radius: 1.6rem;
+  box-shadow: 0 20px 60px rgba(34, 27, 61, 0.06);
+  padding: 1.6rem;
+}
+
+.product-card-heading-row,
+.product-lender-row,
+.product-compensation-item,
+.product-similar-footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.product-card-title,
+.product-similar-title {
+  color: var(--ink);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.product-subtitle {
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: 800;
+  margin-top: 1.5rem;
+}
+
+.product-body-copy,
+.product-note-copy {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-top: 0.95rem;
+}
+
+.product-feature-list {
+  color: var(--foreground);
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1rem;
+  padding-left: 1.2rem;
+}
+
+.product-feature-list li::marker {
+  color: var(--primary);
+}
+
+.product-price-card {
+  background:
+    linear-gradient(160deg, rgba(59, 42, 128, 0.96) 0%, rgba(121, 98, 221, 0.94) 100%);
+  color: #ffffff;
+}
+
+.product-price-label,
+.product-price-caption {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.product-price-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.product-price-value {
+  font-size: clamp(2.2rem, 5vw, 3.1rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  margin-top: 0.35rem;
+}
+
+.product-price-caption {
+  margin-top: 0.3rem;
+}
+
+.product-cta-button {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 999px;
+  color: var(--primary);
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 800;
+  gap: 0.65rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding: 0.95rem 1.2rem;
+  text-align: center;
+  width: 100%;
+}
+
+.product-rating-pill {
+  align-items: center;
+  background: var(--accent-soft);
+  border-radius: 999px;
+  color: var(--primary);
+  display: inline-flex;
+  font-size: 0.92rem;
+  font-weight: 800;
+  gap: 0.35rem;
+  padding: 0.5rem 0.8rem;
+}
+
+.product-lender-label,
+.product-section-kicker {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.product-lender-value {
+  color: var(--ink);
+  font-weight: 800;
+  text-align: right;
+}
+
+.product-compensation-card svg {
+  color: var(--primary);
+}
+
+.product-compensation-item + .product-compensation-item {
+  border-top: 1px solid rgba(227, 220, 243, 0.95);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.product-similar-section {
+  margin-top: 2rem;
+}
+
+.product-similar-header {
+  align-items: end;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.product-similar-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.product-similar-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(227, 220, 243, 0.95);
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 50px rgba(34, 27, 61, 0.06);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.product-similar-image-shell {
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(180deg, #efe9ff 0%, #ddd2fb 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+.product-similar-copy {
+  flex: 1;
+  padding: 1.15rem 1.15rem 0.65rem;
+}
+
+.product-similar-copy h3 {
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.product-similar-copy p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-top: 0.55rem;
+}
+
+.product-similar-footer {
+  color: var(--primary);
+  font-weight: 800;
+  padding: 0 1.15rem 1.1rem;
+}
+
+@media (max-width: 1024px) {
+  .product-hero-panel,
+  .product-details-layout,
+  .product-similar-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .product-page-shell {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .product-hero-panel,
+  .product-detail-card,
+  .product-price-card {
+    border-radius: 1.4rem;
+    padding: 1.25rem;
+  }
+
+  .product-hero-image-shell {
+    min-height: 16rem;
+  }
+
+  .product-lender-row,
+  .product-compensation-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .product-lender-value {
+    text-align: left;
+  }
+}
+
+.billing-page-shell {
+  background:
+    radial-gradient(circle at top right, rgba(211, 197, 246, 0.3), transparent 24%),
+    linear-gradient(180deg, #fcfbff 0%, #f4efff 100%);
+  min-height: 100vh;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.billing-page-wrap {
+  margin: 0 auto;
+  max-width: 74rem;
+}
+
+.billing-back-link {
+  align-items: center;
+  color: var(--primary);
+  display: inline-flex;
+  font-size: 0.95rem;
+  font-weight: 700;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+.billing-page-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.8fr);
+}
+
+.billing-main-card,
+.billing-summary-card,
+.billing-info-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(227, 220, 243, 0.95);
+  border-radius: 1.6rem;
+  box-shadow: 0 22px 60px rgba(34, 27, 61, 0.07);
+}
+
+.billing-main-card {
+  padding: 1.75rem;
+}
+
+.billing-kicker {
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.billing-page-title {
+  color: var(--ink);
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-top: 0.9rem;
+}
+
+.billing-page-copy,
+.billing-empty-copy,
+.billing-info-row p {
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+.billing-page-copy {
+  margin-top: 0.85rem;
+  max-width: 38rem;
+}
+
+.billing-method-section {
+  margin-top: 1.5rem;
+}
+
+.billing-method-title {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.billing-method-grid {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 0.95rem;
+}
+
+.billing-method-option {
+  background: rgba(244, 239, 255, 0.75);
+  border: 1px solid rgba(59, 42, 128, 0.12);
+  border-radius: 1rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  min-height: 3.5rem;
+  position: relative;
+}
+
+.billing-method-option span {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 0.9rem 1rem;
+  width: 100%;
+}
+
+.billing-method-option-selected {
+  background: rgba(59, 42, 128, 0.08);
+  border-color: rgba(59, 42, 128, 0.48);
+  box-shadow: 0 12px 28px rgba(59, 42, 128, 0.12);
+  color: var(--primary);
+}
+
+.billing-method-input {
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+}
+
+.billing-form-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.5rem;
+}
+
+.billing-field {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.billing-field span {
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.billing-field input,
+.billing-field textarea {
+  background: #ffffff;
+  border: 1px solid rgba(59, 42, 128, 0.12);
+  border-radius: 1rem;
+  color: var(--foreground);
+  padding: 0.95rem 1rem;
+}
+
+.billing-field textarea {
+  resize: vertical;
+}
+
+.billing-field-full {
+  grid-column: 1 / -1;
+}
+
+.billing-submit-button {
+  align-items: center;
+  background: var(--primary);
+  border-radius: 999px;
+  color: #ffffff;
+  display: inline-flex;
+  font-size: 1rem;
+  font-weight: 800;
+  gap: 0.65rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  padding: 1rem 1.35rem;
+}
+
+.billing-submit-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.billing-side-column {
+  display: grid;
+  gap: 1rem;
+}
+
+.billing-summary-card,
+.billing-info-card {
+  padding: 1.5rem;
+}
+
+.billing-card-title {
+  color: var(--ink);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.billing-summary-row {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.95rem 0;
+}
+
+.billing-summary-row + .billing-summary-row {
+  border-top: 1px solid rgba(227, 220, 243, 0.95);
+}
+
+.billing-summary-row span {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.billing-summary-row strong {
+  color: var(--ink);
+  text-align: right;
+}
+
+.billing-info-row {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: auto 1fr;
+}
+
+.billing-info-row + .billing-info-row {
+  border-top: 1px solid rgba(227, 220, 243, 0.95);
+  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.billing-info-row svg {
+  color: var(--primary);
+  margin-top: 0.25rem;
+}
+
+.billing-info-row h3 {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+@media (max-width: 1024px) {
+  .billing-page-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .billing-page-shell {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .billing-main-card,
+  .billing-summary-card,
+  .billing-info-card {
+    border-radius: 1.35rem;
+    padding: 1.2rem;
+  }
+
+  .billing-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .billing-method-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .billing-field-full {
+    grid-column: auto;
+  }
+
+  .billing-summary-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .billing-summary-row strong {
+    text-align: left;
   }
 }

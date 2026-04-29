@@ -139,8 +139,8 @@ export default function LoginClient() {
           </header>
 
           <div className="social-login-button-list mb-7 flex flex-col gap-4">
-            <SocialButton provider="Google" icon={<GoogleIcon />} />
-            <SocialButton provider="Facebook" icon={<FacebookIcon />} />
+            <SocialButton provider="Google" icon={<GoogleIcon />} href="/login/google" />
+            <SocialButton provider="Facebook" icon={<FacebookIcon />} href="/login/facebook" />
           </div>
 
           <div className="login-divider-wrapper my-7">

@@ -1,8 +1,11 @@
+import Link from "next/link";
 import type { InputHTMLAttributes, ReactNode } from "react";
 
 type SocialButtonProps = {
   provider: "Google" | "Facebook";
   icon: ReactNode;
+  href: string;
+  actionLabel?: "Login" | "Sign up" | "Continue";
 };
 
 type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -11,17 +14,22 @@ type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   trailingElement?: ReactNode;
 };
 
-export function SocialButton({ provider, icon }: SocialButtonProps) {
+export function SocialButton({
+  provider,
+  icon,
+  href,
+  actionLabel = "Login",
+}: SocialButtonProps) {
   return (
-    <button
-      type="button"
+    <Link
+      href={href}
       className="social-login-button flex w-full items-center justify-center gap-3 rounded-full border border-transparent bg-surface-soft px-5 py-4 text-base font-semibold text-text-secondary transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-soft hover:text-primary"
     >
       <span className="social-login-button-icon flex h-6 w-6 items-center justify-center [&>svg]:h-6 [&>svg]:w-6">
         {icon}
       </span>
-      <span>Login with {provider}</span>
-    </button>
+      <span>{actionLabel} with {provider}</span>
+    </Link>
   );
 }
 
