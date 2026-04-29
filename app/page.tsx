@@ -52,9 +52,9 @@ export default function BorrowedLanding() {
             <Link href="/login" className="primary-btn">
               Get Started <span aria-hidden="true">&rarr;</span>
             </Link>
-            <button type="button" className="secondary-btn">
-              Browse Items
-            </button>
+            <Link href="/products/apex-gaming-pc" className="secondary-btn">
+              View Dummy Product
+            </Link>
           </div>
         </div>
       </main>
