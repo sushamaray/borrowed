@@ -17,9 +17,18 @@
   --text-secondary: #675d8b;
   --text-muted: #9187b0;
   --ink: #1b1530;
+  /* Status colors - derived from design system */
+  --success: #059669;
+  --success-soft: #d1fae5;
+  --warning: #d97706;
+  --warning-soft: #fef3c7;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --font-geist-sans: "Segoe UI", "Trebuchet MS", Verdana, sans-serif;
+  --font-geist-mono: "Cascadia Code", Consolas, "Courier New", monospace;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
@@ -237,9 +246,9 @@ body {
 }
 
 .login-submit-button {
-  background: linear-gradient(135deg, #7a6cf0 0%, #d86bd8 100%);
+  background: var(--text-secondary);
   border-radius: 999px;
-  box-shadow: 0 14px 28px rgba(122, 108, 240, 0.3);
+  box-shadow: 0 14px 28px rgba(103, 93, 139, 0.24);
   color: #ffffff;
   display: block;
   font-size: 0.95rem;
@@ -252,10 +261,12 @@ body {
 }
 
 .login-submit-button:hover {
+  background: var(--primary);
   transform: translateY(-0.125rem);
 }
 
 .login-submit-button:active {
+  background: var(--ink);
   transform: translateY(0);
 }
 
@@ -498,6 +509,16 @@ body {
 
 .registration-submit-button {
   width: 100%;
+  background: var(--text-secondary);
+  box-shadow: 0 16px 32px rgba(103, 93, 139, 0.26);
+}
+
+.registration-submit-button:hover {
+  background: var(--primary);
+}
+
+.registration-submit-button:active {
+  background: var(--ink);
 }
 
 @media (max-width: 760px) {
