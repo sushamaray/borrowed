@@ -18,30 +18,30 @@ type FeaturedCardProps = {
 
 const variantGradients = {
   primary: "from-[var(--primary-soft)] to-[var(--surface)] border-[var(--primary)]/20",
-  success: "from-[var(--status-success-soft)] to-[var(--surface)] border-[var(--status-success)]/20",
-  warning: "from-[var(--status-warning-soft)] to-[var(--surface)] border-[var(--status-warning)]/20",
-  danger: "from-[var(--status-danger-soft)] to-[var(--surface)] border-[var(--status-danger)]/20",
+  success: "from-[var(--success-soft)] to-[var(--surface)] border-[var(--success)]/20",
+  warning: "from-[var(--warning-soft)] to-[var(--surface)] border-[var(--warning)]/20",
+  danger: "from-[var(--danger-soft)] to-[var(--surface)] border-[var(--danger)]/20",
 };
 
 const variantAccents = {
   primary: "bg-[var(--primary)]/5",
-  success: "bg-[var(--status-success)]/5",
-  warning: "bg-[var(--status-warning)]/5",
-  danger: "bg-[var(--status-danger)]/5",
+  success: "bg-[var(--success)]/5",
+  warning: "bg-[var(--warning)]/5",
+  danger: "bg-[var(--danger)]/5",
 };
 
 const variantButtons = {
   primary: "bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white",
-  success: "bg-[var(--status-success)] hover:bg-[var(--status-success)] text-white",
-  warning: "bg-[var(--status-warning)] hover:bg-[var(--status-warning)] text-white",
-  danger: "bg-[var(--status-danger)] hover:bg-[var(--status-danger)] text-white",
+  success: "bg-[var(--success)] hover:bg-[var(--success)] text-white",
+  warning: "bg-[var(--warning)] hover:bg-[var(--warning)] text-white",
+  danger: "bg-[var(--danger)] hover:bg-[var(--danger)] text-white",
 };
 
 const variantIcons = {
   primary: "text-[var(--primary)]",
-  success: "text-[var(--status-success)]",
-  warning: "text-[var(--status-warning)]",
-  danger: "text-[var(--status-danger)]",
+  success: "text-[var(--success)]",
+  warning: "text-[var(--warning)]",
+  danger: "text-[var(--danger)]",
 };
 
 export default function FeaturedCard({

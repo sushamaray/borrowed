@@ -17,9 +17,9 @@ type StatCardProps = {
 
 const variantClasses = {
   default: "bg-[var(--surface)] border-[var(--border)] text-[var(--primary)]",
-  success: "bg-[var(--status-success-soft)] border-[var(--status-success)]/20 text-[var(--status-success)]",
-  warning: "bg-[var(--status-warning-soft)] border-[var(--status-warning)]/20 text-[var(--status-warning)]",
-  danger: "bg-[var(--status-danger-soft)] border-[var(--status-danger)]/20 text-[var(--status-danger)]",
+  success: "bg-[var(--success-soft)] border-[var(--success)]/20 text-[var(--success)]",
+  warning: "bg-[var(--warning-soft)] border-[var(--warning)]/20 text-[var(--warning)]",
+  danger: "bg-[var(--danger-soft)] border-[var(--danger)]/20 text-[var(--danger)]",
   info: "bg-[var(--primary-soft)] border-[var(--primary)]/20 text-[var(--primary)]",
 };
 
@@ -93,8 +93,8 @@ export default function StatCard({
 
   const classes = `
     group relative rounded-lg border transition-all duration-200 flex flex-col
-    hover:shadow-lg hover:border-[var(--primary)]/50 cursor-pointer
-    ${size === "lg" ? "min-h-[200px]" : size === "md" ? "min-h-[180px]" : "min-h-[160px]"}
+    hover:shadow-md hover:border-primary/70 hover:bg-opacity-80 cursor-pointer
+    ${size === "lg" ? "min-h-[200px]" : size === "md" ? "min-h-[160px]" : "min-h-auto"}
     ${variantClasses[variant]}
     ${sizeClasses[size]}
   `;

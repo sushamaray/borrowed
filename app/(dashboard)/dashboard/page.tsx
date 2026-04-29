@@ -1,112 +1,420 @@
 "use client";
 
-import { useState } from "react";
-import StatCard from "@/components/dashboard/StatCard";
+import { useMemo } from "react";
+import Link from "next/link";
+import {
+  AlertCircle,
+  Package,
+  BookOpen,
+  Mail,
+  ShoppingCart,
+  RotateCcw,
+  Clock,
+  MessageSquare,
+  Laptop,
+  Dumbbell,
+  Home,
+  Wrench,
+  Truck,
+  BookMarked,
+  CheckCircle2,
+  Circle,
+} from "lucide-react";
 
 export default function DashboardPage() {
-  const [isDismissed, setIsDismissed] = useState(false);
+  // Mock data - replace with real API data
+  const userStats = {
+    itemsCount: 8,
+    borrowsCount: 3,
+    messagesCount: 2,
+    cartCount: 0,
+    activeBorrows: [
+      { id: 1, item: "Camera", from: "Mike Davis", dueIn: 1, dueDate: "Today", status: "due-today" },
+      { id: 2, item: "Tent", from: "Alex Smith", dueIn: 3, dueDate: "Apr 30", status: "due-soon" },
+      { id: 3, item: "MacBook Pro", from: "Sarah Chen", dueIn: 7, dueDate: "May 4", status: "safe" },
+    ],
+  };
 
   const categories = [
-    { id: 1, name: "Electronics", icon: "📱" },
-    { id: 2, name: "Books", icon: "📚" },
-    { id: 3, name: "Tools", icon: "🔧" },
-    { id: 4, name: "Sports", icon: "⚽" },
-    { id: 5, name: "Furniture", icon: "🪑" },
-    { id: 6, name: "Kitchen", icon: "🍳" },
+    { id: 1, name: "Tech & Electronics", icon: Laptop, accentColor: "#3b2a80" },
+    { id: 2, name: "Sports & Outdoors", icon: Dumbbell, accentColor: "#059669" },
+    { id: 3, name: "Home & Garden", icon: Home, accentColor: "#d97706" },
+    { id: 4, name: "Books & Media", icon: BookMarked, accentColor: "#dc2626" },
+    { id: 5, name: "Vehicles & Transport", icon: Truck, accentColor: "#2563eb" },
+    { id: 6, name: "Tools & Equipment", icon: Wrench, accentColor: "#7c3aed" },
   ];
+
+  const activities = [
+    {
+      id: 1,
+      title: "You added a new item",
+      subtitle: "MacBook Pro 16\"",
+      timestamp: "2 hours ago",
+      status: "completed" as const,
+    },
+    {
+      id: 2,
+      title: "New message from Sarah",
+      subtitle: "About your Camera",
+      timestamp: "4 hours ago",
+      status: "active" as const,
+    },
+    {
+      id: 3,
+      title: "Item returned successfully",
+      subtitle: "Drill from Mike",
+      timestamp: "1 day ago",
+      status: "completed" as const,
+    },
+  ];
+
+  // Sort borrows by urgency
+  const sortedBorrows = useMemo(
+    () => [...userStats.activeBorrows].sort((a, b) => a.dueIn - b.dueIn),
+    [userStats.activeBorrows]
+  );
+
+  const dueTodayCount = sortedBorrows.filter(b => b.status === "due-today").length;
 
   return (
     <div className="space-y-6">
-      {/* Return Overdue Alert */}
-      {!isDismissed && (
-        <div className="rounded-lg border border-red-200 bg-red-50 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-red-100">
-                <svg className="h-5 w-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
+      {/* PRIORITY 1: Alert Banner - Due Items */}
+      {dueTodayCount > 0 && (
+        <div
+          className="rounded-lg border border-[var(--danger)] bg-[var(--danger-soft)] overflow-hidden shadow-md"
+        >
+          <div className="px-6 py-5 flex items-center justify-between gap-4">
+            <div className="flex items-start gap-4">
+              <div
+                className="flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-lg"
+                style={{ backgroundColor: "var(--danger)", color: "white" }}
+              >
+                <AlertCircle className="h-6 w-6" />
               </div>
               <div>
-                <h3 className="font-semibold text-red-900">Return Overdue</h3>
-                <p className="text-sm text-red-700">You have items that need to be returned</p>
+                <h3 className="font-bold text-[var(--foreground)]">
+                  {dueTodayCount} item{dueTodayCount > 1 ? "s" : ""} due today
+                </h3>
+                <p className="text-sm text-[var(--text-secondary)] mt-1">
+                  Return {dueTodayCount === 1 ? "it" : "them"} now to maintain your reputation
+                </p>
               </div>
             </div>
-            <div className="flex gap-2">
-              <button className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700">
-                Mark Resolved
-              </button>
-              <button onClick={() => setIsDismissed(true)} className="rounded-lg p-2 hover:bg-red-100">
-                <svg className="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
+            <Link
+              href="/dashboard/my-borrows"
+              className="flex-shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200"
+              style={{
+                backgroundColor: "var(--danger)",
+                color: "white",
+              }}
+            >
+              Return Item
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
         </div>
       )}
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-3 gap-4">
-        <StatCard
-          title="Active Borrows"
-          value={3}
-          subtitle="Currently borrowing"
-          icon={
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3-8.25H18a2.25 2.25 0 012.25 2.25v6A2.25 2.25 0 0118 21H6a2.25 2.25 0 01-2.25-2.25v-6A2.25 2.25 0 016 9h.75" />
-            </svg>
-          }
-          variant="info"
-        />
-
-        <StatCard
-          title="Your Items"
-          value={8}
+      {/* PRIORITY 2: Overview Stats - Secondary Focus */}
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <OverviewCard
+          icon={Package}
+          title="My Items"
+          value={userStats.itemsCount}
           subtitle="Available to lend"
-          icon={
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125V4.875c0-.621-.504-1.125-1.125-1.125H2.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
-            </svg>
-          }
-          variant="success"
+          href="/dashboard/my-items"
         />
-
-        <StatCard
+        <OverviewCard
+          icon={BookOpen}
+          title="Active Borrows"
+          value={userStats.borrowsCount}
+          subtitle={`${dueTodayCount} due today`}
+          href="/dashboard/my-borrows"
+        />
+        <OverviewCard
+          icon={Mail}
           title="Messages"
-          value={2}
-          subtitle="Unread messages"
-          icon={
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H4.5a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5H4.5A2.25 2.25 0 002.25 6.75m19.5 0h-15m0 0l-3-3m3 3l3-3" />
-            </svg>
-          }
-          variant="warning"
+          value={userStats.messagesCount}
+          subtitle="Unread"
+          href="/dashboard/messages"
+        />
+        <OverviewCard
+          icon={ShoppingCart}
+          title="In Cart"
+          value={userStats.cartCount}
+          subtitle="Ready to borrow"
+          href="/dashboard/cart"
         />
       </div>
 
-      {/* Browse Categories */}
-      <div>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-[var(--foreground)]">Browse Categories</h2>
-          <a href="#" className="text-sm font-semibold text-[var(--primary)] hover:underline">
-            View all →
-          </a>
+      {/* PRIORITY 1b: Active Borrows - Main Focus */}
+      <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] overflow-hidden shadow-sm">
+        <div className="border-b border-[var(--border)] bg-[var(--surface-soft)] px-6 py-4">
+          <h2 className="text-lg font-bold text-[var(--foreground)]">Active Borrows</h2>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">
+            {sortedBorrows.length} items you're currently borrowing
+          </p>
         </div>
-        <div className="grid grid-cols-6 gap-4">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              className="group rounded-lg border border-[var(--border)] bg-[var(--surface)] px-4 py-6 text-center shadow-sm transition-all duration-200 hover:shadow-lg hover:border-[var(--primary)]/50"
+        <div className="divide-y" style={{ borderColor: "var(--border)" }}>
+          {sortedBorrows.map((borrow) => (
+            <BorrowRow key={borrow.id} borrow={borrow} />
+          ))}
+        </div>
+        {sortedBorrows.length > 0 && (
+          <div className="px-6 py-3 bg-[var(--surface-soft)] border-t border-[var(--border)]">
+            <Link
+              href="/dashboard/my-borrows"
+              className="text-sm font-semibold transition-colors"
+              style={{ color: "var(--primary)" }}
             >
-              <div className="mb-3 text-2xl">{category.icon}</div>
-              <p className="text-xs font-semibold text-[var(--foreground)] group-hover:text-[var(--primary)]">
-                {category.name}
-              </p>
-            </button>
+              View all borrows →
+            </Link>
+          </div>
+        )}
+      </div>
+
+      {/* PRIORITY 2b: Browse Categories - Visual Discovery */}
+      <div className="pt-4">
+        <div className="mb-4">
+          <h2 className="text-lg font-bold text-[var(--foreground)]">Browse Categories</h2>
+          <p className="text-xs text-[var(--text-secondary)] mt-1">Discover items available in your community</p>
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {categories.map((category) => {
+            const IconComponent = category.icon;
+            return (
+              <CategoryCard
+                key={category.id}
+                name={category.name}
+                icon={IconComponent}
+                accentColor={category.accentColor}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      {/* PRIORITY 3: Recent Activity - Lower Priority */}
+      <div className="pt-8">
+        <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-[var(--text-secondary)]">
+          Recent Activity
+        </h3>
+        <div className="space-y-2">
+          {activities.map((activity) => (
+            <ActivityItem
+              key={activity.id}
+              title={activity.title}
+              subtitle={activity.subtitle}
+              timestamp={activity.timestamp}
+              status={activity.status}
+            />
           ))}
         </div>
       </div>
     </div>
+  );
+}
+
+// Inline Components
+function OverviewCard({
+  icon: IconComponent,
+  title,
+  value,
+  subtitle,
+  href,
+}: {
+  icon: React.ElementType;
+  title: string;
+  value: string | number;
+  subtitle: string;
+  href: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4 transition-all duration-200 hover:shadow-md hover:border-[var(--primary)]/30"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex-1 min-w-0">
+          <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)]">
+            {title}
+          </p>
+          <p className="mt-3 text-2xl font-bold text-[var(--foreground)]">{value}</p>
+          <p className="mt-1 text-xs text-[var(--text-muted)]">{subtitle}</p>
+        </div>
+        <div
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg"
+          style={{ backgroundColor: "var(--primary-soft)", color: "var(--primary)" }}
+        >
+          <IconComponent className="h-5 w-5" />
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function BorrowRow({
+  borrow,
+}: {
+  borrow: {
+    id: number;
+    item: string;
+    from: string;
+    dueIn: number;
+    dueDate: string;
+    status: "due-today" | "due-soon" | "safe";
+  };
+}) {
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "due-today":
+        return { bg: "var(--danger-soft)", text: "var(--danger)" };
+      case "due-soon":
+        return { bg: "var(--warning-soft)", text: "var(--warning)" };
+      case "safe":
+        return { bg: "var(--success-soft)", text: "var(--success)" };
+      default:
+        return { bg: "var(--surface-soft)", text: "var(--text-secondary)" };
+    }
+  };
+
+  const status = getStatusColor(borrow.status);
+  const statusLabel = borrow.status === "due-today" ? "Due today" : `Due ${borrow.dueDate}`;
+
+  return (
+    <div className="flex items-center justify-between gap-4 px-6 py-4 transition-colors hover:bg-[var(--surface-soft)]">
+      <div className="flex-1 min-w-0">
+        <p className="font-medium text-[var(--foreground)]">{borrow.item}</p>
+        <p className="text-xs text-[var(--text-secondary)] mt-1">
+          From <span className="font-medium">{borrow.from}</span>
+        </p>
+      </div>
+      <div className="flex items-center gap-2 flex-shrink-0">
+        <div
+          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold"
+          style={{ backgroundColor: status.bg, color: status.text }}
+        >
+          <span
+            className="h-2 w-2 rounded-full"
+            style={{ backgroundColor: status.text }}
+          ></span>
+          {statusLabel}
+        </div>
+        <div className="flex items-center gap-1.5">
+          <button
+            className="p-2 rounded-lg transition-colors hover:bg-[var(--surface-soft)]"
+            title="Return item"
+            style={{ color: "var(--primary)" }}
+          >
+            <RotateCcw className="h-4 w-4" />
+          </button>
+          <button
+            className="p-2 rounded-lg transition-colors hover:bg-[var(--surface-soft)]"
+            title="Extend borrow period"
+            style={{ color: "var(--primary)" }}
+          >
+            <Clock className="h-4 w-4" />
+          </button>
+          <button
+            className="p-2 rounded-lg transition-colors hover:bg-[var(--surface-soft)]"
+            title="Message lender"
+            style={{ color: "var(--primary)" }}
+          >
+            <MessageSquare className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ActivityItem({
+  title,
+  subtitle,
+  timestamp,
+  status,
+}: {
+  title: string;
+  subtitle: string;
+  timestamp: string;
+  status: "completed" | "active";
+}) {
+  return (
+    <div className="flex items-start gap-3 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-3 transition-colors hover:bg-[var(--surface-soft)]">
+      <div
+        className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full"
+        style={{
+          backgroundColor: status === "completed" ? "var(--success-soft)" : "var(--primary-soft)",
+        }}
+      >
+        {status === "completed" ? (
+          <CheckCircle2 className="h-4 w-4" style={{ color: "var(--success)" }} />
+        ) : (
+          <Circle className="h-4 w-4 animate-pulse" style={{ color: "var(--primary)" }} />
+        )}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium text-[var(--foreground)]">{title}</p>
+        <p className="text-xs text-[var(--text-muted)] mt-0.5">{subtitle}</p>
+      </div>
+      <span className="flex-shrink-0 text-xs text-[var(--text-muted)]">{timestamp}</span>
+    </div>
+  );
+}
+
+function CategoryCard({
+  name,
+  icon: IconComponent,
+  accentColor,
+}: {
+  name: string;
+  icon: React.ElementType;
+  accentColor: string;
+}) {
+  return (
+    <button
+      className="group relative overflow-hidden rounded-xl p-6 text-left transition-all duration-300 hover:shadow-lg focus:outline-none"
+      style={{
+        backgroundColor: `${accentColor}08`,
+        border: `2px solid ${accentColor}`,
+      }}
+    >
+      {/* Glowy hover effect */}
+      <div
+        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: accentColor,
+          filter: "blur(20px)",
+          zIndex: -1,
+          opacity: 0.05,
+        }}
+      />
+
+      <div className="relative z-10 flex flex-col items-center text-center gap-3">
+        <div
+          className="flex h-12 w-12 items-center justify-center rounded-lg transition-all duration-300 group-hover:scale-110"
+          style={{
+            backgroundColor: `${accentColor}15`,
+            color: accentColor,
+          }}
+        >
+          <IconComponent className="h-7 w-7" />
+        </div>
+        <div>
+          <p className="font-semibold text-sm text-[var(--foreground)] leading-snug">
+            {name}
+          </p>
+          <p
+            className="text-xs mt-2 group-hover:font-medium transition-all duration-300 flex items-center justify-center gap-1"
+            style={{ color: accentColor }}
+          >
+            Browse
+            <span className="group-hover:translate-x-0.5 transition-transform duration-300">→</span>
+          </p>
+        </div>
+      </div>
+    </button>
   );
 }

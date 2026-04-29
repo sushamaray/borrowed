@@ -13,13 +13,13 @@ type ActivityItemProps = {
 const statusConfig = {
   active: {
     label: "Active",
-    color: "bg-[var(--status-success-soft)] text-[var(--status-success)]",
-    dot: "bg-[var(--status-success)]",
+    color: "bg-[var(--success-soft)] text-[var(--success)]",
+    dot: "bg-[var(--success)]",
   },
   pending: {
     label: "Pending",
-    color: "bg-[var(--status-warning-soft)] text-[var(--status-warning)]",
-    dot: "bg-[var(--status-warning)]",
+    color: "bg-[var(--warning-soft)] text-[var(--warning)]",
+    dot: "bg-[var(--warning)]",
   },
   completed: {
     label: "Completed",
@@ -28,8 +28,8 @@ const statusConfig = {
   },
   overdue: {
     label: "Overdue",
-    color: "bg-[var(--status-danger-soft)] text-[var(--status-danger)]",
-    dot: "bg-[var(--status-danger)]",
+    color: "bg-[var(--danger-soft)] text-[var(--danger)]",
+    dot: "bg-[var(--danger)]",
   },
 };
 
