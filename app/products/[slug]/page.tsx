@@ -87,7 +87,7 @@ export default async function ProductDescriptionPage(
                 src={product.imageUrl}
                 alt={product.name}
                 fill
-                preload
+                unoptimized
                 sizes="(max-width: 900px) 100vw, 42vw"
                 className="product-hero-image"
               />
@@ -181,6 +181,7 @@ export default async function ProductDescriptionPage(
                     src={similarProduct.imageUrl}
                     alt={similarProduct.name}
                     fill
+                    unoptimized
                     sizes="(max-width: 900px) 100vw, 22vw"
                     className="product-similar-image"
                   />

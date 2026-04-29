@@ -29,6 +29,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.userId = user.id;
         token.userEmail = user.email;
         token.userName = user.name;
+        token.userLocation = (user as any).location;
       }
 
       return token;
@@ -38,6 +39,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.id = typeof token.userId === "string" ? token.userId : "";
         session.user.email = typeof token.userEmail === "string" ? token.userEmail : "";
         session.user.name = typeof token.userName === "string" ? token.userName : session.user.name;
+        (session.user as any).location = typeof token.userLocation === "string" ? token.userLocation : null;
       }
 
       return session;

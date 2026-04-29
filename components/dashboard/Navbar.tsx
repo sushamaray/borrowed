@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, ChevronDown, Search, ChevronLeft, ChevronRight, User, Settings, LogOut } from "lucide-react";
+import { Menu, ChevronDown, Search, ChevronLeft, ChevronRight, User, Settings, LogOut, MapPin } from "lucide-react";
 
 type NavbarProps = {
   onMenuClick: () => void;
@@ -18,6 +18,26 @@ export default function Navbar({
   pageTitle,
 }: NavbarProps) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [userLocation, setUserLocation] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserLocation = async () => {
+      try {
+        const response = await fetch("/api/user/location");
+        if (response.ok) {
+          const data = await response.json();
+          setUserLocation(data.location);
+        }
+      } catch (error) {
+        console.error("Error fetching user location:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserLocation();
+  }, []);
 
   return (
     <nav className="border-b border-[var(--border)] bg-[var(--surface)] px-4 py-4 sm:px-6 lg:px-8">
@@ -47,7 +67,18 @@ export default function Navbar({
 
           <div>
             <h1 className="text-lg font-semibold text-[var(--foreground)]">{pageTitle}</h1>
-            <p className="text-sm text-[var(--text-secondary)]">Manage your items and connections</p>
+            <div className="flex items-center gap-1 text-sm text-[var(--text-secondary)] mt-1">
+              <MapPin className="h-3.5 w-3.5" />
+              {loading ? (
+                <span>Loading location...</span>
+              ) : userLocation ? (
+                <span>{userLocation}, Dhaka</span>
+              ) : (
+                <Link href="/dashboard/profile" className="hover:text-[var(--primary)] transition-colors">
+                  Set your location
+                </Link>
+              )}
+            </div>
           </div>
         </div>
 

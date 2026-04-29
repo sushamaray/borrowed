@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import SessionWrapper from "@/components/SessionWrapper";
 
 import DashboardShell from "@/components/dashboard/DashboardShell";
 
@@ -7,5 +8,9 @@ export default function AuthenticatedLayout({
 }: {
   children: ReactNode;
 }) {
-  return <DashboardShell>{children}</DashboardShell>;
+  return (
+    <SessionWrapper>
+      <DashboardShell>{children}</DashboardShell>
+    </SessionWrapper>
+  );
 }
