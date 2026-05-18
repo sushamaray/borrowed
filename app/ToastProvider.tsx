@@ -15,9 +15,9 @@ export default function ToastProvider() {
       position="top-right"
       toastOptions={{
         style: {
-          border: "1px solid #e3dcf3",
+          border: "1px solid #c5dfe0",
           borderRadius: "16px",
-          color: "#221b3d",
+          color: "#0f2a2a",
         },
       }}
     />

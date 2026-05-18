@@ -41,7 +41,7 @@ export function TextField({
   ...inputProps
 }: TextFieldProps) {
   return (
-    <label className="login-text-field flex w-full items-center gap-3 rounded-full border border-transparent bg-surface-soft px-5 py-4 transition-all duration-200 focus-within:border-primary/30 focus-within:bg-white focus-within:shadow-[0_10px_24px_rgba(122,108,240,0.12)]">
+    <label className="login-text-field flex w-full items-center gap-3 rounded-full border border-transparent bg-surface-soft px-5 py-4 transition-all duration-200 focus-within:border-primary/30 focus-within:bg-white focus-within:shadow-[0_10px_24px_rgba(26,107,110,0.12)]">
       <input
         placeholder={placeholder}
         className={`login-text-field-input w-full bg-transparent text-base font-medium text-foreground outline-none placeholder:text-text-muted ${className ?? ""}`.trim()}

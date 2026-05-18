@@ -246,7 +246,7 @@ export default function RegisterClient() {
       </section>
 
       <section className="registration-page-form-panel flex min-h-[64vh] items-center justify-center px-6 py-12 lg:min-h-screen">
-        <div className="registration-form-card w-full max-w-2xl rounded-3xl border border-border/90 bg-white/92 px-8 py-10 shadow-[0_28px_84px_rgba(34,27,61,0.14)] backdrop-blur-xl sm:px-12 sm:py-12">
+        <div className="registration-form-card w-full max-w-2xl rounded-3xl border border-border/90 bg-white/92 px-8 py-10 shadow-[0_28px_84px_rgba(12,32,30,0.14)] backdrop-blur-xl sm:px-12 sm:py-12">
           <header className="registration-form-header mb-9">
             <h2 className="registration-form-title text-5xl font-extrabold leading-none text-primary">
               Sign Up

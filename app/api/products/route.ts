@@ -10,11 +10,9 @@ export async function GET() {
         name: true,
         category: true,
         location: true,
-        priceAmount: true,
-        summary: true,
+        pricePerDay: true,
         imageUrl: true,
-        lenderName: true,
-        lenderRating: true,
+        description: true,
       },
       orderBy: {
         createdAt: "desc",

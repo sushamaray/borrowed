@@ -5,6 +5,7 @@ import type { FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 
 import { Divider, SocialButton, TextField } from "./form-components";
@@ -64,36 +65,28 @@ export default function LoginClient() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          identifier,
-          password,
-        }),
+      const response = await signIn("credentials", {
+        redirect: false,
+        redirectTo: "/dashboard",
+        identifier,
+        password,
       });
-      const data = (await response.json()) as {
-        message?: string;
-        user?: { id: string; email: string; userName: string; name: string };
-      };
 
       console.log("[login-client] Login response received", {
-        ok: response.ok,
-        status: response.status,
-        message: data.message,
+        ok: !response?.error,
+        status: response?.status,
+        error: response?.error,
       });
 
-      if (!response.ok) {
-        console.warn("[login-client] Login failed", data);
-        setError(data.message ?? "Unable to log in.");
+      if (!response || response.error) {
+        console.warn("[login-client] Login failed", response);
+        setError("Invalid email, username, or password.");
         return;
       }
 
-      console.log("[login-client] Login successful", data.user);
       setSuccessMessage("Login successful. Redirecting...");
-      router.push("/dashboard");
+      router.replace(response.url ?? "/dashboard");
+      router.refresh();
     } catch (error) {
       console.error("[login-client] Network or server error", error);
       setError("Unable to connect to the server.");
@@ -131,7 +124,7 @@ export default function LoginClient() {
       </section>
 
       <section className="login-page-form-panel flex min-h-[58vh] items-center justify-center bg-white px-6 py-12 lg:min-h-screen">
-        <div className="login-form-card w-full max-w-xl rounded-2xl border border-border/90 bg-white px-10 py-12 shadow-[0_24px_70px_rgba(34,27,61,0.12)] sm:px-12 sm:py-14">
+        <div className="login-form-card w-full max-w-xl rounded-2xl border border-border/90 bg-white px-10 py-12 shadow-[0_24px_70px_rgba(12,32,30,0.12)] sm:px-12 sm:py-14">
           <header className="login-form-header mb-9 text-center">
             <h1 className="login-form-title text-xl font-extrabold uppercase tracking-[0.1em] text-primary">
               User Login

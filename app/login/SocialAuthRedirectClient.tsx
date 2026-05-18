@@ -40,7 +40,7 @@ export default function SocialAuthRedirectClient({
   return (
     <main className="flex min-h-screen w-full items-center justify-center bg-background px-6 py-8">
       <div className="flex w-full items-center justify-center">
-        <section className="flex min-h-[360px] w-full max-w-[760px] items-center justify-center rounded-[24px] border border-border/90 bg-[radial-gradient(circle_at_top,rgba(236,231,250,0.72),rgba(255,255,255,0.97)_40%,rgba(255,255,255,1)_100%)] px-8 py-10 shadow-[0_24px_72px_rgba(34,27,61,0.11)] sm:px-10">
+        <section className="flex min-h-[360px] w-full max-w-[760px] items-center justify-center rounded-[24px] border border-border/90 bg-[radial-gradient(circle_at_top,rgba(224,244,244,0.72),rgba(255,255,255,0.97)_40%,rgba(255,255,255,1)_100%)] px-8 py-10 shadow-[0_24px_72px_rgba(12,32,30,0.11)] sm:px-10">
           <div className="w-full max-w-[620px] text-center">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-success-soft shadow-[0_10px_30px_rgba(47,158,68,0.16)]">
               <div className="relative h-11 w-11 animate-spin rounded-full bg-[conic-gradient(from_220deg,var(--success-soft)_0deg,var(--success)_120deg,var(--success)_245deg,var(--success-soft)_360deg)]">
