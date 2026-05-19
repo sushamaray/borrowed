@@ -162,11 +162,13 @@ export default function ItemDetailClient({
   similarProducts,
   lentItemId,
   backHref = "/dashboard/browse",
+  backLabel = "Back to Browse",
 }: {
   product: ProductWithFeatureList;
   similarProducts: ProductWithFeatureList[];
   lentItemId?: string;
   backHref?: string;
+  backLabel?: string;
 }) {
   const [tab, setTab] = useState<"description" | "trail" | "mentor">("description");
   const [trail, setTrail] = useState<TrailData | null>(null);
@@ -193,7 +195,7 @@ export default function ItemDetailClient({
     new Date(product.lender.createdAt),
   );
   const verifiedItems = [
-    { label: "Identity", value: product.lender.identityVerified || product.lender.nidVerified },
+    { label: "Identity", value: product.lender.identityVerified || product.lender.idVerified },
     { label: "Contact", value: product.lender.contactVerified },
     { label: "Address", value: product.lender.addressVerified },
     { label: "Meetup", value: product.lender.meetupVerified },
@@ -307,7 +309,7 @@ export default function ItemDetailClient({
         className="mb-5 inline-flex items-center gap-1.5 font-bold text-[0.88rem] text-[var(--primary)] no-underline"
       >
         <ArrowLeft size={16} />
-        Back to Browse
+        {backLabel}
       </Link>
 
       {/* Hero grid */}

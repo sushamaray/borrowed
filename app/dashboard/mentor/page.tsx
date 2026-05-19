@@ -42,7 +42,7 @@ type Booking = {
     createdAt: string;
     identityVerified: boolean;
     contactVerified: boolean;
-    nidVerified: boolean;
+    idVerified: boolean;
     addressVerified: boolean;
     meetupVerified: boolean;
   };
@@ -362,7 +362,7 @@ export default function MentorDashboardPage() {
               <p className="mb-2 text-[0.75rem] font-black uppercase tracking-[0.08em] text-[var(--text-muted)]">Verification</p>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { label: "Identity", value: selectedBooking.user.identityVerified || selectedBooking.user.nidVerified },
+                  { label: "Identity", value: selectedBooking.user.identityVerified || selectedBooking.user.idVerified },
                   { label: "Contact", value: selectedBooking.user.contactVerified },
                   { label: "Address", value: selectedBooking.user.addressVerified },
                   { label: "Meetup", value: selectedBooking.user.meetupVerified },

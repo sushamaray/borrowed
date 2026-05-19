@@ -2,8 +2,9 @@
 
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
-import { Calendar, ChevronRight, Coins, Inbox, MapPin, Plus, X } from "lucide-react";
+import { Calendar, ChevronRight, Coins, Inbox, MapPin, Pencil, Plus, X } from "lucide-react";
 import CategoryPicker from "@/components/dashboard/CategoryPicker";
+import { LocationPickerModal } from "@/components/LocationPickerModal";
 
 interface BorrowRequest {
   id: string;
@@ -47,6 +48,8 @@ export default function MyRequestsPage() {
   const [postBudget, setPostBudget] = useState("");
   const [postSubmitting, setPostSubmitting] = useState(false);
   const [postError, setPostError] = useState("");
+  const [showLocationPicker, setShowLocationPicker] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
 
   const fetchRequests = useCallback(async () => {
     setLoading(true);
@@ -60,10 +63,20 @@ export default function MyRequestsPage() {
 
   useEffect(() => { void fetchRequests(); }, [fetchRequests]);
 
-  const openPostModal = () => {
+  const openPostModal = async () => {
     setPostTitle(""); setPostCategory(""); setPostDescription("");
     setPostLocation(""); setPostFrom(""); setPostUntil(""); setPostBudget(""); setPostError("");
     setShowPostModal(true);
+    setLocationLoading(true);
+    try {
+      const res = await fetch("/api/user/location");
+      if (res.ok) {
+        const data = await res.json() as { location?: string };
+        if (data.location) setPostLocation(data.location);
+      }
+    } finally {
+      setLocationLoading(false);
+    }
   };
 
   const submitPost = async () => {
@@ -114,7 +127,7 @@ export default function MyRequestsPage() {
           <p className="mt-1 text-[var(--text-secondary)]">Borrow requests you've posted. Lenders will offer their items here.</p>
         </div>
         <button
-          onClick={openPostModal}
+          onClick={() => { void openPostModal(); }}
           className="flex flex-shrink-0 items-center gap-2 rounded-full bg-[linear-gradient(135deg,#3b2a80,#6d5bba)] px-5 py-2.5 text-[0.88rem] font-black text-white shadow-[0_4px_14px_rgba(59,42,128,0.35)] transition-opacity hover:opacity-90"
         >
           <Plus className="h-4 w-4" strokeWidth={2.5} />
@@ -164,7 +177,7 @@ export default function MyRequestsPage() {
               <p className="font-black text-[var(--ink)]">No open requests</p>
               <p className="mt-1 text-[0.85rem] text-[var(--text-muted)]">Post what you need and lenders will apply</p>
               <button
-                onClick={openPostModal}
+                onClick={() => { void openPostModal(); }}
                 className="mt-5 rounded-full bg-[linear-gradient(135deg,#3b2a80,#6d5bba)] px-6 py-2.5 text-[0.88rem] font-black text-white"
               >
                 Post a Request
@@ -277,12 +290,23 @@ export default function MyRequestsPage() {
 
               <div>
                 <label className="mb-1.5 block text-[0.78rem] font-black uppercase tracking-[0.08em] text-[var(--text-muted)]">Location</label>
-                <input
-                  value={postLocation}
-                  onChange={(e) => setPostLocation(e.target.value)}
-                  placeholder="e.g. Dhaka, Sylhet…"
-                  className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface-soft)] px-4 py-2.5 text-[0.88rem] text-[var(--ink)] outline-none focus:border-[var(--primary)] placeholder:text-[var(--text-muted)]"
-                />
+                <div className="flex items-center gap-2 rounded-xl border border-(--border) bg-(--surface-soft) px-4 py-2.5">
+                  <MapPin className="h-4 w-4 shrink-0 text-(--primary)" />
+                  <span className="flex-1 text-[0.88rem] text-(--ink)">
+                    {locationLoading
+                      ? <span className="text-(--text-muted)">Fetching location…</span>
+                      : postLocation || <span className="text-(--text-muted)">No location set</span>
+                    }
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowLocationPicker(true)}
+                    className="flex items-center gap-1 text-xs font-bold text-(--primary) hover:underline"
+                  >
+                    <Pencil className="h-3 w-3" />
+                    Change
+                  </button>
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -336,6 +360,17 @@ export default function MyRequestsPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {showLocationPicker && (
+        <LocationPickerModal
+          initialLocation={postLocation}
+          onConfirm={({ location }) => {
+            setPostLocation(location);
+            setShowLocationPicker(false);
+          }}
+          onClose={() => setShowLocationPicker(false)}
+        />
       )}
     </div>
   );

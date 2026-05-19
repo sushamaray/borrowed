@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(node -e ' *)",
-      "Bash(npx tsx *)"
+      "Bash(npx tsx *)",
+      "Bash(Get-ChildItem lib *)",
+      "Bash(xargs grep -l \"search\")",
+      "Bash(npx tsc *)",
+      "Bash(npx nodemon *)",
+      "Bash(npm run *)",
+      "Bash(powershell -Command \"\\(Get-Content prisma/seed.ts\\) -replace 'https://images\\\\.unsplash\\\\.com/photo-[^\\\\\"]+', '/placeholder.png' | Set-Content prisma/seed.ts -Encoding utf8\")"
     ]
   }
 }

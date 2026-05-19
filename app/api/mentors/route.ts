@@ -37,6 +37,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { identityVerified: true, idVerified: true },
+    });
+    if (!user?.identityVerified && !user?.idVerified) {
+      return NextResponse.json(
+        { error: "ID verification required to become a mentor" },
+        { status: 403 },
+      );
+    }
+
     const existing = await prisma.mentor.findUnique({ where: { userId: session.user.id } });
     if (existing) {
       return NextResponse.json({ error: "Already a mentor" }, { status: 409 });

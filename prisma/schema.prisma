@@ -30,7 +30,7 @@ model User {
   phoneNumber      String?
   identityVerified Boolean   @default(false)
   contactVerified  Boolean   @default(false)
-  nidVerified      Boolean   @default(false)
+  idVerified       Boolean   @default(false)
   addressVerified  Boolean   @default(false)
   meetupVerified   Boolean   @default(false)
   verifiedAt       DateTime?
@@ -53,7 +53,7 @@ model User {
   trailEntries             ItemTrailEntry[]
   trailReactions           TrailReaction[]
   notifications            Notification[]
-  nidVerification          NidVerification?
+  idVerification           IdVerification?
 }
 
 // ── Product — central item info store ────────────────────────────────────────
@@ -409,9 +409,9 @@ model TrailReaction {
   @@index([userId])
 }
 
-// ── NID Verification ──────────────────────────────────────────────────────────
+// ── ID Verification ───────────────────────────────────────────────────────────
 
-model NidVerification {
+model IdVerification {
   id             String    @id @default(cuid())
   userId         String    @unique
   frontImage     Bytes?    @db.LongBlob

@@ -92,7 +92,7 @@ export async function POST(request: Request) {
             submittedAt: new Date(),
           };
 
-    await prisma.nidVerification.upsert({
+    await prisma.idVerification.upsert({
       where: { userId: session.user.id },
       update: data,
       create: {
@@ -107,7 +107,7 @@ export async function POST(request: Request) {
       fileName: file.name ?? `${kind}-image`,
     });
   } catch (error) {
-    console.error("POST /api/nid-verification:", error);
+    console.error("POST /api/id-verification:", error);
     const message =
       error instanceof Error ? error.message : "Failed to upload verification image";
 

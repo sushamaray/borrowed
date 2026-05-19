@@ -1,16 +1,42 @@
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { expandQueryWithAI, fallbackKeywords, buildItemSearchOR } from "@/lib/ai-search";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const q = (searchParams.get("q") ?? "").trim();
+    const lenderId = searchParams.get("lender") ?? "";
+    const useAI = searchParams.get("ai") === "true";
+
     const session = await auth();
     const currentUserId = session?.user?.id;
+
+    let itemSearchOR: object[] | undefined;
+    let aiMatched = false;
+
+    if (q) {
+      let keywords: string[];
+      let aiCategories: string[] = [];
+
+      if (useAI) {
+        const expanded = await expandQueryWithAI(q);
+        keywords = expanded.keywords;
+        aiCategories = expanded.categories;
+        aiMatched = true;
+      } else {
+        keywords = q.includes(" ") ? [q, ...fallbackKeywords(q)] : [q];
+      }
+
+      itemSearchOR = buildItemSearchOR(keywords, aiCategories);
+    }
 
     const items = await prisma.lentItem.findMany({
       where: {
         status: "active",
-        ...(currentUserId ? { lenderId: { not: currentUserId } } : {}),
+        ...(lenderId ? { lenderId } : currentUserId ? { lenderId: { not: currentUserId } } : {}),
+        ...(itemSearchOR ? { OR: itemSearchOR } : {}),
       },
       include: {
         product: true,
@@ -38,7 +64,7 @@ export async function GET() {
           : (item.lender.userName ?? "Unknown"),
     }));
 
-    return NextResponse.json(shaped);
+    return NextResponse.json({ items: shaped, aiMatched });
   } catch (error) {
     console.error("GET /api/browse:", error);
     return NextResponse.json({ error: "Failed to fetch items" }, { status: 500 });

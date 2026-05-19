@@ -18,6 +18,8 @@ export default async function DashboardItemPage(
       product={product}
       similarProducts={similarProducts}
       lentItemId={product.lentItemId}
+      backHref="/dashboard/my-items"
+      backLabel="Back to My Items"
     />
   );
 }

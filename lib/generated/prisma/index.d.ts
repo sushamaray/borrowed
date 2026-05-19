@@ -109,10 +109,10 @@ export type ItemTrailEntry = $Result.DefaultSelection<Prisma.$ItemTrailEntryPayl
  */
 export type TrailReaction = $Result.DefaultSelection<Prisma.$TrailReactionPayload>
 /**
- * Model NidVerification
+ * Model IdVerification
  * 
  */
-export type NidVerification = $Result.DefaultSelection<Prisma.$NidVerificationPayload>
+export type IdVerification = $Result.DefaultSelection<Prisma.$IdVerificationPayload>
 
 /**
  * Enums
@@ -445,14 +445,14 @@ export class PrismaClient<
   get trailReaction(): Prisma.TrailReactionDelegate<ExtArgs>;
 
   /**
-   * `prisma.nidVerification`: Exposes CRUD operations for the **NidVerification** model.
+   * `prisma.idVerification`: Exposes CRUD operations for the **IdVerification** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more NidVerifications
-    * const nidVerifications = await prisma.nidVerification.findMany()
+    * // Fetch zero or more IdVerifications
+    * const idVerifications = await prisma.idVerification.findMany()
     * ```
     */
-  get nidVerification(): Prisma.NidVerificationDelegate<ExtArgs>;
+  get idVerification(): Prisma.IdVerificationDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -913,7 +913,7 @@ export namespace Prisma {
     Authenticator: 'Authenticator',
     ItemTrailEntry: 'ItemTrailEntry',
     TrailReaction: 'TrailReaction',
-    NidVerification: 'NidVerification'
+    IdVerification: 'IdVerification'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -929,7 +929,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "product" | "lentItem" | "borrowRequest" | "borrowRequestOffer" | "borrowCheckout" | "notification" | "mentor" | "mentorBooking" | "conversation" | "conversationParticipant" | "message" | "cartItem" | "account" | "session" | "verificationToken" | "authenticator" | "itemTrailEntry" | "trailReaction" | "nidVerification"
+      modelProps: "user" | "product" | "lentItem" | "borrowRequest" | "borrowRequestOffer" | "borrowCheckout" | "notification" | "mentor" | "mentorBooking" | "conversation" | "conversationParticipant" | "message" | "cartItem" | "account" | "session" | "verificationToken" | "authenticator" | "itemTrailEntry" | "trailReaction" | "idVerification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2187,69 +2187,69 @@ export namespace Prisma {
           }
         }
       }
-      NidVerification: {
-        payload: Prisma.$NidVerificationPayload<ExtArgs>
-        fields: Prisma.NidVerificationFieldRefs
+      IdVerification: {
+        payload: Prisma.$IdVerificationPayload<ExtArgs>
+        fields: Prisma.IdVerificationFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.NidVerificationFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NidVerificationPayload> | null
+            args: Prisma.IdVerificationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdVerificationPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.NidVerificationFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NidVerificationPayload>
+            args: Prisma.IdVerificationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdVerificationPayload>
           }
           findFirst: {
-            args: Prisma.NidVerificationFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NidVerificationPayload> | null
+            args: Prisma.IdVerificationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdVerificationPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.NidVerificationFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NidVerificationPayload>
+            args: Prisma.IdVerificationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdVerificationPayload>
           }
           findMany: {
-            args: Prisma.NidVerificationFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NidVerificationPayload>[]
+            args: Prisma.IdVerificationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdVerificationPayload>[]
           }
           create: {
-            args: Prisma.NidVerificationCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NidVerificationPayload>
+            args: Prisma.IdVerificationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdVerificationPayload>
           }
           createMany: {
-            args: Prisma.NidVerificationCreateManyArgs<ExtArgs>
+            args: Prisma.IdVerificationCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           delete: {
-            args: Prisma.NidVerificationDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NidVerificationPayload>
+            args: Prisma.IdVerificationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdVerificationPayload>
           }
           update: {
-            args: Prisma.NidVerificationUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NidVerificationPayload>
+            args: Prisma.IdVerificationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdVerificationPayload>
           }
           deleteMany: {
-            args: Prisma.NidVerificationDeleteManyArgs<ExtArgs>
+            args: Prisma.IdVerificationDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.NidVerificationUpdateManyArgs<ExtArgs>
+            args: Prisma.IdVerificationUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.NidVerificationUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$NidVerificationPayload>
+            args: Prisma.IdVerificationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$IdVerificationPayload>
           }
           aggregate: {
-            args: Prisma.NidVerificationAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateNidVerification>
+            args: Prisma.IdVerificationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateIdVerification>
           }
           groupBy: {
-            args: Prisma.NidVerificationGroupByArgs<ExtArgs>
-            result: $Utils.Optional<NidVerificationGroupByOutputType>[]
+            args: Prisma.IdVerificationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<IdVerificationGroupByOutputType>[]
           }
           count: {
-            args: Prisma.NidVerificationCountArgs<ExtArgs>
-            result: $Utils.Optional<NidVerificationCountAggregateOutputType> | number
+            args: Prisma.IdVerificationCountArgs<ExtArgs>
+            result: $Utils.Optional<IdVerificationCountAggregateOutputType> | number
           }
         }
       }
@@ -2858,7 +2858,7 @@ export namespace Prisma {
     phoneNumber: string | null
     identityVerified: boolean | null
     contactVerified: boolean | null
-    nidVerified: boolean | null
+    idVerified: boolean | null
     addressVerified: boolean | null
     meetupVerified: boolean | null
     verifiedAt: Date | null
@@ -2882,7 +2882,7 @@ export namespace Prisma {
     phoneNumber: string | null
     identityVerified: boolean | null
     contactVerified: boolean | null
-    nidVerified: boolean | null
+    idVerified: boolean | null
     addressVerified: boolean | null
     meetupVerified: boolean | null
     verifiedAt: Date | null
@@ -2906,7 +2906,7 @@ export namespace Prisma {
     phoneNumber: number
     identityVerified: number
     contactVerified: number
-    nidVerified: number
+    idVerified: number
     addressVerified: number
     meetupVerified: number
     verifiedAt: number
@@ -2942,7 +2942,7 @@ export namespace Prisma {
     phoneNumber?: true
     identityVerified?: true
     contactVerified?: true
-    nidVerified?: true
+    idVerified?: true
     addressVerified?: true
     meetupVerified?: true
     verifiedAt?: true
@@ -2966,7 +2966,7 @@ export namespace Prisma {
     phoneNumber?: true
     identityVerified?: true
     contactVerified?: true
-    nidVerified?: true
+    idVerified?: true
     addressVerified?: true
     meetupVerified?: true
     verifiedAt?: true
@@ -2990,7 +2990,7 @@ export namespace Prisma {
     phoneNumber?: true
     identityVerified?: true
     contactVerified?: true
-    nidVerified?: true
+    idVerified?: true
     addressVerified?: true
     meetupVerified?: true
     verifiedAt?: true
@@ -3101,7 +3101,7 @@ export namespace Prisma {
     phoneNumber: string | null
     identityVerified: boolean
     contactVerified: boolean
-    nidVerified: boolean
+    idVerified: boolean
     addressVerified: boolean
     meetupVerified: boolean
     verifiedAt: Date | null
@@ -3144,7 +3144,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: boolean
@@ -3166,7 +3166,7 @@ export namespace Prisma {
     trailEntries?: boolean | User$trailEntriesArgs<ExtArgs>
     trailReactions?: boolean | User$trailReactionsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
-    nidVerification?: boolean | User$nidVerificationArgs<ExtArgs>
+    idVerification?: boolean | User$idVerificationArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3188,7 +3188,7 @@ export namespace Prisma {
     phoneNumber?: boolean
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: boolean
@@ -3213,7 +3213,7 @@ export namespace Prisma {
     trailEntries?: boolean | User$trailEntriesArgs<ExtArgs>
     trailReactions?: boolean | User$trailReactionsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
-    nidVerification?: boolean | User$nidVerificationArgs<ExtArgs>
+    idVerification?: boolean | User$idVerificationArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3237,7 +3237,7 @@ export namespace Prisma {
       trailEntries: Prisma.$ItemTrailEntryPayload<ExtArgs>[]
       trailReactions: Prisma.$TrailReactionPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
-      nidVerification: Prisma.$NidVerificationPayload<ExtArgs> | null
+      idVerification: Prisma.$IdVerificationPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3256,7 +3256,7 @@ export namespace Prisma {
       phoneNumber: string | null
       identityVerified: boolean
       contactVerified: boolean
-      nidVerified: boolean
+      idVerified: boolean
       addressVerified: boolean
       meetupVerified: boolean
       verifiedAt: Date | null
@@ -3618,7 +3618,7 @@ export namespace Prisma {
     trailEntries<T extends User$trailEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$trailEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemTrailEntryPayload<ExtArgs>, T, "findMany"> | Null>
     trailReactions<T extends User$trailReactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$trailReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrailReactionPayload<ExtArgs>, T, "findMany"> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany"> | Null>
-    nidVerification<T extends User$nidVerificationArgs<ExtArgs> = {}>(args?: Subset<T, User$nidVerificationArgs<ExtArgs>>): Prisma__NidVerificationClient<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    idVerification<T extends User$idVerificationArgs<ExtArgs> = {}>(args?: Subset<T, User$idVerificationArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3664,7 +3664,7 @@ export namespace Prisma {
     readonly phoneNumber: FieldRef<"User", 'String'>
     readonly identityVerified: FieldRef<"User", 'Boolean'>
     readonly contactVerified: FieldRef<"User", 'Boolean'>
-    readonly nidVerified: FieldRef<"User", 'Boolean'>
+    readonly idVerified: FieldRef<"User", 'Boolean'>
     readonly addressVerified: FieldRef<"User", 'Boolean'>
     readonly meetupVerified: FieldRef<"User", 'Boolean'>
     readonly verifiedAt: FieldRef<"User", 'DateTime'>
@@ -4303,18 +4303,18 @@ export namespace Prisma {
   }
 
   /**
-   * User.nidVerification
+   * User.idVerification
    */
-  export type User$nidVerificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$idVerificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
-    where?: NidVerificationWhereInput
+    include?: IdVerificationInclude<ExtArgs> | null
+    where?: IdVerificationWhereInput
   }
 
   /**
@@ -21571,26 +21571,26 @@ export namespace Prisma {
 
 
   /**
-   * Model NidVerification
+   * Model IdVerification
    */
 
-  export type AggregateNidVerification = {
-    _count: NidVerificationCountAggregateOutputType | null
-    _avg: NidVerificationAvgAggregateOutputType | null
-    _sum: NidVerificationSumAggregateOutputType | null
-    _min: NidVerificationMinAggregateOutputType | null
-    _max: NidVerificationMaxAggregateOutputType | null
+  export type AggregateIdVerification = {
+    _count: IdVerificationCountAggregateOutputType | null
+    _avg: IdVerificationAvgAggregateOutputType | null
+    _sum: IdVerificationSumAggregateOutputType | null
+    _min: IdVerificationMinAggregateOutputType | null
+    _max: IdVerificationMaxAggregateOutputType | null
   }
 
-  export type NidVerificationAvgAggregateOutputType = {
+  export type IdVerificationAvgAggregateOutputType = {
     faceMatchScore: number | null
   }
 
-  export type NidVerificationSumAggregateOutputType = {
+  export type IdVerificationSumAggregateOutputType = {
     faceMatchScore: number | null
   }
 
-  export type NidVerificationMinAggregateOutputType = {
+  export type IdVerificationMinAggregateOutputType = {
     id: string | null
     userId: string | null
     frontImage: Buffer | null
@@ -21605,7 +21605,7 @@ export namespace Prisma {
     reviewedAt: Date | null
   }
 
-  export type NidVerificationMaxAggregateOutputType = {
+  export type IdVerificationMaxAggregateOutputType = {
     id: string | null
     userId: string | null
     frontImage: Buffer | null
@@ -21620,7 +21620,7 @@ export namespace Prisma {
     reviewedAt: Date | null
   }
 
-  export type NidVerificationCountAggregateOutputType = {
+  export type IdVerificationCountAggregateOutputType = {
     id: number
     userId: number
     frontImage: number
@@ -21637,15 +21637,15 @@ export namespace Prisma {
   }
 
 
-  export type NidVerificationAvgAggregateInputType = {
+  export type IdVerificationAvgAggregateInputType = {
     faceMatchScore?: true
   }
 
-  export type NidVerificationSumAggregateInputType = {
+  export type IdVerificationSumAggregateInputType = {
     faceMatchScore?: true
   }
 
-  export type NidVerificationMinAggregateInputType = {
+  export type IdVerificationMinAggregateInputType = {
     id?: true
     userId?: true
     frontImage?: true
@@ -21660,7 +21660,7 @@ export namespace Prisma {
     reviewedAt?: true
   }
 
-  export type NidVerificationMaxAggregateInputType = {
+  export type IdVerificationMaxAggregateInputType = {
     id?: true
     userId?: true
     frontImage?: true
@@ -21675,7 +21675,7 @@ export namespace Prisma {
     reviewedAt?: true
   }
 
-  export type NidVerificationCountAggregateInputType = {
+  export type IdVerificationCountAggregateInputType = {
     id?: true
     userId?: true
     frontImage?: true
@@ -21691,93 +21691,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type NidVerificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which NidVerification to aggregate.
+     * Filter which IdVerification to aggregate.
      */
-    where?: NidVerificationWhereInput
+    where?: IdVerificationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of NidVerifications to fetch.
+     * Determine the order of IdVerifications to fetch.
      */
-    orderBy?: NidVerificationOrderByWithRelationInput | NidVerificationOrderByWithRelationInput[]
+    orderBy?: IdVerificationOrderByWithRelationInput | IdVerificationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: NidVerificationWhereUniqueInput
+    cursor?: IdVerificationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` NidVerifications from the position of the cursor.
+     * Take `±n` IdVerifications from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` NidVerifications.
+     * Skip the first `n` IdVerifications.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned NidVerifications
+     * Count returned IdVerifications
     **/
-    _count?: true | NidVerificationCountAggregateInputType
+    _count?: true | IdVerificationCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: NidVerificationAvgAggregateInputType
+    _avg?: IdVerificationAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: NidVerificationSumAggregateInputType
+    _sum?: IdVerificationSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: NidVerificationMinAggregateInputType
+    _min?: IdVerificationMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: NidVerificationMaxAggregateInputType
+    _max?: IdVerificationMaxAggregateInputType
   }
 
-  export type GetNidVerificationAggregateType<T extends NidVerificationAggregateArgs> = {
-        [P in keyof T & keyof AggregateNidVerification]: P extends '_count' | 'count'
+  export type GetIdVerificationAggregateType<T extends IdVerificationAggregateArgs> = {
+        [P in keyof T & keyof AggregateIdVerification]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateNidVerification[P]>
-      : GetScalarType<T[P], AggregateNidVerification[P]>
+        : GetScalarType<T[P], AggregateIdVerification[P]>
+      : GetScalarType<T[P], AggregateIdVerification[P]>
   }
 
 
 
 
-  export type NidVerificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NidVerificationWhereInput
-    orderBy?: NidVerificationOrderByWithAggregationInput | NidVerificationOrderByWithAggregationInput[]
-    by: NidVerificationScalarFieldEnum[] | NidVerificationScalarFieldEnum
-    having?: NidVerificationScalarWhereWithAggregatesInput
+  export type IdVerificationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: IdVerificationWhereInput
+    orderBy?: IdVerificationOrderByWithAggregationInput | IdVerificationOrderByWithAggregationInput[]
+    by: IdVerificationScalarFieldEnum[] | IdVerificationScalarFieldEnum
+    having?: IdVerificationScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: NidVerificationCountAggregateInputType | true
-    _avg?: NidVerificationAvgAggregateInputType
-    _sum?: NidVerificationSumAggregateInputType
-    _min?: NidVerificationMinAggregateInputType
-    _max?: NidVerificationMaxAggregateInputType
+    _count?: IdVerificationCountAggregateInputType | true
+    _avg?: IdVerificationAvgAggregateInputType
+    _sum?: IdVerificationSumAggregateInputType
+    _min?: IdVerificationMinAggregateInputType
+    _max?: IdVerificationMaxAggregateInputType
   }
 
-  export type NidVerificationGroupByOutputType = {
+  export type IdVerificationGroupByOutputType = {
     id: string
     userId: string
     frontImage: Buffer | null
@@ -21790,28 +21790,28 @@ export namespace Prisma {
     status: string
     submittedAt: Date
     reviewedAt: Date | null
-    _count: NidVerificationCountAggregateOutputType | null
-    _avg: NidVerificationAvgAggregateOutputType | null
-    _sum: NidVerificationSumAggregateOutputType | null
-    _min: NidVerificationMinAggregateOutputType | null
-    _max: NidVerificationMaxAggregateOutputType | null
+    _count: IdVerificationCountAggregateOutputType | null
+    _avg: IdVerificationAvgAggregateOutputType | null
+    _sum: IdVerificationSumAggregateOutputType | null
+    _min: IdVerificationMinAggregateOutputType | null
+    _max: IdVerificationMaxAggregateOutputType | null
   }
 
-  type GetNidVerificationGroupByPayload<T extends NidVerificationGroupByArgs> = Prisma.PrismaPromise<
+  type GetIdVerificationGroupByPayload<T extends IdVerificationGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<NidVerificationGroupByOutputType, T['by']> &
+      PickEnumerable<IdVerificationGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof NidVerificationGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof IdVerificationGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], NidVerificationGroupByOutputType[P]>
-            : GetScalarType<T[P], NidVerificationGroupByOutputType[P]>
+              : GetScalarType<T[P], IdVerificationGroupByOutputType[P]>
+            : GetScalarType<T[P], IdVerificationGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type NidVerificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type IdVerificationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
     frontImage?: boolean
@@ -21825,10 +21825,10 @@ export namespace Prisma {
     submittedAt?: boolean
     reviewedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["nidVerification"]>
+  }, ExtArgs["result"]["idVerification"]>
 
 
-  export type NidVerificationSelectScalar = {
+  export type IdVerificationSelectScalar = {
     id?: boolean
     userId?: boolean
     frontImage?: boolean
@@ -21843,12 +21843,12 @@ export namespace Prisma {
     reviewedAt?: boolean
   }
 
-  export type NidVerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
 
-  export type $NidVerificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "NidVerification"
+  export type $IdVerificationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "IdVerification"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
     }
@@ -21865,143 +21865,143 @@ export namespace Prisma {
       status: string
       submittedAt: Date
       reviewedAt: Date | null
-    }, ExtArgs["result"]["nidVerification"]>
+    }, ExtArgs["result"]["idVerification"]>
     composites: {}
   }
 
-  type NidVerificationGetPayload<S extends boolean | null | undefined | NidVerificationDefaultArgs> = $Result.GetResult<Prisma.$NidVerificationPayload, S>
+  type IdVerificationGetPayload<S extends boolean | null | undefined | IdVerificationDefaultArgs> = $Result.GetResult<Prisma.$IdVerificationPayload, S>
 
-  type NidVerificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<NidVerificationFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: NidVerificationCountAggregateInputType | true
+  type IdVerificationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<IdVerificationFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: IdVerificationCountAggregateInputType | true
     }
 
-  export interface NidVerificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['NidVerification'], meta: { name: 'NidVerification' } }
+  export interface IdVerificationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['IdVerification'], meta: { name: 'IdVerification' } }
     /**
-     * Find zero or one NidVerification that matches the filter.
-     * @param {NidVerificationFindUniqueArgs} args - Arguments to find a NidVerification
+     * Find zero or one IdVerification that matches the filter.
+     * @param {IdVerificationFindUniqueArgs} args - Arguments to find a IdVerification
      * @example
-     * // Get one NidVerification
-     * const nidVerification = await prisma.nidVerification.findUnique({
+     * // Get one IdVerification
+     * const idVerification = await prisma.idVerification.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends NidVerificationFindUniqueArgs>(args: SelectSubset<T, NidVerificationFindUniqueArgs<ExtArgs>>): Prisma__NidVerificationClient<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    findUnique<T extends IdVerificationFindUniqueArgs>(args: SelectSubset<T, IdVerificationFindUniqueArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one NidVerification that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one IdVerification that matches the filter or throw an error with `error.code='P2025'` 
      * if no matches were found.
-     * @param {NidVerificationFindUniqueOrThrowArgs} args - Arguments to find a NidVerification
+     * @param {IdVerificationFindUniqueOrThrowArgs} args - Arguments to find a IdVerification
      * @example
-     * // Get one NidVerification
-     * const nidVerification = await prisma.nidVerification.findUniqueOrThrow({
+     * // Get one IdVerification
+     * const idVerification = await prisma.idVerification.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends NidVerificationFindUniqueOrThrowArgs>(args: SelectSubset<T, NidVerificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NidVerificationClient<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    findUniqueOrThrow<T extends IdVerificationFindUniqueOrThrowArgs>(args: SelectSubset<T, IdVerificationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
 
     /**
-     * Find the first NidVerification that matches the filter.
+     * Find the first IdVerification that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NidVerificationFindFirstArgs} args - Arguments to find a NidVerification
+     * @param {IdVerificationFindFirstArgs} args - Arguments to find a IdVerification
      * @example
-     * // Get one NidVerification
-     * const nidVerification = await prisma.nidVerification.findFirst({
+     * // Get one IdVerification
+     * const idVerification = await prisma.idVerification.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends NidVerificationFindFirstArgs>(args?: SelectSubset<T, NidVerificationFindFirstArgs<ExtArgs>>): Prisma__NidVerificationClient<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    findFirst<T extends IdVerificationFindFirstArgs>(args?: SelectSubset<T, IdVerificationFindFirstArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
 
     /**
-     * Find the first NidVerification that matches the filter or
+     * Find the first IdVerification that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NidVerificationFindFirstOrThrowArgs} args - Arguments to find a NidVerification
+     * @param {IdVerificationFindFirstOrThrowArgs} args - Arguments to find a IdVerification
      * @example
-     * // Get one NidVerification
-     * const nidVerification = await prisma.nidVerification.findFirstOrThrow({
+     * // Get one IdVerification
+     * const idVerification = await prisma.idVerification.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends NidVerificationFindFirstOrThrowArgs>(args?: SelectSubset<T, NidVerificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__NidVerificationClient<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    findFirstOrThrow<T extends IdVerificationFindFirstOrThrowArgs>(args?: SelectSubset<T, IdVerificationFindFirstOrThrowArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
 
     /**
-     * Find zero or more NidVerifications that matches the filter.
+     * Find zero or more IdVerifications that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NidVerificationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {IdVerificationFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all NidVerifications
-     * const nidVerifications = await prisma.nidVerification.findMany()
+     * // Get all IdVerifications
+     * const idVerifications = await prisma.idVerification.findMany()
      * 
-     * // Get first 10 NidVerifications
-     * const nidVerifications = await prisma.nidVerification.findMany({ take: 10 })
+     * // Get first 10 IdVerifications
+     * const idVerifications = await prisma.idVerification.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const nidVerificationWithIdOnly = await prisma.nidVerification.findMany({ select: { id: true } })
+     * const idVerificationWithIdOnly = await prisma.idVerification.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends NidVerificationFindManyArgs>(args?: SelectSubset<T, NidVerificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "findMany">>
+    findMany<T extends IdVerificationFindManyArgs>(args?: SelectSubset<T, IdVerificationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "findMany">>
 
     /**
-     * Create a NidVerification.
-     * @param {NidVerificationCreateArgs} args - Arguments to create a NidVerification.
+     * Create a IdVerification.
+     * @param {IdVerificationCreateArgs} args - Arguments to create a IdVerification.
      * @example
-     * // Create one NidVerification
-     * const NidVerification = await prisma.nidVerification.create({
+     * // Create one IdVerification
+     * const IdVerification = await prisma.idVerification.create({
      *   data: {
-     *     // ... data to create a NidVerification
+     *     // ... data to create a IdVerification
      *   }
      * })
      * 
      */
-    create<T extends NidVerificationCreateArgs>(args: SelectSubset<T, NidVerificationCreateArgs<ExtArgs>>): Prisma__NidVerificationClient<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    create<T extends IdVerificationCreateArgs>(args: SelectSubset<T, IdVerificationCreateArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "create">, never, ExtArgs>
 
     /**
-     * Create many NidVerifications.
-     * @param {NidVerificationCreateManyArgs} args - Arguments to create many NidVerifications.
+     * Create many IdVerifications.
+     * @param {IdVerificationCreateManyArgs} args - Arguments to create many IdVerifications.
      * @example
-     * // Create many NidVerifications
-     * const nidVerification = await prisma.nidVerification.createMany({
+     * // Create many IdVerifications
+     * const idVerification = await prisma.idVerification.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends NidVerificationCreateManyArgs>(args?: SelectSubset<T, NidVerificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends IdVerificationCreateManyArgs>(args?: SelectSubset<T, IdVerificationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a NidVerification.
-     * @param {NidVerificationDeleteArgs} args - Arguments to delete one NidVerification.
+     * Delete a IdVerification.
+     * @param {IdVerificationDeleteArgs} args - Arguments to delete one IdVerification.
      * @example
-     * // Delete one NidVerification
-     * const NidVerification = await prisma.nidVerification.delete({
+     * // Delete one IdVerification
+     * const IdVerification = await prisma.idVerification.delete({
      *   where: {
-     *     // ... filter to delete one NidVerification
+     *     // ... filter to delete one IdVerification
      *   }
      * })
      * 
      */
-    delete<T extends NidVerificationDeleteArgs>(args: SelectSubset<T, NidVerificationDeleteArgs<ExtArgs>>): Prisma__NidVerificationClient<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    delete<T extends IdVerificationDeleteArgs>(args: SelectSubset<T, IdVerificationDeleteArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "delete">, never, ExtArgs>
 
     /**
-     * Update one NidVerification.
-     * @param {NidVerificationUpdateArgs} args - Arguments to update one NidVerification.
+     * Update one IdVerification.
+     * @param {IdVerificationUpdateArgs} args - Arguments to update one IdVerification.
      * @example
-     * // Update one NidVerification
-     * const nidVerification = await prisma.nidVerification.update({
+     * // Update one IdVerification
+     * const idVerification = await prisma.idVerification.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -22011,30 +22011,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends NidVerificationUpdateArgs>(args: SelectSubset<T, NidVerificationUpdateArgs<ExtArgs>>): Prisma__NidVerificationClient<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    update<T extends IdVerificationUpdateArgs>(args: SelectSubset<T, IdVerificationUpdateArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "update">, never, ExtArgs>
 
     /**
-     * Delete zero or more NidVerifications.
-     * @param {NidVerificationDeleteManyArgs} args - Arguments to filter NidVerifications to delete.
+     * Delete zero or more IdVerifications.
+     * @param {IdVerificationDeleteManyArgs} args - Arguments to filter IdVerifications to delete.
      * @example
-     * // Delete a few NidVerifications
-     * const { count } = await prisma.nidVerification.deleteMany({
+     * // Delete a few IdVerifications
+     * const { count } = await prisma.idVerification.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends NidVerificationDeleteManyArgs>(args?: SelectSubset<T, NidVerificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends IdVerificationDeleteManyArgs>(args?: SelectSubset<T, IdVerificationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more NidVerifications.
+     * Update zero or more IdVerifications.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NidVerificationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {IdVerificationUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many NidVerifications
-     * const nidVerification = await prisma.nidVerification.updateMany({
+     * // Update many IdVerifications
+     * const idVerification = await prisma.idVerification.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -22044,56 +22044,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends NidVerificationUpdateManyArgs>(args: SelectSubset<T, NidVerificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends IdVerificationUpdateManyArgs>(args: SelectSubset<T, IdVerificationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one NidVerification.
-     * @param {NidVerificationUpsertArgs} args - Arguments to update or create a NidVerification.
+     * Create or update one IdVerification.
+     * @param {IdVerificationUpsertArgs} args - Arguments to update or create a IdVerification.
      * @example
-     * // Update or create a NidVerification
-     * const nidVerification = await prisma.nidVerification.upsert({
+     * // Update or create a IdVerification
+     * const idVerification = await prisma.idVerification.upsert({
      *   create: {
-     *     // ... data to create a NidVerification
+     *     // ... data to create a IdVerification
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the NidVerification we want to update
+     *     // ... the filter for the IdVerification we want to update
      *   }
      * })
      */
-    upsert<T extends NidVerificationUpsertArgs>(args: SelectSubset<T, NidVerificationUpsertArgs<ExtArgs>>): Prisma__NidVerificationClient<$Result.GetResult<Prisma.$NidVerificationPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+    upsert<T extends IdVerificationUpsertArgs>(args: SelectSubset<T, IdVerificationUpsertArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
 
 
     /**
-     * Count the number of NidVerifications.
+     * Count the number of IdVerifications.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NidVerificationCountArgs} args - Arguments to filter NidVerifications to count.
+     * @param {IdVerificationCountArgs} args - Arguments to filter IdVerifications to count.
      * @example
-     * // Count the number of NidVerifications
-     * const count = await prisma.nidVerification.count({
+     * // Count the number of IdVerifications
+     * const count = await prisma.idVerification.count({
      *   where: {
-     *     // ... the filter for the NidVerifications we want to count
+     *     // ... the filter for the IdVerifications we want to count
      *   }
      * })
     **/
-    count<T extends NidVerificationCountArgs>(
-      args?: Subset<T, NidVerificationCountArgs>,
+    count<T extends IdVerificationCountArgs>(
+      args?: Subset<T, IdVerificationCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], NidVerificationCountAggregateOutputType>
+          : GetScalarType<T['select'], IdVerificationCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a NidVerification.
+     * Allows you to perform aggregations operations on a IdVerification.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NidVerificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {IdVerificationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -22113,13 +22113,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends NidVerificationAggregateArgs>(args: Subset<T, NidVerificationAggregateArgs>): Prisma.PrismaPromise<GetNidVerificationAggregateType<T>>
+    aggregate<T extends IdVerificationAggregateArgs>(args: Subset<T, IdVerificationAggregateArgs>): Prisma.PrismaPromise<GetIdVerificationAggregateType<T>>
 
     /**
-     * Group by NidVerification.
+     * Group by IdVerification.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {NidVerificationGroupByArgs} args - Group by arguments.
+     * @param {IdVerificationGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -22134,14 +22134,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends NidVerificationGroupByArgs,
+      T extends IdVerificationGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: NidVerificationGroupByArgs['orderBy'] }
-        : { orderBy?: NidVerificationGroupByArgs['orderBy'] },
+        ? { orderBy: IdVerificationGroupByArgs['orderBy'] }
+        : { orderBy?: IdVerificationGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -22190,20 +22190,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, NidVerificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNidVerificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, IdVerificationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIdVerificationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the NidVerification model
+   * Fields of the IdVerification model
    */
-  readonly fields: NidVerificationFieldRefs;
+  readonly fields: IdVerificationFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for NidVerification.
+   * The delegate class that acts as a "Promise-like" for IdVerification.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__NidVerificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__IdVerificationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
@@ -22232,331 +22232,331 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the NidVerification model
+   * Fields of the IdVerification model
    */ 
-  interface NidVerificationFieldRefs {
-    readonly id: FieldRef<"NidVerification", 'String'>
-    readonly userId: FieldRef<"NidVerification", 'String'>
-    readonly frontImage: FieldRef<"NidVerification", 'Bytes'>
-    readonly backImage: FieldRef<"NidVerification", 'Bytes'>
-    readonly selfieImage: FieldRef<"NidVerification", 'Bytes'>
-    readonly frontMimeType: FieldRef<"NidVerification", 'String'>
-    readonly backMimeType: FieldRef<"NidVerification", 'String'>
-    readonly selfieMimeType: FieldRef<"NidVerification", 'String'>
-    readonly faceMatchScore: FieldRef<"NidVerification", 'Float'>
-    readonly status: FieldRef<"NidVerification", 'String'>
-    readonly submittedAt: FieldRef<"NidVerification", 'DateTime'>
-    readonly reviewedAt: FieldRef<"NidVerification", 'DateTime'>
+  interface IdVerificationFieldRefs {
+    readonly id: FieldRef<"IdVerification", 'String'>
+    readonly userId: FieldRef<"IdVerification", 'String'>
+    readonly frontImage: FieldRef<"IdVerification", 'Bytes'>
+    readonly backImage: FieldRef<"IdVerification", 'Bytes'>
+    readonly selfieImage: FieldRef<"IdVerification", 'Bytes'>
+    readonly frontMimeType: FieldRef<"IdVerification", 'String'>
+    readonly backMimeType: FieldRef<"IdVerification", 'String'>
+    readonly selfieMimeType: FieldRef<"IdVerification", 'String'>
+    readonly faceMatchScore: FieldRef<"IdVerification", 'Float'>
+    readonly status: FieldRef<"IdVerification", 'String'>
+    readonly submittedAt: FieldRef<"IdVerification", 'DateTime'>
+    readonly reviewedAt: FieldRef<"IdVerification", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * NidVerification findUnique
+   * IdVerification findUnique
    */
-  export type NidVerificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
     /**
-     * Filter, which NidVerification to fetch.
+     * Filter, which IdVerification to fetch.
      */
-    where: NidVerificationWhereUniqueInput
+    where: IdVerificationWhereUniqueInput
   }
 
   /**
-   * NidVerification findUniqueOrThrow
+   * IdVerification findUniqueOrThrow
    */
-  export type NidVerificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
     /**
-     * Filter, which NidVerification to fetch.
+     * Filter, which IdVerification to fetch.
      */
-    where: NidVerificationWhereUniqueInput
+    where: IdVerificationWhereUniqueInput
   }
 
   /**
-   * NidVerification findFirst
+   * IdVerification findFirst
    */
-  export type NidVerificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
     /**
-     * Filter, which NidVerification to fetch.
+     * Filter, which IdVerification to fetch.
      */
-    where?: NidVerificationWhereInput
+    where?: IdVerificationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of NidVerifications to fetch.
+     * Determine the order of IdVerifications to fetch.
      */
-    orderBy?: NidVerificationOrderByWithRelationInput | NidVerificationOrderByWithRelationInput[]
+    orderBy?: IdVerificationOrderByWithRelationInput | IdVerificationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for NidVerifications.
+     * Sets the position for searching for IdVerifications.
      */
-    cursor?: NidVerificationWhereUniqueInput
+    cursor?: IdVerificationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` NidVerifications from the position of the cursor.
+     * Take `±n` IdVerifications from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` NidVerifications.
+     * Skip the first `n` IdVerifications.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of NidVerifications.
+     * Filter by unique combinations of IdVerifications.
      */
-    distinct?: NidVerificationScalarFieldEnum | NidVerificationScalarFieldEnum[]
+    distinct?: IdVerificationScalarFieldEnum | IdVerificationScalarFieldEnum[]
   }
 
   /**
-   * NidVerification findFirstOrThrow
+   * IdVerification findFirstOrThrow
    */
-  export type NidVerificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
     /**
-     * Filter, which NidVerification to fetch.
+     * Filter, which IdVerification to fetch.
      */
-    where?: NidVerificationWhereInput
+    where?: IdVerificationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of NidVerifications to fetch.
+     * Determine the order of IdVerifications to fetch.
      */
-    orderBy?: NidVerificationOrderByWithRelationInput | NidVerificationOrderByWithRelationInput[]
+    orderBy?: IdVerificationOrderByWithRelationInput | IdVerificationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for NidVerifications.
+     * Sets the position for searching for IdVerifications.
      */
-    cursor?: NidVerificationWhereUniqueInput
+    cursor?: IdVerificationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` NidVerifications from the position of the cursor.
+     * Take `±n` IdVerifications from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` NidVerifications.
+     * Skip the first `n` IdVerifications.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of NidVerifications.
+     * Filter by unique combinations of IdVerifications.
      */
-    distinct?: NidVerificationScalarFieldEnum | NidVerificationScalarFieldEnum[]
+    distinct?: IdVerificationScalarFieldEnum | IdVerificationScalarFieldEnum[]
   }
 
   /**
-   * NidVerification findMany
+   * IdVerification findMany
    */
-  export type NidVerificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
     /**
-     * Filter, which NidVerifications to fetch.
+     * Filter, which IdVerifications to fetch.
      */
-    where?: NidVerificationWhereInput
+    where?: IdVerificationWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of NidVerifications to fetch.
+     * Determine the order of IdVerifications to fetch.
      */
-    orderBy?: NidVerificationOrderByWithRelationInput | NidVerificationOrderByWithRelationInput[]
+    orderBy?: IdVerificationOrderByWithRelationInput | IdVerificationOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing NidVerifications.
+     * Sets the position for listing IdVerifications.
      */
-    cursor?: NidVerificationWhereUniqueInput
+    cursor?: IdVerificationWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` NidVerifications from the position of the cursor.
+     * Take `±n` IdVerifications from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` NidVerifications.
+     * Skip the first `n` IdVerifications.
      */
     skip?: number
-    distinct?: NidVerificationScalarFieldEnum | NidVerificationScalarFieldEnum[]
+    distinct?: IdVerificationScalarFieldEnum | IdVerificationScalarFieldEnum[]
   }
 
   /**
-   * NidVerification create
+   * IdVerification create
    */
-  export type NidVerificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
     /**
-     * The data needed to create a NidVerification.
+     * The data needed to create a IdVerification.
      */
-    data: XOR<NidVerificationCreateInput, NidVerificationUncheckedCreateInput>
+    data: XOR<IdVerificationCreateInput, IdVerificationUncheckedCreateInput>
   }
 
   /**
-   * NidVerification createMany
+   * IdVerification createMany
    */
-  export type NidVerificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many NidVerifications.
+     * The data used to create many IdVerifications.
      */
-    data: NidVerificationCreateManyInput | NidVerificationCreateManyInput[]
+    data: IdVerificationCreateManyInput | IdVerificationCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * NidVerification update
+   * IdVerification update
    */
-  export type NidVerificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
     /**
-     * The data needed to update a NidVerification.
+     * The data needed to update a IdVerification.
      */
-    data: XOR<NidVerificationUpdateInput, NidVerificationUncheckedUpdateInput>
+    data: XOR<IdVerificationUpdateInput, IdVerificationUncheckedUpdateInput>
     /**
-     * Choose, which NidVerification to update.
+     * Choose, which IdVerification to update.
      */
-    where: NidVerificationWhereUniqueInput
+    where: IdVerificationWhereUniqueInput
   }
 
   /**
-   * NidVerification updateMany
+   * IdVerification updateMany
    */
-  export type NidVerificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update NidVerifications.
+     * The data used to update IdVerifications.
      */
-    data: XOR<NidVerificationUpdateManyMutationInput, NidVerificationUncheckedUpdateManyInput>
+    data: XOR<IdVerificationUpdateManyMutationInput, IdVerificationUncheckedUpdateManyInput>
     /**
-     * Filter which NidVerifications to update
+     * Filter which IdVerifications to update
      */
-    where?: NidVerificationWhereInput
+    where?: IdVerificationWhereInput
   }
 
   /**
-   * NidVerification upsert
+   * IdVerification upsert
    */
-  export type NidVerificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
     /**
-     * The filter to search for the NidVerification to update in case it exists.
+     * The filter to search for the IdVerification to update in case it exists.
      */
-    where: NidVerificationWhereUniqueInput
+    where: IdVerificationWhereUniqueInput
     /**
-     * In case the NidVerification found by the `where` argument doesn't exist, create a new NidVerification with this data.
+     * In case the IdVerification found by the `where` argument doesn't exist, create a new IdVerification with this data.
      */
-    create: XOR<NidVerificationCreateInput, NidVerificationUncheckedCreateInput>
+    create: XOR<IdVerificationCreateInput, IdVerificationUncheckedCreateInput>
     /**
-     * In case the NidVerification was found with the provided `where` argument, update it with this data.
+     * In case the IdVerification was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<NidVerificationUpdateInput, NidVerificationUncheckedUpdateInput>
+    update: XOR<IdVerificationUpdateInput, IdVerificationUncheckedUpdateInput>
   }
 
   /**
-   * NidVerification delete
+   * IdVerification delete
    */
-  export type NidVerificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
     /**
-     * Filter which NidVerification to delete.
+     * Filter which IdVerification to delete.
      */
-    where: NidVerificationWhereUniqueInput
+    where: IdVerificationWhereUniqueInput
   }
 
   /**
-   * NidVerification deleteMany
+   * IdVerification deleteMany
    */
-  export type NidVerificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which NidVerifications to delete
+     * Filter which IdVerifications to delete
      */
-    where?: NidVerificationWhereInput
+    where?: IdVerificationWhereInput
   }
 
   /**
-   * NidVerification without action
+   * IdVerification without action
    */
-  export type NidVerificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type IdVerificationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the NidVerification
+     * Select specific fields to fetch from the IdVerification
      */
-    select?: NidVerificationSelect<ExtArgs> | null
+    select?: IdVerificationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: NidVerificationInclude<ExtArgs> | null
+    include?: IdVerificationInclude<ExtArgs> | null
   }
 
 
@@ -22591,7 +22591,7 @@ export namespace Prisma {
     phoneNumber: 'phoneNumber',
     identityVerified: 'identityVerified',
     contactVerified: 'contactVerified',
-    nidVerified: 'nidVerified',
+    idVerified: 'idVerified',
     addressVerified: 'addressVerified',
     meetupVerified: 'meetupVerified',
     verifiedAt: 'verifiedAt',
@@ -22863,7 +22863,7 @@ export namespace Prisma {
   export type TrailReactionScalarFieldEnum = (typeof TrailReactionScalarFieldEnum)[keyof typeof TrailReactionScalarFieldEnum]
 
 
-  export const NidVerificationScalarFieldEnum: {
+  export const IdVerificationScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
     frontImage: 'frontImage',
@@ -22878,7 +22878,7 @@ export namespace Prisma {
     reviewedAt: 'reviewedAt'
   };
 
-  export type NidVerificationScalarFieldEnum = (typeof NidVerificationScalarFieldEnum)[keyof typeof NidVerificationScalarFieldEnum]
+  export type IdVerificationScalarFieldEnum = (typeof IdVerificationScalarFieldEnum)[keyof typeof IdVerificationScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -23012,7 +23012,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableFilter<"User"> | string | null
     identityVerified?: BoolFilter<"User"> | boolean
     contactVerified?: BoolFilter<"User"> | boolean
-    nidVerified?: BoolFilter<"User"> | boolean
+    idVerified?: BoolFilter<"User"> | boolean
     addressVerified?: BoolFilter<"User"> | boolean
     meetupVerified?: BoolFilter<"User"> | boolean
     verifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -23034,7 +23034,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryListRelationFilter
     trailReactions?: TrailReactionListRelationFilter
     notifications?: NotificationListRelationFilter
-    nidVerification?: XOR<NidVerificationNullableRelationFilter, NidVerificationWhereInput> | null
+    idVerification?: XOR<IdVerificationNullableRelationFilter, IdVerificationWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -23054,7 +23054,7 @@ export namespace Prisma {
     phoneNumber?: SortOrderInput | SortOrder
     identityVerified?: SortOrder
     contactVerified?: SortOrder
-    nidVerified?: SortOrder
+    idVerified?: SortOrder
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrderInput | SortOrder
@@ -23076,7 +23076,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryOrderByRelationAggregateInput
     trailReactions?: TrailReactionOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
-    nidVerification?: NidVerificationOrderByWithRelationInput
+    idVerification?: IdVerificationOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -23099,7 +23099,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableFilter<"User"> | string | null
     identityVerified?: BoolFilter<"User"> | boolean
     contactVerified?: BoolFilter<"User"> | boolean
-    nidVerified?: BoolFilter<"User"> | boolean
+    idVerified?: BoolFilter<"User"> | boolean
     addressVerified?: BoolFilter<"User"> | boolean
     meetupVerified?: BoolFilter<"User"> | boolean
     verifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -23121,7 +23121,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryListRelationFilter
     trailReactions?: TrailReactionListRelationFilter
     notifications?: NotificationListRelationFilter
-    nidVerification?: XOR<NidVerificationNullableRelationFilter, NidVerificationWhereInput> | null
+    idVerification?: XOR<IdVerificationNullableRelationFilter, IdVerificationWhereInput> | null
   }, "id" | "userName" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -23141,7 +23141,7 @@ export namespace Prisma {
     phoneNumber?: SortOrderInput | SortOrder
     identityVerified?: SortOrder
     contactVerified?: SortOrder
-    nidVerified?: SortOrder
+    idVerified?: SortOrder
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrderInput | SortOrder
@@ -23173,7 +23173,7 @@ export namespace Prisma {
     phoneNumber?: StringNullableWithAggregatesFilter<"User"> | string | null
     identityVerified?: BoolWithAggregatesFilter<"User"> | boolean
     contactVerified?: BoolWithAggregatesFilter<"User"> | boolean
-    nidVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    idVerified?: BoolWithAggregatesFilter<"User"> | boolean
     addressVerified?: BoolWithAggregatesFilter<"User"> | boolean
     meetupVerified?: BoolWithAggregatesFilter<"User"> | boolean
     verifiedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -24593,26 +24593,26 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"TrailReaction"> | Date | string
   }
 
-  export type NidVerificationWhereInput = {
-    AND?: NidVerificationWhereInput | NidVerificationWhereInput[]
-    OR?: NidVerificationWhereInput[]
-    NOT?: NidVerificationWhereInput | NidVerificationWhereInput[]
-    id?: StringFilter<"NidVerification"> | string
-    userId?: StringFilter<"NidVerification"> | string
-    frontImage?: BytesNullableFilter<"NidVerification"> | Buffer | null
-    backImage?: BytesNullableFilter<"NidVerification"> | Buffer | null
-    selfieImage?: BytesNullableFilter<"NidVerification"> | Buffer | null
-    frontMimeType?: StringNullableFilter<"NidVerification"> | string | null
-    backMimeType?: StringNullableFilter<"NidVerification"> | string | null
-    selfieMimeType?: StringNullableFilter<"NidVerification"> | string | null
-    faceMatchScore?: FloatNullableFilter<"NidVerification"> | number | null
-    status?: StringFilter<"NidVerification"> | string
-    submittedAt?: DateTimeFilter<"NidVerification"> | Date | string
-    reviewedAt?: DateTimeNullableFilter<"NidVerification"> | Date | string | null
+  export type IdVerificationWhereInput = {
+    AND?: IdVerificationWhereInput | IdVerificationWhereInput[]
+    OR?: IdVerificationWhereInput[]
+    NOT?: IdVerificationWhereInput | IdVerificationWhereInput[]
+    id?: StringFilter<"IdVerification"> | string
+    userId?: StringFilter<"IdVerification"> | string
+    frontImage?: BytesNullableFilter<"IdVerification"> | Buffer | null
+    backImage?: BytesNullableFilter<"IdVerification"> | Buffer | null
+    selfieImage?: BytesNullableFilter<"IdVerification"> | Buffer | null
+    frontMimeType?: StringNullableFilter<"IdVerification"> | string | null
+    backMimeType?: StringNullableFilter<"IdVerification"> | string | null
+    selfieMimeType?: StringNullableFilter<"IdVerification"> | string | null
+    faceMatchScore?: FloatNullableFilter<"IdVerification"> | number | null
+    status?: StringFilter<"IdVerification"> | string
+    submittedAt?: DateTimeFilter<"IdVerification"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"IdVerification"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
-  export type NidVerificationOrderByWithRelationInput = {
+  export type IdVerificationOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
     frontImage?: SortOrderInput | SortOrder
@@ -24628,26 +24628,26 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
   }
 
-  export type NidVerificationWhereUniqueInput = Prisma.AtLeast<{
+  export type IdVerificationWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     userId?: string
-    AND?: NidVerificationWhereInput | NidVerificationWhereInput[]
-    OR?: NidVerificationWhereInput[]
-    NOT?: NidVerificationWhereInput | NidVerificationWhereInput[]
-    frontImage?: BytesNullableFilter<"NidVerification"> | Buffer | null
-    backImage?: BytesNullableFilter<"NidVerification"> | Buffer | null
-    selfieImage?: BytesNullableFilter<"NidVerification"> | Buffer | null
-    frontMimeType?: StringNullableFilter<"NidVerification"> | string | null
-    backMimeType?: StringNullableFilter<"NidVerification"> | string | null
-    selfieMimeType?: StringNullableFilter<"NidVerification"> | string | null
-    faceMatchScore?: FloatNullableFilter<"NidVerification"> | number | null
-    status?: StringFilter<"NidVerification"> | string
-    submittedAt?: DateTimeFilter<"NidVerification"> | Date | string
-    reviewedAt?: DateTimeNullableFilter<"NidVerification"> | Date | string | null
+    AND?: IdVerificationWhereInput | IdVerificationWhereInput[]
+    OR?: IdVerificationWhereInput[]
+    NOT?: IdVerificationWhereInput | IdVerificationWhereInput[]
+    frontImage?: BytesNullableFilter<"IdVerification"> | Buffer | null
+    backImage?: BytesNullableFilter<"IdVerification"> | Buffer | null
+    selfieImage?: BytesNullableFilter<"IdVerification"> | Buffer | null
+    frontMimeType?: StringNullableFilter<"IdVerification"> | string | null
+    backMimeType?: StringNullableFilter<"IdVerification"> | string | null
+    selfieMimeType?: StringNullableFilter<"IdVerification"> | string | null
+    faceMatchScore?: FloatNullableFilter<"IdVerification"> | number | null
+    status?: StringFilter<"IdVerification"> | string
+    submittedAt?: DateTimeFilter<"IdVerification"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"IdVerification"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
-  export type NidVerificationOrderByWithAggregationInput = {
+  export type IdVerificationOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     frontImage?: SortOrderInput | SortOrder
@@ -24660,29 +24660,29 @@ export namespace Prisma {
     status?: SortOrder
     submittedAt?: SortOrder
     reviewedAt?: SortOrderInput | SortOrder
-    _count?: NidVerificationCountOrderByAggregateInput
-    _avg?: NidVerificationAvgOrderByAggregateInput
-    _max?: NidVerificationMaxOrderByAggregateInput
-    _min?: NidVerificationMinOrderByAggregateInput
-    _sum?: NidVerificationSumOrderByAggregateInput
+    _count?: IdVerificationCountOrderByAggregateInput
+    _avg?: IdVerificationAvgOrderByAggregateInput
+    _max?: IdVerificationMaxOrderByAggregateInput
+    _min?: IdVerificationMinOrderByAggregateInput
+    _sum?: IdVerificationSumOrderByAggregateInput
   }
 
-  export type NidVerificationScalarWhereWithAggregatesInput = {
-    AND?: NidVerificationScalarWhereWithAggregatesInput | NidVerificationScalarWhereWithAggregatesInput[]
-    OR?: NidVerificationScalarWhereWithAggregatesInput[]
-    NOT?: NidVerificationScalarWhereWithAggregatesInput | NidVerificationScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"NidVerification"> | string
-    userId?: StringWithAggregatesFilter<"NidVerification"> | string
-    frontImage?: BytesNullableWithAggregatesFilter<"NidVerification"> | Buffer | null
-    backImage?: BytesNullableWithAggregatesFilter<"NidVerification"> | Buffer | null
-    selfieImage?: BytesNullableWithAggregatesFilter<"NidVerification"> | Buffer | null
-    frontMimeType?: StringNullableWithAggregatesFilter<"NidVerification"> | string | null
-    backMimeType?: StringNullableWithAggregatesFilter<"NidVerification"> | string | null
-    selfieMimeType?: StringNullableWithAggregatesFilter<"NidVerification"> | string | null
-    faceMatchScore?: FloatNullableWithAggregatesFilter<"NidVerification"> | number | null
-    status?: StringWithAggregatesFilter<"NidVerification"> | string
-    submittedAt?: DateTimeWithAggregatesFilter<"NidVerification"> | Date | string
-    reviewedAt?: DateTimeNullableWithAggregatesFilter<"NidVerification"> | Date | string | null
+  export type IdVerificationScalarWhereWithAggregatesInput = {
+    AND?: IdVerificationScalarWhereWithAggregatesInput | IdVerificationScalarWhereWithAggregatesInput[]
+    OR?: IdVerificationScalarWhereWithAggregatesInput[]
+    NOT?: IdVerificationScalarWhereWithAggregatesInput | IdVerificationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"IdVerification"> | string
+    userId?: StringWithAggregatesFilter<"IdVerification"> | string
+    frontImage?: BytesNullableWithAggregatesFilter<"IdVerification"> | Buffer | null
+    backImage?: BytesNullableWithAggregatesFilter<"IdVerification"> | Buffer | null
+    selfieImage?: BytesNullableWithAggregatesFilter<"IdVerification"> | Buffer | null
+    frontMimeType?: StringNullableWithAggregatesFilter<"IdVerification"> | string | null
+    backMimeType?: StringNullableWithAggregatesFilter<"IdVerification"> | string | null
+    selfieMimeType?: StringNullableWithAggregatesFilter<"IdVerification"> | string | null
+    faceMatchScore?: FloatNullableWithAggregatesFilter<"IdVerification"> | number | null
+    status?: StringWithAggregatesFilter<"IdVerification"> | string
+    submittedAt?: DateTimeWithAggregatesFilter<"IdVerification"> | Date | string
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"IdVerification"> | Date | string | null
   }
 
   export type UserCreateInput = {
@@ -24702,7 +24702,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -24724,7 +24724,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -24744,7 +24744,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -24766,7 +24766,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -24786,7 +24786,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24808,7 +24808,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -24828,7 +24828,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24850,7 +24850,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -24870,7 +24870,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -24894,7 +24894,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24918,7 +24918,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26407,7 +26407,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type NidVerificationCreateInput = {
+  export type IdVerificationCreateInput = {
     id?: string
     frontImage?: Buffer | null
     backImage?: Buffer | null
@@ -26419,10 +26419,10 @@ export namespace Prisma {
     status?: string
     submittedAt?: Date | string
     reviewedAt?: Date | string | null
-    user: UserCreateNestedOneWithoutNidVerificationInput
+    user: UserCreateNestedOneWithoutIdVerificationInput
   }
 
-  export type NidVerificationUncheckedCreateInput = {
+  export type IdVerificationUncheckedCreateInput = {
     id?: string
     userId: string
     frontImage?: Buffer | null
@@ -26437,7 +26437,7 @@ export namespace Prisma {
     reviewedAt?: Date | string | null
   }
 
-  export type NidVerificationUpdateInput = {
+  export type IdVerificationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     frontImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     backImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
@@ -26449,10 +26449,10 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     submittedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutNidVerificationNestedInput
+    user?: UserUpdateOneRequiredWithoutIdVerificationNestedInput
   }
 
-  export type NidVerificationUncheckedUpdateInput = {
+  export type IdVerificationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     frontImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
@@ -26467,7 +26467,7 @@ export namespace Prisma {
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type NidVerificationCreateManyInput = {
+  export type IdVerificationCreateManyInput = {
     id?: string
     userId: string
     frontImage?: Buffer | null
@@ -26482,7 +26482,7 @@ export namespace Prisma {
     reviewedAt?: Date | string | null
   }
 
-  export type NidVerificationUpdateManyMutationInput = {
+  export type IdVerificationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     frontImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     backImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
@@ -26496,7 +26496,7 @@ export namespace Prisma {
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type NidVerificationUncheckedUpdateManyInput = {
+  export type IdVerificationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     frontImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
@@ -26672,9 +26672,9 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
-  export type NidVerificationNullableRelationFilter = {
-    is?: NidVerificationWhereInput | null
-    isNot?: NidVerificationWhereInput | null
+  export type IdVerificationNullableRelationFilter = {
+    is?: IdVerificationWhereInput | null
+    isNot?: IdVerificationWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -26759,7 +26759,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     identityVerified?: SortOrder
     contactVerified?: SortOrder
-    nidVerified?: SortOrder
+    idVerified?: SortOrder
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrder
@@ -26788,7 +26788,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     identityVerified?: SortOrder
     contactVerified?: SortOrder
-    nidVerified?: SortOrder
+    idVerified?: SortOrder
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrder
@@ -26812,7 +26812,7 @@ export namespace Prisma {
     phoneNumber?: SortOrder
     identityVerified?: SortOrder
     contactVerified?: SortOrder
-    nidVerified?: SortOrder
+    idVerified?: SortOrder
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrder
@@ -27886,7 +27886,7 @@ export namespace Prisma {
     not?: NestedBytesNullableFilter<$PrismaModel> | Buffer | null
   }
 
-  export type NidVerificationCountOrderByAggregateInput = {
+  export type IdVerificationCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     frontImage?: SortOrder
@@ -27901,11 +27901,11 @@ export namespace Prisma {
     reviewedAt?: SortOrder
   }
 
-  export type NidVerificationAvgOrderByAggregateInput = {
+  export type IdVerificationAvgOrderByAggregateInput = {
     faceMatchScore?: SortOrder
   }
 
-  export type NidVerificationMaxOrderByAggregateInput = {
+  export type IdVerificationMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     frontImage?: SortOrder
@@ -27920,7 +27920,7 @@ export namespace Prisma {
     reviewedAt?: SortOrder
   }
 
-  export type NidVerificationMinOrderByAggregateInput = {
+  export type IdVerificationMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     frontImage?: SortOrder
@@ -27935,7 +27935,7 @@ export namespace Prisma {
     reviewedAt?: SortOrder
   }
 
-  export type NidVerificationSumOrderByAggregateInput = {
+  export type IdVerificationSumOrderByAggregateInput = {
     faceMatchScore?: SortOrder
   }
 
@@ -28067,10 +28067,10 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
-  export type NidVerificationCreateNestedOneWithoutUserInput = {
-    create?: XOR<NidVerificationCreateWithoutUserInput, NidVerificationUncheckedCreateWithoutUserInput>
-    connectOrCreate?: NidVerificationCreateOrConnectWithoutUserInput
-    connect?: NidVerificationWhereUniqueInput
+  export type IdVerificationCreateNestedOneWithoutUserInput = {
+    create?: XOR<IdVerificationCreateWithoutUserInput, IdVerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: IdVerificationCreateOrConnectWithoutUserInput
+    connect?: IdVerificationWhereUniqueInput
   }
 
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
@@ -28191,10 +28191,10 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
-  export type NidVerificationUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<NidVerificationCreateWithoutUserInput, NidVerificationUncheckedCreateWithoutUserInput>
-    connectOrCreate?: NidVerificationCreateOrConnectWithoutUserInput
-    connect?: NidVerificationWhereUniqueInput
+  export type IdVerificationUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<IdVerificationCreateWithoutUserInput, IdVerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: IdVerificationCreateOrConnectWithoutUserInput
+    connect?: IdVerificationWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -28459,14 +28459,14 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
-  export type NidVerificationUpdateOneWithoutUserNestedInput = {
-    create?: XOR<NidVerificationCreateWithoutUserInput, NidVerificationUncheckedCreateWithoutUserInput>
-    connectOrCreate?: NidVerificationCreateOrConnectWithoutUserInput
-    upsert?: NidVerificationUpsertWithoutUserInput
-    disconnect?: NidVerificationWhereInput | boolean
-    delete?: NidVerificationWhereInput | boolean
-    connect?: NidVerificationWhereUniqueInput
-    update?: XOR<XOR<NidVerificationUpdateToOneWithWhereWithoutUserInput, NidVerificationUpdateWithoutUserInput>, NidVerificationUncheckedUpdateWithoutUserInput>
+  export type IdVerificationUpdateOneWithoutUserNestedInput = {
+    create?: XOR<IdVerificationCreateWithoutUserInput, IdVerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: IdVerificationCreateOrConnectWithoutUserInput
+    upsert?: IdVerificationUpsertWithoutUserInput
+    disconnect?: IdVerificationWhereInput | boolean
+    delete?: IdVerificationWhereInput | boolean
+    connect?: IdVerificationWhereUniqueInput
+    update?: XOR<XOR<IdVerificationUpdateToOneWithWhereWithoutUserInput, IdVerificationUpdateWithoutUserInput>, IdVerificationUncheckedUpdateWithoutUserInput>
   }
 
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
@@ -28703,14 +28703,14 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
-  export type NidVerificationUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<NidVerificationCreateWithoutUserInput, NidVerificationUncheckedCreateWithoutUserInput>
-    connectOrCreate?: NidVerificationCreateOrConnectWithoutUserInput
-    upsert?: NidVerificationUpsertWithoutUserInput
-    disconnect?: NidVerificationWhereInput | boolean
-    delete?: NidVerificationWhereInput | boolean
-    connect?: NidVerificationWhereUniqueInput
-    update?: XOR<XOR<NidVerificationUpdateToOneWithWhereWithoutUserInput, NidVerificationUpdateWithoutUserInput>, NidVerificationUncheckedUpdateWithoutUserInput>
+  export type IdVerificationUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<IdVerificationCreateWithoutUserInput, IdVerificationUncheckedCreateWithoutUserInput>
+    connectOrCreate?: IdVerificationCreateOrConnectWithoutUserInput
+    upsert?: IdVerificationUpsertWithoutUserInput
+    disconnect?: IdVerificationWhereInput | boolean
+    delete?: IdVerificationWhereInput | boolean
+    connect?: IdVerificationWhereUniqueInput
+    update?: XOR<XOR<IdVerificationUpdateToOneWithWhereWithoutUserInput, IdVerificationUpdateWithoutUserInput>, IdVerificationUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutProductsInput = {
@@ -29757,9 +29757,9 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTrailReactionsInput, UserUpdateWithoutTrailReactionsInput>, UserUncheckedUpdateWithoutTrailReactionsInput>
   }
 
-  export type UserCreateNestedOneWithoutNidVerificationInput = {
-    create?: XOR<UserCreateWithoutNidVerificationInput, UserUncheckedCreateWithoutNidVerificationInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNidVerificationInput
+  export type UserCreateNestedOneWithoutIdVerificationInput = {
+    create?: XOR<UserCreateWithoutIdVerificationInput, UserUncheckedCreateWithoutIdVerificationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIdVerificationInput
     connect?: UserWhereUniqueInput
   }
 
@@ -29767,12 +29767,12 @@ export namespace Prisma {
     set?: Buffer | null
   }
 
-  export type UserUpdateOneRequiredWithoutNidVerificationNestedInput = {
-    create?: XOR<UserCreateWithoutNidVerificationInput, UserUncheckedCreateWithoutNidVerificationInput>
-    connectOrCreate?: UserCreateOrConnectWithoutNidVerificationInput
-    upsert?: UserUpsertWithoutNidVerificationInput
+  export type UserUpdateOneRequiredWithoutIdVerificationNestedInput = {
+    create?: XOR<UserCreateWithoutIdVerificationInput, UserUncheckedCreateWithoutIdVerificationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutIdVerificationInput
+    upsert?: UserUpsertWithoutIdVerificationInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNidVerificationInput, UserUpdateWithoutNidVerificationInput>, UserUncheckedUpdateWithoutNidVerificationInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutIdVerificationInput, UserUpdateWithoutIdVerificationInput>, UserUncheckedUpdateWithoutIdVerificationInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -30688,7 +30688,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type NidVerificationCreateWithoutUserInput = {
+  export type IdVerificationCreateWithoutUserInput = {
     id?: string
     frontImage?: Buffer | null
     backImage?: Buffer | null
@@ -30702,7 +30702,7 @@ export namespace Prisma {
     reviewedAt?: Date | string | null
   }
 
-  export type NidVerificationUncheckedCreateWithoutUserInput = {
+  export type IdVerificationUncheckedCreateWithoutUserInput = {
     id?: string
     frontImage?: Buffer | null
     backImage?: Buffer | null
@@ -30716,9 +30716,9 @@ export namespace Prisma {
     reviewedAt?: Date | string | null
   }
 
-  export type NidVerificationCreateOrConnectWithoutUserInput = {
-    where: NidVerificationWhereUniqueInput
-    create: XOR<NidVerificationCreateWithoutUserInput, NidVerificationUncheckedCreateWithoutUserInput>
+  export type IdVerificationCreateOrConnectWithoutUserInput = {
+    where: IdVerificationWhereUniqueInput
+    create: XOR<IdVerificationCreateWithoutUserInput, IdVerificationUncheckedCreateWithoutUserInput>
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -31248,18 +31248,18 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Notification"> | Date | string
   }
 
-  export type NidVerificationUpsertWithoutUserInput = {
-    update: XOR<NidVerificationUpdateWithoutUserInput, NidVerificationUncheckedUpdateWithoutUserInput>
-    create: XOR<NidVerificationCreateWithoutUserInput, NidVerificationUncheckedCreateWithoutUserInput>
-    where?: NidVerificationWhereInput
+  export type IdVerificationUpsertWithoutUserInput = {
+    update: XOR<IdVerificationUpdateWithoutUserInput, IdVerificationUncheckedUpdateWithoutUserInput>
+    create: XOR<IdVerificationCreateWithoutUserInput, IdVerificationUncheckedCreateWithoutUserInput>
+    where?: IdVerificationWhereInput
   }
 
-  export type NidVerificationUpdateToOneWithWhereWithoutUserInput = {
-    where?: NidVerificationWhereInput
-    data: XOR<NidVerificationUpdateWithoutUserInput, NidVerificationUncheckedUpdateWithoutUserInput>
+  export type IdVerificationUpdateToOneWithWhereWithoutUserInput = {
+    where?: IdVerificationWhereInput
+    data: XOR<IdVerificationUpdateWithoutUserInput, IdVerificationUncheckedUpdateWithoutUserInput>
   }
 
-  export type NidVerificationUpdateWithoutUserInput = {
+  export type IdVerificationUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     frontImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     backImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
@@ -31273,7 +31273,7 @@ export namespace Prisma {
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type NidVerificationUncheckedUpdateWithoutUserInput = {
+  export type IdVerificationUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     frontImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
     backImage?: NullableBytesFieldUpdateOperationsInput | Buffer | null
@@ -31304,7 +31304,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -31325,7 +31325,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProductsInput = {
@@ -31345,7 +31345,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -31366,7 +31366,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProductsInput = {
@@ -31558,7 +31558,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31579,7 +31579,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProductsInput = {
@@ -31599,7 +31599,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31620,7 +31620,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type LentItemUpsertWithWhereUniqueWithoutProductInput = {
@@ -31757,7 +31757,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -31778,7 +31778,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLentItemsInput = {
@@ -31798,7 +31798,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -31819,7 +31819,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLentItemsInput = {
@@ -32032,7 +32032,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32053,7 +32053,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLentItemsInput = {
@@ -32073,7 +32073,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32094,7 +32094,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type CartItemUpsertWithWhereUniqueWithoutLentItemInput = {
@@ -32162,7 +32162,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -32183,7 +32183,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBorrowRequestsInput = {
@@ -32203,7 +32203,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -32224,7 +32224,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBorrowRequestsInput = {
@@ -32290,7 +32290,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32311,7 +32311,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBorrowRequestsInput = {
@@ -32331,7 +32331,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32352,7 +32352,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type BorrowRequestOfferUpsertWithWhereUniqueWithoutBorrowRequestInput = {
@@ -32476,7 +32476,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -32497,7 +32497,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBorrowRequestOffersInput = {
@@ -32517,7 +32517,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -32538,7 +32538,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBorrowRequestOffersInput = {
@@ -32721,7 +32721,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32742,7 +32742,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBorrowRequestOffersInput = {
@@ -32762,7 +32762,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -32783,7 +32783,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type BorrowCheckoutUpsertWithoutOfferInput = {
@@ -32856,7 +32856,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -32877,7 +32877,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCheckoutsAsBorrowerInput = {
@@ -32897,7 +32897,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -32918,7 +32918,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCheckoutsAsBorrowerInput = {
@@ -32943,7 +32943,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -32964,7 +32964,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCheckoutsAsLenderInput = {
@@ -32984,7 +32984,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -33005,7 +33005,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCheckoutsAsLenderInput = {
@@ -33183,7 +33183,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33204,7 +33204,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCheckoutsAsBorrowerInput = {
@@ -33224,7 +33224,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33245,7 +33245,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutCheckoutsAsLenderInput = {
@@ -33276,7 +33276,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33297,7 +33297,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCheckoutsAsLenderInput = {
@@ -33317,7 +33317,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33338,7 +33338,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ProductUpsertWithoutCheckoutsInput = {
@@ -33524,7 +33524,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -33545,7 +33545,7 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -33565,7 +33565,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -33586,7 +33586,7 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -33622,7 +33622,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33643,7 +33643,7 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -33663,7 +33663,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33684,7 +33684,7 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutMentorInput = {
@@ -33704,7 +33704,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -33725,7 +33725,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMentorInput = {
@@ -33745,7 +33745,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -33766,7 +33766,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMentorInput = {
@@ -33832,7 +33832,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33853,7 +33853,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMentorInput = {
@@ -33873,7 +33873,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -33894,7 +33894,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type MentorBookingUpsertWithWhereUniqueWithoutMentorInput = {
@@ -33973,7 +33973,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -33994,7 +33994,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMentorBookingsInput = {
@@ -34014,7 +34014,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -34035,7 +34035,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMentorBookingsInput = {
@@ -34120,7 +34120,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34141,7 +34141,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMentorBookingsInput = {
@@ -34161,7 +34161,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34182,7 +34182,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ConversationParticipantCreateWithoutConversationInput = {
@@ -34297,7 +34297,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -34318,7 +34318,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutConversationParticipantsInput = {
@@ -34338,7 +34338,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -34359,7 +34359,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutConversationParticipantsInput = {
@@ -34420,7 +34420,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34441,7 +34441,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationParticipantsInput = {
@@ -34461,7 +34461,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34482,7 +34482,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ConversationCreateWithoutMessagesInput = {
@@ -34521,7 +34521,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -34542,7 +34542,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -34562,7 +34562,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -34583,7 +34583,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -34644,7 +34644,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34665,7 +34665,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -34685,7 +34685,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34706,7 +34706,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCartItemsInput = {
@@ -34726,7 +34726,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -34747,7 +34747,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCartItemsInput = {
@@ -34767,7 +34767,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -34788,7 +34788,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCartItemsInput = {
@@ -34851,7 +34851,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34872,7 +34872,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCartItemsInput = {
@@ -34892,7 +34892,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34913,7 +34913,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type LentItemUpsertWithoutCartItemsInput = {
@@ -34966,7 +34966,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -34987,7 +34987,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -35007,7 +35007,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -35028,7 +35028,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -35064,7 +35064,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35085,7 +35085,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -35105,7 +35105,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35126,7 +35126,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -35146,7 +35146,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -35167,7 +35167,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -35187,7 +35187,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -35208,7 +35208,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -35244,7 +35244,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35265,7 +35265,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -35285,7 +35285,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35306,7 +35306,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAuthenticatorsInput = {
@@ -35326,7 +35326,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -35347,7 +35347,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAuthenticatorsInput = {
@@ -35367,7 +35367,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -35388,7 +35388,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAuthenticatorsInput = {
@@ -35424,7 +35424,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35445,7 +35445,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuthenticatorsInput = {
@@ -35465,7 +35465,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35486,7 +35486,7 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ProductCreateWithoutTrailEntriesInput = {
@@ -35633,7 +35633,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -35654,7 +35654,7 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTrailEntriesInput = {
@@ -35674,7 +35674,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -35695,7 +35695,7 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTrailEntriesInput = {
@@ -35900,7 +35900,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35921,7 +35921,7 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTrailEntriesInput = {
@@ -35941,7 +35941,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35962,7 +35962,7 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type TrailReactionUpsertWithWhereUniqueWithoutTrailEntryInput = {
@@ -36035,7 +36035,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -36056,7 +36056,7 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTrailReactionsInput = {
@@ -36076,7 +36076,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -36097,7 +36097,7 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTrailReactionsInput = {
@@ -36176,7 +36176,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -36197,7 +36197,7 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTrailReactionsInput = {
@@ -36217,7 +36217,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -36238,10 +36238,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutNidVerificationInput = {
+  export type UserCreateWithoutIdVerificationInput = {
     id?: string
     name?: string | null
     firstName?: string | null
@@ -36258,7 +36258,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -36282,7 +36282,7 @@ export namespace Prisma {
     notifications?: NotificationCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutNidVerificationInput = {
+  export type UserUncheckedCreateWithoutIdVerificationInput = {
     id?: string
     name?: string | null
     firstName?: string | null
@@ -36299,7 +36299,7 @@ export namespace Prisma {
     phoneNumber?: string | null
     identityVerified?: boolean
     contactVerified?: boolean
-    nidVerified?: boolean
+    idVerified?: boolean
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
@@ -36323,23 +36323,23 @@ export namespace Prisma {
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutNidVerificationInput = {
+  export type UserCreateOrConnectWithoutIdVerificationInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutNidVerificationInput, UserUncheckedCreateWithoutNidVerificationInput>
+    create: XOR<UserCreateWithoutIdVerificationInput, UserUncheckedCreateWithoutIdVerificationInput>
   }
 
-  export type UserUpsertWithoutNidVerificationInput = {
-    update: XOR<UserUpdateWithoutNidVerificationInput, UserUncheckedUpdateWithoutNidVerificationInput>
-    create: XOR<UserCreateWithoutNidVerificationInput, UserUncheckedCreateWithoutNidVerificationInput>
+  export type UserUpsertWithoutIdVerificationInput = {
+    update: XOR<UserUpdateWithoutIdVerificationInput, UserUncheckedUpdateWithoutIdVerificationInput>
+    create: XOR<UserCreateWithoutIdVerificationInput, UserUncheckedCreateWithoutIdVerificationInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutNidVerificationInput = {
+  export type UserUpdateToOneWithWhereWithoutIdVerificationInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutNidVerificationInput, UserUncheckedUpdateWithoutNidVerificationInput>
+    data: XOR<UserUpdateWithoutIdVerificationInput, UserUncheckedUpdateWithoutIdVerificationInput>
   }
 
-  export type UserUpdateWithoutNidVerificationInput = {
+  export type UserUpdateWithoutIdVerificationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36356,7 +36356,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -36380,7 +36380,7 @@ export namespace Prisma {
     notifications?: NotificationUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutNidVerificationInput = {
+  export type UserUncheckedUpdateWithoutIdVerificationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     firstName?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36397,7 +36397,7 @@ export namespace Prisma {
     phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     identityVerified?: BoolFieldUpdateOperationsInput | boolean
     contactVerified?: BoolFieldUpdateOperationsInput | boolean
-    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37829,9 +37829,9 @@ export namespace Prisma {
      */
     export type TrailReactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = TrailReactionDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use NidVerificationDefaultArgs instead
+     * @deprecated Use IdVerificationDefaultArgs instead
      */
-    export type NidVerificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = NidVerificationDefaultArgs<ExtArgs>
+    export type IdVerificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = IdVerificationDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

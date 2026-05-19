@@ -23,7 +23,7 @@ export async function GET() {
             userName: true, email: true, profilePicture: true, image: true,
             location: true, createdAt: true,
             identityVerified: true, contactVerified: true,
-            nidVerified: true, addressVerified: true, meetupVerified: true,
+            idVerified: true, addressVerified: true, meetupVerified: true,
           },
         },
       },

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   AlertCircle,
@@ -24,21 +24,45 @@ import {
   Zap,
 } from "lucide-react";
 
+interface ActiveBorrow {
+  id: string;
+  item: string;
+  from: string;
+  dueIn: number;
+  dueDate: string;
+  status: "due-today" | "due-soon" | "safe";
+}
+
+interface ActivityItem {
+  id: string;
+  title: string;
+  subtitle: string;
+  timestamp: string;
+  status: "completed" | "active";
+}
+
+interface DashboardStats {
+  userName: string;
+  itemsCount: number;
+  borrowsCount: number;
+  messagesCount: number;
+  cartCount: number;
+  activeBorrows: ActiveBorrow[];
+  recentActivity: ActivityItem[];
+}
+
 export default function DashboardPage() {
   const [showEmergency, setShowEmergency] = useState(false);
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Mock data - replace with real API data
-  const userStats = {
-    itemsCount: 8,
-    borrowsCount: 3,
-    messagesCount: 2,
-    cartCount: 0,
-    activeBorrows: [
-      { id: 1, item: "Camera", from: "Mike Davis", dueIn: 1, dueDate: "Today", status: "due-today" as const },
-      { id: 2, item: "Tent", from: "Alex Smith", dueIn: 3, dueDate: "Apr 30", status: "due-soon" as const },
-      { id: 3, item: "MacBook Pro", from: "Sarah Chen", dueIn: 7, dueDate: "May 4", status: "safe" as const },
-    ],
-  };
+  useEffect(() => {
+    fetch("/api/dashboard/stats")
+      .then((r) => r.json())
+      .then((data: DashboardStats) => setStats(data))
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
 
   const categories = [
     { id: 1, name: "Tech & Electronics", icon: Laptop, accent: "purple" as const },
@@ -49,37 +73,12 @@ export default function DashboardPage() {
     { id: 6, name: "Tools & Equipment", icon: Wrench, accent: "violet" as const },
   ];
 
-  const activities = [
-    {
-      id: 1,
-      title: "You added a new item",
-      subtitle: "MacBook Pro 16\"",
-      timestamp: "2 hours ago",
-      status: "completed" as const,
-    },
-    {
-      id: 2,
-      title: "New message from Sarah",
-      subtitle: "About your Camera",
-      timestamp: "4 hours ago",
-      status: "active" as const,
-    },
-    {
-      id: 3,
-      title: "Item returned successfully",
-      subtitle: "Drill from Mike",
-      timestamp: "1 day ago",
-      status: "completed" as const,
-    },
-  ];
-
-  // Sort borrows by urgency
   const sortedBorrows = useMemo(
-    () => [...userStats.activeBorrows].sort((a, b) => a.dueIn - b.dueIn),
-    [userStats.activeBorrows]
+    () => [...(stats?.activeBorrows ?? [])].sort((a, b) => a.dueIn - b.dueIn),
+    [stats?.activeBorrows]
   );
 
-  const dueTodayCount = sortedBorrows.filter(b => b.status === "due-today").length;
+  const dueTodayCount = sortedBorrows.filter((b) => b.status === "due-today").length;
 
   return (
     <div className="space-y-6">
@@ -89,7 +88,7 @@ export default function DashboardPage() {
             Today
           </p>
           <h1 className="mt-1 text-2xl font-black tracking-tight text-[var(--foreground)]">
-            Welcome back
+            {loading ? "Welcome back" : `Welcome back${stats?.userName ? ", " + stats.userName : ""}`}
           </h1>
         </div>
         <button
@@ -104,88 +103,88 @@ export default function DashboardPage() {
         </button>
       </div>
 
-      {/* PRIORITY 1: Alert Banner - Due Items */}
-      {dueTodayCount > 0 && (
-        <div
-          className="overflow-hidden rounded-xl bg-[#ef4444] shadow-[0_20px_50px_rgba(239,68,68,0.4)]"
-        >
-          <div
-            className="m-1 overflow-hidden rounded-xl border-2 border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0.1)_100%)] shadow-[inset_0_0_20px_rgba(255,255,255,0.2)] backdrop-blur-[20px]"
-          >
+      {/* Alert Banner - Due Items */}
+      {!loading && dueTodayCount > 0 && (
+        <div className="overflow-hidden rounded-xl bg-[#ef4444] shadow-[0_20px_50px_rgba(239,68,68,0.4)]">
+          <div className="m-1 overflow-hidden rounded-xl border-2 border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0.1)_100%)] shadow-[inset_0_0_20px_rgba(255,255,255,0.2)] backdrop-blur-[20px]">
             <div className="px-6 py-5 flex items-center justify-between gap-4">
               <div className="flex items-start gap-4">
-                <div
-                  className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0.15)_100%)] text-white backdrop-blur-[10px]"
-                >
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0.15)_100%)] text-white backdrop-blur-[10px]">
                   <AlertCircle className="h-6 w-6" />
                 </div>
-              <div>
-                <h3 className="font-bold text-[var(--foreground)]">
-                  {dueTodayCount} item{dueTodayCount > 1 ? "s" : ""} due today
-                </h3>
-                <p className="text-sm text-[var(--text-secondary)] mt-1">
-                  Return {dueTodayCount === 1 ? "it" : "them"} now to maintain your reputation
-                </p>
+                <div>
+                  <h3 className="font-bold text-[var(--foreground)]">
+                    {dueTodayCount} item{dueTodayCount > 1 ? "s" : ""} due today
+                  </h3>
+                  <p className="text-sm text-[var(--text-secondary)] mt-1">
+                    Return {dueTodayCount === 1 ? "it" : "them"} now to maintain your reputation
+                  </p>
+                </div>
               </div>
+              <Link
+                href="/dashboard/my-borrows"
+                className="inline-flex flex-shrink-0 items-center gap-2 rounded-lg border-[1.5px] border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0.2)_100%)] px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-[10px] transition-all duration-200 hover:bg-white/30"
+              >
+                Return Item
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
-            <Link
-              href="/dashboard/my-borrows"
-              className="inline-flex flex-shrink-0 items-center gap-2 rounded-lg border-[1.5px] border-white/40 bg-[linear-gradient(135deg,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0.2)_100%)] px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-[10px] transition-all duration-200 hover:bg-white/30"
-            >
-              Return Item
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
           </div>
         </div>
       )}
 
-      {/* PRIORITY 2: Overview Stats - Secondary Focus */}
+      {/* Overview Stats */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
         <OverviewCard
           icon={Package}
           title="My Items"
-          value={userStats.itemsCount}
+          value={loading ? "—" : stats?.itemsCount ?? 0}
           subtitle="Available to lend"
           href="/dashboard/my-items"
         />
         <OverviewCard
           icon={BookOpen}
           title="Active Borrows"
-          value={userStats.borrowsCount}
-          subtitle={`${dueTodayCount} due today`}
+          value={loading ? "—" : stats?.borrowsCount ?? 0}
+          subtitle={loading ? "Loading…" : `${dueTodayCount} due today`}
           href="/dashboard/my-borrows"
         />
         <OverviewCard
           icon={Mail}
           title="Messages"
-          value={userStats.messagesCount}
+          value={loading ? "—" : stats?.messagesCount ?? 0}
           subtitle="Unread"
           href="/dashboard/messages"
         />
         <OverviewCard
           icon={ShoppingCart}
           title="In Cart"
-          value={userStats.cartCount}
+          value={loading ? "—" : stats?.cartCount ?? 0}
           subtitle="Ready to borrow"
           href="/dashboard/cart"
         />
       </div>
 
-      {/* PRIORITY 1b: Active Borrows - Main Focus */}
+      {/* Active Borrows */}
       <div className="rounded-lg border border-[var(--border)]/40 bg-[var(--surface)]/40 overflow-hidden shadow-sm backdrop-blur-md">
         <div className="border-b border-[var(--border)] bg-[var(--surface-soft)] px-6 py-4">
           <h2 className="text-lg font-bold text-[var(--foreground)]">Active Borrows</h2>
           <p className="text-xs text-[var(--text-secondary)] mt-1">
-            {sortedBorrows.length} items you&apos;re currently borrowing
+            {loading ? "Loading…" : `${sortedBorrows.length} items you're currently borrowing`}
           </p>
         </div>
         <div className="divide-y divide-[var(--border)]">
-          {sortedBorrows.map((borrow) => (
-            <BorrowRow key={borrow.id} borrow={borrow} />
-          ))}
+          {loading ? (
+            <div className="px-6 py-8 text-center text-sm text-[var(--text-muted)]">Loading…</div>
+          ) : sortedBorrows.length === 0 ? (
+            <div className="px-6 py-8 text-center text-sm text-[var(--text-muted)]">
+              No active borrows right now.
+            </div>
+          ) : (
+            sortedBorrows.map((borrow) => <BorrowRow key={borrow.id} borrow={borrow} />)
+          )}
         </div>
         {sortedBorrows.length > 0 && (
           <div className="px-6 py-3 bg-[var(--surface-soft)] border-t border-[var(--border)]">
@@ -199,7 +198,7 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* PRIORITY 2b: Browse Categories - Visual Discovery */}
+      {/* Browse Categories */}
       <div className="pt-4">
         <div className="mb-4">
           <h2 className="text-lg font-bold text-[var(--foreground)]">Browse Categories</h2>
@@ -220,22 +219,28 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* PRIORITY 3: Recent Activity - Lower Priority */}
+      {/* Recent Activity */}
       <div className="pt-8">
         <h3 className="mb-4 text-sm font-bold uppercase tracking-widest text-[var(--text-secondary)]">
           Recent Activity
         </h3>
-        <div className="space-y-2">
-          {activities.map((activity) => (
-            <ActivityItem
-              key={activity.id}
-              title={activity.title}
-              subtitle={activity.subtitle}
-              timestamp={activity.timestamp}
-              status={activity.status}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="text-sm text-[var(--text-muted)]">Loading…</div>
+        ) : (stats?.recentActivity ?? []).length === 0 ? (
+          <div className="text-sm text-[var(--text-muted)]">No recent activity yet.</div>
+        ) : (
+          <div className="space-y-2">
+            {(stats?.recentActivity ?? []).map((activity) => (
+              <ActivityRow
+                key={activity.id}
+                title={activity.title}
+                subtitle={activity.subtitle}
+                timestamp={activity.timestamp}
+                status={activity.status}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {showEmergency && (
@@ -460,7 +465,6 @@ function EmergencyModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-// Inline Components
 function OverviewCard({
   icon: IconComponent,
   title,
@@ -487,9 +491,7 @@ function OverviewCard({
           <p className="mt-3 text-2xl font-bold text-[var(--foreground)]">{value}</p>
           <p className="mt-1 text-xs text-[var(--text-muted)]">{subtitle}</p>
         </div>
-        <div
-          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--primary-soft)] text-[var(--primary)]"
-        >
+        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-[var(--primary-soft)] text-[var(--primary)]">
           <IconComponent className="h-5 w-5" />
         </div>
       </div>
@@ -501,7 +503,7 @@ function BorrowRow({
   borrow,
 }: {
   borrow: {
-    id: number;
+    id: string;
     item: string;
     from: string;
     dueIn: number;
@@ -522,7 +524,7 @@ function BorrowRow({
     }
   };
 
-  const status = getStatusClass(borrow.status);
+  const statusClass = getStatusClass(borrow.status);
   const statusLabel = borrow.status === "due-today" ? "Due today" : `Due ${borrow.dueDate}`;
 
   return (
@@ -534,33 +536,26 @@ function BorrowRow({
         </p>
       </div>
       <div className="flex items-center gap-2 flex-shrink-0">
-        <div
-          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold ${status}`}
-        >
+        <div className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold ${statusClass}`}>
           <span
             className={`h-2 w-2 rounded-full ${
-              borrow.status === "due-today" ? "bg-[var(--danger)]" : borrow.status === "due-soon" ? "bg-[var(--warning)]" : "bg-[var(--success)]"
+              borrow.status === "due-today"
+                ? "bg-[var(--danger)]"
+                : borrow.status === "due-soon"
+                ? "bg-[var(--warning)]"
+                : "bg-[var(--success)]"
             }`}
-          ></span>
+          />
           {statusLabel}
         </div>
         <div className="flex items-center gap-1.5">
-          <button
-            className="rounded-lg p-2 text-[var(--primary)] transition-colors hover:bg-[var(--surface-soft)]"
-            title="Return item"
-          >
+          <button className="rounded-lg p-2 text-[var(--primary)] transition-colors hover:bg-[var(--surface-soft)]" title="Return item">
             <RotateCcw className="h-4 w-4" />
           </button>
-          <button
-            className="rounded-lg p-2 text-[var(--primary)] transition-colors hover:bg-[var(--surface-soft)]"
-            title="Extend borrow period"
-          >
+          <button className="rounded-lg p-2 text-[var(--primary)] transition-colors hover:bg-[var(--surface-soft)]" title="Extend borrow period">
             <Clock className="h-4 w-4" />
           </button>
-          <button
-            className="rounded-lg p-2 text-[var(--primary)] transition-colors hover:bg-[var(--surface-soft)]"
-            title="Message lender"
-          >
+          <button className="rounded-lg p-2 text-[var(--primary)] transition-colors hover:bg-[var(--surface-soft)]" title="Message lender">
             <MessageSquare className="h-4 w-4" />
           </button>
         </div>
@@ -569,7 +564,7 @@ function BorrowRow({
   );
 }
 
-function ActivityItem({
+function ActivityRow({
   title,
   subtitle,
   timestamp,
@@ -654,11 +649,9 @@ function CategoryCard({
     <button
       className={`group relative overflow-hidden rounded-xl border-2 p-6 text-left transition-all duration-300 hover:shadow-lg focus:outline-none ${accentClasses.card}`}
     >
-      {/* Glowy hover effect */}
       <div
         className={`absolute inset-0 -z-10 rounded-xl opacity-5 blur-[20px] transition-opacity duration-300 group-hover:opacity-100 ${accentClasses.glow}`}
       />
-
       <div className="relative z-10 flex flex-col items-center text-center gap-3">
         <div
           className={`flex h-12 w-12 items-center justify-center rounded-lg transition-all duration-300 group-hover:scale-110 ${accentClasses.icon}`}

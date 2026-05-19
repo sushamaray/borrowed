@@ -7,17 +7,17 @@ import { LocationPickerModal } from "@/components/LocationPickerModal";
 import CategoryPicker from "@/components/dashboard/CategoryPicker";
 import { getCategoryForSub } from "@/lib/categories";
 
-type VerificationKey = "identity" | "contact" | "nid" | "address" | "meetup";
+type VerificationKey = "identity" | "contact" | "id" | "address" | "meetup";
 
 const MAX_BROWSER_IMAGE_BYTES = 10 * 1024 * 1024;
 const MAX_STORED_IMAGE_BYTES = 450 * 1024;
-const NID_MAX_DIMENSION = 1600;
+const ID_MAX_DIMENSION = 1600;
 const SELFIE_MAX_DIMENSION = 1280;
 
-const verificationFlags: Record<VerificationKey, boolean> = {
+const DEFAULT_VERIFICATION_FLAGS: Record<VerificationKey, boolean> = {
   identity: false,
   contact: false,
-  nid: false,
+  id: false,
   address: false,
   meetup: false,
 };
@@ -25,16 +25,7 @@ const verificationFlags: Record<VerificationKey, boolean> = {
 const registrationMetadata = {
   memberSince: "2026",
   accountType: "Personal account",
-  trustScore: 42,
 };
-
-const steps = [
-  { label: "Email verified", done: true, locked: false },
-  { label: "Phone number", done: verificationFlags.contact, locked: false },
-  { label: "NID scan", done: verificationFlags.nid, locked: false },
-  { label: "Face match", done: false, locked: !verificationFlags.nid },
-  { label: "Borrow location", done: verificationFlags.address, locked: !verificationFlags.nid },
-];
 
 function SegmentedProgress({ value, fillClass = "bg-[var(--primary)]" }: { value: number; fillClass?: string }) {
   const active = Math.max(0, Math.min(100, Math.round(value)));
@@ -66,15 +57,15 @@ type MentorData = {
 };
 
 export default function ProfilePage() {
-  const { data: session, status } = useSession();
-  // 0=idle, 1=intro, 2=phone, 3=nid-upload, 4=face-scan, 5=matching, 6=done
-  const [nidStep, setNidStep] = useState(0);
+  const { data: session, status, update } = useSession();
+  // 0=idle, 1=intro, 2=phone, 3=id-upload, 4=face-scan, 5=matching, 6=done
+  const [idStep, setIdStep] = useState(0);
   const [faceProgress, setFaceProgress] = useState(0);
   const [matchScore, setMatchScore] = useState(0);
   const [faceVerificationStatus, setFaceVerificationStatus] = useState<"verified" | "rejected" | null>(null);
-  const [uploadedNidName, setUploadedNidName] = useState("");
+  const [uploadedIdName, setUploadedIdName] = useState("");
   const [uploadedSelfieName, setUploadedSelfieName] = useState("");
-  const [nidPreviewUrl, setNidPreviewUrl] = useState("");
+  const [idPreviewUrl, setIdPreviewUrl] = useState("");
   const [selfiePreviewUrl, setSelfiePreviewUrl] = useState("");
   const [verificationLoading, setVerificationLoading] = useState(false);
   const [phone, setPhone] = useState("");
@@ -93,6 +84,8 @@ export default function ProfilePage() {
   });
   const [submittingMentor, setSubmittingMentor] = useState(false);
   const [mentorError, setMentorError] = useState("");
+  const [verificationFlags, setVerificationFlags] = useState<Record<VerificationKey, boolean>>(DEFAULT_VERIFICATION_FLAGS);
+  const [trustScore, setTrustScore] = useState(16); // starts at 16 (email always verified)
 
   // Tab state
   const [activeTab, setActiveTab] = useState<"user" | "mentor">("user");
@@ -104,20 +97,20 @@ export default function ProfilePage() {
   const [editForm, setEditForm] = useState<Partial<MentorData> & { tagsInput?: string }>({});
   const [savingEdit, setSavingEdit] = useState(false);
   const [editError, setEditError] = useState("");
-  const nidInputRef = useRef<HTMLInputElement | null>(null);
+  const idInputRef = useRef<HTMLInputElement | null>(null);
   const selfieCameraInputRef = useRef<HTMLInputElement | null>(null);
   const selfieUploadInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     return () => {
-      if (nidPreviewUrl) {
-        URL.revokeObjectURL(nidPreviewUrl);
+      if (idPreviewUrl) {
+        URL.revokeObjectURL(idPreviewUrl);
       }
       if (selfiePreviewUrl) {
         URL.revokeObjectURL(selfiePreviewUrl);
       }
     };
-  }, [nidPreviewUrl, selfiePreviewUrl]);
+  }, [idPreviewUrl, selfiePreviewUrl]);
 
   const profileName = session?.user?.name || "Borrowed Member";
   const profileEmail = session?.user?.email || "No email available";
@@ -133,6 +126,14 @@ export default function ProfilePage() {
     ? `@${profileEmail.split("@")[0]}`
     : "@borrowed-user";
   const currentLocation = location;
+
+  const steps = useMemo(() => [
+    { label: "Email verified", done: true, locked: false },
+    { label: "Phone number", done: verificationFlags.contact, locked: false },
+    { label: "ID scan", done: verificationFlags.id, locked: false },
+    { label: "Face match", done: verificationFlags.identity, locked: !verificationFlags.id },
+    { label: "Borrow location", done: verificationFlags.address, locked: !verificationFlags.id },
+  ], [verificationFlags]);
 
   const completedCount = steps.filter((s) => s.done).length;
   const nextStep = steps.find((s) => !s.done && !s.locked);
@@ -160,6 +161,29 @@ export default function ProfilePage() {
       })
       .catch(() => {})
       .finally(() => setLocationLoading(false));
+  }, []);
+
+  // Fetch fresh verification status and trust score from DB on mount
+  useEffect(() => {
+    fetch("/api/user/verification-status")
+      .then((r) => r.json())
+      .then((data) => {
+        setVerificationFlags({
+          identity: Boolean(data.identityVerified),
+          contact: Boolean(data.contactVerified),
+          id: Boolean(data.idVerified),
+          address: Boolean(data.addressVerified),
+          meetup: Boolean(data.meetupVerified),
+        });
+      })
+      .catch(() => {});
+
+    fetch("/api/user/trust-score")
+      .then((r) => r.json())
+      .then((data) => {
+        if (typeof data.score === "number") setTrustScore(data.score);
+      })
+      .catch(() => {});
   }, []);
 
   // Fetch mentor profile data for the Mentor Profile tab
@@ -271,7 +295,7 @@ export default function ProfilePage() {
     formData.append("kind", kind);
     formData.append("file", file);
 
-    const response = await fetch("/api/nid-verification", {
+    const response = await fetch("/api/id-verification", {
       method: "POST",
       body: formData,
     });
@@ -302,14 +326,14 @@ export default function ProfilePage() {
     setMessage(null);
 
     try {
-      const optimizedFile = await optimizeImageForUpload(file, NID_MAX_DIMENSION);
+      const optimizedFile = await optimizeImageForUpload(file, ID_MAX_DIMENSION);
       await uploadVerificationImage("front", optimizedFile);
-      setUploadedNidName(file.name);
-      replacePreviewUrl(nidPreviewUrl, optimizedFile, setNidPreviewUrl);
-      setMessage({ type: "success", text: "NID photo uploaded successfully." });
+      setUploadedIdName(file.name);
+      replacePreviewUrl(idPreviewUrl, optimizedFile, setIdPreviewUrl);
+      setMessage({ type: "success", text: "ID photo uploaded successfully." });
     } catch (error) {
       const text =
-        error instanceof Error ? error.message : "Failed to upload NID photo";
+        error instanceof Error ? error.message : "Failed to upload ID photo";
       setMessage({ type: "error", text });
     } finally {
       setVerificationLoading(false);
@@ -350,9 +374,9 @@ export default function ProfilePage() {
       return;
     }
 
-    if (!uploadedNidName) {
-      setMessage({ type: "error", text: "Upload your NID photo first." });
-      setNidStep(3);
+    if (!uploadedIdName) {
+      setMessage({ type: "error", text: "Upload your ID photo first." });
+      setIdStep(3);
       return;
     }
 
@@ -361,7 +385,7 @@ export default function ProfilePage() {
       return;
     }
 
-    setNidStep(5);
+    setIdStep(5);
     setVerificationLoading(true);
     setFaceProgress(12);
     setFaceVerificationStatus(null);
@@ -379,7 +403,7 @@ export default function ProfilePage() {
 
     try {
       const response = await fetch(
-        `/api/nid-verification/face-match/${session.user.id}`,
+        `/api/id-verification/face-match/${session.user.id}`,
         { method: "POST" },
       );
       const data = await response.json();
@@ -404,12 +428,27 @@ export default function ProfilePage() {
           ? Math.round(data.similarityScore)
           : 0,
       );
-      setFaceVerificationStatus(data?.status === "verified" ? "verified" : "rejected");
-      setTimeout(() => setNidStep(6), 400);
+      const isVerified = data?.status === "verified";
+      setFaceVerificationStatus(isVerified ? "verified" : "rejected");
+      if (isVerified) {
+        setVerificationFlags((prev) => ({ ...prev, id: true, identity: true }));
+        // Refresh trust score from DB after successful verification
+        fetch("/api/user/trust-score")
+          .then((r) => r.json())
+          .then((d) => { if (typeof d.score === "number") setTrustScore(d.score); })
+          .catch(() => {});
+      }
+      setTimeout(() => {
+        setIdStep(6);
+        // Auto-close the modal 3 seconds after showing the result
+        if (isVerified) {
+          setTimeout(() => setIdStep(0), 3000);
+        }
+      }, 400);
     } catch (error) {
       window.clearInterval(progressTimer);
       setFaceProgress(0);
-      setNidStep(4);
+      setIdStep(4);
       const text =
         error instanceof Error ? error.message : "Face verification failed";
       setMessage({ type: "error", text });
@@ -458,8 +497,9 @@ export default function ProfilePage() {
         setMentorError(data.error ?? "Failed to create mentor profile");
         return;
       }
-      // Hard navigation forces the server to re-run the jwt callback,
-      // which queries the DB and bakes isMentor: true into the new cookie.
+      // Trigger the JWT callback with trigger="update" so it re-queries
+      // isMentor from the DB and writes it into the token before navigating.
+      await update();
       window.location.href = "/dashboard/mentor";
     } catch {
       setMentorError("Something went wrong. Please try again.");
@@ -625,7 +665,7 @@ export default function ProfilePage() {
                         Trust Score
                       </p>
                       <p className="mt-0.5 text-[1.5rem] font-black tracking-[-0.03em] text-[var(--ink)]">
-                        {registrationMetadata.trustScore}
+                        {trustScore}
                         <span className="text-base font-semibold text-[var(--text-muted)]">/100</span>
                       </p>
                     </div>
@@ -641,7 +681,7 @@ export default function ProfilePage() {
                     </svg>
                   </div>
                   <div className="h-1.5 overflow-hidden rounded-full bg-[var(--border)]">
-                    <SegmentedProgress value={registrationMetadata.trustScore} />
+                    <SegmentedProgress value={trustScore} />
                   </div>
                   <div className="mt-2 flex justify-between">
                     <span className="text-[0.7rem] font-bold uppercase tracking-[0.08em] text-[var(--text-muted)]">
@@ -655,7 +695,7 @@ export default function ProfilePage() {
 
                 <button
                   type="button"
-                  onClick={() => setNidStep(1)}
+                  onClick={() => setIdStep(1)}
                   className="w-full rounded-full bg-[var(--primary)] py-3 text-sm font-extrabold text-white transition-colors hover:bg-[var(--primary-hover)]"
                 >
                   Complete Verification →
@@ -707,7 +747,7 @@ export default function ProfilePage() {
                       {!s.done && !s.locked && i <= 2 && (
                         <button
                           type="button"
-                          onClick={() => setNidStep(1)}
+                          onClick={() => setIdStep(1)}
                           className="rounded-full bg-[var(--primary-soft)] px-3 py-1 text-[0.72rem] font-bold text-[var(--primary)] transition-colors hover:bg-[var(--accent-soft)]"
                         >
                           Start
@@ -788,13 +828,13 @@ export default function ProfilePage() {
                 </div>
 
                 <p className="relative mb-5 text-sm leading-6 text-white/75">
-                  Upload your NID, verify your phone, and take a live selfie. Our AI matches your face
+                  Upload your ID, verify your phone, and take a live selfie. Our AI matches your face
                   in under 30 seconds — fully encrypted.
                 </p>
 
                 <div className="relative mb-5 flex flex-col gap-2">
                   {[
-                    "Upload National ID card",
+                    "Upload government-issued ID",
                     "Verify your phone number",
                     "Take a live selfie",
                     "Instant AI face-match result",
@@ -812,7 +852,7 @@ export default function ProfilePage() {
 
                 <button
                   type="button"
-                  onClick={() => setNidStep(1)}
+                  onClick={() => setIdStep(1)}
                   className="relative w-full rounded-full bg-white py-3 text-sm font-extrabold text-(--primary) shadow-[0_4px_16px_rgba(0,0,0,0.25)] transition-opacity hover:opacity-90"
                 >
                   Start Verification →
@@ -888,7 +928,7 @@ export default function ProfilePage() {
                 >
                   Mentor Dashboard →
                 </a>
-              ) : (
+              ) : verificationFlags.identity || verificationFlags.id ? (
                 <button
                   type="button"
                   onClick={() => {
@@ -898,6 +938,15 @@ export default function ProfilePage() {
                   className="shrink-0 rounded-full bg-(--primary) px-5 py-2.5 text-sm font-extrabold text-white transition-colors hover:bg-(--primary-hover)"
                 >
                   Become a Mentor →
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setIdStep(1)}
+                  className="shrink-0 rounded-full border border-(--border) bg-(--surface-soft) px-5 py-2.5 text-sm font-extrabold text-(--text-muted) transition-colors hover:bg-(--border)"
+                  title="Complete ID verification first"
+                >
+                  🔒 Verify ID first
                 </button>
               )}
             </div>
@@ -1221,17 +1270,17 @@ export default function ProfilePage() {
         </div>
       )}
 
-      {/* NID Verification Modal */}
-      {nidStep > 0 && (
+      {/* ID Verification Modal */}
+      {idStep > 0 && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(12,32,30,0.8)] p-4 backdrop-blur-[4px]"
-          onClick={(e) => e.target === e.currentTarget && nidStep !== 5 && setNidStep(0)}
+          onClick={(e) => e.target === e.currentTarget && idStep !== 5 && setIdStep(0)}
         >
           <div className="scrollbar-thin relative max-h-[90vh] w-full max-w-[480px] overflow-y-auto rounded-[1.5rem] bg-[var(--surface)] p-8 shadow-[0_40px_100px_rgba(0,0,0,0.3)]">
-            {nidStep < 6 && (
+            {idStep < 6 && (
               <button
                 type="button"
-                onClick={() => setNidStep(0)}
+                onClick={() => setIdStep(0)}
                 className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-[0.5rem] bg-[var(--surface-soft)] text-sm text-[var(--text-secondary)] transition-colors hover:bg-[var(--accent-soft)]"
               >
                 <X className="h-4 w-4" strokeWidth={2.4} />
@@ -1239,31 +1288,31 @@ export default function ProfilePage() {
             )}
 
             {/* Step progress bars — 5 segments */}
-            {nidStep < 6 && (
+            {idStep < 6 && (
               <div className="mb-6 flex gap-1.5">
                 {[1, 2, 3, 4, 5].map((s) => (
                   <div
                     key={s}
-                    className={`h-1 flex-1 rounded-full transition-colors ${nidStep >= s ? "bg-[var(--primary)]" : "bg-[var(--border)]"}`}
+                    className={`h-1 flex-1 rounded-full transition-colors ${idStep >= s ? "bg-[var(--primary)]" : "bg-[var(--border)]"}`}
                   />
                 ))}
               </div>
             )}
 
             {/* Step 1: Intro */}
-            {nidStep === 1 && (
+            {idStep === 1 && (
               <div>
                 <div className="mb-6 text-center">
                   <ShieldCheck className="mx-auto mb-2 h-10 w-10 text-[var(--primary)]" strokeWidth={1.8} />
                   <p className="mb-2 text-xl font-black text-[var(--ink)]">Verify Your Identity</p>
                   <p className="text-sm leading-6 text-[var(--text-secondary)]">
-                    We&apos;ll verify your phone, scan your NID, and match your face using AI. This
+                    We&apos;ll verify your phone, scan your ID, and match your face using AI. This
                     takes about 60 seconds and is completely secure.
                   </p>
                 </div>
                 <div className="mb-6 flex flex-col gap-2">
                   {[
-                    "Government-issued NID card required",
+                    "Government-issued ID card required",
                     "Photos are encrypted & not stored",
                     "Powered by on-device AI face matching",
                   ].map((t, i) => (
@@ -1278,7 +1327,7 @@ export default function ProfilePage() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => setNidStep(2)}
+                  onClick={() => setIdStep(2)}
                   className="w-full rounded-full bg-[var(--primary)] py-3.5 text-sm font-extrabold text-white transition-colors hover:bg-[var(--primary-hover)]"
                 >
                   Begin Verification →
@@ -1287,7 +1336,7 @@ export default function ProfilePage() {
             )}
 
             {/* Step 2: Phone verification */}
-            {nidStep === 2 && (
+            {idStep === 2 && (
               <div>
                 <p className="mb-1 text-lg font-black text-[var(--ink)]">
                   Step 1 — Phone Verification
@@ -1315,7 +1364,7 @@ export default function ProfilePage() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setNidStep(3)}
+                  onClick={() => setIdStep(3)}
                   className="w-full rounded-full bg-[var(--primary)] py-3.5 text-sm font-extrabold text-white transition-colors hover:bg-[var(--primary-hover)]"
                 >
                   Continue →
@@ -1323,51 +1372,51 @@ export default function ProfilePage() {
               </div>
             )}
 
-            {/* Step 3: NID upload */}
-            {nidStep === 3 && (
+            {/* Step 3: ID upload */}
+            {idStep === 3 && (
               <div>
                 <input
-                  ref={nidInputRef}
+                  ref={idInputRef}
                   type="file"
                   accept="image/png,image/jpeg,image/webp"
                   className="hidden"
                   onChange={handleNidFileChange}
                 />
-                <p className="mb-1 text-lg font-black text-[var(--ink)]">Step 2 — Upload NID</p>
+                <p className="mb-1 text-lg font-black text-[var(--ink)]">Step 2 — Upload ID</p>
                 <p className="mb-5 text-sm leading-6 text-[var(--text-secondary)]">
                   Take a clear photo of your National Identity Card (front side).
                 </p>
                 <div
                   className="relative mb-4 cursor-pointer overflow-hidden rounded-[1.1rem] border-2 border-dashed border-[var(--border)] bg-[var(--surface-soft)] px-4 py-10 text-center transition-colors hover:border-[var(--primary)]"
-                  onClick={() => nidInputRef.current?.click()}
+                  onClick={() => idInputRef.current?.click()}
                 >
-                  {nidPreviewUrl && (
+                  {idPreviewUrl && (
                     <>
                       <img
-                        src={nidPreviewUrl}
-                        alt="NID preview"
+                        src={idPreviewUrl}
+                        alt="ID preview"
                         className="absolute inset-0 h-full w-full object-cover"
                       />
                       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-4 py-4 text-left">
-                        <p className="text-sm font-extrabold text-white">Tap to replace NID photo</p>
+                        <p className="text-sm font-extrabold text-white">Tap to replace ID photo</p>
                         <p className="text-xs text-white/80">Max 10MB input · Optimized automatically</p>
                       </div>
                     </>
                   )}
                   <Camera
-                    className={`mx-auto mb-2 h-8 w-8 text-[var(--primary)] ${nidPreviewUrl ? "opacity-0" : ""}`}
+                    className={`mx-auto mb-2 h-8 w-8 text-[var(--primary)] ${idPreviewUrl ? "opacity-0" : ""}`}
                     strokeWidth={1.8}
                   />
-                  <p className={`mb-1 text-sm font-bold text-[var(--primary)] ${nidPreviewUrl ? "opacity-0" : ""}`}>
-                    Tap to upload NID photo
+                  <p className={`mb-1 text-sm font-bold text-[var(--primary)] ${idPreviewUrl ? "opacity-0" : ""}`}>
+                    Tap to upload ID photo
                   </p>
-                  <p className={`text-xs text-[var(--text-muted)] ${nidPreviewUrl ? "opacity-0" : ""}`}>
+                  <p className={`text-xs text-[var(--text-muted)] ${idPreviewUrl ? "opacity-0" : ""}`}>
                     JPG, PNG · Max 10MB · Front side only
                   </p>
                 </div>
-                {uploadedNidName && (
+                {uploadedIdName && (
                   <div className="mb-4 rounded-[0.75rem] border border-[var(--success)]/25 bg-[var(--success-soft)] px-4 py-3 text-sm font-semibold text-[var(--success)]">
-                    Uploaded: {uploadedNidName}
+                    Uploaded: {uploadedIdName}
                   </div>
                 )}
                 <div className="mb-5 grid grid-cols-2 gap-2">
@@ -1388,8 +1437,8 @@ export default function ProfilePage() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => setNidStep(4)}
-                  disabled={!uploadedNidName || verificationLoading}
+                  onClick={() => setIdStep(4)}
+                  disabled={!uploadedIdName || verificationLoading}
                   className="w-full rounded-full bg-[var(--primary)] py-3.5 text-sm font-extrabold text-white transition-colors hover:bg-[var(--primary-hover)] disabled:cursor-not-allowed disabled:opacity-55"
                 >
                   Continue →
@@ -1398,7 +1447,7 @@ export default function ProfilePage() {
             )}
 
             {/* Step 4: Face scan */}
-            {nidStep === 4 && (
+            {idStep === 4 && (
               <div>
                 <input
                   ref={selfieCameraInputRef}
@@ -1417,7 +1466,7 @@ export default function ProfilePage() {
                 />
                 <p className="mb-1 text-lg font-black text-[var(--ink)]">Step 3 — Face Scan</p>
                 <p className="mb-5 text-sm leading-6 text-[var(--text-secondary)]">
-                  Look directly at the camera. Our AI will match your face to your NID photo.
+                  Look directly at the camera. Our AI will match your face to your ID photo.
                 </p>
                 <div className="relative mb-4 flex h-56 items-center justify-center overflow-hidden rounded-[1.1rem] bg-[var(--ink)]">
                   {selfiePreviewUrl && (
@@ -1499,12 +1548,12 @@ export default function ProfilePage() {
             )}
 
             {/* Step 5: AI matching */}
-            {nidStep === 5 && (
+            {idStep === 5 && (
               <div className="py-4 text-center">
                 <Search className="mx-auto mb-4 h-10 w-10 text-[var(--primary)]" strokeWidth={1.8} />
                 <p className="mb-2 text-xl font-black text-[var(--ink)]">AI Matching in Progress…</p>
                 <p className="mb-6 text-sm text-[var(--text-secondary)]">
-                  Comparing facial features from your NID with live capture
+                  Comparing facial features from your ID with live capture
                 </p>
                 <div className="mb-2 h-2 overflow-hidden rounded-full bg-[var(--surface-soft)]">
                   <SegmentedProgress value={faceProgress} />
@@ -1514,14 +1563,14 @@ export default function ProfilePage() {
                   {faceProgress < 40
                     ? "Detecting facial landmarks…"
                     : faceProgress < 70
-                      ? "Comparing with NID photo…"
+                      ? "Comparing with ID photo…"
                       : "Calculating match confidence…"}
                 </p>
               </div>
             )}
 
             {/* Step 6: Result */}
-            {nidStep === 6 && (
+            {idStep === 6 && (
               <div className="py-4 text-center">
                 <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-[var(--success)]">
                   <svg
@@ -1548,7 +1597,7 @@ export default function ProfilePage() {
                 </p>
                 <p className="mb-5 text-sm leading-6 text-[var(--text-secondary)]">
                   {faceVerificationStatus === "verified"
-                    ? "Your NID and face matched successfully. Your trust score has been updated."
+                    ? "Your ID and face matched successfully. Your trust score has been updated."
                     : "Your face match score is below the 70% requirement, so this account was not marked as verified."}
                 </p>
                 <div className="mb-5 rounded-[1rem] border border-[var(--success)]/30 bg-[var(--success-soft)] p-4 text-left">
@@ -1565,7 +1614,7 @@ export default function ProfilePage() {
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
-                    {["NID Scan", "Face Match", "Liveness", "Document Validity"].map(
+                    {["ID Scan", "Face Match", "Liveness", "Document Validity"].map(
                       (s, i) => (
                         <div
                           key={i}
@@ -1578,12 +1627,14 @@ export default function ProfilePage() {
                     )}
                   </div>
                 </div>
-                <div className="mb-5 rounded-[0.75rem] bg-[var(--primary-soft)] px-4 py-3 text-sm font-semibold text-[var(--primary)]">
-                  Trust Score updated: <strong>42 → 68/100</strong>
-                </div>
+                {faceVerificationStatus === "verified" && (
+                  <div className="mb-5 rounded-[0.75rem] bg-[var(--primary-soft)] px-4 py-3 text-sm font-semibold text-[var(--primary)]">
+                    Trust Score updated: <strong>{trustScore}/100</strong>
+                  </div>
+                )}
                 <button
                   type="button"
-                  onClick={() => setNidStep(0)}
+                  onClick={() => setIdStep(0)}
                   className="rounded-full bg-[var(--primary)] px-10 py-3 text-sm font-extrabold text-white transition-colors hover:bg-[var(--primary-hover)]"
                 >
                   {faceVerificationStatus === "verified" ? "Done" : "Try Again"}

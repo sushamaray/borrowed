@@ -18,9 +18,9 @@ function roundNumber(value: number, decimals: number) {
 }
 
 async function runFaceMatch(userId: string) {
-  console.log("[nid-face-match] Verification request received", { userId });
+  console.log("[id-face-match] Verification request received", { userId });
 
-  const verification = await prisma.nidVerification.findUnique({
+  const verification = await prisma.idVerification.findUnique({
     where: { userId },
     select: {
       userId: true,
@@ -54,7 +54,7 @@ async function runFaceMatch(userId: string) {
     const reviewedAt = new Date();
 
     await prisma.$transaction([
-      prisma.nidVerification.update({
+      prisma.idVerification.update({
         where: { userId },
         data: {
           faceMatchScore: similarityScore,
@@ -65,14 +65,14 @@ async function runFaceMatch(userId: string) {
       prisma.user.update({
         where: { id: userId },
         data: {
-          nidVerified: isVerified,
+          idVerified: isVerified,
           identityVerified: isVerified,
           verifiedAt: isVerified ? reviewedAt : null,
         },
       }),
     ]);
 
-    console.log("[nid-face-match] Database updated", {
+    console.log("[id-face-match] Database updated", {
       userId,
       similarityScore,
       distance,
@@ -89,7 +89,7 @@ async function runFaceMatch(userId: string) {
       verified: isVerified,
     });
   } catch (error) {
-    console.error("[nid-face-match] Face verification failed", error);
+    console.error("[id-face-match] Face verification failed", error);
 
     const message =
       error instanceof Error ? error.message : "Internal server error";
@@ -131,7 +131,7 @@ export async function GET(
 
     return await runFaceMatch(userId);
   } catch (error) {
-    console.error("[nid-face-match] GET request failed", error);
+    console.error("[id-face-match] GET request failed", error);
     const message =
       error instanceof Error ? error.message : "Internal server error";
 
@@ -157,7 +157,7 @@ export async function POST(
 
     return await runFaceMatch(userId);
   } catch (error) {
-    console.error("[nid-face-match] POST request failed", error);
+    console.error("[id-face-match] POST request failed", error);
     const message =
       error instanceof Error ? error.message : "Internal server error";
 

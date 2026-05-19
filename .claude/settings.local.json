@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(npx prisma *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(mkdir -p \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\\\\app\\\\api\\\\id-verification\\\\face-match\\\\[userId]\")",
+      "Bash(mkdir -p \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\\\\app\\\\api\\\\lent-items\\\\[id]\")",
+      "Bash(xargs grep -l \"location\")",
+      "Bash(xargs grep -l \"LocationPicker\\\\|LocationPickerModal\")"
+    ],
+    "additionalDirectories": [
+      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\id-verification\\face-match",
+      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\lent-items\\[id]"
     ]
   }
 }

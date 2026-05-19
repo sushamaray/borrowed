@@ -11,7 +11,7 @@ export interface LenderPublicInfo {
   contactVerified: boolean;
   addressVerified: boolean;
   meetupVerified: boolean;
-  nidVerified: boolean;
+  idVerified: boolean;
   createdAt: Date;
 }
 
@@ -46,7 +46,7 @@ function withFeatureList(
       contactVerified: boolean;
       addressVerified: boolean;
       meetupVerified: boolean;
-      nidVerified: boolean;
+      idVerified: boolean;
       createdAt: Date;
     };
   },
@@ -75,7 +75,7 @@ function withFeatureList(
       contactVerified: product.createdBy.contactVerified,
       addressVerified: product.createdBy.addressVerified,
       meetupVerified: product.createdBy.meetupVerified,
-      nidVerified: product.createdBy.nidVerified,
+      idVerified: product.createdBy.idVerified,
       createdAt: product.createdBy.createdAt,
     },
     lentItemId,
@@ -96,7 +96,7 @@ const createdBySelect = {
     contactVerified: true,
     addressVerified: true,
     meetupVerified: true,
-    nidVerified: true,
+    idVerified: true,
     createdAt: true,
   },
 } as const;

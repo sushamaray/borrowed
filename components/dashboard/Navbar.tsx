@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { Menu, ChevronDown, Search, ChevronLeft, ChevronRight, User, Settings, LogOut, MapPin, Pencil } from "lucide-react";
+import { Menu, ChevronDown, ChevronLeft, ChevronRight, User, Settings, LogOut, MapPin, Pencil } from "lucide-react";
 import NotificationBell from "./NotificationBell";
 import { LocationPickerModal } from "@/components/LocationPickerModal";
+import SearchBar from "./SearchBar";
 
 type NavbarProps = {
   onMenuClick: () => void;
@@ -118,14 +119,7 @@ export default function Navbar({
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-2 rounded-lg bg-[var(--surface-soft)] px-3 py-2">
-              <Search className="h-4 w-4 text-[var(--text-secondary)]" />
-              <input
-                type="text"
-                placeholder="Search items, users..."
-                className="bg-transparent text-sm text-[var(--foreground)] placeholder-[var(--text-secondary)] outline-none"
-              />
-            </div>
+            <SearchBar />
 
             <NotificationBell />
 

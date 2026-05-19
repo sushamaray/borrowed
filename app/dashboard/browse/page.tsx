@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { Calendar, ChevronDown, ChevronUp, Coins, Inbox, MapPin, Plus } from "lucide-react";
+import { Calendar, ChevronDown, ChevronUp, Coins, Inbox, MapPin, Plus, Search, Sparkles, X } from "lucide-react";
 import FallbackImage from "@/components/FallbackImage";
 import CategoryPicker from "@/components/dashboard/CategoryPicker";
 import { CATEGORIES, getCategoryForSub } from "@/lib/categories";
@@ -454,9 +455,10 @@ function RequestCard({
 
 type PageTab = "items" | "requests";
 
-export default function BrowseItemsPage() {
+function BrowseItemsContent() {
   const { data: session } = useSession();
   const userId = session?.user?.id;
+  const searchParams = useSearchParams();
 
   const [tab, setTab] = useState<PageTab>("items");
 
@@ -464,6 +466,9 @@ export default function BrowseItemsPage() {
   const [items, setItems] = useState<BrowseItem[]>([]);
   const [itemsLoading, setItemsLoading] = useState(true);
   const [itemsError, setItemsError] = useState<string | null>(null);
+  const [aiMatched, setAiMatched] = useState(false);
+  const [itemSearch, setItemSearch] = useState(searchParams.get("q") ?? "");
+  const [lenderFilter, setLenderFilter] = useState(searchParams.get("lender") ?? "");
 
   // Requests tab
   const [requests, setRequests] = useState<BorrowRequest[]>([]);
@@ -471,14 +476,36 @@ export default function BrowseItemsPage() {
   const [reqFetched, setReqFetched] = useState(false);
   const [catFilter, setCatFilter] = useState("All");
 
-  // Fetch items on mount
+  // Sync URL params whenever they change (e.g. from header search navigation)
   useEffect(() => {
-    fetch("/api/browse")
+    const q = searchParams.get("q") ?? "";
+    const lender = searchParams.get("lender") ?? "";
+    setItemSearch(q);
+    setLenderFilter(lender);
+  }, [searchParams]);
+
+  // Fetch items whenever search or lender filter changes
+  useEffect(() => {
+    setItemsLoading(true);
+    setItemsError(null);
+    setAiMatched(false);
+    const url = new URL("/api/browse", window.location.origin);
+    if (itemSearch) {
+      url.searchParams.set("q", itemSearch);
+      if (itemSearch.trim().split(/\s+/).length >= 3) {
+        url.searchParams.set("ai", "true");
+      }
+    }
+    if (lenderFilter) url.searchParams.set("lender", lenderFilter);
+    fetch(url.toString())
       .then((r) => { if (!r.ok) throw new Error("Failed to fetch"); return r.json(); })
-      .then((data: BrowseItem[]) => setItems(Array.isArray(data) ? data : []))
+      .then((data: { items: BrowseItem[]; aiMatched: boolean }) => {
+        setItems(Array.isArray(data.items) ? data.items : []);
+        setAiMatched(data.aiMatched ?? false);
+      })
       .catch((err: Error) => setItemsError(err.message))
       .finally(() => setItemsLoading(false));
-  }, []);
+  }, [itemSearch, lenderFilter]);
 
   // Fetch requests lazily when tab is first opened
   const fetchRequests = useCallback(async () => {
@@ -507,6 +534,7 @@ export default function BrowseItemsPage() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-[var(--foreground)]">Browse</h1>
+
         <p className="text-sm text-[var(--text-secondary)] mt-1">
           {tab === "items" ? "Discover items available for lending in your community" : "See what others are looking to borrow — offer your item if you have it"}
         </p>
@@ -534,6 +562,39 @@ export default function BrowseItemsPage() {
       {/* ── Tab: Browse Items ── */}
       {tab === "items" && (
         <>
+          {/* Search + lender banner */}
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2.5">
+              <Search className="h-4 w-4 shrink-0 text-[var(--text-secondary)]" />
+              <input
+                type="text"
+                value={itemSearch}
+                onChange={(e) => { setItemSearch(e.target.value); setLenderFilter(""); }}
+                placeholder="Search items by name, category, or describe what you need…"
+                className="flex-1 bg-transparent text-sm text-[var(--foreground)] placeholder-[var(--text-secondary)] outline-none"
+              />
+              {aiMatched && (
+                <div className="flex items-center gap-1 rounded-full bg-[var(--primary)]/10 px-2 py-0.5">
+                  <Sparkles className="h-3 w-3 text-[var(--primary)]" />
+                  <span className="text-[0.65rem] font-bold text-[var(--primary)]">AI</span>
+                </div>
+              )}
+              {itemSearch && (
+                <button type="button" onClick={() => setItemSearch("")} className="text-[var(--text-muted)] hover:text-[var(--foreground)]">
+                  <X className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+            {lenderFilter && (
+              <div className="flex items-center gap-2 rounded-xl bg-[var(--primary)]/5 px-3 py-2 text-sm text-[var(--primary)]">
+                <span className="flex-1">Showing items from this lender</span>
+                <button type="button" onClick={() => setLenderFilter("")} className="hover:opacity-70">
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+          </div>
+
           {itemsLoading && (
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[...Array(6)].map((_, i) => <div key={i} className="rounded-lg bg-[var(--surface)] animate-pulse h-72" />)}
@@ -588,5 +649,13 @@ export default function BrowseItemsPage() {
         </>
       )}
     </div>
+  );
+}
+
+export default function BrowseItemsPage() {
+  return (
+    <Suspense>
+      <BrowseItemsContent />
+    </Suspense>
   );
 }

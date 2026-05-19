@@ -1,10 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Plus, X, CheckCircle2, XCircle } from "lucide-react";
+import { Plus, X, CheckCircle2, XCircle, MapPin, Pencil } from "lucide-react";
 import toast from "react-hot-toast";
 import CategoryPicker from "@/components/dashboard/CategoryPicker";
 import { getCategoryForSub } from "@/lib/categories";
+import { LocationPickerModal } from "@/components/LocationPickerModal";
 
 const MAX_ITEMS = 10;
 
@@ -124,6 +125,8 @@ function ListEditor({
 export default function AddItemModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showLocationPicker, setShowLocationPicker] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -138,6 +141,20 @@ export default function AddItemModal() {
   });
   const [features, setFeatures] = useState<string[]>([]);
   const [drawbacks, setDrawbacks] = useState<string[]>([]);
+
+  const handleOpen = async () => {
+    setIsOpen(true);
+    setLocationLoading(true);
+    try {
+      const res = await fetch("/api/user/location");
+      if (res.ok) {
+        const data = await res.json() as { location?: string };
+        if (data.location) setFormData((prev) => ({ ...prev, location: data.location! }));
+      }
+    } finally {
+      setLocationLoading(false);
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -198,7 +215,7 @@ export default function AddItemModal() {
   return (
     <>
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => { void handleOpen(); }}
         className="inline-flex items-center gap-2 rounded-full bg-[var(--primary)] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--primary-hover)] active:bg-[var(--primary-active)]"
       >
         <Plus className="h-5 w-5" />
@@ -294,19 +311,25 @@ export default function AddItemModal() {
               />
 
               <div className="space-y-2">
-                <label htmlFor="location" className="block text-sm font-semibold text-(--foreground)">
-                  Location
-                </label>
-                <input
-                  id="location"
-                  type="text"
-                  name="location"
-                  value={formData.location}
-                  onChange={handleInputChange}
-                  placeholder="Where the item is located"
-                  className="w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-(--foreground) placeholder-(--text-muted) transition-colors focus:border-(--primary) focus:outline-none"
-                  disabled={isSubmitting}
-                />
+                <label className="block text-sm font-semibold text-(--foreground)">Location</label>
+                <div className="flex items-center gap-2 rounded-2xl border border-(--border) bg-(--surface) px-4 py-3">
+                  <MapPin className="h-4 w-4 shrink-0 text-(--primary)" />
+                  <span className="flex-1 text-sm text-(--foreground)">
+                    {locationLoading
+                      ? <span className="text-(--text-muted)">Fetching location…</span>
+                      : formData.location || <span className="text-(--text-muted)">No location set</span>
+                    }
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowLocationPicker(true)}
+                    disabled={isSubmitting}
+                    className="flex items-center gap-1 text-xs font-semibold text-(--primary) hover:underline disabled:opacity-50"
+                  >
+                    <Pencil className="h-3 w-3" />
+                    Change
+                  </button>
+                </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
@@ -413,6 +436,17 @@ export default function AddItemModal() {
             </form>
           </div>
         </div>
+      )}
+
+      {showLocationPicker && (
+        <LocationPickerModal
+          initialLocation={formData.location}
+          onConfirm={({ location }) => {
+            setFormData((prev) => ({ ...prev, location }));
+            setShowLocationPicker(false);
+          }}
+          onClose={() => setShowLocationPicker(false)}
+        />
       )}
     </>
   );
