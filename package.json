@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "node server.mjs",
     "lint": "eslint",
+    "download:face-models": "node scripts/download-face-models.js",
     "db:seed": "npx tsx prisma/seed.ts",
     "db:seed-test": "npx tsx prisma/seed-test-users.ts"
   },
@@ -16,8 +17,11 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
     "@prisma/client": "^5.22.0",
+    "@tensorflow/tfjs": "^4.22.0",
     "@types/leaflet": "^1.9.21",
     "bcrypt": "^6.0.0",
+    "canvas": "^3.2.3",
+    "face-api.js": "^0.22.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.12.0",
     "next": "16.2.4",

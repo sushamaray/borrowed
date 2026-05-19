@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { Camera, Check, Clock, Lightbulb, Loader, MapPin, Pencil, Search, ShieldCheck, Star, User, X } from "lucide-react";
 import { LocationPickerModal } from "@/components/LocationPickerModal";
@@ -8,6 +8,11 @@ import CategoryPicker from "@/components/dashboard/CategoryPicker";
 import { getCategoryForSub } from "@/lib/categories";
 
 type VerificationKey = "identity" | "contact" | "nid" | "address" | "meetup";
+
+const MAX_BROWSER_IMAGE_BYTES = 10 * 1024 * 1024;
+const MAX_STORED_IMAGE_BYTES = 450 * 1024;
+const NID_MAX_DIMENSION = 1600;
+const SELFIE_MAX_DIMENSION = 1280;
 
 const verificationFlags: Record<VerificationKey, boolean> = {
   identity: false,
@@ -66,6 +71,12 @@ export default function ProfilePage() {
   const [nidStep, setNidStep] = useState(0);
   const [faceProgress, setFaceProgress] = useState(0);
   const [matchScore, setMatchScore] = useState(0);
+  const [faceVerificationStatus, setFaceVerificationStatus] = useState<"verified" | "rejected" | null>(null);
+  const [uploadedNidName, setUploadedNidName] = useState("");
+  const [uploadedSelfieName, setUploadedSelfieName] = useState("");
+  const [nidPreviewUrl, setNidPreviewUrl] = useState("");
+  const [selfiePreviewUrl, setSelfiePreviewUrl] = useState("");
+  const [verificationLoading, setVerificationLoading] = useState(false);
   const [phone, setPhone] = useState("");
   const [location, setLocation] = useState("");
   const [latitude, setLatitude] = useState<number | null>(null);
@@ -93,6 +104,20 @@ export default function ProfilePage() {
   const [editForm, setEditForm] = useState<Partial<MentorData> & { tagsInput?: string }>({});
   const [savingEdit, setSavingEdit] = useState(false);
   const [editError, setEditError] = useState("");
+  const nidInputRef = useRef<HTMLInputElement | null>(null);
+  const selfieCameraInputRef = useRef<HTMLInputElement | null>(null);
+  const selfieUploadInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (nidPreviewUrl) {
+        URL.revokeObjectURL(nidPreviewUrl);
+      }
+      if (selfiePreviewUrl) {
+        URL.revokeObjectURL(selfiePreviewUrl);
+      }
+    };
+  }, [nidPreviewUrl, selfiePreviewUrl]);
 
   const profileName = session?.user?.name || "Borrowed Member";
   const profileEmail = session?.user?.email || "No email available";
@@ -148,18 +173,249 @@ export default function ProfilePage() {
       .finally(() => setMentorLoading(false));
   }, [session?.user?.isMentor]);
 
-  const handleFaceScan = () => {
-    setNidStep(5);
-    let p = 0;
-    const interval = setInterval(() => {
-      p += Math.random() * 18;
-      setFaceProgress(Math.min(Math.round(p), 100));
-      if (p >= 100) {
-        clearInterval(interval);
-        setMatchScore(97);
-        setTimeout(() => setNidStep(6), 400);
+  const replacePreviewUrl = (
+    currentPreviewUrl: string,
+    nextFile: File,
+    setPreviewUrl: (previewUrl: string) => void,
+  ) => {
+    if (currentPreviewUrl) {
+      URL.revokeObjectURL(currentPreviewUrl);
+    }
+
+    setPreviewUrl(URL.createObjectURL(nextFile));
+  };
+
+  const canvasToBlob = (
+    canvas: HTMLCanvasElement,
+    mimeType: string,
+    quality?: number,
+  ) =>
+    new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          reject(new Error("Failed to process image"));
+          return;
+        }
+
+        resolve(blob);
+      }, mimeType, quality);
+    });
+
+  const optimizeImageForUpload = async (
+    file: File,
+    maxDimension: number,
+  ) => {
+    if (file.size > MAX_BROWSER_IMAGE_BYTES) {
+      throw new Error("Image must be 10MB or smaller");
+    }
+
+    const sourceUrl = URL.createObjectURL(file);
+
+    try {
+      const image = await new Promise<HTMLImageElement>((resolve, reject) => {
+        const nextImage = new window.Image();
+        nextImage.onload = () => resolve(nextImage);
+        nextImage.onerror = () => reject(new Error("Failed to load image preview"));
+        nextImage.src = sourceUrl;
+      });
+
+      let width = image.width;
+      let height = image.height;
+      const initialScale = Math.min(1, maxDimension / Math.max(width, height));
+
+      width = Math.max(1, Math.round(width * initialScale));
+      height = Math.max(1, Math.round(height * initialScale));
+
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+
+      if (!context) {
+        throw new Error("Failed to prepare image processing");
       }
-    }, 120);
+
+      let quality = file.type === "image/webp" ? 0.9 : 0.86;
+      const mimeType = file.type === "image/webp" ? "image/webp" : "image/jpeg";
+      let blob: Blob | null = null;
+
+      for (let attempt = 0; attempt < 6; attempt += 1) {
+        canvas.width = width;
+        canvas.height = height;
+        context.clearRect(0, 0, width, height);
+        context.drawImage(image, 0, 0, width, height);
+        blob = await canvasToBlob(canvas, mimeType, quality);
+
+        if (blob.size <= MAX_STORED_IMAGE_BYTES) {
+          break;
+        }
+
+        quality = Math.max(0.55, quality - 0.08);
+        width = Math.max(720, Math.round(width * 0.88));
+        height = Math.max(720, Math.round(height * 0.88));
+      }
+
+      if (!blob) {
+        throw new Error("Failed to process image");
+      }
+
+      return new File([blob], file.name, {
+        type: mimeType,
+        lastModified: Date.now(),
+      });
+    } finally {
+      URL.revokeObjectURL(sourceUrl);
+    }
+  };
+
+  const uploadVerificationImage = async (kind: "front" | "selfie", file: File) => {
+    const formData = new FormData();
+    formData.append("kind", kind);
+    formData.append("file", file);
+
+    const response = await fetch("/api/nid-verification", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const messageParts = [
+        typeof data?.error === "string" ? data.error : "Failed to upload image",
+        typeof data?.details === "string" ? data.details : null,
+      ].filter(Boolean);
+
+      throw new Error(
+        messageParts.join(": "),
+      );
+    }
+  };
+
+  const handleNidFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    setVerificationLoading(true);
+    setMessage(null);
+
+    try {
+      const optimizedFile = await optimizeImageForUpload(file, NID_MAX_DIMENSION);
+      await uploadVerificationImage("front", optimizedFile);
+      setUploadedNidName(file.name);
+      replacePreviewUrl(nidPreviewUrl, optimizedFile, setNidPreviewUrl);
+      setMessage({ type: "success", text: "NID photo uploaded successfully." });
+    } catch (error) {
+      const text =
+        error instanceof Error ? error.message : "Failed to upload NID photo";
+      setMessage({ type: "error", text });
+    } finally {
+      setVerificationLoading(false);
+      event.target.value = "";
+    }
+  };
+
+  const handleSelfieFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    setVerificationLoading(true);
+    setMessage(null);
+
+    try {
+      const optimizedFile = await optimizeImageForUpload(file, SELFIE_MAX_DIMENSION);
+      await uploadVerificationImage("selfie", optimizedFile);
+      setUploadedSelfieName(file.name);
+      replacePreviewUrl(selfiePreviewUrl, optimizedFile, setSelfiePreviewUrl);
+      setMessage({ type: "success", text: "Selfie captured successfully." });
+    } catch (error) {
+      const text =
+        error instanceof Error ? error.message : "Failed to upload selfie";
+      setMessage({ type: "error", text });
+    } finally {
+      setVerificationLoading(false);
+      event.target.value = "";
+    }
+  };
+
+  const handleFaceScan = async () => {
+    if (!session?.user?.id) {
+      setMessage({ type: "error", text: "Please sign in again to verify your identity." });
+      return;
+    }
+
+    if (!uploadedNidName) {
+      setMessage({ type: "error", text: "Upload your NID photo first." });
+      setNidStep(3);
+      return;
+    }
+
+    if (!uploadedSelfieName) {
+      setMessage({ type: "error", text: "Capture or upload your selfie first." });
+      return;
+    }
+
+    setNidStep(5);
+    setVerificationLoading(true);
+    setFaceProgress(12);
+    setFaceVerificationStatus(null);
+    setMessage(null);
+
+    const progressTimer = window.setInterval(() => {
+      setFaceProgress((current) => {
+        if (current >= 92) {
+          return current;
+        }
+
+        return current + Math.max(3, Math.round((100 - current) / 7));
+      });
+    }, 180);
+
+    try {
+      const response = await fetch(
+        `/api/nid-verification/face-match/${session.user.id}`,
+        { method: "POST" },
+      );
+      const data = await response.json();
+
+      if (!response.ok || !data?.success) {
+        const messageParts = [
+          typeof data?.error === "string"
+            ? data.error
+            : "Face verification failed",
+          typeof data?.details === "string" ? data.details : null,
+        ].filter(Boolean);
+
+        throw new Error(
+          messageParts.join(": "),
+        );
+      }
+
+      window.clearInterval(progressTimer);
+      setFaceProgress(100);
+      setMatchScore(
+        typeof data.similarityScore === "number"
+          ? Math.round(data.similarityScore)
+          : 0,
+      );
+      setFaceVerificationStatus(data?.status === "verified" ? "verified" : "rejected");
+      setTimeout(() => setNidStep(6), 400);
+    } catch (error) {
+      window.clearInterval(progressTimer);
+      setFaceProgress(0);
+      setNidStep(4);
+      const text =
+        error instanceof Error ? error.message : "Face verification failed";
+      setMessage({ type: "error", text });
+    } finally {
+      setVerificationLoading(false);
+    }
   };
 
   const handleLocationConfirm = async (result: { location: string; latitude: number; longitude: number }) => {
@@ -1070,22 +1326,50 @@ export default function ProfilePage() {
             {/* Step 3: NID upload */}
             {nidStep === 3 && (
               <div>
+                <input
+                  ref={nidInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp"
+                  className="hidden"
+                  onChange={handleNidFileChange}
+                />
                 <p className="mb-1 text-lg font-black text-[var(--ink)]">Step 2 — Upload NID</p>
                 <p className="mb-5 text-sm leading-6 text-[var(--text-secondary)]">
                   Take a clear photo of your National Identity Card (front side).
                 </p>
                 <div
-                  className="mb-4 cursor-pointer rounded-[1.1rem] border-2 border-dashed border-[var(--border)] bg-[var(--surface-soft)] px-4 py-10 text-center transition-colors hover:border-[var(--primary)]"
-                  onClick={() => setNidStep(4)}
+                  className="relative mb-4 cursor-pointer overflow-hidden rounded-[1.1rem] border-2 border-dashed border-[var(--border)] bg-[var(--surface-soft)] px-4 py-10 text-center transition-colors hover:border-[var(--primary)]"
+                  onClick={() => nidInputRef.current?.click()}
                 >
-                  <Camera className="mx-auto mb-2 h-8 w-8 text-[var(--primary)]" strokeWidth={1.8} />
-                  <p className="mb-1 text-sm font-bold text-[var(--primary)]">
+                  {nidPreviewUrl && (
+                    <>
+                      <img
+                        src={nidPreviewUrl}
+                        alt="NID preview"
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-4 py-4 text-left">
+                        <p className="text-sm font-extrabold text-white">Tap to replace NID photo</p>
+                        <p className="text-xs text-white/80">Max 10MB input · Optimized automatically</p>
+                      </div>
+                    </>
+                  )}
+                  <Camera
+                    className={`mx-auto mb-2 h-8 w-8 text-[var(--primary)] ${nidPreviewUrl ? "opacity-0" : ""}`}
+                    strokeWidth={1.8}
+                  />
+                  <p className={`mb-1 text-sm font-bold text-[var(--primary)] ${nidPreviewUrl ? "opacity-0" : ""}`}>
                     Tap to upload NID photo
                   </p>
-                  <p className="text-xs text-[var(--text-muted)]">
+                  <p className={`text-xs text-[var(--text-muted)] ${nidPreviewUrl ? "opacity-0" : ""}`}>
                     JPG, PNG · Max 10MB · Front side only
                   </p>
                 </div>
+                {uploadedNidName && (
+                  <div className="mb-4 rounded-[0.75rem] border border-[var(--success)]/25 bg-[var(--success-soft)] px-4 py-3 text-sm font-semibold text-[var(--success)]">
+                    Uploaded: {uploadedNidName}
+                  </div>
+                )}
                 <div className="mb-5 grid grid-cols-2 gap-2">
                   {[
                     "Hold card flat under good lighting",
@@ -1105,7 +1389,8 @@ export default function ProfilePage() {
                 <button
                   type="button"
                   onClick={() => setNidStep(4)}
-                  className="w-full rounded-full bg-[var(--primary)] py-3.5 text-sm font-extrabold text-white transition-colors hover:bg-[var(--primary-hover)]"
+                  disabled={!uploadedNidName || verificationLoading}
+                  className="w-full rounded-full bg-[var(--primary)] py-3.5 text-sm font-extrabold text-white transition-colors hover:bg-[var(--primary-hover)] disabled:cursor-not-allowed disabled:opacity-55"
                 >
                   Continue →
                 </button>
@@ -1115,11 +1400,33 @@ export default function ProfilePage() {
             {/* Step 4: Face scan */}
             {nidStep === 4 && (
               <div>
+                <input
+                  ref={selfieCameraInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/*"
+                  capture="user"
+                  className="hidden"
+                  onChange={handleSelfieFileChange}
+                />
+                <input
+                  ref={selfieUploadInputRef}
+                  type="file"
+                  accept="image/png,image/jpeg,image/webp,image/*"
+                  className="hidden"
+                  onChange={handleSelfieFileChange}
+                />
                 <p className="mb-1 text-lg font-black text-[var(--ink)]">Step 3 — Face Scan</p>
                 <p className="mb-5 text-sm leading-6 text-[var(--text-secondary)]">
                   Look directly at the camera. Our AI will match your face to your NID photo.
                 </p>
                 <div className="relative mb-4 flex h-56 items-center justify-center overflow-hidden rounded-[1.1rem] bg-[var(--ink)]">
+                  {selfiePreviewUrl && (
+                    <img
+                      src={selfiePreviewUrl}
+                      alt="Selfie preview"
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                  )}
                   <div className="absolute h-40 w-28 rounded-[60px] border-2 border-[var(--primary)] shadow-[0_0_0_9999px_rgba(0,0,0,0.5)]" />
                   <div className="relative z-10 flex h-40 w-28 items-center justify-center rounded-[60px] bg-gradient-to-b from-[var(--primary-soft)] to-[var(--primary)]">
                     <svg
@@ -1157,10 +1464,34 @@ export default function ProfilePage() {
                   </svg>
                   Remove glasses, hats, or masks. Ensure good lighting.
                 </div>
+                <div className="mb-3 grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => selfieCameraInputRef.current?.click()}
+                    disabled={verificationLoading}
+                    className="rounded-full border border-[var(--border)] bg-white py-3 text-sm font-extrabold text-[var(--ink)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-55"
+                  >
+                    Open Camera
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => selfieUploadInputRef.current?.click()}
+                    disabled={verificationLoading}
+                    className="rounded-full border border-[var(--border)] bg-white py-3 text-sm font-extrabold text-[var(--ink)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-55"
+                  >
+                    {uploadedSelfieName ? "Upload Again" : "Upload Selfie"}
+                  </button>
+                </div>
+                {uploadedSelfieName && (
+                  <div className="mb-5 rounded-[0.75rem] border border-[var(--success)]/25 bg-[var(--success-soft)] px-4 py-3 text-sm font-semibold text-[var(--success)]">
+                    Selfie ready: {uploadedSelfieName}
+                  </div>
+                )}
                 <button
                   type="button"
                   onClick={handleFaceScan}
-                  className="w-full rounded-full bg-[var(--primary)] py-3.5 text-sm font-extrabold text-white shadow-[0_8px_24px_rgba(0,0,0,0.15)] transition-colors hover:bg-[var(--primary-hover)]"
+                  disabled={verificationLoading}
+                  className="w-full rounded-full bg-[var(--primary)] py-3.5 text-sm font-extrabold text-white shadow-[0_8px_24px_rgba(0,0,0,0.15)] transition-colors hover:bg-[var(--primary-hover)] disabled:cursor-not-allowed disabled:opacity-55"
                 >
                   Capture & Analyze
                 </button>
@@ -1189,7 +1520,7 @@ export default function ProfilePage() {
               </div>
             )}
 
-            {/* Step 6: Success */}
+            {/* Step 6: Result */}
             {nidStep === 6 && (
               <div className="py-4 text-center">
                 <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-[var(--success)]">
@@ -1205,20 +1536,33 @@ export default function ProfilePage() {
                   </svg>
                 </div>
                 <p className="mb-2 flex items-center justify-center gap-2 text-2xl font-black text-[var(--ink)]">
-                  Identity Verified! <Check className="h-6 w-6 text-[var(--success)]" strokeWidth={2.6} />
+                  {faceVerificationStatus === "verified" ? (
+                    <>
+                      Identity Verified! <Check className="h-6 w-6 text-[var(--success)]" strokeWidth={2.6} />
+                    </>
+                  ) : (
+                    <>
+                      Identity Not Verified <X className="h-6 w-6 text-[var(--danger)]" strokeWidth={2.6} />
+                    </>
+                  )}
                 </p>
                 <p className="mb-5 text-sm leading-6 text-[var(--text-secondary)]">
-                  Your NID and face matched successfully. Your trust score has been updated.
+                  {faceVerificationStatus === "verified"
+                    ? "Your NID and face matched successfully. Your trust score has been updated."
+                    : "Your face match score is below the 70% requirement, so this account was not marked as verified."}
                 </p>
                 <div className="mb-5 rounded-[1rem] border border-[var(--success)]/30 bg-[var(--success-soft)] p-4 text-left">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="text-sm font-bold text-[var(--success)]">
                       AI Match Confidence
                     </span>
-                    <span className="text-xl font-black text-[var(--success)]">{matchScore}%</span>
+                    <span className={`text-xl font-black ${faceVerificationStatus === "verified" ? "text-[var(--success)]" : "text-[var(--danger)]"}`}>{matchScore}%</span>
                   </div>
-                  <div className="mb-3 h-1.5 overflow-hidden rounded-full bg-[var(--success)]/20">
-                    <SegmentedProgress value={matchScore} fillClass="bg-[var(--success)]" />
+                  <div className={`mb-3 h-1.5 overflow-hidden rounded-full ${faceVerificationStatus === "verified" ? "bg-[var(--success)]/20" : "bg-[var(--danger)]/20"}`}>
+                    <SegmentedProgress
+                      value={matchScore}
+                      fillClass={faceVerificationStatus === "verified" ? "bg-[var(--success)]" : "bg-[var(--danger)]"}
+                    />
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     {["NID Scan", "Face Match", "Liveness", "Document Validity"].map(
@@ -1242,7 +1586,7 @@ export default function ProfilePage() {
                   onClick={() => setNidStep(0)}
                   className="rounded-full bg-[var(--primary)] px-10 py-3 text-sm font-extrabold text-white transition-colors hover:bg-[var(--primary-hover)]"
                 >
-                  Done
+                  {faceVerificationStatus === "verified" ? "Done" : "Try Again"}
                 </button>
               </div>
             )}

@@ -11,159 +11,189 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ── User ──────────────────────────────────────────────────────────────────────
+
 model User {
-  id                       String                    @id @default(uuid())
-  name                     String?
-  firstName                String?
-  lastName                 String?
-  userName                 String?                   @unique
-  email                    String                    @unique
-  emailVerified            DateTime?
-  image                    String?
-  location                 String?
-  password                 String?
-  profilePicture           String?
-  identityVerified         Boolean                   @default(false)
-  contactVerified          Boolean                   @default(false)
-  nidVerified              Boolean                   @default(false)
-  addressVerified          Boolean                   @default(false)
-  meetupVerified           Boolean                   @default(false)
-  createdAt                DateTime                  @default(now())
+  id               String    @id @default(uuid())
+  name             String?
+  firstName        String?
+  lastName         String?
+  userName         String?   @unique
+  email            String    @unique
+  emailVerified    DateTime?
+  image            String?
+  location         String?
+  latitude         Float?
+  longitude        Float?
+  password         String?
+  profilePicture   String?
+  phoneNumber      String?
+  identityVerified Boolean   @default(false)
+  contactVerified  Boolean   @default(false)
+  nidVerified      Boolean   @default(false)
+  addressVerified  Boolean   @default(false)
+  meetupVerified   Boolean   @default(false)
+  verifiedAt       DateTime?
+  createdAt        DateTime  @default(now())
+
   accounts                 Account[]
   sessions                 Session[]
   authenticators           Authenticator[]
+  products                 Product[]                 @relation("ProductCreator")
   lentItems                LentItem[]
+  mentor                   Mentor?
   mentorBookings           MentorBooking[]
-  borrows                  BorrowTransaction[]       @relation("Borrower")
+  checkoutsAsBorrower      BorrowCheckout[]          @relation("CheckoutBorrower")
+  checkoutsAsLender        BorrowCheckout[]          @relation("CheckoutLender")
+  borrowRequests           BorrowRequest[]
+  borrowRequestOffers      BorrowRequestOffer[]
   conversationParticipants ConversationParticipant[]
   sentMessages             Message[]
   cartItems                CartItem[]
   trailEntries             ItemTrailEntry[]
   trailReactions           TrailReaction[]
-  cartSessions             CartSession[]
-  billingOrders            BillingOrder[]            @relation("BorrowerOrders")
-  borrowOrders             BorrowOrder[]             @relation("BorrowOrderBorrower")
-  lentOrders               BorrowOrder[]             @relation("BorrowOrderLender")
   notifications            Notification[]
+  nidVerification          NidVerification?
 }
+
+// ── Product — central item info store ────────────────────────────────────────
+// Created when a lender lists an item OR when a lender responds to a borrow
+// request. One Product can back multiple LentItem rows over time (reuse).
 
 model Product {
-  id                String            @id @default(cuid())
-  slug              String            @unique
+  id                String   @id @default(cuid())
+  slug              String   @unique
   name              String
   category          String
+  subcategory       String?
   location          String
-  postedAt          DateTime
-  priceAmount       Int
-  summary           String
-  description       String            @db.Text
-  features          Json
-  imageUrl          String
-  lenderName        String
-  lenderRating      Decimal           @db.Decimal(2, 1)
-  lenderNote        String            @db.Text
-  compensationMajor String
-  compensationMinor String
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  billingOrders     BillingOrder[]
-  trailEntries      ItemTrailEntry[]
-  cartItems         ProductCartItem[]
+  pricePerDay       Int
+  deposit           Int?
+  description       String   @db.Text
+  features          Json     @default("[]")
+  drawbacks         Json     @default("[]")
+  imageUrl          String?
+  compensationMajor String?
+  compensationMinor String?
+  lenderNote        String?  @db.Text
+  createdById       String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  createdBy    User                 @relation("ProductCreator", fields: [createdById], references: [id], onDelete: Cascade)
+  lentItems    LentItem[]
+  offers       BorrowRequestOffer[]
+  checkouts    BorrowCheckout[]
+  trailEntries ItemTrailEntry[]
+
+  @@index([createdById])
+  @@index([category])
 }
 
+// ── LentItem — Side A listing ────────────────────────────────────────────────
+// A lender makes a product available for borrowing. One product can be relisted
+// multiple times after being returned (only one active/borrowed at a time).
+
 model LentItem {
-  id          String   @id @default(cuid())
-  lenderId    String
-  title       String
-  description String?  @db.Text
-  imageUrl    String?
-  category    String?
-  location    String?
-  pricePerDay Int?
-  deposit     Int?
-  status      String   @default("active")
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id        String   @id @default(cuid())
+  productId String
+  lenderId  String
+  status    String   @default("active") // "active" | "borrowed" | "inactive"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  lender       User                @relation(fields: [lenderId], references: [id], onDelete: Cascade)
-  borrows      BorrowTransaction[]
+  product      Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
+  lender       User             @relation(fields: [lenderId], references: [id], onDelete: Cascade)
   cartItems    CartItem[]
+  checkouts    BorrowCheckout[]
   trailEntries ItemTrailEntry[]
-  borrowOrders BorrowOrder[]
 
+  @@index([lenderId])
+  @@index([productId])
+}
+
+// ── BorrowRequest — Side B want-ad ───────────────────────────────────────────
+// A borrower posts "I need X item". Lenders browse and respond with offers.
+
+model BorrowRequest {
+  id           String   @id @default(cuid())
+  requesterId  String
+  title        String
+  category     String?
+  description  String?  @db.Text
+  location     String?
+  neededFrom   DateTime
+  neededUntil  DateTime
+  budgetPerDay Int?
+  status       String   @default("open") // "open" | "fulfilled" | "closed"
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  requester User                 @relation(fields: [requesterId], references: [id], onDelete: Cascade)
+  offers    BorrowRequestOffer[]
+
+  @@index([requesterId])
+  @@index([status])
+}
+
+// ── BorrowRequestOffer — Side B lender response ───────────────────────────────
+// A lender responds to a BorrowRequest. They pick an existing Product or fill
+// the listing form to create a new one. Borrower accepts one offer → BorrowCheckout.
+
+model BorrowRequestOffer {
+  id              String   @id @default(cuid())
+  borrowRequestId String
+  productId       String
+  lenderId        String
+  message         String?  @db.Text
+  status          String   @default("pending") // "pending" | "accepted" | "rejected"
+  createdAt       DateTime @default(now())
+
+  borrowRequest BorrowRequest   @relation(fields: [borrowRequestId], references: [id], onDelete: Cascade)
+  product       Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  lender        User            @relation(fields: [lenderId], references: [id], onDelete: Cascade)
+  checkout      BorrowCheckout?
+
+  @@index([borrowRequestId])
   @@index([lenderId])
 }
 
-model ProductPc {
-  id                String   @id
-  name              String
-  postedAt          DateTime @default(now())
-  location          String?
-  images            String   @db.LongText
-  description       String
-  features          String   @db.LongText
-  lenderName        String
-  lenderReview      Float
-  lenderNote        String
-  lenderInfoUrl     String?
-  compensationMajor String
-  compensationMinor String
-  category          String?
+// ── BorrowCheckout — unified transaction ──────────────────────────────────────
+// The agreed borrowing between two parties. Created from either flow.
+// Side A: cart checkout of a LentItem  →  lentItemId set, borrowRequestOfferId null
+// Side B: borrower accepts an offer    →  borrowRequestOfferId set, lentItemId null
 
-  @@map("productpc")
-}
+model BorrowCheckout {
+  id                   String    @id @default(cuid())
+  borrowerId           String
+  lenderId             String
+  productId            String
+  lentItemId           String?
+  borrowRequestOfferId String?   @unique
+  originType           String // "lent_item" | "borrow_request"
+  startDate            DateTime?
+  endDate              DateTime?
+  totalPrice           Int?
+  deposit              Int?
+  notes                String?   @db.Text
+  damageReport         Json?
+  returnedAt           DateTime?
+  cancelledBy          String? // "borrower" | "lender"
+  status               String    @default("pending")
+  // "pending" | "accepted" | "active" | "returned" | "rejected" | "cancelled"
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
 
-enum BillingMethod {
-  BKASH
-  NAGAD
-  ROCKET
-  CARD
-  CASH_ON_DELIVERY
-}
-
-model BillingOrder {
-  id              String        @id @default(cuid())
-  productId       String
-  borrowerId      String?
-  fullName        String
-  email           String
-  phoneNumber     String
-  deliveryAddress String        @db.Text
-  specialNotes    String?       @db.Text
-  billingMethod   BillingMethod
-  createdAt       DateTime      @default(now())
-
-  product  Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  borrower User?   @relation("BorrowerOrders", fields: [borrowerId], references: [id], onDelete: SetNull)
-
-  @@index([productId])
-  @@index([borrowerId])
-}
-
-// ── Borrow Orders (lent-item checkout) ───────────────────────────────────────
-
-model BorrowOrder {
-  id         String    @id @default(cuid())
-  borrowerId String
-  lenderId   String
-  lentItemId String
-  startDate  DateTime?
-  endDate    DateTime?
-  status     String    @default("pending")
-  totalPrice Int?
-  deposit    Int?
-  notes      String?   @db.Text
-  returnedAt DateTime?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-
-  borrower   User            @relation("BorrowOrderBorrower", fields: [borrowerId], references: [id], onDelete: Cascade)
-  lender     User            @relation("BorrowOrderLender", fields: [lenderId], references: [id], onDelete: Cascade)
-  lentItem   LentItem        @relation(fields: [lentItemId], references: [id], onDelete: Cascade)
+  borrower   User                @relation("CheckoutBorrower", fields: [borrowerId], references: [id], onDelete: Cascade)
+  lender     User                @relation("CheckoutLender", fields: [lenderId], references: [id], onDelete: Cascade)
+  product    Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  lentItem   LentItem?           @relation(fields: [lentItemId], references: [id], onDelete: SetNull)
+  offer      BorrowRequestOffer? @relation(fields: [borrowRequestOfferId], references: [id], onDelete: SetNull)
   trailEntry ItemTrailEntry?
 
   @@index([borrowerId])
   @@index([lenderId])
+  @@index([productId])
   @@index([lentItemId])
 }
 
@@ -188,11 +218,13 @@ model Notification {
 
 model Mentor {
   id              String   @id @default(cuid())
+  userId          String?  @unique
   name            String
   handle          String   @unique
   avatar          String
   specialty       String
   category        String
+  subcategories   Json     @default("[]")
   bio             String   @db.Text
   tags            Json
   rating          Decimal  @default(0) @db.Decimal(3, 2)
@@ -202,6 +234,7 @@ model Mentor {
   responseTime    String
   createdAt       DateTime @default(now())
 
+  user     User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
   bookings MentorBooking[]
 }
 
@@ -225,37 +258,6 @@ model MentorBooking {
 
   @@index([mentorId])
   @@index([userId])
-}
-
-// ── Borrow Transactions ───────────────────────────────────────────────────────
-
-enum BorrowStatus {
-  ACTIVE
-  RETURNED
-  OVERDUE
-  CANCELLED
-}
-
-model BorrowTransaction {
-  id            String       @id @default(cuid())
-  lentItemId    String
-  borrowerId    String
-  startDate     DateTime
-  endDate       DateTime
-  returnedAt    DateTime?
-  status        BorrowStatus @default(ACTIVE)
-  depositAmount Int
-  totalPrice    Int
-  damageReport  Json?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-
-  lentItem   LentItem        @relation(fields: [lentItemId], references: [id], onDelete: Cascade)
-  borrower   User            @relation("Borrower", fields: [borrowerId], references: [id], onDelete: Cascade)
-  trailEntry ItemTrailEntry?
-
-  @@index([lentItemId])
-  @@index([borrowerId])
 }
 
 // ── Messaging ─────────────────────────────────────────────────────────────────
@@ -295,7 +297,7 @@ model Message {
   @@index([senderId])
 }
 
-// ── Cart ──────────────────────────────────────────────────────────────────────
+// ── Cart (lent items only) ────────────────────────────────────────────────────
 
 model CartItem {
   id         String   @id @default(cuid())
@@ -367,28 +369,25 @@ model Authenticator {
 // ── Social Item Trail ─────────────────────────────────────────────────────────
 
 model ItemTrailEntry {
-  id            String  @id @default(cuid())
-  productId     String?
-  lentItemId    String?
-  borrowId      String? @unique
-  borrowOrderId String? @unique
-  borrowerId    String?
+  id               String   @id @default(cuid())
+  productId        String?
+  lentItemId       String?
+  borrowCheckoutId String?  @unique
+  borrowerId       String?
+  useFor           String   @db.Text
+  location         String?
+  tags             Json     @default("[]")
+  itemRating       Int
+  photoUrls        Json     @default("[]")
+  isPublic         Boolean  @default(true)
+  anonymous        Boolean  @default(false)
+  createdAt        DateTime @default(now())
 
-  useFor     String   @db.Text
-  location   String?
-  tags       Json     @default("[]")
-  itemRating Int
-  photoUrls  Json     @default("[]")
-  isPublic   Boolean  @default(true)
-  anonymous  Boolean  @default(false)
-  createdAt  DateTime @default(now())
-
-  product     Product?           @relation(fields: [productId], references: [id], onDelete: Cascade)
-  lentItem    LentItem?          @relation(fields: [lentItemId], references: [id], onDelete: Cascade)
-  borrow      BorrowTransaction? @relation(fields: [borrowId], references: [id])
-  borrowOrder BorrowOrder?       @relation(fields: [borrowOrderId], references: [id])
-  borrower    User?              @relation(fields: [borrowerId], references: [id])
-  reactions   TrailReaction[]
+  product        Product?        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  lentItem       LentItem?       @relation(fields: [lentItemId], references: [id], onDelete: Cascade)
+  borrowCheckout BorrowCheckout? @relation(fields: [borrowCheckoutId], references: [id], onDelete: SetNull)
+  borrower       User?           @relation(fields: [borrowerId], references: [id])
+  reactions      TrailReaction[]
 
   @@index([productId])
   @@index([lentItemId])
@@ -410,34 +409,23 @@ model TrailReaction {
   @@index([userId])
 }
 
-// ── Product Cart (session-based) ──────────────────────────────────────────────
+// ── NID Verification ──────────────────────────────────────────────────────────
 
-model CartSession {
-  id        String   @id @default(cuid())
-  token     String   @unique @default(cuid())
-  userId    String?
-  expiresAt DateTime
-  createdAt DateTime @default(now())
+model NidVerification {
+  id             String    @id @default(cuid())
+  userId         String    @unique
+  frontImage     Bytes?    @db.LongBlob
+  backImage      Bytes?    @db.LongBlob
+  selfieImage    Bytes?    @db.LongBlob
+  frontMimeType  String?
+  backMimeType   String?
+  selfieMimeType String?
+  faceMatchScore Float?
+  status         String    @default("pending")
+  submittedAt    DateTime  @default(now())
+  reviewedAt     DateTime?
 
-  user  User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items ProductCartItem[]
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([token])
   @@index([userId])
-}
-
-model ProductCartItem {
-  id            String    @id @default(cuid())
-  cartSessionId String
-  productId     String
-  days          Int       @default(1)
-  startDate     DateTime?
-  endDate       DateTime?
-  addedAt       DateTime  @default(now())
-
-  cartSession CartSession @relation(fields: [cartSessionId], references: [id], onDelete: Cascade)
-  product     Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  @@unique([cartSessionId, productId])
-  @@index([cartSessionId])
 }
