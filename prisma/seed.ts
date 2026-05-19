@@ -355,6 +355,13 @@ async function main() {
     console.log(`  ✓ ${mentor.name}`);
   }
 
+  const productCount = await prisma.product.count();
+  if (productCount === 0) {
+    console.log("Skipping trail entries — no products in DB (run seed-test-users.ts first).");
+    console.log("Seed complete.");
+    return;
+  }
+
   console.log("Seeding trail entries…");
 
   for (const entry of trailEntries) {
