@@ -2,8 +2,10 @@
 
 import { useMemo, useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { Camera, Check, Lightbulb, Loader, MapPin, Pencil, Search, ShieldCheck, X } from "lucide-react";
+import { Camera, Check, Lightbulb, Loader, MapPin, Pencil, Search, ShieldCheck, Star, X } from "lucide-react";
 import { LocationPickerModal } from "@/components/LocationPickerModal";
+import CategoryPicker from "@/components/dashboard/CategoryPicker";
+import { getCategoryForSub } from "@/lib/categories";
 
 type VerificationKey = "identity" | "contact" | "nid" | "address" | "meetup";
 
@@ -41,6 +43,7 @@ function SegmentedProgress({ value, fillClass = "bg-[var(--primary)]" }: { value
   );
 }
 
+
 export default function ProfilePage() {
   const { data: session, status } = useSession();
   // 0=idle, 1=intro, 2=phone, 3=nid-upload, 4=face-scan, 5=matching, 6=done
@@ -55,6 +58,14 @@ export default function ProfilePage() {
   const [saving, setSaving] = useState(false);
   const [locationLoading, setLocationLoading] = useState(true);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+  const [showMentorModal, setShowMentorModal] = useState(false);
+  const [mentorForm, setMentorForm] = useState({
+    name: "", handle: "", specialty: "", category: "",
+    subcategories: [] as string[],
+    bio: "", pricePerSession: "500", responseTime: "Within 24 hours", tags: "",
+  });
+  const [submittingMentor, setSubmittingMentor] = useState(false);
+  const [mentorError, setMentorError] = useState("");
 
   const profileName = session?.user?.name || "Borrowed Member";
   const profileEmail = session?.user?.email || "No email available";
@@ -123,6 +134,31 @@ export default function ProfilePage() {
       setMessage({ type: "error", text: "Error saving location" });
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleBecomeMentor = async () => {
+    setSubmittingMentor(true);
+    setMentorError("");
+    try {
+      const tags = mentorForm.tags.split(",").map((t) => t.trim()).filter(Boolean);
+      const res = await fetch("/api/mentors", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...mentorForm, tags, pricePerSession: Number(mentorForm.pricePerSession), subcategories: mentorForm.subcategories }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setMentorError(data.error ?? "Failed to create mentor profile");
+        return;
+      }
+      // Hard navigation forces the server to re-run the jwt callback,
+      // which queries the DB and bakes isMentor: true into the new cookie.
+      window.location.href = "/dashboard/mentor";
+    } catch {
+      setMentorError("Something went wrong. Please try again.");
+    } finally {
+      setSubmittingMentor(false);
     }
   };
 
@@ -458,6 +494,45 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      {/* Mentor profile — full width */}
+      <div className="rounded-[1.25rem] border border-(--border) bg-(--surface) p-5 shadow-[0_12px_40px_rgba(12,32,30,0.07)]">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <div className="mb-1 flex items-center gap-2">
+              <Star className="h-4 w-4 text-(--primary)" strokeWidth={2} />
+              <p className="text-sm font-extrabold text-(--ink)">Mentor Profile</p>
+              {session?.user?.isMentor && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-(--success-soft) px-2.5 py-0.5 text-[0.65rem] font-extrabold uppercase tracking-[0.08em] text-(--success)">
+                  <Check className="h-2.5 w-2.5" strokeWidth={3} /> Active
+                </span>
+              )}
+            </div>
+            <p className="text-sm leading-6 text-(--text-secondary)">
+              Share your expertise and help others grow. Set your own schedule and price per session.
+            </p>
+          </div>
+          {session?.user?.isMentor ? (
+            <a
+              href="/dashboard/mentor"
+              className="shrink-0 rounded-full bg-(--primary) px-5 py-2.5 text-sm font-extrabold text-white transition-colors hover:bg-(--primary-hover)"
+            >
+              Mentor Dashboard →
+            </a>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setMentorForm((f) => ({ ...f, name: profileName !== "Borrowed Member" ? profileName : "" }));
+                setShowMentorModal(true);
+              }}
+              className="shrink-0 rounded-full bg-(--primary) px-5 py-2.5 text-sm font-extrabold text-white transition-colors hover:bg-(--primary-hover)"
+            >
+              Become a Mentor →
+            </button>
+          )}
+        </div>
+      </div>
+
       {showLocationModal && (
         <LocationPickerModal
           initialLocation={currentLocation || undefined}
@@ -468,13 +543,148 @@ export default function ProfilePage() {
         />
       )}
 
+      {/* Become a Mentor Modal */}
+      {showMentorModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(12,32,30,0.8)] p-4 backdrop-blur-[4px]"
+          onClick={(e) => e.target === e.currentTarget && setShowMentorModal(false)}
+        >
+          <div className="scrollbar-thin relative max-h-[90vh] w-full max-w-130 overflow-y-auto rounded-3xl bg-(--surface) p-8 shadow-[0_40px_100px_rgba(0,0,0,0.3)]">
+            <button
+              type="button"
+              onClick={() => setShowMentorModal(false)}
+              className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-lg bg-(--surface-soft) text-sm text-(--text-secondary) transition-colors hover:bg-(--accent-soft)"
+            >
+              <X className="h-4 w-4" strokeWidth={2.4} />
+            </button>
+
+            <p className="mb-1 text-xl font-black text-(--ink)">Become a Mentor</p>
+            <p className="mb-6 text-sm leading-6 text-(--text-secondary)">
+              Set up your mentor profile to start helping others and earning from your expertise.
+            </p>
+
+            {mentorError && (
+              <div className="mb-4 rounded-xl border border-(--danger)/20 bg-(--danger-soft) px-4 py-3 text-sm font-semibold text-(--danger)">
+                {mentorError}
+              </div>
+            )}
+
+            <div className="flex flex-col gap-4">
+              <div>
+                <label className="mb-1.5 block text-[0.72rem] font-extrabold uppercase tracking-widest text-(--text-muted)">Display Name</label>
+                <input
+                  type="text"
+                  value={mentorForm.name}
+                  onChange={(e) => setMentorForm((f) => ({ ...f, name: e.target.value }))}
+                  className="w-full rounded-xl border border-(--border) bg-(--surface-soft) px-4 py-3 text-sm font-semibold text-(--ink) placeholder:text-(--text-muted) focus:border-(--primary) focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-[0.72rem] font-extrabold uppercase tracking-widest text-(--text-muted)">Handle</label>
+                <input
+                  type="text"
+                  value={mentorForm.handle}
+                  onChange={(e) => setMentorForm((f) => ({ ...f, handle: e.target.value.toLowerCase().replace(/\s+/g, "-") }))}
+                  placeholder="e.g. john-doe"
+                  className="w-full rounded-xl border border-(--border) bg-(--surface-soft) px-4 py-3 text-sm font-semibold text-(--ink) placeholder:text-(--text-muted) focus:border-(--primary) focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-[0.72rem] font-extrabold uppercase tracking-widest text-(--text-muted)">Specialty</label>
+                <input
+                  type="text"
+                  value={mentorForm.specialty}
+                  onChange={(e) => setMentorForm((f) => ({ ...f, specialty: e.target.value }))}
+                  placeholder="e.g. Landscape Photography, Guitar Repair"
+                  className="w-full rounded-xl border border-(--border) bg-(--surface-soft) px-4 py-3 text-sm font-semibold text-(--ink) placeholder:text-(--text-muted) focus:border-(--primary) focus:outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-[0.72rem] font-extrabold uppercase tracking-widest text-(--text-muted)">Expertise Areas</label>
+                <CategoryPicker
+                  mode="multi"
+                  value={mentorForm.subcategories}
+                  onChange={(v) =>
+                    setMentorForm((f) => ({
+                      ...f,
+                      subcategories: v,
+                      category: v.length > 0 ? getCategoryForSub(v[0]) : f.category,
+                    }))
+                  }
+                  disabled={submittingMentor}
+                  placeholder="Select your expertise areas"
+                />
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-[0.72rem] font-extrabold uppercase tracking-widest text-(--text-muted)">Bio</label>
+                <textarea
+                  rows={3}
+                  value={mentorForm.bio}
+                  onChange={(e) => setMentorForm((f) => ({ ...f, bio: e.target.value }))}
+                  placeholder="Tell learners about your background and expertise..."
+                  className="w-full resize-none rounded-xl border border-(--border) bg-(--surface-soft) px-4 py-3 text-sm font-semibold text-(--ink) placeholder:text-(--text-muted) focus:border-(--primary) focus:outline-none"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="mb-1.5 block text-[0.72rem] font-extrabold uppercase tracking-widest text-(--text-muted)">Price / Session (BDT)</label>
+                  <input
+                    type="number"
+                    min={0}
+                    value={mentorForm.pricePerSession}
+                    onChange={(e) => setMentorForm((f) => ({ ...f, pricePerSession: e.target.value }))}
+                    className="w-full rounded-xl border border-(--border) bg-(--surface-soft) px-4 py-3 text-sm font-semibold text-(--ink) focus:border-(--primary) focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-[0.72rem] font-extrabold uppercase tracking-widest text-(--text-muted)">Response Time</label>
+                  <input
+                    type="text"
+                    value={mentorForm.responseTime}
+                    onChange={(e) => setMentorForm((f) => ({ ...f, responseTime: e.target.value }))}
+                    placeholder="e.g. Within 2 hours"
+                    className="w-full rounded-xl border border-(--border) bg-(--surface-soft) px-4 py-3 text-sm font-semibold text-(--ink) placeholder:text-(--text-muted) focus:border-(--primary) focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-1.5 block text-[0.72rem] font-extrabold uppercase tracking-widest text-(--text-muted)">Tags (comma-separated)</label>
+                <input
+                  type="text"
+                  value={mentorForm.tags}
+                  onChange={(e) => setMentorForm((f) => ({ ...f, tags: e.target.value }))}
+                  placeholder="e.g. Next.js, TypeScript, System Design"
+                  className="w-full rounded-xl border border-(--border) bg-(--surface-soft) px-4 py-3 text-sm font-semibold text-(--ink) placeholder:text-(--text-muted) focus:border-(--primary) focus:outline-none"
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={handleBecomeMentor}
+                disabled={submittingMentor}
+                className="mt-2 flex items-center justify-center gap-2 rounded-full bg-(--primary) py-3.5 text-sm font-extrabold text-white transition-colors hover:bg-(--primary-hover) disabled:opacity-60"
+              >
+                {submittingMentor && <Loader className="h-4 w-4 animate-spin" />}
+                {submittingMentor ? "Creating profile…" : "Become a Mentor →"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* NID Verification Modal */}
       {nidStep > 0 && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(12,32,30,0.8)] p-4 backdrop-blur-[4px]"
           onClick={(e) => e.target === e.currentTarget && nidStep !== 5 && setNidStep(0)}
         >
-          <div className="relative max-h-[90vh] w-full max-w-[480px] overflow-y-auto rounded-[1.5rem] bg-[var(--surface)] p-8 shadow-[0_40px_100px_rgba(0,0,0,0.3)]">
+          <div className="scrollbar-thin relative max-h-[90vh] w-full max-w-[480px] overflow-y-auto rounded-[1.5rem] bg-[var(--surface)] p-8 shadow-[0_40px_100px_rgba(0,0,0,0.3)]">
             {nidStep < 6 && (
               <button
                 type="button"

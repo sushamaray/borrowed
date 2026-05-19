@@ -7,7 +7,7 @@ import {
   ArrowLeft, MapPin, Star, ShieldCheck, ShoppingCart,
   Calendar, MessageSquare, Sparkles, ChevronRight, Check,
   Flame, Gem, Heart, Mountain, Palette, Plane, Sprout, Target,
-  X, UserRound, BadgeCheck,
+  X, UserRound, BadgeCheck, CheckCircle2, XCircle,
 } from "lucide-react";
 import FallbackImage from "@/components/FallbackImage";
 import type { ProductWithFeatureList } from "@/lib/products";
@@ -314,10 +314,10 @@ export default function ItemDetailClient({
       <div className="mb-6 grid grid-cols-[1fr_380px] gap-6">
 
         {/* Left panel */}
-        <div className="rounded-[20px] border border-[#e3dcf3] bg-white p-7 shadow-[0_12px_40px_rgba(15,42,42,0.07)]">
+        <div className="rounded-[20px] border border-[#e3dcf3] bg-white p-7 shadow-[0_12px_40px_rgba(59,42,128,0.07)]">
 
           {/* Image */}
-          <div className="relative mb-6 h-[280px] overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#daeaeb,#f2eefb)]">
+          <div className="relative mb-6 h-[280px] overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#ece7fa,#f2eefb)]">
             <FallbackImage
               src={product.imageUrl ?? ""}
               alt={product.name}
@@ -343,18 +343,18 @@ export default function ItemDetailClient({
 
           {/* Meta */}
           <div className="mb-4 flex flex-wrap items-center gap-4">
-            <div className="flex items-center gap-[5px] text-[0.88rem] font-semibold text-[#4b7b7f]">
+            <div className="flex items-center gap-[5px] text-[0.88rem] font-semibold text-(--text-secondary)">
               <MapPin size={14} />
               {product.location}
             </div>
             <div className="flex items-center gap-1.5">
               <StarRow rating={Math.round(Number(product.lenderRating))} size={13} />
-              <span className="text-[0.88rem] font-semibold text-[#4b7b7f]">{product.lenderRating.toString()}</span>
+              <span className="text-[0.88rem] font-semibold text-(--text-secondary)">{product.lenderRating.toString()}</span>
             </div>
           </div>
 
           {/* Tabs */}
-          <div className="mb-5 flex gap-1 border-b-2 border-[#eef5f5]">
+          <div className="mb-5 flex gap-1 border-b-2 border-(--border)">
             {TABS.map((t) => (
               <button
                 key={t.id}
@@ -371,18 +371,45 @@ export default function ItemDetailClient({
           {/* Tab: Description */}
           {tab === "description" && (
             <div>
-              <p className="mb-5 leading-[1.8] text-[#4b7b7f]">{product.description}</p>
-              <div className="mb-2.5 font-extrabold text-[#1b1530]">Features</div>
-              <ul className="grid list-none gap-2 p-0">
-                {product.featureList.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-[0.9rem] text-[#4b7b7f]">
-                    <span className="inline-flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#daeaeb]">
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#31236a" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>
-                    </span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
+              <p className="mb-5 leading-[1.8] text-(--text-secondary)">{product.description}</p>
+
+              {(product.featureList.length > 0 || product.drawbackList.length > 0) && (
+                <div className="mt-1 grid grid-cols-2 gap-4">
+                  {product.featureList.length > 0 && (
+                    <div className="rounded-2xl border border-(--border) bg-(--surface-soft) p-4">
+                      <div className="mb-3 flex items-center gap-1.5 text-sm font-extrabold text-[#1b1530]">
+                        <CheckCircle2 className="h-4 w-4 text-(--success)" />
+                        Features
+                      </div>
+                      <ul className="grid list-none gap-2 p-0">
+                        {product.featureList.map((f) => (
+                          <li key={f} className="flex items-start gap-2 text-[0.85rem] text-(--text-secondary)">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-(--success)" />
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {product.drawbackList.length > 0 && (
+                    <div className="rounded-2xl border border-red-200 bg-red-50 p-4">
+                      <div className="mb-3 flex items-center gap-1.5 text-sm font-extrabold text-[#1b1530]">
+                        <XCircle className="h-4 w-4 text-(--danger)" />
+                        Known Drawbacks
+                      </div>
+                      <ul className="grid list-none gap-2 p-0">
+                        {product.drawbackList.map((d) => (
+                          <li key={d} className="flex items-start gap-2 text-[0.85rem] text-(--text-secondary)">
+                            <XCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-(--danger)" />
+                            {d}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
@@ -403,7 +430,7 @@ export default function ItemDetailClient({
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {trail.badges.map((b) => (
-                      <div key={b.id} title={b.description} className="flex items-center gap-[5px] rounded-full border border-[#e3dcf3] bg-[linear-gradient(135deg,#f2eefb,#daeaeb)] px-3 py-1 text-[0.75rem] font-extrabold text-[#31236a]">
+                      <div key={b.id} title={b.description} className="flex items-center gap-[5px] rounded-full border border-[#e3dcf3] bg-[linear-gradient(135deg,#f2eefb,#ece7fa)] px-3 py-1 text-[0.75rem] font-extrabold text-[#31236a]">
                         {(() => {
                           const BadgeIcon = BADGE_ICONS[b.id as keyof typeof BADGE_ICONS] ?? Sparkles;
                           return <BadgeIcon size={13} strokeWidth={2.3} />;
@@ -423,7 +450,7 @@ export default function ItemDetailClient({
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {trail.locations.map((loc, i) => (
-                      <span key={loc} className="flex items-center gap-1 text-[0.78rem] font-semibold text-[#4b7b7f]">
+                      <span key={loc} className="flex items-center gap-1 text-[0.78rem] font-semibold text-(--text-secondary)">
                         {i > 0 && <ChevronRight size={11} color="#9187b0" />}
                         <span className="rounded-full border border-[#e3dcf3] bg-white px-2.5 py-0.5">{loc}</span>
                       </span>
@@ -460,7 +487,7 @@ export default function ItemDetailClient({
                         <div className="absolute left-[17px] top-[38px] h-[calc(100%+0.25rem)] w-0.5 bg-[linear-gradient(180deg,#e3dcf3,transparent)]" />
                       )}
                       <Avatar initials={entry.initials} size={36} />
-                      <div className="flex-1 rounded-[14px] border border-[#e3dcf3] bg-[#f3f7f7] px-4 py-[0.85rem]">
+                      <div className="flex-1 rounded-[14px] border border-[#e3dcf3] bg-(--surface-soft) px-4 py-[0.85rem]">
                         <div className="mb-1 flex items-center justify-between">
                           <div>
                             <span className="text-[0.88rem] font-extrabold text-[#31236a]">{entry.displayName}</span>
@@ -470,7 +497,7 @@ export default function ItemDetailClient({
                           </div>
                           <span className="text-[0.75rem] text-[#9187b0]">{entry.when}</span>
                         </div>
-                        <div className="mb-1 text-[0.85rem] text-[#4b7b7f]">
+                        <div className="mb-1 text-[0.85rem] text-(--text-secondary)">
                           Used for <em className="font-bold not-italic text-[#1b1530]">{entry.useFor}</em>
                           {entry.location && (
                             <span className="text-[#9187b0]"> · {entry.location}</span>
@@ -507,7 +534,7 @@ export default function ItemDetailClient({
               )}
 
               {/* CTA to borrow */}
-              <div className="mt-4 flex items-center justify-center gap-1.5 rounded-[14px] border border-dashed border-[#a8c4c8] bg-[linear-gradient(135deg,#f3f7f7,#daeaeb)] px-4 py-[0.85rem] text-center text-[0.82rem] text-[#4b7b7f]">
+              <div className="mt-4 flex items-center justify-center gap-1.5 rounded-[14px] border border-dashed border-(--border) bg-(--surface-soft) px-4 py-[0.85rem] text-center text-[0.82rem] text-(--text-secondary)">
                 <Target size={15} strokeWidth={2.2} /> Borrow this item and add your story to the trail
               </div>
             </div>
@@ -588,7 +615,7 @@ export default function ItemDetailClient({
           </div>
 
           {/* Lender card */}
-          <div className="rounded-[18px] border border-[#e3dcf3] bg-white p-5 shadow-[0_8px_24px_rgba(15,42,42,0.06)]">
+          <div className="rounded-[18px] border border-[#e3dcf3] bg-white p-5 shadow-[0_8px_24px_rgba(59,42,128,0.06)]">
             <div className="mb-[0.85rem] flex items-center justify-between font-extrabold text-[#1b1530]">
               Lender Details
               <span className="rounded-full bg-[#d1fae5] px-[9px] py-[3px] text-[0.72rem] font-extrabold text-[#059669]">
@@ -609,24 +636,24 @@ export default function ItemDetailClient({
               </div>
             </div>
             {product.lenderNote && (
-              <p className="mb-[0.85rem] text-[0.82rem] leading-[1.6] text-[#4b7b7f]">{product.lenderNote}</p>
+              <p className="mb-[0.85rem] text-[0.82rem] leading-[1.6] text-(--text-secondary)">{product.lenderNote}</p>
             )}
             <button
               type="button"
               onClick={openMsgModal}
-              className="flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-full border-0 bg-[#eef5f5] p-[0.65rem] text-[0.85rem] font-bold text-[#31236a]"
+              className="flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-full border-0 bg-(--surface-soft) p-[0.65rem] text-[0.85rem] font-bold text-[#31236a]"
             >
               <MessageSquare size={15} /> Message Lender
             </button>
           </div>
 
           {/* Compensation card */}
-          <div className="rounded-[18px] border border-[#e3dcf3] bg-white p-5 shadow-[0_8px_24px_rgba(15,42,42,0.06)]">
+          <div className="rounded-[18px] border border-[#e3dcf3] bg-white p-5 shadow-[0_8px_24px_rgba(59,42,128,0.06)]">
             <div className="mb-[0.85rem] flex items-center gap-1.5 text-[0.92rem] font-extrabold text-[#1b1530]">
               <ShieldCheck size={15} color="#3b2a80" /> Compensation Fees
             </div>
             <div className="grid gap-[0.7rem]">
-              <div className="flex justify-between border-b border-[#eef5f5] pb-[0.7rem]">
+              <div className="flex justify-between border-b border-(--border) pb-[0.7rem]">
                 <div className="text-[0.72rem] font-bold uppercase tracking-[0.08em] text-[#9187b0]">If lost or major damage</div>
                 <div className="text-[0.92rem] font-black text-[#dc2626]">{product.compensationMajor ?? "Contact lender"}</div>
               </div>
@@ -651,7 +678,7 @@ export default function ItemDetailClient({
           </div>
           <div className="grid grid-cols-3 gap-4">
             {similarProducts.map((p) => (
-              <Link key={p.id} href={p.lentItemId ? `/dashboard/items/${p.lentItemId}` : `/products/${p.slug}`} className="block overflow-hidden rounded-2xl border border-[#e3dcf3] bg-white no-underline shadow-[0_4px_16px_rgba(15,42,42,0.06)]">
+              <Link key={p.id} href={p.lentItemId ? `/dashboard/items/${p.lentItemId}` : `/products/${p.slug}`} className="block overflow-hidden rounded-2xl border border-[#e3dcf3] bg-white no-underline shadow-[0_4px_16px_rgba(59,42,128,0.06)]">
                 <div className="relative h-[140px] bg-[#f2eefb]">
                   <FallbackImage src={p.imageUrl ?? ""} alt={p.name} fill sizes="22vw" className="object-cover" />
                 </div>
@@ -763,12 +790,12 @@ export default function ItemDetailClient({
             </div>
 
             <div className="grid gap-2.5">
-              <div className="flex items-center gap-2 rounded-xl bg-[#f8f7fc] px-3 py-2.5 text-[0.84rem] font-semibold text-[#4b7b7f]">
+              <div className="flex items-center gap-2 rounded-xl bg-[#f8f7fc] px-3 py-2.5 text-[0.84rem] font-semibold text-(--text-secondary)">
                 <UserRound size={15} className="text-[#3b2a80]" />
                 Member since {joinedAt}
               </div>
               {product.lender.location && (
-                <div className="flex items-center gap-2 rounded-xl bg-[#f8f7fc] px-3 py-2.5 text-[0.84rem] font-semibold text-[#4b7b7f]">
+                <div className="flex items-center gap-2 rounded-xl bg-[#f8f7fc] px-3 py-2.5 text-[0.84rem] font-semibold text-(--text-secondary)">
                   <MapPin size={15} className="text-[#3b2a80]" />
                   {product.lender.location}
                 </div>

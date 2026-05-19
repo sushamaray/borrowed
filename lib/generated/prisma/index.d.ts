@@ -3154,6 +3154,7 @@ export namespace Prisma {
     authenticators?: boolean | User$authenticatorsArgs<ExtArgs>
     products?: boolean | User$productsArgs<ExtArgs>
     lentItems?: boolean | User$lentItemsArgs<ExtArgs>
+    mentor?: boolean | User$mentorArgs<ExtArgs>
     mentorBookings?: boolean | User$mentorBookingsArgs<ExtArgs>
     checkoutsAsBorrower?: boolean | User$checkoutsAsBorrowerArgs<ExtArgs>
     checkoutsAsLender?: boolean | User$checkoutsAsLenderArgs<ExtArgs>
@@ -3200,6 +3201,7 @@ export namespace Prisma {
     authenticators?: boolean | User$authenticatorsArgs<ExtArgs>
     products?: boolean | User$productsArgs<ExtArgs>
     lentItems?: boolean | User$lentItemsArgs<ExtArgs>
+    mentor?: boolean | User$mentorArgs<ExtArgs>
     mentorBookings?: boolean | User$mentorBookingsArgs<ExtArgs>
     checkoutsAsBorrower?: boolean | User$checkoutsAsBorrowerArgs<ExtArgs>
     checkoutsAsLender?: boolean | User$checkoutsAsLenderArgs<ExtArgs>
@@ -3223,6 +3225,7 @@ export namespace Prisma {
       authenticators: Prisma.$AuthenticatorPayload<ExtArgs>[]
       products: Prisma.$ProductPayload<ExtArgs>[]
       lentItems: Prisma.$LentItemPayload<ExtArgs>[]
+      mentor: Prisma.$MentorPayload<ExtArgs> | null
       mentorBookings: Prisma.$MentorBookingPayload<ExtArgs>[]
       checkoutsAsBorrower: Prisma.$BorrowCheckoutPayload<ExtArgs>[]
       checkoutsAsLender: Prisma.$BorrowCheckoutPayload<ExtArgs>[]
@@ -3603,6 +3606,7 @@ export namespace Prisma {
     authenticators<T extends User$authenticatorsArgs<ExtArgs> = {}>(args?: Subset<T, User$authenticatorsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthenticatorPayload<ExtArgs>, T, "findMany"> | Null>
     products<T extends User$productsArgs<ExtArgs> = {}>(args?: Subset<T, User$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany"> | Null>
     lentItems<T extends User$lentItemsArgs<ExtArgs> = {}>(args?: Subset<T, User$lentItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LentItemPayload<ExtArgs>, T, "findMany"> | Null>
+    mentor<T extends User$mentorArgs<ExtArgs> = {}>(args?: Subset<T, User$mentorArgs<ExtArgs>>): Prisma__MentorClient<$Result.GetResult<Prisma.$MentorPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     mentorBookings<T extends User$mentorBookingsArgs<ExtArgs> = {}>(args?: Subset<T, User$mentorBookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorBookingPayload<ExtArgs>, T, "findMany"> | Null>
     checkoutsAsBorrower<T extends User$checkoutsAsBorrowerArgs<ExtArgs> = {}>(args?: Subset<T, User$checkoutsAsBorrowerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BorrowCheckoutPayload<ExtArgs>, T, "findMany"> | Null>
     checkoutsAsLender<T extends User$checkoutsAsLenderArgs<ExtArgs> = {}>(args?: Subset<T, User$checkoutsAsLenderArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BorrowCheckoutPayload<ExtArgs>, T, "findMany"> | Null>
@@ -4064,6 +4068,21 @@ export namespace Prisma {
   }
 
   /**
+   * User.mentor
+   */
+  export type User$mentorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Mentor
+     */
+    select?: MentorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MentorInclude<ExtArgs> | null
+    where?: MentorWhereInput
+  }
+
+  /**
    * User.mentorBookings
    */
   export type User$mentorBookingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4340,6 +4359,7 @@ export namespace Prisma {
     slug: string | null
     name: string | null
     category: string | null
+    subcategory: string | null
     location: string | null
     pricePerDay: number | null
     deposit: number | null
@@ -4358,6 +4378,7 @@ export namespace Prisma {
     slug: string | null
     name: string | null
     category: string | null
+    subcategory: string | null
     location: string | null
     pricePerDay: number | null
     deposit: number | null
@@ -4376,11 +4397,13 @@ export namespace Prisma {
     slug: number
     name: number
     category: number
+    subcategory: number
     location: number
     pricePerDay: number
     deposit: number
     description: number
     features: number
+    drawbacks: number
     imageUrl: number
     compensationMajor: number
     compensationMinor: number
@@ -4407,6 +4430,7 @@ export namespace Prisma {
     slug?: true
     name?: true
     category?: true
+    subcategory?: true
     location?: true
     pricePerDay?: true
     deposit?: true
@@ -4425,6 +4449,7 @@ export namespace Prisma {
     slug?: true
     name?: true
     category?: true
+    subcategory?: true
     location?: true
     pricePerDay?: true
     deposit?: true
@@ -4443,11 +4468,13 @@ export namespace Prisma {
     slug?: true
     name?: true
     category?: true
+    subcategory?: true
     location?: true
     pricePerDay?: true
     deposit?: true
     description?: true
     features?: true
+    drawbacks?: true
     imageUrl?: true
     compensationMajor?: true
     compensationMinor?: true
@@ -4549,11 +4576,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory: string | null
     location: string
     pricePerDay: number
     deposit: number | null
     description: string
     features: JsonValue
+    drawbacks: JsonValue
     imageUrl: string | null
     compensationMajor: string | null
     compensationMinor: string | null
@@ -4587,11 +4616,13 @@ export namespace Prisma {
     slug?: boolean
     name?: boolean
     category?: boolean
+    subcategory?: boolean
     location?: boolean
     pricePerDay?: boolean
     deposit?: boolean
     description?: boolean
     features?: boolean
+    drawbacks?: boolean
     imageUrl?: boolean
     compensationMajor?: boolean
     compensationMinor?: boolean
@@ -4613,11 +4644,13 @@ export namespace Prisma {
     slug?: boolean
     name?: boolean
     category?: boolean
+    subcategory?: boolean
     location?: boolean
     pricePerDay?: boolean
     deposit?: boolean
     description?: boolean
     features?: boolean
+    drawbacks?: boolean
     imageUrl?: boolean
     compensationMajor?: boolean
     compensationMinor?: boolean
@@ -4650,11 +4683,13 @@ export namespace Prisma {
       slug: string
       name: string
       category: string
+      subcategory: string | null
       location: string
       pricePerDay: number
       deposit: number | null
       description: string
       features: Prisma.JsonValue
+      drawbacks: Prisma.JsonValue
       imageUrl: string | null
       compensationMajor: string | null
       compensationMinor: string | null
@@ -5040,11 +5075,13 @@ export namespace Prisma {
     readonly slug: FieldRef<"Product", 'String'>
     readonly name: FieldRef<"Product", 'String'>
     readonly category: FieldRef<"Product", 'String'>
+    readonly subcategory: FieldRef<"Product", 'String'>
     readonly location: FieldRef<"Product", 'String'>
     readonly pricePerDay: FieldRef<"Product", 'Int'>
     readonly deposit: FieldRef<"Product", 'Int'>
     readonly description: FieldRef<"Product", 'String'>
     readonly features: FieldRef<"Product", 'Json'>
+    readonly drawbacks: FieldRef<"Product", 'Json'>
     readonly imageUrl: FieldRef<"Product", 'String'>
     readonly compensationMajor: FieldRef<"Product", 'String'>
     readonly compensationMinor: FieldRef<"Product", 'String'>
@@ -10416,6 +10453,7 @@ export namespace Prisma {
 
   export type MentorMinAggregateOutputType = {
     id: string | null
+    userId: string | null
     name: string | null
     handle: string | null
     avatar: string | null
@@ -10432,6 +10470,7 @@ export namespace Prisma {
 
   export type MentorMaxAggregateOutputType = {
     id: string | null
+    userId: string | null
     name: string | null
     handle: string | null
     avatar: string | null
@@ -10448,11 +10487,13 @@ export namespace Prisma {
 
   export type MentorCountAggregateOutputType = {
     id: number
+    userId: number
     name: number
     handle: number
     avatar: number
     specialty: number
     category: number
+    subcategories: number
     bio: number
     tags: number
     rating: number
@@ -10479,6 +10520,7 @@ export namespace Prisma {
 
   export type MentorMinAggregateInputType = {
     id?: true
+    userId?: true
     name?: true
     handle?: true
     avatar?: true
@@ -10495,6 +10537,7 @@ export namespace Prisma {
 
   export type MentorMaxAggregateInputType = {
     id?: true
+    userId?: true
     name?: true
     handle?: true
     avatar?: true
@@ -10511,11 +10554,13 @@ export namespace Prisma {
 
   export type MentorCountAggregateInputType = {
     id?: true
+    userId?: true
     name?: true
     handle?: true
     avatar?: true
     specialty?: true
     category?: true
+    subcategories?: true
     bio?: true
     tags?: true
     rating?: true
@@ -10615,11 +10660,13 @@ export namespace Prisma {
 
   export type MentorGroupByOutputType = {
     id: string
+    userId: string | null
     name: string
     handle: string
     avatar: string
     specialty: string
     category: string
+    subcategories: JsonValue
     bio: string
     tags: JsonValue
     rating: Decimal
@@ -10651,11 +10698,13 @@ export namespace Prisma {
 
   export type MentorSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    userId?: boolean
     name?: boolean
     handle?: boolean
     avatar?: boolean
     specialty?: boolean
     category?: boolean
+    subcategories?: boolean
     bio?: boolean
     tags?: boolean
     rating?: boolean
@@ -10664,6 +10713,7 @@ export namespace Prisma {
     available?: boolean
     responseTime?: boolean
     createdAt?: boolean
+    user?: boolean | Mentor$userArgs<ExtArgs>
     bookings?: boolean | Mentor$bookingsArgs<ExtArgs>
     _count?: boolean | MentorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["mentor"]>
@@ -10671,11 +10721,13 @@ export namespace Prisma {
 
   export type MentorSelectScalar = {
     id?: boolean
+    userId?: boolean
     name?: boolean
     handle?: boolean
     avatar?: boolean
     specialty?: boolean
     category?: boolean
+    subcategories?: boolean
     bio?: boolean
     tags?: boolean
     rating?: boolean
@@ -10687,6 +10739,7 @@ export namespace Prisma {
   }
 
   export type MentorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | Mentor$userArgs<ExtArgs>
     bookings?: boolean | Mentor$bookingsArgs<ExtArgs>
     _count?: boolean | MentorCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -10694,15 +10747,18 @@ export namespace Prisma {
   export type $MentorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Mentor"
     objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
       bookings: Prisma.$MentorBookingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      userId: string | null
       name: string
       handle: string
       avatar: string
       specialty: string
       category: string
+      subcategories: Prisma.JsonValue
       bio: string
       tags: Prisma.JsonValue
       rating: Prisma.Decimal
@@ -11051,6 +11107,7 @@ export namespace Prisma {
    */
   export interface Prisma__MentorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends Mentor$userArgs<ExtArgs> = {}>(args?: Subset<T, Mentor$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     bookings<T extends Mentor$bookingsArgs<ExtArgs> = {}>(args?: Subset<T, Mentor$bookingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MentorBookingPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -11082,11 +11139,13 @@ export namespace Prisma {
    */ 
   interface MentorFieldRefs {
     readonly id: FieldRef<"Mentor", 'String'>
+    readonly userId: FieldRef<"Mentor", 'String'>
     readonly name: FieldRef<"Mentor", 'String'>
     readonly handle: FieldRef<"Mentor", 'String'>
     readonly avatar: FieldRef<"Mentor", 'String'>
     readonly specialty: FieldRef<"Mentor", 'String'>
     readonly category: FieldRef<"Mentor", 'String'>
+    readonly subcategories: FieldRef<"Mentor", 'Json'>
     readonly bio: FieldRef<"Mentor", 'String'>
     readonly tags: FieldRef<"Mentor", 'Json'>
     readonly rating: FieldRef<"Mentor", 'Decimal'>
@@ -11391,6 +11450,21 @@ export namespace Prisma {
      * Filter which Mentors to delete
      */
     where?: MentorWhereInput
+  }
+
+  /**
+   * Mentor.user
+   */
+  export type Mentor$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -22532,11 +22606,13 @@ export namespace Prisma {
     slug: 'slug',
     name: 'name',
     category: 'category',
+    subcategory: 'subcategory',
     location: 'location',
     pricePerDay: 'pricePerDay',
     deposit: 'deposit',
     description: 'description',
     features: 'features',
+    drawbacks: 'drawbacks',
     imageUrl: 'imageUrl',
     compensationMajor: 'compensationMajor',
     compensationMinor: 'compensationMinor',
@@ -22632,11 +22708,13 @@ export namespace Prisma {
 
   export const MentorScalarFieldEnum: {
     id: 'id',
+    userId: 'userId',
     name: 'name',
     handle: 'handle',
     avatar: 'avatar',
     specialty: 'specialty',
     category: 'category',
+    subcategories: 'subcategories',
     bio: 'bio',
     tags: 'tags',
     rating: 'rating',
@@ -22944,6 +23022,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorListRelationFilter
     products?: ProductListRelationFilter
     lentItems?: LentItemListRelationFilter
+    mentor?: XOR<MentorNullableRelationFilter, MentorWhereInput> | null
     mentorBookings?: MentorBookingListRelationFilter
     checkoutsAsBorrower?: BorrowCheckoutListRelationFilter
     checkoutsAsLender?: BorrowCheckoutListRelationFilter
@@ -22985,6 +23064,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorOrderByRelationAggregateInput
     products?: ProductOrderByRelationAggregateInput
     lentItems?: LentItemOrderByRelationAggregateInput
+    mentor?: MentorOrderByWithRelationInput
     mentorBookings?: MentorBookingOrderByRelationAggregateInput
     checkoutsAsBorrower?: BorrowCheckoutOrderByRelationAggregateInput
     checkoutsAsLender?: BorrowCheckoutOrderByRelationAggregateInput
@@ -23029,6 +23109,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorListRelationFilter
     products?: ProductListRelationFilter
     lentItems?: LentItemListRelationFilter
+    mentor?: XOR<MentorNullableRelationFilter, MentorWhereInput> | null
     mentorBookings?: MentorBookingListRelationFilter
     checkoutsAsBorrower?: BorrowCheckoutListRelationFilter
     checkoutsAsLender?: BorrowCheckoutListRelationFilter
@@ -23107,11 +23188,13 @@ export namespace Prisma {
     slug?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     category?: StringFilter<"Product"> | string
+    subcategory?: StringNullableFilter<"Product"> | string | null
     location?: StringFilter<"Product"> | string
     pricePerDay?: IntFilter<"Product"> | number
     deposit?: IntNullableFilter<"Product"> | number | null
     description?: StringFilter<"Product"> | string
     features?: JsonFilter<"Product">
+    drawbacks?: JsonFilter<"Product">
     imageUrl?: StringNullableFilter<"Product"> | string | null
     compensationMajor?: StringNullableFilter<"Product"> | string | null
     compensationMinor?: StringNullableFilter<"Product"> | string | null
@@ -23131,11 +23214,13 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     category?: SortOrder
+    subcategory?: SortOrderInput | SortOrder
     location?: SortOrder
     pricePerDay?: SortOrder
     deposit?: SortOrderInput | SortOrder
     description?: SortOrder
     features?: SortOrder
+    drawbacks?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     compensationMajor?: SortOrderInput | SortOrder
     compensationMinor?: SortOrderInput | SortOrder
@@ -23158,11 +23243,13 @@ export namespace Prisma {
     NOT?: ProductWhereInput | ProductWhereInput[]
     name?: StringFilter<"Product"> | string
     category?: StringFilter<"Product"> | string
+    subcategory?: StringNullableFilter<"Product"> | string | null
     location?: StringFilter<"Product"> | string
     pricePerDay?: IntFilter<"Product"> | number
     deposit?: IntNullableFilter<"Product"> | number | null
     description?: StringFilter<"Product"> | string
     features?: JsonFilter<"Product">
+    drawbacks?: JsonFilter<"Product">
     imageUrl?: StringNullableFilter<"Product"> | string | null
     compensationMajor?: StringNullableFilter<"Product"> | string | null
     compensationMinor?: StringNullableFilter<"Product"> | string | null
@@ -23182,11 +23269,13 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     category?: SortOrder
+    subcategory?: SortOrderInput | SortOrder
     location?: SortOrder
     pricePerDay?: SortOrder
     deposit?: SortOrderInput | SortOrder
     description?: SortOrder
     features?: SortOrder
+    drawbacks?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     compensationMajor?: SortOrderInput | SortOrder
     compensationMinor?: SortOrderInput | SortOrder
@@ -23209,11 +23298,13 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Product"> | string
     name?: StringWithAggregatesFilter<"Product"> | string
     category?: StringWithAggregatesFilter<"Product"> | string
+    subcategory?: StringNullableWithAggregatesFilter<"Product"> | string | null
     location?: StringWithAggregatesFilter<"Product"> | string
     pricePerDay?: IntWithAggregatesFilter<"Product"> | number
     deposit?: IntNullableWithAggregatesFilter<"Product"> | number | null
     description?: StringWithAggregatesFilter<"Product"> | string
     features?: JsonWithAggregatesFilter<"Product">
+    drawbacks?: JsonWithAggregatesFilter<"Product">
     imageUrl?: StringNullableWithAggregatesFilter<"Product"> | string | null
     compensationMajor?: StringNullableWithAggregatesFilter<"Product"> | string | null
     compensationMinor?: StringNullableWithAggregatesFilter<"Product"> | string | null
@@ -23676,11 +23767,13 @@ export namespace Prisma {
     OR?: MentorWhereInput[]
     NOT?: MentorWhereInput | MentorWhereInput[]
     id?: StringFilter<"Mentor"> | string
+    userId?: StringNullableFilter<"Mentor"> | string | null
     name?: StringFilter<"Mentor"> | string
     handle?: StringFilter<"Mentor"> | string
     avatar?: StringFilter<"Mentor"> | string
     specialty?: StringFilter<"Mentor"> | string
     category?: StringFilter<"Mentor"> | string
+    subcategories?: JsonFilter<"Mentor">
     bio?: StringFilter<"Mentor"> | string
     tags?: JsonFilter<"Mentor">
     rating?: DecimalFilter<"Mentor"> | Decimal | DecimalJsLike | number | string
@@ -23689,16 +23782,19 @@ export namespace Prisma {
     available?: BoolFilter<"Mentor"> | boolean
     responseTime?: StringFilter<"Mentor"> | string
     createdAt?: DateTimeFilter<"Mentor"> | Date | string
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     bookings?: MentorBookingListRelationFilter
   }
 
   export type MentorOrderByWithRelationInput = {
     id?: SortOrder
+    userId?: SortOrderInput | SortOrder
     name?: SortOrder
     handle?: SortOrder
     avatar?: SortOrder
     specialty?: SortOrder
     category?: SortOrder
+    subcategories?: SortOrder
     bio?: SortOrder
     tags?: SortOrder
     rating?: SortOrder
@@ -23707,11 +23803,13 @@ export namespace Prisma {
     available?: SortOrder
     responseTime?: SortOrder
     createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
     bookings?: MentorBookingOrderByRelationAggregateInput
   }
 
   export type MentorWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    userId?: string
     handle?: string
     AND?: MentorWhereInput | MentorWhereInput[]
     OR?: MentorWhereInput[]
@@ -23720,6 +23818,7 @@ export namespace Prisma {
     avatar?: StringFilter<"Mentor"> | string
     specialty?: StringFilter<"Mentor"> | string
     category?: StringFilter<"Mentor"> | string
+    subcategories?: JsonFilter<"Mentor">
     bio?: StringFilter<"Mentor"> | string
     tags?: JsonFilter<"Mentor">
     rating?: DecimalFilter<"Mentor"> | Decimal | DecimalJsLike | number | string
@@ -23728,16 +23827,19 @@ export namespace Prisma {
     available?: BoolFilter<"Mentor"> | boolean
     responseTime?: StringFilter<"Mentor"> | string
     createdAt?: DateTimeFilter<"Mentor"> | Date | string
+    user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     bookings?: MentorBookingListRelationFilter
-  }, "id" | "handle">
+  }, "id" | "userId" | "handle">
 
   export type MentorOrderByWithAggregationInput = {
     id?: SortOrder
+    userId?: SortOrderInput | SortOrder
     name?: SortOrder
     handle?: SortOrder
     avatar?: SortOrder
     specialty?: SortOrder
     category?: SortOrder
+    subcategories?: SortOrder
     bio?: SortOrder
     tags?: SortOrder
     rating?: SortOrder
@@ -23758,11 +23860,13 @@ export namespace Prisma {
     OR?: MentorScalarWhereWithAggregatesInput[]
     NOT?: MentorScalarWhereWithAggregatesInput | MentorScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Mentor"> | string
+    userId?: StringNullableWithAggregatesFilter<"Mentor"> | string | null
     name?: StringWithAggregatesFilter<"Mentor"> | string
     handle?: StringWithAggregatesFilter<"Mentor"> | string
     avatar?: StringWithAggregatesFilter<"Mentor"> | string
     specialty?: StringWithAggregatesFilter<"Mentor"> | string
     category?: StringWithAggregatesFilter<"Mentor"> | string
+    subcategories?: JsonWithAggregatesFilter<"Mentor">
     bio?: StringWithAggregatesFilter<"Mentor"> | string
     tags?: JsonWithAggregatesFilter<"Mentor">
     rating?: DecimalWithAggregatesFilter<"Mentor"> | Decimal | DecimalJsLike | number | string
@@ -24608,6 +24712,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -24649,6 +24754,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -24690,6 +24796,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -24731,6 +24838,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -24822,11 +24930,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -24845,11 +24955,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -24868,11 +24980,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24891,11 +25005,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24914,11 +25030,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -24933,11 +25051,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -24951,11 +25071,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -25446,6 +25568,7 @@ export namespace Prisma {
     avatar: string
     specialty: string
     category: string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio: string
     tags: JsonNullValueInput | InputJsonValue
     rating?: Decimal | DecimalJsLike | number | string
@@ -25454,16 +25577,19 @@ export namespace Prisma {
     available?: boolean
     responseTime: string
     createdAt?: Date | string
+    user?: UserCreateNestedOneWithoutMentorInput
     bookings?: MentorBookingCreateNestedManyWithoutMentorInput
   }
 
   export type MentorUncheckedCreateInput = {
     id?: string
+    userId?: string | null
     name: string
     handle: string
     avatar: string
     specialty: string
     category: string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio: string
     tags: JsonNullValueInput | InputJsonValue
     rating?: Decimal | DecimalJsLike | number | string
@@ -25482,6 +25608,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     specialty?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio?: StringFieldUpdateOperationsInput | string
     tags?: JsonNullValueInput | InputJsonValue
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -25490,16 +25617,19 @@ export namespace Prisma {
     available?: BoolFieldUpdateOperationsInput | boolean
     responseTime?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutMentorNestedInput
     bookings?: MentorBookingUpdateManyWithoutMentorNestedInput
   }
 
   export type MentorUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     handle?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     specialty?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio?: StringFieldUpdateOperationsInput | string
     tags?: JsonNullValueInput | InputJsonValue
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -25513,11 +25643,13 @@ export namespace Prisma {
 
   export type MentorCreateManyInput = {
     id?: string
+    userId?: string | null
     name: string
     handle: string
     avatar: string
     specialty: string
     category: string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio: string
     tags: JsonNullValueInput | InputJsonValue
     rating?: Decimal | DecimalJsLike | number | string
@@ -25535,6 +25667,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     specialty?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio?: StringFieldUpdateOperationsInput | string
     tags?: JsonNullValueInput | InputJsonValue
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -25547,11 +25680,13 @@ export namespace Prisma {
 
   export type MentorUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     handle?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     specialty?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio?: StringFieldUpdateOperationsInput | string
     tags?: JsonNullValueInput | InputJsonValue
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -26472,6 +26607,11 @@ export namespace Prisma {
     none?: LentItemWhereInput
   }
 
+  export type MentorNullableRelationFilter = {
+    is?: MentorWhereInput | null
+    isNot?: MentorWhereInput | null
+  }
+
   export type MentorBookingListRelationFilter = {
     every?: MentorBookingWhereInput
     some?: MentorBookingWhereInput
@@ -26824,11 +26964,13 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     category?: SortOrder
+    subcategory?: SortOrder
     location?: SortOrder
     pricePerDay?: SortOrder
     deposit?: SortOrder
     description?: SortOrder
     features?: SortOrder
+    drawbacks?: SortOrder
     imageUrl?: SortOrder
     compensationMajor?: SortOrder
     compensationMinor?: SortOrder
@@ -26848,6 +26990,7 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     category?: SortOrder
+    subcategory?: SortOrder
     location?: SortOrder
     pricePerDay?: SortOrder
     deposit?: SortOrder
@@ -26866,6 +27009,7 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     category?: SortOrder
+    subcategory?: SortOrder
     location?: SortOrder
     pricePerDay?: SortOrder
     deposit?: SortOrder
@@ -27243,13 +27387,20 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
+  export type UserNullableRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
   export type MentorCountOrderByAggregateInput = {
     id?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     handle?: SortOrder
     avatar?: SortOrder
     specialty?: SortOrder
     category?: SortOrder
+    subcategories?: SortOrder
     bio?: SortOrder
     tags?: SortOrder
     rating?: SortOrder
@@ -27268,6 +27419,7 @@ export namespace Prisma {
 
   export type MentorMaxOrderByAggregateInput = {
     id?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     handle?: SortOrder
     avatar?: SortOrder
@@ -27284,6 +27436,7 @@ export namespace Prisma {
 
   export type MentorMinOrderByAggregateInput = {
     id?: SortOrder
+    userId?: SortOrder
     name?: SortOrder
     handle?: SortOrder
     avatar?: SortOrder
@@ -27640,11 +27793,6 @@ export namespace Prisma {
     isNot?: ProductWhereInput | null
   }
 
-  export type UserNullableRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
   export type ItemTrailEntryCountOrderByAggregateInput = {
     id?: SortOrder
     productId?: SortOrder
@@ -27836,6 +27984,12 @@ export namespace Prisma {
     connect?: LentItemWhereUniqueInput | LentItemWhereUniqueInput[]
   }
 
+  export type MentorCreateNestedOneWithoutUserInput = {
+    create?: XOR<MentorCreateWithoutUserInput, MentorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MentorCreateOrConnectWithoutUserInput
+    connect?: MentorWhereUniqueInput
+  }
+
   export type MentorBookingCreateNestedManyWithoutUserInput = {
     create?: XOR<MentorBookingCreateWithoutUserInput, MentorBookingUncheckedCreateWithoutUserInput> | MentorBookingCreateWithoutUserInput[] | MentorBookingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: MentorBookingCreateOrConnectWithoutUserInput | MentorBookingCreateOrConnectWithoutUserInput[]
@@ -27952,6 +28106,12 @@ export namespace Prisma {
     connectOrCreate?: LentItemCreateOrConnectWithoutLenderInput | LentItemCreateOrConnectWithoutLenderInput[]
     createMany?: LentItemCreateManyLenderInputEnvelope
     connect?: LentItemWhereUniqueInput | LentItemWhereUniqueInput[]
+  }
+
+  export type MentorUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<MentorCreateWithoutUserInput, MentorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MentorCreateOrConnectWithoutUserInput
+    connect?: MentorWhereUniqueInput
   }
 
   export type MentorBookingUncheckedCreateNestedManyWithoutUserInput = {
@@ -28133,6 +28293,16 @@ export namespace Prisma {
     update?: LentItemUpdateWithWhereUniqueWithoutLenderInput | LentItemUpdateWithWhereUniqueWithoutLenderInput[]
     updateMany?: LentItemUpdateManyWithWhereWithoutLenderInput | LentItemUpdateManyWithWhereWithoutLenderInput[]
     deleteMany?: LentItemScalarWhereInput | LentItemScalarWhereInput[]
+  }
+
+  export type MentorUpdateOneWithoutUserNestedInput = {
+    create?: XOR<MentorCreateWithoutUserInput, MentorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MentorCreateOrConnectWithoutUserInput
+    upsert?: MentorUpsertWithoutUserInput
+    disconnect?: MentorWhereInput | boolean
+    delete?: MentorWhereInput | boolean
+    connect?: MentorWhereUniqueInput
+    update?: XOR<XOR<MentorUpdateToOneWithWhereWithoutUserInput, MentorUpdateWithoutUserInput>, MentorUncheckedUpdateWithoutUserInput>
   }
 
   export type MentorBookingUpdateManyWithoutUserNestedInput = {
@@ -28367,6 +28537,16 @@ export namespace Prisma {
     update?: LentItemUpdateWithWhereUniqueWithoutLenderInput | LentItemUpdateWithWhereUniqueWithoutLenderInput[]
     updateMany?: LentItemUpdateManyWithWhereWithoutLenderInput | LentItemUpdateManyWithWhereWithoutLenderInput[]
     deleteMany?: LentItemScalarWhereInput | LentItemScalarWhereInput[]
+  }
+
+  export type MentorUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<MentorCreateWithoutUserInput, MentorUncheckedCreateWithoutUserInput>
+    connectOrCreate?: MentorCreateOrConnectWithoutUserInput
+    upsert?: MentorUpsertWithoutUserInput
+    disconnect?: MentorWhereInput | boolean
+    delete?: MentorWhereInput | boolean
+    connect?: MentorWhereUniqueInput
+    update?: XOR<XOR<MentorUpdateToOneWithWhereWithoutUserInput, MentorUpdateWithoutUserInput>, MentorUncheckedUpdateWithoutUserInput>
   }
 
   export type MentorBookingUncheckedUpdateManyWithoutUserNestedInput = {
@@ -29135,6 +29315,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationsInput, UserUpdateWithoutNotificationsInput>, UserUncheckedUpdateWithoutNotificationsInput>
   }
 
+  export type UserCreateNestedOneWithoutMentorInput = {
+    create?: XOR<UserCreateWithoutMentorInput, UserUncheckedCreateWithoutMentorInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMentorInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type MentorBookingCreateNestedManyWithoutMentorInput = {
     create?: XOR<MentorBookingCreateWithoutMentorInput, MentorBookingUncheckedCreateWithoutMentorInput> | MentorBookingCreateWithoutMentorInput[] | MentorBookingUncheckedCreateWithoutMentorInput[]
     connectOrCreate?: MentorBookingCreateOrConnectWithoutMentorInput | MentorBookingCreateOrConnectWithoutMentorInput[]
@@ -29155,6 +29341,16 @@ export namespace Prisma {
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type UserUpdateOneWithoutMentorNestedInput = {
+    create?: XOR<UserCreateWithoutMentorInput, UserUncheckedCreateWithoutMentorInput>
+    connectOrCreate?: UserCreateOrConnectWithoutMentorInput
+    upsert?: UserUpsertWithoutMentorInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutMentorInput, UserUpdateWithoutMentorInput>, UserUncheckedUpdateWithoutMentorInput>
   }
 
   export type MentorBookingUpdateManyWithoutMentorNestedInput = {
@@ -29996,11 +30192,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -30018,11 +30216,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -30075,6 +30275,49 @@ export namespace Prisma {
   export type LentItemCreateManyLenderInputEnvelope = {
     data: LentItemCreateManyLenderInput | LentItemCreateManyLenderInput[]
     skipDuplicates?: boolean
+  }
+
+  export type MentorCreateWithoutUserInput = {
+    id?: string
+    name: string
+    handle: string
+    avatar: string
+    specialty: string
+    category: string
+    subcategories?: JsonNullValueInput | InputJsonValue
+    bio: string
+    tags: JsonNullValueInput | InputJsonValue
+    rating?: Decimal | DecimalJsLike | number | string
+    sessions?: number
+    pricePerSession: number
+    available?: boolean
+    responseTime: string
+    createdAt?: Date | string
+    bookings?: MentorBookingCreateNestedManyWithoutMentorInput
+  }
+
+  export type MentorUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    handle: string
+    avatar: string
+    specialty: string
+    category: string
+    subcategories?: JsonNullValueInput | InputJsonValue
+    bio: string
+    tags: JsonNullValueInput | InputJsonValue
+    rating?: Decimal | DecimalJsLike | number | string
+    sessions?: number
+    pricePerSession: number
+    available?: boolean
+    responseTime: string
+    createdAt?: Date | string
+    bookings?: MentorBookingUncheckedCreateNestedManyWithoutMentorInput
+  }
+
+  export type MentorCreateOrConnectWithoutUserInput = {
+    where: MentorWhereUniqueInput
+    create: XOR<MentorCreateWithoutUserInput, MentorUncheckedCreateWithoutUserInput>
   }
 
   export type MentorBookingCreateWithoutUserInput = {
@@ -30592,11 +30835,13 @@ export namespace Prisma {
     slug?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     category?: StringFilter<"Product"> | string
+    subcategory?: StringNullableFilter<"Product"> | string | null
     location?: StringFilter<"Product"> | string
     pricePerDay?: IntFilter<"Product"> | number
     deposit?: IntNullableFilter<"Product"> | number | null
     description?: StringFilter<"Product"> | string
     features?: JsonFilter<"Product">
+    drawbacks?: JsonFilter<"Product">
     imageUrl?: StringNullableFilter<"Product"> | string | null
     compensationMajor?: StringNullableFilter<"Product"> | string | null
     compensationMinor?: StringNullableFilter<"Product"> | string | null
@@ -30632,6 +30877,55 @@ export namespace Prisma {
     status?: StringFilter<"LentItem"> | string
     createdAt?: DateTimeFilter<"LentItem"> | Date | string
     updatedAt?: DateTimeFilter<"LentItem"> | Date | string
+  }
+
+  export type MentorUpsertWithoutUserInput = {
+    update: XOR<MentorUpdateWithoutUserInput, MentorUncheckedUpdateWithoutUserInput>
+    create: XOR<MentorCreateWithoutUserInput, MentorUncheckedCreateWithoutUserInput>
+    where?: MentorWhereInput
+  }
+
+  export type MentorUpdateToOneWithWhereWithoutUserInput = {
+    where?: MentorWhereInput
+    data: XOR<MentorUpdateWithoutUserInput, MentorUncheckedUpdateWithoutUserInput>
+  }
+
+  export type MentorUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    handle?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    specialty?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategories?: JsonNullValueInput | InputJsonValue
+    bio?: StringFieldUpdateOperationsInput | string
+    tags?: JsonNullValueInput | InputJsonValue
+    rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sessions?: IntFieldUpdateOperationsInput | number
+    pricePerSession?: IntFieldUpdateOperationsInput | number
+    available?: BoolFieldUpdateOperationsInput | boolean
+    responseTime?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: MentorBookingUpdateManyWithoutMentorNestedInput
+  }
+
+  export type MentorUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    handle?: StringFieldUpdateOperationsInput | string
+    avatar?: StringFieldUpdateOperationsInput | string
+    specialty?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategories?: JsonNullValueInput | InputJsonValue
+    bio?: StringFieldUpdateOperationsInput | string
+    tags?: JsonNullValueInput | InputJsonValue
+    rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    sessions?: IntFieldUpdateOperationsInput | number
+    pricePerSession?: IntFieldUpdateOperationsInput | number
+    available?: BoolFieldUpdateOperationsInput | boolean
+    responseTime?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bookings?: MentorBookingUncheckedUpdateManyWithoutMentorNestedInput
   }
 
   export type MentorBookingUpsertWithWhereUniqueWithoutUserInput = {
@@ -31019,6 +31313,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -31059,6 +31354,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -31271,6 +31567,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -31311,6 +31608,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -31394,11 +31692,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -31416,11 +31716,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -31464,6 +31766,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -31504,6 +31807,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -31657,11 +31961,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31679,11 +31985,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -31733,6 +32041,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -31773,6 +32082,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -31862,6 +32172,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -31902,6 +32213,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -31988,6 +32300,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -32028,6 +32341,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -32097,11 +32411,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -32119,11 +32435,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -32168,6 +32486,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -32208,6 +32527,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -32330,11 +32650,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32352,11 +32674,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32407,6 +32731,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -32447,6 +32772,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -32540,6 +32866,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
     borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
@@ -32580,6 +32907,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
     borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
@@ -32625,6 +32953,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
@@ -32665,6 +32994,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
@@ -32688,11 +33018,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -32710,11 +33042,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -32859,6 +33193,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
     borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
@@ -32899,6 +33234,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
     borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
@@ -32950,6 +33286,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
@@ -32990,6 +33327,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
@@ -33019,11 +33357,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33041,11 +33381,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -33192,6 +33534,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -33232,6 +33575,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -33288,6 +33632,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -33328,6 +33673,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -33339,6 +33685,93 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutMentorInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    nidVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    createdAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
+    products?: ProductCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    nidVerification?: NidVerificationCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutMentorInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    nidVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    createdAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    nidVerification?: NidVerificationUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutMentorInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutMentorInput, UserUncheckedCreateWithoutMentorInput>
   }
 
   export type MentorBookingCreateWithoutMentorInput = {
@@ -33371,6 +33804,99 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserUpsertWithoutMentorInput = {
+    update: XOR<UserUpdateWithoutMentorInput, UserUncheckedUpdateWithoutMentorInput>
+    create: XOR<UserCreateWithoutMentorInput, UserUncheckedCreateWithoutMentorInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutMentorInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutMentorInput, UserUncheckedUpdateWithoutMentorInput>
+  }
+
+  export type UserUpdateWithoutMentorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
+    products?: ProductUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    nidVerification?: NidVerificationUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutMentorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    nidVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    nidVerification?: NidVerificationUncheckedUpdateOneWithoutUserNestedInput
+  }
+
   export type MentorBookingUpsertWithWhereUniqueWithoutMentorInput = {
     where: MentorBookingWhereUniqueInput
     update: XOR<MentorBookingUpdateWithoutMentorInput, MentorBookingUncheckedUpdateWithoutMentorInput>
@@ -33394,6 +33920,7 @@ export namespace Prisma {
     avatar: string
     specialty: string
     category: string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio: string
     tags: JsonNullValueInput | InputJsonValue
     rating?: Decimal | DecimalJsLike | number | string
@@ -33402,15 +33929,18 @@ export namespace Prisma {
     available?: boolean
     responseTime: string
     createdAt?: Date | string
+    user?: UserCreateNestedOneWithoutMentorInput
   }
 
   export type MentorUncheckedCreateWithoutBookingsInput = {
     id?: string
+    userId?: string | null
     name: string
     handle: string
     avatar: string
     specialty: string
     category: string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio: string
     tags: JsonNullValueInput | InputJsonValue
     rating?: Decimal | DecimalJsLike | number | string
@@ -33453,6 +33983,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
     borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
@@ -33493,6 +34024,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
     borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
@@ -33529,6 +34061,7 @@ export namespace Prisma {
     avatar?: StringFieldUpdateOperationsInput | string
     specialty?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio?: StringFieldUpdateOperationsInput | string
     tags?: JsonNullValueInput | InputJsonValue
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -33537,15 +34070,18 @@ export namespace Prisma {
     available?: BoolFieldUpdateOperationsInput | boolean
     responseTime?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutMentorNestedInput
   }
 
   export type MentorUncheckedUpdateWithoutBookingsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     handle?: StringFieldUpdateOperationsInput | string
     avatar?: StringFieldUpdateOperationsInput | string
     specialty?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategories?: JsonNullValueInput | InputJsonValue
     bio?: StringFieldUpdateOperationsInput | string
     tags?: JsonNullValueInput | InputJsonValue
     rating?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -33594,6 +34130,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
     borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
@@ -33634,6 +34171,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
     borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
@@ -33769,6 +34307,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -33809,6 +34348,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -33890,6 +34430,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -33930,6 +34471,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -33989,6 +34531,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -34029,6 +34572,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -34110,6 +34654,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -34150,6 +34695,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -34190,6 +34736,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -34230,6 +34777,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -34313,6 +34861,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -34353,6 +34902,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -34425,6 +34975,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -34465,6 +35016,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -34521,6 +35073,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -34561,6 +35114,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -34601,6 +35155,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -34641,6 +35196,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -34697,6 +35253,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -34737,6 +35294,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -34777,6 +35335,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -34817,6 +35376,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -34873,6 +35433,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -34913,6 +35474,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -34932,11 +35494,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -34954,11 +35518,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -35077,6 +35643,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -35117,6 +35684,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -35175,11 +35743,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -35197,11 +35767,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -35338,6 +35910,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -35378,6 +35951,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -35471,6 +36045,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -35511,6 +36086,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -35610,6 +36186,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -35650,6 +36227,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -35690,6 +36268,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
     products?: ProductCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
@@ -35730,6 +36309,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
     products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
     mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
     checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
@@ -35786,6 +36366,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
     products?: ProductUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
@@ -35826,6 +36407,7 @@ export namespace Prisma {
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
     products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
     mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
     checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
     checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
@@ -35874,11 +36456,13 @@ export namespace Prisma {
     slug: string
     name: string
     category: string
+    subcategory?: string | null
     location: string
     pricePerDay: number
     deposit?: number | null
     description: string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: string | null
     compensationMajor?: string | null
     compensationMinor?: string | null
@@ -36114,11 +36698,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36136,11 +36722,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
@@ -36158,11 +36746,13 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
     location?: StringFieldUpdateOperationsInput | string
     pricePerDay?: IntFieldUpdateOperationsInput | number
     deposit?: NullableIntFieldUpdateOperationsInput | number | null
     description?: StringFieldUpdateOperationsInput | string
     features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
     compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null

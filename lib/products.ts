@@ -18,6 +18,7 @@ export interface LenderPublicInfo {
 export type ProductWithFeatureList = Omit<Product, "deposit"> & {
   lenderRating: number;
   featureList: string[];
+  drawbackList: string[];
   deposit: number | null;
   lenderName: string;
   lender: LenderPublicInfo;
@@ -56,10 +57,13 @@ function withFeatureList(
       ? `${product.createdBy.firstName} ${product.createdBy.lastName}`
       : (product.createdBy.name ?? product.createdBy.userName ?? "Unknown");
 
+  const raw = product as unknown as Record<string, unknown>;
+
   return {
     ...product,
     lenderRating: 0,
     featureList: readFeatures(product.features),
+    drawbackList: readFeatures(raw.drawbacks),
     lenderName,
     lender: {
       id: product.createdBy.id,

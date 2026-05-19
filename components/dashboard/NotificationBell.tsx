@@ -48,12 +48,12 @@ function typeIcon(type: string) {
 
 function typeColor(type: string): string {
   switch (type) {
-    case "return_reminder":   return "text-amber-400";
-    case "new_message":       return "text-blue-400";
-    case "mentor_confirmed":  return "text-purple-400";
+    case "return_reminder":   return "text-amber-600";
+    case "new_message":       return "text-blue-600";
+    case "mentor_confirmed":  return "text-purple-600";
     case "new_borrow_request":
-    case "borrow_accepted":   return "text-emerald-400";
-    default:                  return "text-violet-400";
+    case "borrow_accepted":   return "text-emerald-600";
+    default:                  return "text-violet-600";
   }
 }
 
@@ -139,30 +139,30 @@ export default function NotificationBell() {
       {open && (
         <div
           ref={panelRef}
-          className="absolute right-0 top-11 z-50 w-[360px] overflow-hidden rounded-2xl border border-white/[0.08] bg-[linear-gradient(160deg,#1a0d42_0%,#130930_100%)] shadow-2xl"
+          className="absolute right-0 top-11 z-50 w-[360px] overflow-hidden rounded-2xl border border-(--border) bg-white shadow-2xl"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/[0.07] px-4 py-3">
+          <div className="flex items-center justify-between border-b border-(--border) px-4 py-3">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-black text-white">Notifications</span>
+              <span className="text-sm font-black text-(--foreground)">Notifications</span>
               {unreadCount > 0 && (
-                <span className="rounded-full bg-[#3b2a80] px-2 py-0.5 text-[0.65rem] font-black text-white">
+                <span className="rounded-full bg-(--primary) px-2 py-0.5 text-[0.65rem] font-black text-white">
                   {unreadCount} new
                 </span>
               )}
             </div>
             <button
               onClick={() => setOpen(false)}
-              className="flex h-6 w-6 items-center justify-center rounded-lg text-white/40 transition-colors hover:text-white/80"
+              className="flex h-6 w-6 items-center justify-center rounded-lg text-(--text-muted) transition-colors hover:text-(--foreground)"
             >
               <X className="h-3.5 w-3.5" />
             </button>
           </div>
 
           {/* List */}
-          <div className="max-h-[380px] overflow-y-auto">
+          <div className="max-h-[380px] overflow-y-auto scrollbar-dark">
             {notifications.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-10 text-white/30">
+              <div className="flex flex-col items-center justify-center py-10 text-(--text-muted)">
                 <Bell className="mb-2 h-8 w-8" />
                 <p className="text-xs font-semibold">No notifications yet</p>
               </div>
@@ -171,29 +171,29 @@ export default function NotificationBell() {
                 <button
                   key={n.id}
                   onClick={() => handleClick(n)}
-                  className="group relative flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-white/5"
+                  className="group relative flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-(--surface-soft)"
                 >
                   {/* Unread indicator */}
                   {!n.read && (
-                    <span className="absolute left-0 top-0 h-full w-[3px] rounded-r-full bg-[#6d5bba]" />
+                    <span className="absolute left-0 top-0 h-full w-[3px] rounded-r-full bg-(--primary)" />
                   )}
                   {/* Icon */}
                   <div
-                    className={`mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-white/[0.06] ${typeColor(n.type)}`}
+                    className={`mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-(--primary-soft) ${typeColor(n.type)}`}
                   >
                     {typeIcon(n.type)}
                   </div>
                   {/* Content */}
                   <div className="min-w-0 flex-1">
-                    <p className={`text-[0.8rem] font-bold leading-snug ${n.read ? "text-white/60" : "text-white"}`}>
+                    <p className={`text-[0.8rem] font-bold leading-snug ${n.read ? "text-(--text-muted)" : "text-(--foreground)"}`}>
                       {n.title}
                     </p>
-                    <p className="mt-0.5 truncate text-[0.72rem] text-white/45 leading-snug">
+                    <p className="mt-0.5 truncate text-[0.72rem] text-(--text-muted) leading-snug">
                       {n.body}
                     </p>
                   </div>
                   {/* Time */}
-                  <span className="mt-0.5 flex-shrink-0 text-[0.65rem] text-white/30">
+                  <span className="mt-0.5 flex-shrink-0 text-[0.65rem] text-(--text-muted)">
                     {relativeTime(n.createdAt)}
                   </span>
                 </button>
@@ -203,10 +203,10 @@ export default function NotificationBell() {
 
           {/* Footer */}
           {notifications.length > 0 && (
-            <div className="border-t border-white/[0.07] px-4 py-2.5">
+            <div className="border-t border-(--border) px-4 py-2.5">
               <button
                 onClick={markAllRead}
-                className="w-full text-center text-[0.72rem] font-semibold text-white/40 transition-colors hover:text-white/70"
+                className="w-full text-center text-[0.72rem] font-semibold text-(--text-muted) transition-colors hover:text-(--text-secondary)"
               >
                 Mark all as read
               </button>

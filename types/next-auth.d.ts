@@ -9,6 +9,7 @@ declare module "next-auth" {
     user: DefaultSession["user"] & {
       id: string;
       location?: string | null;
+      isMentor: boolean;
     };
   }
 }
@@ -19,5 +20,6 @@ declare module "next-auth/jwt" {
     userEmail?: string | null;
     userName?: string | null;
     userLocation?: string | null;
+    isMentor?: boolean;
   }
 }

@@ -85,13 +85,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       return true;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       if (user) {
         token.userId = user.id;
         token.userEmail = user.email;
         token.userName = user.name;
         token.userLocation =
           typeof user.location === "string" ? user.location : null;
+      }
+
+      if (user || trigger === "update" || !("isMentor" in token)) {
+        const userId = user?.id ?? (typeof token.userId === "string" ? token.userId : null);
+        if (userId) {
+          const mentor = await prisma.mentor.findUnique({ where: { userId } });
+          token.isMentor = Boolean(mentor);
+        }
       }
 
       return token;
@@ -103,6 +111,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.name = typeof token.userName === "string" ? token.userName : session.user.name;
         session.user.location =
           typeof token.userLocation === "string" ? token.userLocation : null;
+        session.user.isMentor = Boolean(token.isMentor);
       }
 
       return session;

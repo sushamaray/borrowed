@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Home, Package, Clock, MessageCircle, ShoppingCart,
-  User, Settings, Search, GraduationCap,
+  User, Settings, Search, GraduationCap, Star, Inbox, ClipboardList,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
 
@@ -102,6 +102,9 @@ const iconMap: Record<string, React.ReactNode> = {
   "shopping-cart": <ShoppingCart className="h-[18px] w-[18px]" />,
   user: <User className="h-[18px] w-[18px]" />,
   settings: <Settings className="h-[18px] w-[18px]" />,
+  star: <Star className="h-4.5 w-4.5" />,
+  inbox: <Inbox className="h-4.5 w-4.5" />,
+  "clipboard-list": <ClipboardList className="h-4.5 w-4.5" />,
 };
 
 export default function Sidebar({ onNavigate, isCollapsed = false }: SidebarProps) {
@@ -178,6 +181,27 @@ export default function Sidebar({ onNavigate, isCollapsed = false }: SidebarProp
             </div>
           </div>
         ))}
+
+        {session?.user?.isMentor && (
+          <div className="mt-5">
+            {!isCollapsed && (
+              <h3 className="px-3 pb-1.5 text-[0.6rem] font-black uppercase tracking-[0.16em] text-white/25">
+                Mentor
+              </h3>
+            )}
+            {isCollapsed && <div className="h-1" />}
+            <div className="relative space-y-0.5 px-1">
+              <NavItem
+                href="/dashboard/mentor"
+                label="Mentor Dashboard"
+                active={isActiveDashboardPath(pathname, "/dashboard/mentor")}
+                onNavigate={onNavigate}
+                icon={iconMap["star"]}
+                isCollapsed={isCollapsed}
+              />
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Bottom user card */}
