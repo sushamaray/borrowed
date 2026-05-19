@@ -8,7 +8,10 @@
       "Bash(npx tsc *)",
       "Bash(npx nodemon *)",
       "Bash(npm run *)",
-      "Bash(powershell -Command \"\\(Get-Content prisma/seed.ts\\) -replace 'https://images\\\\.unsplash\\\\.com/photo-[^\\\\\"]+', '/placeholder.png' | Set-Content prisma/seed.ts -Encoding utf8\")"
+      "Bash(powershell -Command \"\\(Get-Content prisma/seed.ts\\) -replace 'https://images\\\\.unsplash\\\\.com/photo-[^\\\\\"]+', '/placeholder.png' | Set-Content prisma/seed.ts -Encoding utf8\")",
+      "Bash(Get-ChildItem -Path \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\" -Force)",
+      "Bash(Select-Object -Property Name, Mode)",
+      "Bash(grep -E '\\\\.sql$|\\\\.toml$')"
     ]
   }
 }
