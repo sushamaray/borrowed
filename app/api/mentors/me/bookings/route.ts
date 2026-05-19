@@ -18,7 +18,13 @@ export async function GET() {
       where: { mentorId: mentor.id },
       include: {
         user: {
-          select: { id: true, name: true, firstName: true, lastName: true, email: true, profilePicture: true, image: true },
+          select: {
+            id: true, name: true, firstName: true, lastName: true,
+            userName: true, email: true, profilePicture: true, image: true,
+            location: true, createdAt: true,
+            identityVerified: true, contactVerified: true,
+            nidVerified: true, addressVerified: true, meetupVerified: true,
+          },
         },
       },
       orderBy: { createdAt: "desc" },

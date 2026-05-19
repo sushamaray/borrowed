@@ -227,7 +227,7 @@ function MentorCard({ mentor, onBook }: { mentor: Mentor; onBook: (m: Mentor) =>
       <p className="text-[0.78rem] leading-relaxed text-[var(--text-muted)]">{mentor.bio}</p>
 
       <div className="flex flex-wrap gap-1.5">
-        {mentor.tags.map((t) => (
+        {[...new Set(mentor.tags)].map((t) => (
           <span key={t} className="rounded-full bg-[var(--surface-soft)] px-2 py-[2px] text-[0.68rem] font-bold text-[var(--purple-500)]">
             {t}
           </span>
