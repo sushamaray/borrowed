@@ -355,34 +355,38 @@ async function main() {
     console.log(`  ✓ ${mentor.name}`);
   }
 
-  console.log("Seeding trail entries…");
+  const productCount = await prisma.product.count();
+  if (productCount === 0) {
+    console.log("Skipping trail entries — no products in DB yet.");
+  } else {
+    console.log("Seeding trail entries…");
 
-  for (const entry of trailEntries) {
-    const createdAt = new Date(Date.now() - entry.createdDaysAgo * 86400000);
+    for (const entry of trailEntries) {
+      const createdAt = new Date(Date.now() - entry.createdDaysAgo * 86400000);
 
-    // Check if an identical entry already exists (idempotent by productId + useFor)
-    const existing = await prisma.itemTrailEntry.findFirst({
-      where: { productId: entry.productId, useFor: entry.useFor },
-      select: { id: true },
-    });
-    if (existing) {
-      console.log(`  ↩ skip existing: ${entry.useFor.slice(0, 50)}`);
-      continue;
+      const existing = await prisma.itemTrailEntry.findFirst({
+        where: { productId: entry.productId, useFor: entry.useFor },
+        select: { id: true },
+      });
+      if (existing) {
+        console.log(`  ↩ skip existing: ${entry.useFor.slice(0, 50)}`);
+        continue;
+      }
+
+      await prisma.itemTrailEntry.create({
+        data: {
+          productId: entry.productId,
+          useFor: entry.useFor,
+          location: entry.location,
+          tags: entry.tags,
+          itemRating: entry.itemRating,
+          anonymous: entry.anonymous,
+          isPublic: true,
+          createdAt,
+        },
+      });
+      console.log(`  ✓ ${entry.productId}: ${entry.useFor.slice(0, 50)}…`);
     }
-
-    await prisma.itemTrailEntry.create({
-      data: {
-        productId: entry.productId,
-        useFor: entry.useFor,
-        location: entry.location,
-        tags: entry.tags,
-        itemRating: entry.itemRating,
-        anonymous: entry.anonymous,
-        isPublic: true,
-        createdAt,
-      },
-    });
-    console.log(`  ✓ ${entry.productId}: ${entry.useFor.slice(0, 50)}…`);
   }
 
   console.log("Seed complete.");
