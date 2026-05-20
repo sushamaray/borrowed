@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Camera, Check, Clock, Lightbulb, Loader, MapPin, Pencil, Search, ShieldCheck, Star, User, X } from "lucide-react";
 import { LocationPickerModal } from "@/components/LocationPickerModal";
@@ -57,6 +58,7 @@ type MentorData = {
 };
 
 export default function ProfilePage() {
+  const router = useRouter();
   const { data: session, status, update } = useSession();
   // 0=idle, 1=intro, 2=phone, 3=id-upload, 4=face-scan, 5=matching, 6=done
   const [idStep, setIdStep] = useState(0);
@@ -499,8 +501,8 @@ export default function ProfilePage() {
       }
       // Trigger the JWT callback with trigger="update" so it re-queries
       // isMentor from the DB and writes it into the token before navigating.
-      await update();
-      window.location.href = "/dashboard/mentor";
+      await update({});
+      router.push("/dashboard/mentor");
     } catch {
       setMentorError("Something went wrong. Please try again.");
     } finally {

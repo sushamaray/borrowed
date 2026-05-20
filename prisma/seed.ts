@@ -1092,6 +1092,544 @@ const trailEntries = [
     anonymous: false,
     createdDaysAgo: 55,
   },
+
+  // Softbox Lighting Kit (test_prod_alice_4)
+  {
+    productId: "test_prod_alice_4",
+    useFor: "a portrait session for a model's portfolio in Dhanmondi",
+    location: "Dhanmondi, Dhaka",
+    tags: ["portrait", "creative", "work"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 7,
+  },
+  {
+    productId: "test_prod_alice_4",
+    useFor: "product photography for an e-commerce clothing brand",
+    location: "Gulshan, Dhaka",
+    tags: ["work", "creative", "art"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 32,
+  },
+  {
+    productId: "test_prod_alice_4",
+    useFor: "filming a YouTube cooking tutorial at home",
+    location: "Uttara, Dhaka",
+    tags: ["creative", "film"],
+    itemRating: 4,
+    anonymous: true,
+    createdDaysAgo: 60,
+  },
+
+  // Casio Keyboard (test_prod_alice_5)
+  {
+    productId: "test_prod_alice_5",
+    useFor: "performing at a friend's birthday party in Banani",
+    location: "Banani, Dhaka",
+    tags: ["event", "music"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 5,
+  },
+  {
+    productId: "test_prod_alice_5",
+    useFor: "practising for a school talent show for two weeks",
+    location: "Mirpur, Dhaka",
+    tags: ["music", "creative"],
+    itemRating: 4,
+    anonymous: false,
+    createdDaysAgo: 48,
+  },
+
+  // BenQ Projector (test_prod_alice_6)
+  {
+    productId: "test_prod_alice_6",
+    useFor: "an outdoor movie night at a rooftop in Mohammadpur",
+    location: "Mohammadpur, Dhaka",
+    tags: ["event", "fun"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 11,
+  },
+  {
+    productId: "test_prod_alice_6",
+    useFor: "a corporate quarterly presentation at a rented conference hall",
+    location: "Motijheel, Dhaka",
+    tags: ["work", "event"],
+    itemRating: 4,
+    anonymous: false,
+    createdDaysAgo: 38,
+  },
+
+  // 2-Person Kayak (test_prod_alice_7)
+  {
+    productId: "test_prod_alice_7",
+    useFor: "kayaking through the canals of Barisal with a friend",
+    location: "Barisal",
+    tags: ["adventure", "outdoor", "travel"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 14,
+  },
+  {
+    productId: "test_prod_alice_7",
+    useFor: "a sunrise paddling trip on Hatirjheel lake",
+    location: "Hatirjheel, Dhaka",
+    tags: ["outdoor", "fitness", "adventure"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 42,
+  },
+
+  // Yamaha Guitar (test_prod_bob_1)
+  {
+    productId: "test_prod_bob_1",
+    useFor: "serenading at a friend's engagement ceremony in Uttara",
+    location: "Uttara, Dhaka",
+    tags: ["event", "music", "creative"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 3,
+  },
+  {
+    productId: "test_prod_bob_1",
+    useFor: "learning chords for a month while saving up to buy my own",
+    location: "Dhanmondi, Dhaka",
+    tags: ["music"],
+    itemRating: 4,
+    anonymous: false,
+    createdDaysAgo: 70,
+  },
+  {
+    productId: "test_prod_bob_1",
+    useFor: "busking at a community art fair in Shilpakala Academy",
+    location: "Segunbagicha, Dhaka",
+    tags: ["music", "event", "art"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 95,
+  },
+
+  // Sony Headphones (test_prod_bob_2)
+  {
+    productId: "test_prod_bob_2",
+    useFor: "a week-long work-from-home setup during a noisy renovation next door",
+    location: "Banani, Dhaka",
+    tags: ["work"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 10,
+  },
+  {
+    productId: "test_prod_bob_2",
+    useFor: "a long-haul flight to Dubai and back — absolute lifesaver",
+    location: "Hazrat Shahjalal Airport, Dhaka",
+    tags: ["travel"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 55,
+  },
+
+  // PlayStation 5 (test_prod_bob_3)
+  {
+    productId: "test_prod_bob_3",
+    useFor: "hosting a FIFA tournament with university friends over Eid break",
+    location: "Dhanmondi, Dhaka",
+    tags: ["fun", "event"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 16,
+  },
+  {
+    productId: "test_prod_bob_3",
+    useFor: "trying out Hogwarts Legacy for a week before deciding to buy",
+    location: "Gulshan, Dhaka",
+    tags: ["fun"],
+    itemRating: 4,
+    anonymous: true,
+    createdDaysAgo: 44,
+  },
+
+  // MacBook Pro (test_prod_bob_4)
+  {
+    productId: "test_prod_bob_4",
+    useFor: "editing a short film for a university project — Final Cut Pro runs flawlessly",
+    location: "Dhaka University",
+    tags: ["work", "creative", "film"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 8,
+  },
+  {
+    productId: "test_prod_bob_4",
+    useFor: "freelance logo design work for two weeks while my PC was being repaired",
+    location: "Mirpur, Dhaka",
+    tags: ["work", "creative"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 52,
+  },
+
+  // Meta Quest 3 (test_prod_bob_5)
+  {
+    productId: "test_prod_bob_5",
+    useFor: "trying VR gaming for the first time with my flatmates — we were hooked",
+    location: "Bashundhara, Dhaka",
+    tags: ["fun", "adventure"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 20,
+  },
+  {
+    productId: "test_prod_bob_5",
+    useFor: "a virtual architecture walkthrough presentation for a client",
+    location: "Tejgaon, Dhaka",
+    tags: ["work", "creative"],
+    itemRating: 4,
+    anonymous: false,
+    createdDaysAgo: 65,
+  },
+
+  // JBL PA Speaker (test_prod_bob_6)
+  {
+    productId: "test_prod_bob_6",
+    useFor: "sound system for a rooftop Eid party with 60+ guests",
+    location: "Banani, Dhaka",
+    tags: ["event", "music", "fun"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 2,
+  },
+  {
+    productId: "test_prod_bob_6",
+    useFor: "live acoustic set at a charity fundraiser in Dhanmondi",
+    location: "Dhanmondi, Dhaka",
+    tags: ["music", "event", "creative"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 35,
+  },
+
+  // Anker Nebula Projector (test_prod_bob_7)
+  {
+    productId: "test_prod_bob_7",
+    useFor: "backyard movie screening with family on Eid night",
+    location: "Uttara, Dhaka",
+    tags: ["fun", "event"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 18,
+  },
+  {
+    productId: "test_prod_bob_7",
+    useFor: "a portable presentation setup for a trade fair booth",
+    location: "ICCB, Dhaka",
+    tags: ["work", "event"],
+    itemRating: 4,
+    anonymous: false,
+    createdDaysAgo: 50,
+  },
+
+  // Rode Wireless Mic (test_prod_bob_8)
+  {
+    productId: "test_prod_bob_8",
+    useFor: "recording vox pops and interviews for a documentary on Dhaka traffic",
+    location: "Farmgate, Dhaka",
+    tags: ["film", "work", "creative"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 13,
+  },
+  {
+    productId: "test_prod_bob_8",
+    useFor: "live streaming a startup pitch event for an online audience",
+    location: "Shyamoli, Dhaka",
+    tags: ["work", "event"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 40,
+  },
+
+  // Bosch Drill (test_prod_carol_1)
+  {
+    productId: "test_prod_carol_1",
+    useFor: "assembling flat-pack furniture for a new apartment in Bashundhara",
+    location: "Bashundhara, Dhaka",
+    tags: ["work"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 6,
+  },
+  {
+    productId: "test_prod_carol_1",
+    useFor: "installing shelves and curtain rods across the whole flat in a single afternoon",
+    location: "Mohammadpur, Dhaka",
+    tags: ["work"],
+    itemRating: 5,
+    anonymous: true,
+    createdDaysAgo: 29,
+  },
+
+  // KitchenAid Stand Mixer (test_prod_carol_3)
+  {
+    productId: "test_prod_carol_3",
+    useFor: "baking custom cakes for a small home bakery pop-up during Eid",
+    location: "Gulshan, Dhaka",
+    tags: ["fun", "creative", "event"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 4,
+  },
+  {
+    productId: "test_prod_carol_3",
+    useFor: "making fresh pasta for a dinner party of 12 guests",
+    location: "Baridhara, Dhaka",
+    tags: ["fun", "event"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 26,
+  },
+
+  // De'Longhi Espresso Machine (test_prod_carol_4)
+  {
+    productId: "test_prod_carol_4",
+    useFor: "hosting a coffee tasting morning for a group of colleagues at home",
+    location: "Gulshan, Dhaka",
+    tags: ["fun", "event"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 9,
+  },
+  {
+    productId: "test_prod_carol_4",
+    useFor: "two weeks of serious espresso pulls while reviewing beans for a food blog",
+    location: "Dhanmondi, Dhaka",
+    tags: ["work", "creative"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 47,
+  },
+
+  // Makita Circular Saw (test_prod_carol_5)
+  {
+    productId: "test_prod_carol_5",
+    useFor: "cutting custom timber shelves for a DIY bookcase project",
+    location: "Mirpur, Dhaka",
+    tags: ["work", "creative"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 17,
+  },
+  {
+    productId: "test_prod_carol_5",
+    useFor: "renovating a wooden deck at a rented farmhouse in Gazipur",
+    location: "Gazipur",
+    tags: ["work", "outdoor"],
+    itemRating: 4,
+    anonymous: true,
+    createdDaysAgo: 58,
+  },
+
+  // Ring Light Kit (test_prod_carol_6)
+  {
+    productId: "test_prod_carol_6",
+    useFor: "recording beauty and skincare tutorials for Instagram Reels",
+    location: "Dhanmondi, Dhaka",
+    tags: ["creative", "work", "art"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 5,
+  },
+  {
+    productId: "test_prod_carol_6",
+    useFor: "a professional headshot session for a client's LinkedIn profile",
+    location: "Banani, Dhaka",
+    tags: ["work", "portrait"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 33,
+  },
+
+  // Epson Laser Projector (test_prod_carol_7)
+  {
+    productId: "test_prod_carol_7",
+    useFor: "a two-day corporate training workshop at a hired event space",
+    location: "Pan Pacific Sonargaon, Dhaka",
+    tags: ["work", "event"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 22,
+  },
+  {
+    productId: "test_prod_carol_7",
+    useFor: "projecting a photo slideshow at a family reunion dinner",
+    location: "Uttara, Dhaka",
+    tags: ["event", "fun"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 63,
+  },
+
+  // Brother Sewing Machine (test_prod_carol_8)
+  {
+    productId: "test_prod_carol_8",
+    useFor: "stitching custom kurtas for the whole family before Eid",
+    location: "Gulshan, Dhaka",
+    tags: ["creative", "art"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 15,
+  },
+  {
+    productId: "test_prod_carol_8",
+    useFor: "making eco-friendly tote bags for a university sustainability fair",
+    location: "Dhaka University",
+    tags: ["creative", "event", "art"],
+    itemRating: 4,
+    anonymous: false,
+    createdDaysAgo: 44,
+  },
+
+  // iPad Pro (test_prod_dave_2)
+  {
+    productId: "test_prod_dave_2",
+    useFor: "sketching architectural floor plans with Procreate for a freelance client",
+    location: "Uttara, Dhaka",
+    tags: ["work", "creative", "art"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 11,
+  },
+  {
+    productId: "test_prod_dave_2",
+    useFor: "using it as a second screen and note-taking device during a 3-day conference",
+    location: "Bashundhara Convention Centre, Dhaka",
+    tags: ["work", "event"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 37,
+  },
+
+  // Cricket Equipment (test_prod_dave_3)
+  {
+    productId: "test_prod_dave_3",
+    useFor: "a neighbourhood tournament on Eid day — 8 teams, all day",
+    location: "Khilkhet, Dhaka",
+    tags: ["sport", "event", "fun"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 7,
+  },
+  {
+    productId: "test_prod_dave_3",
+    useFor: "inter-university cricket practice match at Savar grounds",
+    location: "Savar, Dhaka",
+    tags: ["sport", "fitness"],
+    itemRating: 4,
+    anonymous: false,
+    createdDaysAgo: 43,
+  },
+
+  // Bowflex Dumbbells (test_prod_dave_4)
+  {
+    productId: "test_prod_dave_4",
+    useFor: "a full month of home workouts while my gym was closed for renovation",
+    location: "Bashundhara, Dhaka",
+    tags: ["fitness", "work"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 19,
+  },
+  {
+    productId: "test_prod_dave_4",
+    useFor: "strength training sessions at a friend's rooftop terrace",
+    location: "Banani, Dhaka",
+    tags: ["fitness", "outdoor"],
+    itemRating: 5,
+    anonymous: true,
+    createdDaysAgo: 54,
+  },
+
+  // Weber BBQ (test_prod_dave_5)
+  {
+    productId: "test_prod_dave_5",
+    useFor: "a sunset BBQ on the bank of Turag river with university friends",
+    location: "Tongi, Gazipur",
+    tags: ["fun", "outdoor", "travel"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 1,
+  },
+  {
+    productId: "test_prod_dave_5",
+    useFor: "grilling at a family picnic in Bhawal National Park",
+    location: "Gazipur",
+    tags: ["outdoor", "fun", "travel"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 23,
+  },
+
+  // ENO Hammock (test_prod_dave_6)
+  {
+    productId: "test_prod_dave_6",
+    useFor: "stringing up between two palms during a beach trip in Cox's Bazar",
+    location: "Cox's Bazar",
+    tags: ["travel", "outdoor", "adventure"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 12,
+  },
+  {
+    productId: "test_prod_dave_6",
+    useFor: "afternoon reading sessions in Ramna Park for a week",
+    location: "Ramna, Dhaka",
+    tags: ["outdoor", "fun"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 36,
+  },
+
+  // Kärcher Pressure Washer (test_prod_dave_7)
+  {
+    productId: "test_prod_dave_7",
+    useFor: "deep-cleaning the building's rooftop before a housewarming party",
+    location: "Wari, Dhaka",
+    tags: ["work", "event"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 8,
+  },
+  {
+    productId: "test_prod_dave_7",
+    useFor: "washing the car and driveway — took 20 minutes instead of two hours",
+    location: "Uttara, Dhaka",
+    tags: ["work"],
+    itemRating: 5,
+    anonymous: true,
+    createdDaysAgo: 31,
+  },
+
+  // Wilson Tennis Set (test_prod_dave_8)
+  {
+    productId: "test_prod_dave_8",
+    useFor: "weekend matches at Gulshan Club tennis courts with colleagues",
+    location: "Gulshan, Dhaka",
+    tags: ["sport", "fitness", "fun"],
+    itemRating: 5,
+    anonymous: false,
+    createdDaysAgo: 3,
+  },
+  {
+    productId: "test_prod_dave_8",
+    useFor: "a beginner tennis crash course with a coach at Ramna courts",
+    location: "Ramna, Dhaka",
+    tags: ["sport", "fitness"],
+    itemRating: 4,
+    anonymous: false,
+    createdDaysAgo: 27,
+  },
 ];
 
 // â”€â”€ Main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€

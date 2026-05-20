@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Loader2, Sparkles, Package, ClipboardList, User2, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import UserProfileModal from "./UserProfileModal";
 
 interface SearchItem {
   id: string;
@@ -51,6 +52,8 @@ export default function SearchBar() {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -137,6 +140,10 @@ export default function SearchBar() {
   const viewAllIndex = userStart + (results ? results.users.length : 0);
 
   return (
+    <>
+    {selectedUserId && (
+      <UserProfileModal userId={selectedUserId} onClose={() => setSelectedUserId(null)} />
+    )}
     <div ref={containerRef} className="relative hidden sm:block">
       <div className="flex items-center gap-2 rounded-xl bg-[var(--surface-soft)] border border-transparent px-3 py-2 transition-colors focus-within:border-[var(--primary)]/30 focus-within:bg-[var(--surface)]">
         {loading ? (
@@ -250,11 +257,10 @@ export default function SearchBar() {
               {results.users.map((user, idx) => {
                 const rowIdx = userStart + idx;
                 return (
-                  <Link
+                  <button
                     key={user.id}
-                    href={`/dashboard/browse?lender=${user.id}`}
-                    onClick={() => setOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[var(--surface-soft)] ${activeIndex === rowIdx ? "bg-[var(--surface-soft)]" : ""}`}
+                    onClick={() => { setOpen(false); setSelectedUserId(user.id); }}
+                    className={`flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-[var(--surface-soft)] ${activeIndex === rowIdx ? "bg-[var(--surface-soft)]" : ""}`}
                   >
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[var(--primary)] text-sm font-bold text-white">
                       {user.avatarLabel}
@@ -267,7 +273,7 @@ export default function SearchBar() {
                         <span>· {user.itemCount} item{user.itemCount !== 1 ? "s" : ""}</span>
                       </div>
                     </div>
-                  </Link>
+                  </button>
                 );
               })}
             </div>
@@ -287,5 +293,6 @@ export default function SearchBar() {
         </div>
       )}
     </div>
+    </>
   );
 }
