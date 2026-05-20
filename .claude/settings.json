@@ -12,7 +12,12 @@
       "Bash(Get-ChildItem -Path \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\" -Force)",
       "Bash(Select-Object -Property Name, Mode)",
       "Bash(grep -E '\\\\.sql$|\\\\.toml$')",
-      "Bash(mkdir -p \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\\\\app\\\\api\\\\users\\\\[id]\")"
+      "Bash(mkdir -p \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\\\\app\\\\api\\\\users\\\\[id]\")",
+      "Bash(Get-ChildItem -Path \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\" -Recurse -Directory)",
+      "Bash(Select-Object FullName)",
+      "Bash(cd \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\\\\\" && ls -la app/api/dashboard/stats/route.ts app/api/borrow-requests/route.ts app/api/users/[id]/route.ts app/api/lent-items/route.ts app/api/my-items/route.ts 2>&1)",
+      "Read(//d/Niloy All Major Projects/Software-Engineering-Project\" && ls -la app/api/dashboard/stats/route.ts app/api/borrow-requests/route.ts app/api/**)",
+      "Bash(cd \"d:\\\\\\\\Niloy All Major Projects\\\\\\\\Software-Engineering-Project\")"
     ],
     "additionalDirectories": [
       "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\users"

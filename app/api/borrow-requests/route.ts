@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 
     const where = mine
       ? { requesterId: session.user.id }
-      : { status: "open", NOT: { requesterId: session.user.id } };
+      : { status: "open", isPrivate: false, NOT: { requesterId: session.user.id } };
 
     const requests = await prisma.borrowRequest.findMany({
       where,
@@ -47,9 +47,11 @@ export async function POST(request: NextRequest) {
       neededFrom: string;
       neededUntil: string;
       budgetPerDay?: number;
+      isPrivate?: boolean;
+      targetUserId?: string;
     };
 
-    const { title, category, description, location, neededFrom, neededUntil, budgetPerDay } = body;
+    const { title, category, description, location, neededFrom, neededUntil, budgetPerDay, isPrivate, targetUserId } = body;
 
     if (!title?.trim()) {
       return NextResponse.json({ error: "title is required" }, { status: 400 });
@@ -69,6 +71,8 @@ export async function POST(request: NextRequest) {
         neededUntil: new Date(neededUntil),
         budgetPerDay: budgetPerDay ?? null,
         status: "open",
+        isPrivate: isPrivate === true,
+        targetUserId: isPrivate && targetUserId ? targetUserId : null,
       },
     });
 

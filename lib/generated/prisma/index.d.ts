@@ -6481,6 +6481,8 @@ export namespace Prisma {
     neededUntil: Date | null
     budgetPerDay: number | null
     status: string | null
+    isPrivate: boolean | null
+    targetUserId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6496,6 +6498,8 @@ export namespace Prisma {
     neededUntil: Date | null
     budgetPerDay: number | null
     status: string | null
+    isPrivate: boolean | null
+    targetUserId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6511,6 +6515,8 @@ export namespace Prisma {
     neededUntil: number
     budgetPerDay: number
     status: number
+    isPrivate: number
+    targetUserId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6536,6 +6542,8 @@ export namespace Prisma {
     neededUntil?: true
     budgetPerDay?: true
     status?: true
+    isPrivate?: true
+    targetUserId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6551,6 +6559,8 @@ export namespace Prisma {
     neededUntil?: true
     budgetPerDay?: true
     status?: true
+    isPrivate?: true
+    targetUserId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6566,6 +6576,8 @@ export namespace Prisma {
     neededUntil?: true
     budgetPerDay?: true
     status?: true
+    isPrivate?: true
+    targetUserId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6668,6 +6680,8 @@ export namespace Prisma {
     neededUntil: Date
     budgetPerDay: number | null
     status: string
+    isPrivate: boolean
+    targetUserId: string | null
     createdAt: Date
     updatedAt: Date
     _count: BorrowRequestCountAggregateOutputType | null
@@ -6702,6 +6716,8 @@ export namespace Prisma {
     neededUntil?: boolean
     budgetPerDay?: boolean
     status?: boolean
+    isPrivate?: boolean
+    targetUserId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     requester?: boolean | UserDefaultArgs<ExtArgs>
@@ -6721,6 +6737,8 @@ export namespace Prisma {
     neededUntil?: boolean
     budgetPerDay?: boolean
     status?: boolean
+    isPrivate?: boolean
+    targetUserId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -6748,6 +6766,8 @@ export namespace Prisma {
       neededUntil: Date
       budgetPerDay: number | null
       status: string
+      isPrivate: boolean
+      targetUserId: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["borrowRequest"]>
@@ -7131,6 +7151,8 @@ export namespace Prisma {
     readonly neededUntil: FieldRef<"BorrowRequest", 'DateTime'>
     readonly budgetPerDay: FieldRef<"BorrowRequest", 'Int'>
     readonly status: FieldRef<"BorrowRequest", 'String'>
+    readonly isPrivate: FieldRef<"BorrowRequest", 'Boolean'>
+    readonly targetUserId: FieldRef<"BorrowRequest", 'String'>
     readonly createdAt: FieldRef<"BorrowRequest", 'DateTime'>
     readonly updatedAt: FieldRef<"BorrowRequest", 'DateTime'>
   }
@@ -14186,6 +14208,7 @@ export namespace Prisma {
     conversationId: string | null
     senderId: string | null
     content: string | null
+    type: string | null
     readAt: Date | null
     createdAt: Date | null
   }
@@ -14195,6 +14218,7 @@ export namespace Prisma {
     conversationId: string | null
     senderId: string | null
     content: string | null
+    type: string | null
     readAt: Date | null
     createdAt: Date | null
   }
@@ -14204,6 +14228,8 @@ export namespace Prisma {
     conversationId: number
     senderId: number
     content: number
+    type: number
+    metadata: number
     readAt: number
     createdAt: number
     _all: number
@@ -14215,6 +14241,7 @@ export namespace Prisma {
     conversationId?: true
     senderId?: true
     content?: true
+    type?: true
     readAt?: true
     createdAt?: true
   }
@@ -14224,6 +14251,7 @@ export namespace Prisma {
     conversationId?: true
     senderId?: true
     content?: true
+    type?: true
     readAt?: true
     createdAt?: true
   }
@@ -14233,6 +14261,8 @@ export namespace Prisma {
     conversationId?: true
     senderId?: true
     content?: true
+    type?: true
+    metadata?: true
     readAt?: true
     createdAt?: true
     _all?: true
@@ -14315,6 +14345,8 @@ export namespace Prisma {
     conversationId: string
     senderId: string
     content: string
+    type: string
+    metadata: JsonValue | null
     readAt: Date | null
     createdAt: Date
     _count: MessageCountAggregateOutputType | null
@@ -14341,6 +14373,8 @@ export namespace Prisma {
     conversationId?: boolean
     senderId?: boolean
     content?: boolean
+    type?: boolean
+    metadata?: boolean
     readAt?: boolean
     createdAt?: boolean
     conversation?: boolean | ConversationDefaultArgs<ExtArgs>
@@ -14353,6 +14387,8 @@ export namespace Prisma {
     conversationId?: boolean
     senderId?: boolean
     content?: boolean
+    type?: boolean
+    metadata?: boolean
     readAt?: boolean
     createdAt?: boolean
   }
@@ -14373,6 +14409,8 @@ export namespace Prisma {
       conversationId: string
       senderId: string
       content: string
+      type: string
+      metadata: Prisma.JsonValue | null
       readAt: Date | null
       createdAt: Date
     }, ExtArgs["result"]["message"]>
@@ -14750,6 +14788,8 @@ export namespace Prisma {
     readonly conversationId: FieldRef<"Message", 'String'>
     readonly senderId: FieldRef<"Message", 'String'>
     readonly content: FieldRef<"Message", 'String'>
+    readonly type: FieldRef<"Message", 'String'>
+    readonly metadata: FieldRef<"Message", 'Json'>
     readonly readAt: FieldRef<"Message", 'DateTime'>
     readonly createdAt: FieldRef<"Message", 'DateTime'>
   }
@@ -22648,6 +22688,8 @@ export namespace Prisma {
     neededUntil: 'neededUntil',
     budgetPerDay: 'budgetPerDay',
     status: 'status',
+    isPrivate: 'isPrivate',
+    targetUserId: 'targetUserId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -22764,6 +22806,8 @@ export namespace Prisma {
     conversationId: 'conversationId',
     senderId: 'senderId',
     content: 'content',
+    type: 'type',
+    metadata: 'metadata',
     readAt: 'readAt',
     createdAt: 'createdAt'
   };
@@ -23400,6 +23444,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFilter<"BorrowRequest"> | Date | string
     budgetPerDay?: IntNullableFilter<"BorrowRequest"> | number | null
     status?: StringFilter<"BorrowRequest"> | string
+    isPrivate?: BoolFilter<"BorrowRequest"> | boolean
+    targetUserId?: StringNullableFilter<"BorrowRequest"> | string | null
     createdAt?: DateTimeFilter<"BorrowRequest"> | Date | string
     updatedAt?: DateTimeFilter<"BorrowRequest"> | Date | string
     requester?: XOR<UserRelationFilter, UserWhereInput>
@@ -23417,6 +23463,8 @@ export namespace Prisma {
     neededUntil?: SortOrder
     budgetPerDay?: SortOrderInput | SortOrder
     status?: SortOrder
+    isPrivate?: SortOrder
+    targetUserId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     requester?: UserOrderByWithRelationInput
@@ -23437,6 +23485,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFilter<"BorrowRequest"> | Date | string
     budgetPerDay?: IntNullableFilter<"BorrowRequest"> | number | null
     status?: StringFilter<"BorrowRequest"> | string
+    isPrivate?: BoolFilter<"BorrowRequest"> | boolean
+    targetUserId?: StringNullableFilter<"BorrowRequest"> | string | null
     createdAt?: DateTimeFilter<"BorrowRequest"> | Date | string
     updatedAt?: DateTimeFilter<"BorrowRequest"> | Date | string
     requester?: XOR<UserRelationFilter, UserWhereInput>
@@ -23454,6 +23504,8 @@ export namespace Prisma {
     neededUntil?: SortOrder
     budgetPerDay?: SortOrderInput | SortOrder
     status?: SortOrder
+    isPrivate?: SortOrder
+    targetUserId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BorrowRequestCountOrderByAggregateInput
@@ -23477,6 +23529,8 @@ export namespace Prisma {
     neededUntil?: DateTimeWithAggregatesFilter<"BorrowRequest"> | Date | string
     budgetPerDay?: IntNullableWithAggregatesFilter<"BorrowRequest"> | number | null
     status?: StringWithAggregatesFilter<"BorrowRequest"> | string
+    isPrivate?: BoolWithAggregatesFilter<"BorrowRequest"> | boolean
+    targetUserId?: StringNullableWithAggregatesFilter<"BorrowRequest"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"BorrowRequest"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"BorrowRequest"> | Date | string
   }
@@ -24050,6 +24104,8 @@ export namespace Prisma {
     conversationId?: StringFilter<"Message"> | string
     senderId?: StringFilter<"Message"> | string
     content?: StringFilter<"Message"> | string
+    type?: StringFilter<"Message"> | string
+    metadata?: JsonNullableFilter<"Message">
     readAt?: DateTimeNullableFilter<"Message"> | Date | string | null
     createdAt?: DateTimeFilter<"Message"> | Date | string
     conversation?: XOR<ConversationRelationFilter, ConversationWhereInput>
@@ -24061,6 +24117,8 @@ export namespace Prisma {
     conversationId?: SortOrder
     senderId?: SortOrder
     content?: SortOrder
+    type?: SortOrder
+    metadata?: SortOrderInput | SortOrder
     readAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     conversation?: ConversationOrderByWithRelationInput
@@ -24075,6 +24133,8 @@ export namespace Prisma {
     conversationId?: StringFilter<"Message"> | string
     senderId?: StringFilter<"Message"> | string
     content?: StringFilter<"Message"> | string
+    type?: StringFilter<"Message"> | string
+    metadata?: JsonNullableFilter<"Message">
     readAt?: DateTimeNullableFilter<"Message"> | Date | string | null
     createdAt?: DateTimeFilter<"Message"> | Date | string
     conversation?: XOR<ConversationRelationFilter, ConversationWhereInput>
@@ -24086,6 +24146,8 @@ export namespace Prisma {
     conversationId?: SortOrder
     senderId?: SortOrder
     content?: SortOrder
+    type?: SortOrder
+    metadata?: SortOrderInput | SortOrder
     readAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: MessageCountOrderByAggregateInput
@@ -24101,6 +24163,8 @@ export namespace Prisma {
     conversationId?: StringWithAggregatesFilter<"Message"> | string
     senderId?: StringWithAggregatesFilter<"Message"> | string
     content?: StringWithAggregatesFilter<"Message"> | string
+    type?: StringWithAggregatesFilter<"Message"> | string
+    metadata?: JsonNullableWithAggregatesFilter<"Message">
     readAt?: DateTimeNullableWithAggregatesFilter<"Message"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Message"> | Date | string
   }
@@ -25170,6 +25234,8 @@ export namespace Prisma {
     neededUntil: Date | string
     budgetPerDay?: number | null
     status?: string
+    isPrivate?: boolean
+    targetUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     requester: UserCreateNestedOneWithoutBorrowRequestsInput
@@ -25187,6 +25253,8 @@ export namespace Prisma {
     neededUntil: Date | string
     budgetPerDay?: number | null
     status?: string
+    isPrivate?: boolean
+    targetUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     offers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutBorrowRequestInput
@@ -25202,6 +25270,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetPerDay?: NullableIntFieldUpdateOperationsInput | number | null
     status?: StringFieldUpdateOperationsInput | string
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     requester?: UserUpdateOneRequiredWithoutBorrowRequestsNestedInput
@@ -25219,6 +25289,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetPerDay?: NullableIntFieldUpdateOperationsInput | number | null
     status?: StringFieldUpdateOperationsInput | string
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     offers?: BorrowRequestOfferUncheckedUpdateManyWithoutBorrowRequestNestedInput
@@ -25235,6 +25307,8 @@ export namespace Prisma {
     neededUntil: Date | string
     budgetPerDay?: number | null
     status?: string
+    isPrivate?: boolean
+    targetUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25249,6 +25323,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetPerDay?: NullableIntFieldUpdateOperationsInput | number | null
     status?: StringFieldUpdateOperationsInput | string
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25264,6 +25340,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetPerDay?: NullableIntFieldUpdateOperationsInput | number | null
     status?: StringFieldUpdateOperationsInput | string
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25859,6 +25937,8 @@ export namespace Prisma {
   export type MessageCreateInput = {
     id?: string
     content: string
+    type?: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: Date | string | null
     createdAt?: Date | string
     conversation: ConversationCreateNestedOneWithoutMessagesInput
@@ -25870,6 +25950,8 @@ export namespace Prisma {
     conversationId: string
     senderId: string
     content: string
+    type?: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: Date | string | null
     createdAt?: Date | string
   }
@@ -25877,6 +25959,8 @@ export namespace Prisma {
   export type MessageUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
@@ -25888,6 +25972,8 @@ export namespace Prisma {
     conversationId?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25897,6 +25983,8 @@ export namespace Prisma {
     conversationId: string
     senderId: string
     content: string
+    type?: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: Date | string | null
     createdAt?: Date | string
   }
@@ -25904,6 +25992,8 @@ export namespace Prisma {
   export type MessageUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25913,6 +26003,8 @@ export namespace Prisma {
     conversationId?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -27128,6 +27220,8 @@ export namespace Prisma {
     neededUntil?: SortOrder
     budgetPerDay?: SortOrder
     status?: SortOrder
+    isPrivate?: SortOrder
+    targetUserId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27147,6 +27241,8 @@ export namespace Prisma {
     neededUntil?: SortOrder
     budgetPerDay?: SortOrder
     status?: SortOrder
+    isPrivate?: SortOrder
+    targetUserId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27162,6 +27258,8 @@ export namespace Prisma {
     neededUntil?: SortOrder
     budgetPerDay?: SortOrder
     status?: SortOrder
+    isPrivate?: SortOrder
+    targetUserId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27576,6 +27674,8 @@ export namespace Prisma {
     conversationId?: SortOrder
     senderId?: SortOrder
     content?: SortOrder
+    type?: SortOrder
+    metadata?: SortOrder
     readAt?: SortOrder
     createdAt?: SortOrder
   }
@@ -27585,6 +27685,7 @@ export namespace Prisma {
     conversationId?: SortOrder
     senderId?: SortOrder
     content?: SortOrder
+    type?: SortOrder
     readAt?: SortOrder
     createdAt?: SortOrder
   }
@@ -27594,6 +27695,7 @@ export namespace Prisma {
     conversationId?: SortOrder
     senderId?: SortOrder
     content?: SortOrder
+    type?: SortOrder
     readAt?: SortOrder
     createdAt?: SortOrder
   }
@@ -30464,6 +30566,8 @@ export namespace Prisma {
     neededUntil: Date | string
     budgetPerDay?: number | null
     status?: string
+    isPrivate?: boolean
+    targetUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     offers?: BorrowRequestOfferCreateNestedManyWithoutBorrowRequestInput
@@ -30479,6 +30583,8 @@ export namespace Prisma {
     neededUntil: Date | string
     budgetPerDay?: number | null
     status?: string
+    isPrivate?: boolean
+    targetUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     offers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutBorrowRequestInput
@@ -30545,6 +30651,8 @@ export namespace Prisma {
   export type MessageCreateWithoutSenderInput = {
     id?: string
     content: string
+    type?: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: Date | string | null
     createdAt?: Date | string
     conversation: ConversationCreateNestedOneWithoutMessagesInput
@@ -30554,6 +30662,8 @@ export namespace Prisma {
     id?: string
     conversationId: string
     content: string
+    type?: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: Date | string | null
     createdAt?: Date | string
   }
@@ -31044,6 +31154,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFilter<"BorrowRequest"> | Date | string
     budgetPerDay?: IntNullableFilter<"BorrowRequest"> | number | null
     status?: StringFilter<"BorrowRequest"> | string
+    isPrivate?: BoolFilter<"BorrowRequest"> | boolean
+    targetUserId?: StringNullableFilter<"BorrowRequest"> | string | null
     createdAt?: DateTimeFilter<"BorrowRequest"> | Date | string
     updatedAt?: DateTimeFilter<"BorrowRequest"> | Date | string
   }
@@ -31125,6 +31237,8 @@ export namespace Prisma {
     conversationId?: StringFilter<"Message"> | string
     senderId?: StringFilter<"Message"> | string
     content?: StringFilter<"Message"> | string
+    type?: StringFilter<"Message"> | string
+    metadata?: JsonNullableFilter<"Message">
     readAt?: DateTimeNullableFilter<"Message"> | Date | string | null
     createdAt?: DateTimeFilter<"Message"> | Date | string
   }
@@ -32381,6 +32495,8 @@ export namespace Prisma {
     neededUntil: Date | string
     budgetPerDay?: number | null
     status?: string
+    isPrivate?: boolean
+    targetUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     requester: UserCreateNestedOneWithoutBorrowRequestsInput
@@ -32397,6 +32513,8 @@ export namespace Prisma {
     neededUntil: Date | string
     budgetPerDay?: number | null
     status?: string
+    isPrivate?: boolean
+    targetUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -32614,6 +32732,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetPerDay?: NullableIntFieldUpdateOperationsInput | number | null
     status?: StringFieldUpdateOperationsInput | string
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     requester?: UserUpdateOneRequiredWithoutBorrowRequestsNestedInput
@@ -32630,6 +32750,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetPerDay?: NullableIntFieldUpdateOperationsInput | number | null
     status?: StringFieldUpdateOperationsInput | string
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34206,6 +34328,8 @@ export namespace Prisma {
   export type MessageCreateWithoutConversationInput = {
     id?: string
     content: string
+    type?: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: Date | string | null
     createdAt?: Date | string
     sender: UserCreateNestedOneWithoutSentMessagesInput
@@ -34215,6 +34339,8 @@ export namespace Prisma {
     id?: string
     senderId: string
     content: string
+    type?: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: Date | string | null
     createdAt?: Date | string
   }
@@ -36539,6 +36665,8 @@ export namespace Prisma {
     neededUntil: Date | string
     budgetPerDay?: number | null
     status?: string
+    isPrivate?: boolean
+    targetUserId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -36560,6 +36688,8 @@ export namespace Prisma {
     id?: string
     conversationId: string
     content: string
+    type?: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: Date | string | null
     createdAt?: Date | string
   }
@@ -36955,6 +37085,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetPerDay?: NullableIntFieldUpdateOperationsInput | number | null
     status?: StringFieldUpdateOperationsInput | string
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     offers?: BorrowRequestOfferUpdateManyWithoutBorrowRequestNestedInput
@@ -36970,6 +37102,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetPerDay?: NullableIntFieldUpdateOperationsInput | number | null
     status?: StringFieldUpdateOperationsInput | string
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     offers?: BorrowRequestOfferUncheckedUpdateManyWithoutBorrowRequestNestedInput
@@ -36985,6 +37119,8 @@ export namespace Prisma {
     neededUntil?: DateTimeFieldUpdateOperationsInput | Date | string
     budgetPerDay?: NullableIntFieldUpdateOperationsInput | number | null
     status?: StringFieldUpdateOperationsInput | string
+    isPrivate?: BoolFieldUpdateOperationsInput | boolean
+    targetUserId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37033,6 +37169,8 @@ export namespace Prisma {
   export type MessageUpdateWithoutSenderInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     conversation?: ConversationUpdateOneRequiredWithoutMessagesNestedInput
@@ -37042,6 +37180,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     conversationId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37050,6 +37190,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     conversationId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37651,6 +37793,8 @@ export namespace Prisma {
     id?: string
     senderId: string
     content: string
+    type?: string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: Date | string | null
     createdAt?: Date | string
   }
@@ -37670,6 +37814,8 @@ export namespace Prisma {
   export type MessageUpdateWithoutConversationInput = {
     id?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sender?: UserUpdateOneRequiredWithoutSentMessagesNestedInput
@@ -37679,6 +37825,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37687,6 +37835,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     senderId?: StringFieldUpdateOperationsInput | string
     content?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    metadata?: NullableJsonNullValueInput | InputJsonValue
     readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

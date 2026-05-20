@@ -68,6 +68,8 @@ export async function GET() {
           from: m.senderId === userId ? "me" : "them",
           text: m.content,
           time: formatTime(m.createdAt),
+          type: m.type ?? "text",
+          metadata: m.metadata ?? null,
         })),
       };
     });

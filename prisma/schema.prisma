@@ -126,6 +126,8 @@ model BorrowRequest {
   neededUntil  DateTime
   budgetPerDay Int?
   status       String   @default("open") // "open" | "fulfilled" | "closed"
+  isPrivate    Boolean  @default(false)
+  targetUserId String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -287,6 +289,8 @@ model Message {
   conversationId String
   senderId       String
   content        String    @db.Text
+  type           String    @default("text")
+  metadata       Json?
   readAt         DateTime?
   createdAt      DateTime  @default(now())
 

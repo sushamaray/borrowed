@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { X, MapPin, ShieldCheck, Package, MessageCircle, ExternalLink } from "lucide-react";
+import { X, MapPin, ShieldCheck, Package, MessageCircle, ExternalLink, UserRound, BadgeCheck } from "lucide-react";
 import FallbackImage from "@/components/FallbackImage";
 
 interface UserItem {
@@ -20,8 +20,11 @@ interface UserProfile {
   lastName: string | null;
   userName: string | null;
   location: string | null;
+  profilePicture: string | null;
   identityVerified: boolean;
   contactVerified: boolean;
+  addressVerified: boolean;
+  meetupVerified: boolean;
   memberSince: string;
   itemCount: number;
   isCurrentUser: boolean;
@@ -31,6 +34,25 @@ interface UserProfile {
 interface Props {
   userId: string;
   onClose: () => void;
+}
+
+function ProfileAvatar({ name, imageUrl, size = 64 }: { name: string; imageUrl?: string | null; size?: number }) {
+  const initials = name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase() || "U";
+  const dim = size === 64 ? "h-16 w-16 text-xl" : "h-12 w-12 text-base";
+
+  if (imageUrl) {
+    return (
+      <div className={`relative shrink-0 overflow-hidden rounded-full bg-[#f2eefb] ${dim}`}>
+        <FallbackImage src={imageUrl} alt={name} fill sizes={`${size}px`} className="object-cover" />
+      </div>
+    );
+  }
+
+  return (
+    <div className={`flex shrink-0 items-center justify-center rounded-full bg-[var(--primary)] font-bold text-white ${dim}`}>
+      {initials}
+    </div>
+  );
 }
 
 export default function UserProfileModal({ userId, onClose }: Props) {
@@ -57,11 +79,16 @@ export default function UserProfileModal({ userId, onClose }: Props) {
       : (profile.userName ?? "User")
     : "";
 
-  const avatarLabel = displayName.charAt(0).toUpperCase() || "U";
-
-  const memberYear = profile
-    ? new Date(profile.memberSince).getFullYear()
+  const memberSince = profile
+    ? new Date(profile.memberSince).toLocaleDateString("en-US", { month: "short", year: "numeric" })
     : null;
+
+  const verifications = profile ? [
+    { label: "Identity", value: profile.identityVerified },
+    { label: "Contact", value: profile.contactVerified },
+    { label: "Address", value: profile.addressVerified },
+    { label: "Meetup", value: profile.meetupVerified },
+  ] : [];
 
   return (
     <div
@@ -70,7 +97,6 @@ export default function UserProfileModal({ userId, onClose }: Props) {
       onMouseDown={(e) => { if (e.target === backdropRef.current) onClose(); }}
     >
       <div className="relative w-full max-w-md overflow-hidden rounded-2xl bg-[var(--surface)] shadow-2xl">
-        {/* Close */}
         <button
           onClick={onClose}
           className="absolute right-4 top-4 z-10 rounded-full bg-[var(--surface-soft)] p-1.5 text-[var(--text-secondary)] hover:text-[var(--foreground)]"
@@ -87,6 +113,11 @@ export default function UserProfileModal({ userId, onClose }: Props) {
                 <div className="h-3 w-24 animate-pulse rounded bg-[var(--surface-soft)]" />
               </div>
             </div>
+            <div className="grid grid-cols-2 gap-2">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="h-9 animate-pulse rounded-xl bg-[var(--surface-soft)]" />
+              ))}
+            </div>
             <div className="grid grid-cols-2 gap-3">
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="h-24 animate-pulse rounded-xl bg-[var(--surface-soft)]" />
@@ -98,36 +129,23 @@ export default function UserProfileModal({ userId, onClose }: Props) {
             {/* Header */}
             <div className="bg-[var(--surface-soft)] px-6 pb-5 pt-6">
               <div className="flex items-start gap-4">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-2xl font-bold text-white">
-                  {avatarLabel}
-                </div>
+                <ProfileAvatar name={displayName} imageUrl={profile.profilePicture} size={64} />
                 <div className="min-w-0 flex-1 pt-1">
                   <h2 className="text-lg font-bold text-[var(--foreground)]">{displayName}</h2>
                   {profile.userName && (
                     <p className="text-sm text-[var(--text-muted)]">@{profile.userName}</p>
                   )}
-                  <div className="mt-1.5 flex flex-wrap gap-2">
+                  <div className="mt-2 flex flex-wrap gap-2 text-xs text-[var(--text-secondary)]">
                     {profile.location && (
-                      <span className="flex items-center gap-1 text-xs text-[var(--text-secondary)]">
+                      <span className="flex items-center gap-1">
                         <MapPin className="h-3 w-3" />
                         {profile.location.split(",")[0]}
                       </span>
                     )}
-                    {memberYear && (
-                      <span className="text-xs text-[var(--text-muted)]">
-                        Member since {memberYear}
-                      </span>
-                    )}
-                  </div>
-                  <div className="mt-2 flex gap-2">
-                    {profile.identityVerified && (
-                      <span className="flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[0.65rem] font-bold text-emerald-700">
-                        <ShieldCheck className="h-3 w-3" /> ID Verified
-                      </span>
-                    )}
-                    {profile.contactVerified && (
-                      <span className="flex items-center gap-1 rounded-full bg-blue-100 px-2 py-0.5 text-[0.65rem] font-bold text-blue-700">
-                        <ShieldCheck className="h-3 w-3" /> Contact Verified
+                    {memberSince && (
+                      <span className="flex items-center gap-1">
+                        <UserRound className="h-3 w-3" />
+                        Member since {memberSince}
                       </span>
                     )}
                   </div>
@@ -135,7 +153,32 @@ export default function UserProfileModal({ userId, onClose }: Props) {
               </div>
             </div>
 
-            {/* Stats bar */}
+            {/* Verification grid */}
+            <div className="border-b border-[var(--border)] px-6 py-4">
+              <p className="mb-2.5 text-[0.7rem] font-black uppercase tracking-wider text-[var(--text-muted)]">
+                Verification
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                {verifications.map((v) => (
+                  <div
+                    key={v.label}
+                    className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-[0.8rem] font-bold ${
+                      v.value
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                        : "border-[var(--border)] bg-[var(--surface-soft)] text-[var(--text-muted)]"
+                    }`}
+                  >
+                    {v.value
+                      ? <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
+                      : <BadgeCheck className="h-3.5 w-3.5 shrink-0 opacity-40" />
+                    }
+                    {v.label}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Stats */}
             <div className="border-b border-[var(--border)] px-6 py-3">
               <span className="text-sm text-[var(--text-secondary)]">
                 <span className="font-bold text-[var(--foreground)]">{profile.itemCount}</span>{" "}
@@ -144,9 +187,9 @@ export default function UserProfileModal({ userId, onClose }: Props) {
             </div>
 
             {/* Items grid */}
-            <div className="max-h-64 overflow-y-auto p-4">
+            <div className="scrollbar-dark max-h-56 overflow-y-auto p-4">
               {profile.items.length === 0 ? (
-                <div className="flex flex-col items-center gap-2 py-8 text-[var(--text-muted)]">
+                <div className="flex flex-col items-center gap-2 py-6 text-[var(--text-muted)]">
                   <Package className="h-8 w-8 opacity-40" />
                   <p className="text-sm">No active listings</p>
                 </div>
@@ -180,7 +223,7 @@ export default function UserProfileModal({ userId, onClose }: Props) {
               )}
             </div>
 
-            {/* Footer actions */}
+            {/* Actions */}
             {!profile.isCurrentUser && (
               <div className="flex gap-3 border-t border-[var(--border)] px-4 py-3">
                 <Link

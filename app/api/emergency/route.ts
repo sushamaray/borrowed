@@ -147,7 +147,7 @@ export async function POST(request: NextRequest) {
           type: "emergency_request",
           title: "Emergency borrow request nearby",
           body: `${requesterName} urgently needs ${item}${locationLabel}.${neededLabel}`,
-          link: "/dashboard/my-items",
+          link: `/dashboard/messages?userId=${requester.id}&emergency=true&item=${encodeURIComponent(item)}`,
         })),
       });
     }

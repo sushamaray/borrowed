@@ -20,9 +20,13 @@ import {
   BookMarked,
   CheckCircle2,
   Circle,
+  Inbox,
+  Plus,
   X,
   Zap,
 } from "lucide-react";
+import AddItemModal from "@/app/dashboard/my-items/AddItemModal";
+import PostRequestModal from "@/components/dashboard/PostRequestModal";
 
 interface ActiveBorrow {
   id: string;
@@ -39,6 +43,8 @@ interface ActivityItem {
   subtitle: string;
   timestamp: string;
   status: "completed" | "active";
+  type?: string;
+  link?: string | null;
 }
 
 interface DashboardStats {
@@ -53,8 +59,11 @@ interface DashboardStats {
 
 export default function DashboardPage() {
   const [showEmergency, setShowEmergency] = useState(false);
+  const [showAddItem, setShowAddItem] = useState(false);
+  const [showPostRequest, setShowPostRequest] = useState(false);
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [emergencyAlertDismissed, setEmergencyAlertDismissed] = useState(false);
 
   useEffect(() => {
     fetch("/api/dashboard/stats")
@@ -102,6 +111,42 @@ export default function DashboardPage() {
           Emergency Mode
         </button>
       </div>
+
+      {/* Emergency Notification Banner */}
+      {!loading && !emergencyAlertDismissed && (() => {
+        const emergencyNotif = stats?.recentActivity.find((a) => a.type === "emergency_request");
+        if (!emergencyNotif) return null;
+        return (
+          <Link
+            href={emergencyNotif.link ?? "/dashboard/messages"}
+            className="block overflow-hidden rounded-2xl bg-[linear-gradient(135deg,var(--emergency),var(--emergency-end))] shadow-[0_8px_32px_rgba(255,69,32,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_40px_rgba(255,69,32,0.45)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="m-[3px] overflow-hidden rounded-[13px] border border-white/30 bg-white/10 backdrop-blur-sm">
+              <div className="flex items-center gap-4 px-5 py-4">
+                <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl border border-white/40 bg-white/20">
+                  <Zap className="h-6 w-6 text-white" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[0.95rem] font-black text-white">Emergency Borrow Request Nearby</p>
+                  <p className="mt-0.5 text-[0.8rem] text-white/80 truncate">{emergencyNotif.subtitle}</p>
+                </div>
+                <div className="flex flex-shrink-0 items-center gap-2">
+                  <span className="hidden sm:block rounded-lg border border-white/40 bg-white/20 px-4 py-2 text-[0.8rem] font-black text-white backdrop-blur-sm">
+                    Respond →
+                  </span>
+                  <button
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); setEmergencyAlertDismissed(true); }}
+                    className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/30 bg-white/15 text-white/80 transition-colors hover:bg-white/25 hover:text-white"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Link>
+        );
+      })()}
 
       {/* Alert Banner - Due Items */}
       {!loading && dueTodayCount > 0 && (
@@ -165,6 +210,35 @@ export default function DashboardPage() {
           subtitle="Ready to borrow"
           href="/dashboard/cart"
         />
+      </div>
+
+      {/* Quick Actions */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <button
+          onClick={() => setShowAddItem(true)}
+          className="group flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-white px-5 py-4 text-left shadow-sm transition-all hover:border-[#6d5bba]/50 hover:shadow-[0_4px_16px_rgba(59,42,128,0.1)]"
+        >
+          <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#f2eefb,#e8e0f8)]">
+            <Plus className="h-5 w-5 text-[#3b2a80]" strokeWidth={2.5} />
+          </div>
+          <div>
+            <p className="font-black text-[0.92rem] text-[var(--ink)] group-hover:text-[#3b2a80]">List an Item</p>
+            <p className="mt-0.5 text-[0.75rem] text-[var(--text-muted)]">Add something you can lend out</p>
+          </div>
+        </button>
+
+        <button
+          onClick={() => setShowPostRequest(true)}
+          className="group flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-white px-5 py-4 text-left shadow-sm transition-all hover:border-[#6d5bba]/50 hover:shadow-[0_4px_16px_rgba(59,42,128,0.1)]"
+        >
+          <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#f2eefb,#e8e0f8)]">
+            <Inbox className="h-5 w-5 text-[#3b2a80]" strokeWidth={1.8} />
+          </div>
+          <div>
+            <p className="font-black text-[0.92rem] text-[var(--ink)] group-hover:text-[#3b2a80]">Post a Request</p>
+            <p className="mt-0.5 text-[0.75rem] text-[var(--text-muted)]">Ask lenders for something you need</p>
+          </div>
+        </button>
       </div>
 
       {/* Active Borrows */}
@@ -237,11 +311,20 @@ export default function DashboardPage() {
                 subtitle={activity.subtitle}
                 timestamp={activity.timestamp}
                 status={activity.status}
+                type={activity.type}
               />
             ))}
           </div>
         )}
       </div>
+
+      <AddItemModal open={showAddItem} onOpenChange={setShowAddItem} />
+
+      <PostRequestModal
+        open={showPostRequest}
+        onClose={() => setShowPostRequest(false)}
+        onSuccess={() => setShowPostRequest(false)}
+      />
 
       {showEmergency && (
         <EmergencyModal onClose={() => setShowEmergency(false)} />
@@ -569,28 +652,37 @@ function ActivityRow({
   subtitle,
   timestamp,
   status,
+  type,
 }: {
   title: string;
   subtitle: string;
   timestamp: string;
   status: "completed" | "active";
+  type?: string;
 }) {
+  const isEmergency = type === "emergency_request";
   return (
-    <div className="flex items-start gap-3 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-3 transition-colors hover:bg-[var(--surface-soft)]">
+    <div className={`flex items-start gap-3 rounded-lg border p-3 transition-colors ${
+      isEmergency
+        ? "border-orange-200 bg-orange-50 hover:bg-orange-100"
+        : "border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-soft)]"
+    }`}>
       <div
         className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full ${
-          status === "completed" ? "bg-[var(--success-soft)]" : "bg-[var(--primary-soft)]"
+          isEmergency ? "bg-orange-100" : status === "completed" ? "bg-[var(--success-soft)]" : "bg-[var(--primary-soft)]"
         }`}
       >
-        {status === "completed" ? (
+        {isEmergency ? (
+          <Zap className="h-4 w-4 text-orange-600" />
+        ) : status === "completed" ? (
           <CheckCircle2 className="h-4 w-4 text-[var(--success)]" />
         ) : (
           <Circle className="h-4 w-4 animate-pulse text-[var(--primary)]" />
         )}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-[var(--foreground)]">{title}</p>
-        <p className="text-xs text-[var(--text-muted)] mt-0.5">{subtitle}</p>
+        <p className={`text-sm font-medium ${isEmergency ? "text-orange-800" : "text-[var(--foreground)]"}`}>{title}</p>
+        <p className={`text-xs mt-0.5 ${isEmergency ? "text-orange-600" : "text-[var(--text-muted)]"}`}>{subtitle}</p>
       </div>
       <span className="flex-shrink-0 text-xs text-[var(--text-muted)]">{timestamp}</span>
     </div>

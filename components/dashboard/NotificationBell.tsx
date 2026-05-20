@@ -10,6 +10,7 @@ import {
   Home,
   Package,
   X,
+  Zap,
 } from "lucide-react";
 
 type Notification = {
@@ -37,24 +38,36 @@ function relativeTime(dateStr: string): string {
 function typeIcon(type: string) {
   const cls = "h-4 w-4 flex-shrink-0";
   switch (type) {
-    case "return_reminder":   return <Clock className={cls} />;
-    case "new_message":       return <MessageCircle className={cls} />;
-    case "mentor_confirmed":  return <GraduationCap className={cls} />;
+    case "emergency_request":  return <Zap className={cls} />;
+    case "return_reminder":    return <Clock className={cls} />;
+    case "new_message":        return <MessageCircle className={cls} />;
+    case "mentor_confirmed":   return <GraduationCap className={cls} />;
     case "new_borrow_request":
-    case "borrow_accepted":   return <Home className={cls} />;
-    default:                  return <Package className={cls} />;
+    case "borrow_accepted":    return <Home className={cls} />;
+    default:                   return <Package className={cls} />;
   }
 }
 
 function typeColor(type: string): string {
   switch (type) {
-    case "return_reminder":   return "text-amber-600";
-    case "new_message":       return "text-blue-600";
-    case "mentor_confirmed":  return "text-purple-600";
+    case "emergency_request":  return "text-orange-600";
+    case "return_reminder":    return "text-amber-600";
+    case "new_message":        return "text-blue-600";
+    case "mentor_confirmed":   return "text-purple-600";
     case "new_borrow_request":
-    case "borrow_accepted":   return "text-emerald-600";
-    default:                  return "text-violet-600";
+    case "borrow_accepted":    return "text-emerald-600";
+    default:                   return "text-violet-600";
   }
+}
+
+function iconBg(type: string): string {
+  if (type === "emergency_request") return "bg-orange-50";
+  return "bg-(--primary-soft)";
+}
+
+function unreadBar(type: string): string {
+  if (type === "emergency_request") return "bg-orange-500";
+  return "bg-(--primary)";
 }
 
 export default function NotificationBell() {
@@ -175,11 +188,11 @@ export default function NotificationBell() {
                 >
                   {/* Unread indicator */}
                   {!n.read && (
-                    <span className="absolute left-0 top-0 h-full w-[3px] rounded-r-full bg-(--primary)" />
+                    <span className={`absolute left-0 top-0 h-full w-[3px] rounded-r-full ${unreadBar(n.type)}`} />
                   )}
                   {/* Icon */}
                   <div
-                    className={`mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-(--primary-soft) ${typeColor(n.type)}`}
+                    className={`mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl ${iconBg(n.type)} ${typeColor(n.type)}`}
                   >
                     {typeIcon(n.type)}
                   </div>

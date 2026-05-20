@@ -90,6 +90,8 @@ export async function GET() {
       subtitle: n.body,
       timestamp: relativeTime(n.createdAt),
       status: "active" as const,
+      type: n.type,
+      link: n.link ?? null,
     }));
 
     const firstName = session.user.name?.split(" ")[0] ?? "there";

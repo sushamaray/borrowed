@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft, MapPin, Star, ShieldCheck, ShoppingCart,
   Calendar, MessageSquare, Sparkles, ChevronRight, Check,
   Flame, Gem, Heart, Mountain, Palette, Plane, Sprout, Target,
-  X, UserRound, BadgeCheck, CheckCircle2, XCircle,
+  CheckCircle2, XCircle,
 } from "lucide-react";
+import UserProfileModal from "@/components/dashboard/UserProfileModal";
 import FallbackImage from "@/components/FallbackImage";
 import type { ProductWithFeatureList } from "@/lib/products";
 
@@ -179,11 +179,6 @@ export default function ItemDetailClient({
   const [cartPending, setCartPending] = useState(false);
   const [cartError, setCartError] = useState("");
   const [lenderOpen, setLenderOpen] = useState(false);
-  const [msgModalOpen, setMsgModalOpen] = useState(false);
-  const [msgDraft, setMsgDraft] = useState("");
-  const [msgSending, setMsgSending] = useState(false);
-  const [msgError, setMsgError] = useState("");
-  const router = useRouter();
 
   const days = startDate && endDate
     ? Math.max(1, Math.round((new Date(endDate).getTime() - new Date(startDate).getTime()) / 86400000))
@@ -191,15 +186,6 @@ export default function ItemDetailClient({
 
   const priceFormatter = new Intl.NumberFormat("en-BD");
   const fmt = (n: number) => `TK ${priceFormatter.format(n)}`;
-  const joinedAt = new Intl.DateTimeFormat("en", { month: "short", year: "numeric" }).format(
-    new Date(product.lender.createdAt),
-  );
-  const verifiedItems = [
-    { label: "Identity", value: product.lender.identityVerified || product.lender.idVerified },
-    { label: "Contact", value: product.lender.contactVerified },
-    { label: "Address", value: product.lender.addressVerified },
-    { label: "Meetup", value: product.lender.meetupVerified },
-  ];
 
   // Load trail when tab switches to "trail"
   useEffect(() => {
@@ -260,38 +246,6 @@ export default function ItemDetailClient({
     } finally {
       setCartPending(false);
     }
-  };
-
-  const sendMessageToLender = async () => {
-    const text = msgDraft.trim();
-    if (!text || msgSending) return;
-    setMsgSending(true);
-    setMsgError("");
-    try {
-      const res = await fetch("/api/conversations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ recipientId: product.lender.id, message: text }),
-      });
-      const data = await res.json() as { conversationId?: string; error?: string };
-      if (res.ok && data.conversationId) {
-        setMsgModalOpen(false);
-        setMsgDraft("");
-        router.push(`/dashboard/messages?conversationId=${data.conversationId}`);
-      } else {
-        setMsgError(data.error ?? "Failed to send message");
-      }
-    } catch {
-      setMsgError("Network error, please try again");
-    } finally {
-      setMsgSending(false);
-    }
-  };
-
-  const openMsgModal = () => {
-    setLenderOpen(false);
-    setMsgError("");
-    setMsgModalOpen(true);
   };
 
   const trailCount = trail?.total ?? 0;
@@ -640,13 +594,12 @@ export default function ItemDetailClient({
             {product.lenderNote && (
               <p className="mb-[0.85rem] text-[0.82rem] leading-[1.6] text-(--text-secondary)">{product.lenderNote}</p>
             )}
-            <button
-              type="button"
-              onClick={openMsgModal}
-              className="flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-full border-0 bg-(--surface-soft) p-[0.65rem] text-[0.85rem] font-bold text-[#31236a]"
+            <Link
+              href={`/dashboard/messages?userId=${product.lender.id}`}
+              className="flex w-full items-center justify-center gap-1.5 rounded-full bg-(--surface-soft) p-[0.65rem] text-[0.85rem] font-bold text-[#31236a] no-underline"
             >
               <MessageSquare size={15} /> Message Lender
-            </button>
+            </Link>
           </div>
 
           {/* Compensation card */}
@@ -698,142 +651,8 @@ export default function ItemDetailClient({
         </section>
       )}
 
-      {msgModalOpen && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/35 px-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="msg-modal-title"
-          onClick={() => setMsgModalOpen(false)}
-        >
-          <div
-            className="w-full max-w-[380px] rounded-[18px] border border-[#e3dcf3] bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.25)]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="mb-3 flex items-start justify-between">
-              <div>
-                <h3 id="msg-modal-title" className="text-[1rem] font-black text-[#1b1530]">Message Lender</h3>
-                <p className="text-[0.8rem] text-[#9187b0]">{product.lenderName}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setMsgModalOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-[#e3dcf3] bg-[#f8f7fc] text-[#675d8b]"
-                aria-label="Close"
-              >
-                <X size={16} />
-              </button>
-            </div>
-            <textarea
-              value={msgDraft}
-              onChange={(e) => setMsgDraft(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessageToLender()}
-              placeholder={`Hi, I'm interested in your ${product.name}…`}
-              rows={3}
-              maxLength={1000}
-              className="mb-2 w-full resize-none rounded-[10px] border border-[#e3dcf3] bg-[#f8f7fc] p-3 text-[0.88rem] text-[#1b1530] outline-none placeholder:text-[#9187b0] focus:border-[#3b2a80]"
-            />
-            {msgError && (
-              <p className="mb-2 text-[0.8rem] font-semibold text-red-500">{msgError}</p>
-            )}
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={() => { setMsgModalOpen(false); setMsgError(""); setMsgDraft(""); }}
-                className="flex-1 cursor-pointer rounded-full border border-[#e3dcf3] bg-[#f8f7fc] py-2.5 text-[0.88rem] font-bold text-[#675d8b]"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={sendMessageToLender}
-                disabled={msgSending || !msgDraft.trim()}
-                className="flex-1 cursor-pointer rounded-full border-0 bg-[#3b2a80] py-2.5 text-[0.88rem] font-bold text-white disabled:opacity-60"
-              >
-                {msgSending ? "Sending…" : "Send"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {lenderOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 px-4"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="lender-profile-title"
-          onClick={() => setLenderOpen(false)}
-        >
-          <div
-            className="w-full max-w-[430px] rounded-[18px] border border-[#e3dcf3] bg-white p-5 shadow-[0_24px_70px_rgba(15,23,42,0.25)]"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="mb-4 flex items-start justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <LenderAvatar name={product.lenderName} imageUrl={product.lender.imageUrl} size={64} />
-                <div>
-                  <h2 id="lender-profile-title" className="text-[1.1rem] font-black text-[#1b1530]">
-                    {product.lender.displayName}
-                  </h2>
-                  <p className="text-[0.82rem] font-semibold text-[#9187b0]">
-                    {product.lender.userName ? `@${product.lender.userName}` : "Borrowed lender"}
-                  </p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => setLenderOpen(false)}
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-[#e3dcf3] bg-[#f8f7fc] text-[#675d8b]"
-                aria-label="Close lender profile"
-              >
-                <X size={16} />
-              </button>
-            </div>
-
-            <div className="grid gap-2.5">
-              <div className="flex items-center gap-2 rounded-xl bg-[#f8f7fc] px-3 py-2.5 text-[0.84rem] font-semibold text-(--text-secondary)">
-                <UserRound size={15} className="text-[#3b2a80]" />
-                Member since {joinedAt}
-              </div>
-              {product.lender.location && (
-                <div className="flex items-center gap-2 rounded-xl bg-[#f8f7fc] px-3 py-2.5 text-[0.84rem] font-semibold text-(--text-secondary)">
-                  <MapPin size={15} className="text-[#3b2a80]" />
-                  {product.lender.location}
-                </div>
-              )}
-            </div>
-
-            <div className="mt-4">
-              <div className="mb-2 text-[0.8rem] font-black uppercase tracking-[0.08em] text-[#9187b0]">
-                Verification
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                {verifiedItems.map((item) => (
-                  <div
-                    key={item.label}
-                    className={`flex items-center gap-2 rounded-xl border px-3 py-2 text-[0.8rem] font-bold ${
-                      item.value
-                        ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                        : "border-[#e3dcf3] bg-[#f8f7fc] text-[#9187b0]"
-                    }`}
-                  >
-                    <BadgeCheck size={14} />
-                    {item.label}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={openMsgModal}
-              className="mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-[#3b2a80] py-3 text-[0.9rem] font-black text-white"
-            >
-              <MessageSquare size={16} /> Message Lender
-            </button>
-          </div>
-        </div>
+        <UserProfileModal userId={product.lender.id} onClose={() => setLenderOpen(false)} />
       )}
     </main>
   );

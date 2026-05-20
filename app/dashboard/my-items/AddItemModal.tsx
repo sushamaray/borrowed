@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Plus, X, CheckCircle2, XCircle, MapPin, Pencil } from "lucide-react";
 import toast from "react-hot-toast";
 import CategoryPicker from "@/components/dashboard/CategoryPicker";
@@ -122,8 +122,21 @@ function ListEditor({
   );
 }
 
-export default function AddItemModal() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function AddItemModal({
+  open: controlledOpen,
+  onOpenChange,
+}: {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+} = {}) {
+  const isControlled = controlledOpen !== undefined;
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = isControlled ? controlledOpen! : internalOpen;
+  const setIsOpen = (v: boolean) => {
+    if (isControlled) onOpenChange?.(v);
+    else setInternalOpen(v);
+  };
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showLocationPicker, setShowLocationPicker] = useState(false);
   const [locationLoading, setLocationLoading] = useState(false);
@@ -142,19 +155,16 @@ export default function AddItemModal() {
   const [features, setFeatures] = useState<string[]>([]);
   const [drawbacks, setDrawbacks] = useState<string[]>([]);
 
-  const handleOpen = async () => {
-    setIsOpen(true);
+  // Fetch user location whenever the modal opens
+  useEffect(() => {
+    if (!isOpen) return;
     setLocationLoading(true);
-    try {
-      const res = await fetch("/api/user/location");
-      if (res.ok) {
-        const data = await res.json() as { location?: string };
-        if (data.location) setFormData((prev) => ({ ...prev, location: data.location! }));
-      }
-    } finally {
-      setLocationLoading(false);
-    }
-  };
+    fetch("/api/user/location")
+      .then((r) => r.ok ? r.json() as Promise<{ location?: string }> : null)
+      .then((d) => { if (d?.location) setFormData((prev) => ({ ...prev, location: d.location! })); })
+      .catch(() => {})
+      .finally(() => setLocationLoading(false));
+  }, [isOpen]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -214,13 +224,15 @@ export default function AddItemModal() {
 
   return (
     <>
-      <button
-        onClick={() => { void handleOpen(); }}
-        className="inline-flex items-center gap-2 rounded-full bg-[var(--primary)] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--primary-hover)] active:bg-[var(--primary-active)]"
-      >
-        <Plus className="h-5 w-5" />
-        Add Item
-      </button>
+      {!isControlled && (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="inline-flex items-center gap-2 rounded-full bg-[var(--primary)] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[var(--primary-hover)] active:bg-[var(--primary-active)]"
+        >
+          <Plus className="h-5 w-5" />
+          Add Item
+        </button>
+      )}
 
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
