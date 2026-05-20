@@ -168,9 +168,9 @@ CREATE TABLE `BorrowCheckout` (
   PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- ── 12. Create NidVerification ────────────────────────────────────────────────
+-- ── 12. Create IdVerification ────────────────────────────────────────────────
 
-CREATE TABLE `NidVerification` (
+CREATE TABLE `IdVerification` (
   `id`             VARCHAR(191) NOT NULL,
   `userId`         VARCHAR(191) NOT NULL,
   `frontImage`     LONGBLOB     NULL,
@@ -184,8 +184,8 @@ CREATE TABLE `NidVerification` (
   `submittedAt`    DATETIME(3)  NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
   `reviewedAt`     DATETIME(3)  NULL,
 
-  UNIQUE INDEX `NidVerification_userId_key`(`userId`),
-  INDEX `NidVerification_userId_idx`(`userId`),
+  UNIQUE INDEX `IdVerification_userId_key`(`userId`),
+  INDEX `IdVerification_userId_idx`(`userId`),
   PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -231,8 +231,8 @@ ALTER TABLE `BorrowCheckout`
   ADD CONSTRAINT `BorrowCheckout_borrowRequestOfferId_fkey`
   FOREIGN KEY (`borrowRequestOfferId`) REFERENCES `BorrowRequestOffer`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
-ALTER TABLE `NidVerification`
-  ADD CONSTRAINT `NidVerification_userId_fkey`
+ALTER TABLE `IdVerification`
+  ADD CONSTRAINT `IdVerification_userId_fkey`
   FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 SET FOREIGN_KEY_CHECKS = 1;

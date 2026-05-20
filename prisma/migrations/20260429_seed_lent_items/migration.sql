@@ -9,7 +9,7 @@ INSERT INTO `User` (
     `createdAt`,
     `identityVerified`,
     `contactVerified`,
-    `nidVerified`,
+    `idVerified`,
     `addressVerified`,
     `meetupVerified`
 ) VALUES

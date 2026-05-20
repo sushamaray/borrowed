@@ -3,7 +3,7 @@ ALTER TABLE `user` ADD COLUMN `addressVerified` BOOLEAN NOT NULL DEFAULT false,
     ADD COLUMN `contactVerified` BOOLEAN NOT NULL DEFAULT false,
     ADD COLUMN `identityVerified` BOOLEAN NOT NULL DEFAULT false,
     ADD COLUMN `meetupVerified` BOOLEAN NOT NULL DEFAULT false,
-    ADD COLUMN `nidVerified` BOOLEAN NOT NULL DEFAULT false,
+    ADD COLUMN `idVerified` BOOLEAN NOT NULL DEFAULT false,
     ADD COLUMN `profilePicture` VARCHAR(191) NULL;
 
 -- CreateTable
