@@ -1,5 +1,3 @@
--- Rename NidVerification table to IdVerification
-RENAME TABLE `NidVerification` TO `IdVerification`;
-
--- Rename nidVerified column to idVerified on User table
-ALTER TABLE `User` RENAME COLUMN `nidVerified` TO `idVerified`;
+-- RENAME TABLE already applied in prior partial run; skipped here.
+-- RENAME COLUMN is not supported in MariaDB; use CHANGE COLUMN instead.
+ALTER TABLE `User` CHANGE `nidVerified` `idVerified` BOOLEAN NOT NULL DEFAULT false;
