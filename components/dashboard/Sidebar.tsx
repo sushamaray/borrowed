@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Home, Package, Clock, MessageCircle, ShoppingCart,
-  User, Settings, Search, GraduationCap, Star, Inbox, ClipboardList,
+  User, Settings, Search, GraduationCap, Star, Inbox, ClipboardList, ShieldAlert,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
 
@@ -199,6 +199,35 @@ export default function Sidebar({ onNavigate, isCollapsed = false }: SidebarProp
                 icon={iconMap["star"]}
                 isCollapsed={isCollapsed}
               />
+            </div>
+          </div>
+        )}
+
+        {session?.user?.isAdmin && (
+          <div className="mt-5">
+            {!isCollapsed && (
+              <h3 className="px-3 pb-1.5 text-[0.6rem] font-black uppercase tracking-[0.16em] text-white/25">
+                Admin
+              </h3>
+            )}
+            {isCollapsed && <div className="h-1" />}
+            <div className="relative space-y-0.5 px-1">
+              <Link
+                href="/admin/disputes"
+                onClick={onNavigate}
+                className={`group relative z-10 flex h-11 items-center gap-2.5 rounded-[0.65rem] text-sm font-semibold transition-colors duration-200 text-red-400/80 hover:text-red-300 hover:bg-red-950/30 ${
+                  isCollapsed ? "justify-center px-0" : "px-[0.85rem]"
+                }`}
+                title={isCollapsed ? "Admin Console" : undefined}
+              >
+                <ShieldAlert className="h-[18px] w-[18px] shrink-0" />
+                {!isCollapsed && <span className="flex-1 whitespace-nowrap">Admin Console</span>}
+                {isCollapsed && (
+                  <div className="pointer-events-none absolute left-full ml-2 hidden whitespace-nowrap rounded-lg bg-[#12082e] px-2.5 py-1.5 text-xs text-white shadow-xl group-hover:block border border-white/10 z-50">
+                    Admin Console
+                  </div>
+                )}
+              </Link>
             </div>
           </div>
         )}

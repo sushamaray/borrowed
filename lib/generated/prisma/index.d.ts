@@ -113,6 +113,21 @@ export type TrailReaction = $Result.DefaultSelection<Prisma.$TrailReactionPayloa
  * 
  */
 export type IdVerification = $Result.DefaultSelection<Prisma.$IdVerificationPayload>
+/**
+ * Model Dispute
+ * 
+ */
+export type Dispute = $Result.DefaultSelection<Prisma.$DisputePayload>
+/**
+ * Model DisputeResolution
+ * 
+ */
+export type DisputeResolution = $Result.DefaultSelection<Prisma.$DisputeResolutionPayload>
+/**
+ * Model DisputeEvent
+ * 
+ */
+export type DisputeEvent = $Result.DefaultSelection<Prisma.$DisputeEventPayload>
 
 /**
  * Enums
@@ -125,11 +140,39 @@ export namespace $Enums {
 
 export type SessionFormat = (typeof SessionFormat)[keyof typeof SessionFormat]
 
+
+export const DisputeStatus: {
+  OPEN: 'OPEN',
+  UNDER_REVIEW: 'UNDER_REVIEW',
+  ESCALATED: 'ESCALATED',
+  RESOLVED: 'RESOLVED',
+  CLOSED: 'CLOSED'
+};
+
+export type DisputeStatus = (typeof DisputeStatus)[keyof typeof DisputeStatus]
+
+
+export const DecisionType: {
+  RELEASE_TO_LENDER: 'RELEASE_TO_LENDER',
+  RETURN_TO_BORROWER: 'RETURN_TO_BORROWER',
+  SPLIT: 'SPLIT'
+};
+
+export type DecisionType = (typeof DecisionType)[keyof typeof DecisionType]
+
 }
 
 export type SessionFormat = $Enums.SessionFormat
 
 export const SessionFormat: typeof $Enums.SessionFormat
+
+export type DisputeStatus = $Enums.DisputeStatus
+
+export const DisputeStatus: typeof $Enums.DisputeStatus
+
+export type DecisionType = $Enums.DecisionType
+
+export const DecisionType: typeof $Enums.DecisionType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -453,6 +496,36 @@ export class PrismaClient<
     * ```
     */
   get idVerification(): Prisma.IdVerificationDelegate<ExtArgs>;
+
+  /**
+   * `prisma.dispute`: Exposes CRUD operations for the **Dispute** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Disputes
+    * const disputes = await prisma.dispute.findMany()
+    * ```
+    */
+  get dispute(): Prisma.DisputeDelegate<ExtArgs>;
+
+  /**
+   * `prisma.disputeResolution`: Exposes CRUD operations for the **DisputeResolution** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DisputeResolutions
+    * const disputeResolutions = await prisma.disputeResolution.findMany()
+    * ```
+    */
+  get disputeResolution(): Prisma.DisputeResolutionDelegate<ExtArgs>;
+
+  /**
+   * `prisma.disputeEvent`: Exposes CRUD operations for the **DisputeEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more DisputeEvents
+    * const disputeEvents = await prisma.disputeEvent.findMany()
+    * ```
+    */
+  get disputeEvent(): Prisma.DisputeEventDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -913,7 +986,10 @@ export namespace Prisma {
     Authenticator: 'Authenticator',
     ItemTrailEntry: 'ItemTrailEntry',
     TrailReaction: 'TrailReaction',
-    IdVerification: 'IdVerification'
+    IdVerification: 'IdVerification',
+    Dispute: 'Dispute',
+    DisputeResolution: 'DisputeResolution',
+    DisputeEvent: 'DisputeEvent'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -929,7 +1005,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "product" | "lentItem" | "borrowRequest" | "borrowRequestOffer" | "borrowCheckout" | "notification" | "mentor" | "mentorBooking" | "conversation" | "conversationParticipant" | "message" | "cartItem" | "account" | "session" | "verificationToken" | "authenticator" | "itemTrailEntry" | "trailReaction" | "idVerification"
+      modelProps: "user" | "product" | "lentItem" | "borrowRequest" | "borrowRequestOffer" | "borrowCheckout" | "notification" | "mentor" | "mentorBooking" | "conversation" | "conversationParticipant" | "message" | "cartItem" | "account" | "session" | "verificationToken" | "authenticator" | "itemTrailEntry" | "trailReaction" | "idVerification" | "dispute" | "disputeResolution" | "disputeEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2253,6 +2329,204 @@ export namespace Prisma {
           }
         }
       }
+      Dispute: {
+        payload: Prisma.$DisputePayload<ExtArgs>
+        fields: Prisma.DisputeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DisputeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DisputeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          findFirst: {
+            args: Prisma.DisputeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DisputeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          findMany: {
+            args: Prisma.DisputeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>[]
+          }
+          create: {
+            args: Prisma.DisputeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          createMany: {
+            args: Prisma.DisputeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.DisputeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          update: {
+            args: Prisma.DisputeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          deleteMany: {
+            args: Prisma.DisputeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DisputeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DisputeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputePayload>
+          }
+          aggregate: {
+            args: Prisma.DisputeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDispute>
+          }
+          groupBy: {
+            args: Prisma.DisputeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DisputeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DisputeCountArgs<ExtArgs>
+            result: $Utils.Optional<DisputeCountAggregateOutputType> | number
+          }
+        }
+      }
+      DisputeResolution: {
+        payload: Prisma.$DisputeResolutionPayload<ExtArgs>
+        fields: Prisma.DisputeResolutionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DisputeResolutionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeResolutionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DisputeResolutionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeResolutionPayload>
+          }
+          findFirst: {
+            args: Prisma.DisputeResolutionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeResolutionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DisputeResolutionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeResolutionPayload>
+          }
+          findMany: {
+            args: Prisma.DisputeResolutionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeResolutionPayload>[]
+          }
+          create: {
+            args: Prisma.DisputeResolutionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeResolutionPayload>
+          }
+          createMany: {
+            args: Prisma.DisputeResolutionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.DisputeResolutionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeResolutionPayload>
+          }
+          update: {
+            args: Prisma.DisputeResolutionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeResolutionPayload>
+          }
+          deleteMany: {
+            args: Prisma.DisputeResolutionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DisputeResolutionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DisputeResolutionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeResolutionPayload>
+          }
+          aggregate: {
+            args: Prisma.DisputeResolutionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDisputeResolution>
+          }
+          groupBy: {
+            args: Prisma.DisputeResolutionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DisputeResolutionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DisputeResolutionCountArgs<ExtArgs>
+            result: $Utils.Optional<DisputeResolutionCountAggregateOutputType> | number
+          }
+        }
+      }
+      DisputeEvent: {
+        payload: Prisma.$DisputeEventPayload<ExtArgs>
+        fields: Prisma.DisputeEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DisputeEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DisputeEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeEventPayload>
+          }
+          findFirst: {
+            args: Prisma.DisputeEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DisputeEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeEventPayload>
+          }
+          findMany: {
+            args: Prisma.DisputeEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeEventPayload>[]
+          }
+          create: {
+            args: Prisma.DisputeEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeEventPayload>
+          }
+          createMany: {
+            args: Prisma.DisputeEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.DisputeEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeEventPayload>
+          }
+          update: {
+            args: Prisma.DisputeEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.DisputeEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DisputeEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DisputeEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DisputeEventPayload>
+          }
+          aggregate: {
+            args: Prisma.DisputeEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDisputeEvent>
+          }
+          groupBy: {
+            args: Prisma.DisputeEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DisputeEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DisputeEventCountArgs<ExtArgs>
+            result: $Utils.Optional<DisputeEventCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2430,6 +2704,10 @@ export namespace Prisma {
     trailEntries: number
     trailReactions: number
     notifications: number
+    disputesRaised: number
+    disputesAsBorrower: number
+    disputesAsLender: number
+    disputeResolutions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2449,6 +2727,10 @@ export namespace Prisma {
     trailEntries?: boolean | UserCountOutputTypeCountTrailEntriesArgs
     trailReactions?: boolean | UserCountOutputTypeCountTrailReactionsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+    disputesRaised?: boolean | UserCountOutputTypeCountDisputesRaisedArgs
+    disputesAsBorrower?: boolean | UserCountOutputTypeCountDisputesAsBorrowerArgs
+    disputesAsLender?: boolean | UserCountOutputTypeCountDisputesAsLenderArgs
+    disputeResolutions?: boolean | UserCountOutputTypeCountDisputeResolutionsArgs
   }
 
   // Custom InputTypes
@@ -2572,6 +2854,34 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: NotificationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDisputesRaisedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDisputesAsBorrowerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDisputesAsLenderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDisputeResolutionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputeResolutionWhereInput
   }
 
 
@@ -2816,6 +3126,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type DisputeCountOutputType
+   */
+
+  export type DisputeCountOutputType = {
+    events: number
+  }
+
+  export type DisputeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    events?: boolean | DisputeCountOutputTypeCountEventsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DisputeCountOutputType without action
+   */
+  export type DisputeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeCountOutputType
+     */
+    select?: DisputeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DisputeCountOutputType without action
+   */
+  export type DisputeCountOutputTypeCountEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputeEventWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2862,6 +3203,7 @@ export namespace Prisma {
     addressVerified: boolean | null
     meetupVerified: boolean | null
     verifiedAt: Date | null
+    isAdmin: boolean | null
     createdAt: Date | null
   }
 
@@ -2886,6 +3228,7 @@ export namespace Prisma {
     addressVerified: boolean | null
     meetupVerified: boolean | null
     verifiedAt: Date | null
+    isAdmin: boolean | null
     createdAt: Date | null
   }
 
@@ -2910,6 +3253,7 @@ export namespace Prisma {
     addressVerified: number
     meetupVerified: number
     verifiedAt: number
+    isAdmin: number
     createdAt: number
     _all: number
   }
@@ -2946,6 +3290,7 @@ export namespace Prisma {
     addressVerified?: true
     meetupVerified?: true
     verifiedAt?: true
+    isAdmin?: true
     createdAt?: true
   }
 
@@ -2970,6 +3315,7 @@ export namespace Prisma {
     addressVerified?: true
     meetupVerified?: true
     verifiedAt?: true
+    isAdmin?: true
     createdAt?: true
   }
 
@@ -2994,6 +3340,7 @@ export namespace Prisma {
     addressVerified?: true
     meetupVerified?: true
     verifiedAt?: true
+    isAdmin?: true
     createdAt?: true
     _all?: true
   }
@@ -3105,6 +3452,7 @@ export namespace Prisma {
     addressVerified: boolean
     meetupVerified: boolean
     verifiedAt: Date | null
+    isAdmin: boolean
     createdAt: Date
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -3148,6 +3496,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: boolean
+    isAdmin?: boolean
     createdAt?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
@@ -3167,6 +3516,10 @@ export namespace Prisma {
     trailReactions?: boolean | User$trailReactionsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     idVerification?: boolean | User$idVerificationArgs<ExtArgs>
+    disputesRaised?: boolean | User$disputesRaisedArgs<ExtArgs>
+    disputesAsBorrower?: boolean | User$disputesAsBorrowerArgs<ExtArgs>
+    disputesAsLender?: boolean | User$disputesAsLenderArgs<ExtArgs>
+    disputeResolutions?: boolean | User$disputeResolutionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3192,6 +3545,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: boolean
+    isAdmin?: boolean
     createdAt?: boolean
   }
 
@@ -3214,6 +3568,10 @@ export namespace Prisma {
     trailReactions?: boolean | User$trailReactionsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     idVerification?: boolean | User$idVerificationArgs<ExtArgs>
+    disputesRaised?: boolean | User$disputesRaisedArgs<ExtArgs>
+    disputesAsBorrower?: boolean | User$disputesAsBorrowerArgs<ExtArgs>
+    disputesAsLender?: boolean | User$disputesAsLenderArgs<ExtArgs>
+    disputeResolutions?: boolean | User$disputeResolutionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3238,6 +3596,10 @@ export namespace Prisma {
       trailReactions: Prisma.$TrailReactionPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       idVerification: Prisma.$IdVerificationPayload<ExtArgs> | null
+      disputesRaised: Prisma.$DisputePayload<ExtArgs>[]
+      disputesAsBorrower: Prisma.$DisputePayload<ExtArgs>[]
+      disputesAsLender: Prisma.$DisputePayload<ExtArgs>[]
+      disputeResolutions: Prisma.$DisputeResolutionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3260,6 +3622,7 @@ export namespace Prisma {
       addressVerified: boolean
       meetupVerified: boolean
       verifiedAt: Date | null
+      isAdmin: boolean
       createdAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -3619,6 +3982,10 @@ export namespace Prisma {
     trailReactions<T extends User$trailReactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$trailReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrailReactionPayload<ExtArgs>, T, "findMany"> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany"> | Null>
     idVerification<T extends User$idVerificationArgs<ExtArgs> = {}>(args?: Subset<T, User$idVerificationArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    disputesRaised<T extends User$disputesRaisedArgs<ExtArgs> = {}>(args?: Subset<T, User$disputesRaisedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findMany"> | Null>
+    disputesAsBorrower<T extends User$disputesAsBorrowerArgs<ExtArgs> = {}>(args?: Subset<T, User$disputesAsBorrowerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findMany"> | Null>
+    disputesAsLender<T extends User$disputesAsLenderArgs<ExtArgs> = {}>(args?: Subset<T, User$disputesAsLenderArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findMany"> | Null>
+    disputeResolutions<T extends User$disputeResolutionsArgs<ExtArgs> = {}>(args?: Subset<T, User$disputeResolutionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3668,6 +4035,7 @@ export namespace Prisma {
     readonly addressVerified: FieldRef<"User", 'Boolean'>
     readonly meetupVerified: FieldRef<"User", 'Boolean'>
     readonly verifiedAt: FieldRef<"User", 'DateTime'>
+    readonly isAdmin: FieldRef<"User", 'Boolean'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
   }
     
@@ -4315,6 +4683,86 @@ export namespace Prisma {
      */
     include?: IdVerificationInclude<ExtArgs> | null
     where?: IdVerificationWhereInput
+  }
+
+  /**
+   * User.disputesRaised
+   */
+  export type User$disputesRaisedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    where?: DisputeWhereInput
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    cursor?: DisputeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DisputeScalarFieldEnum | DisputeScalarFieldEnum[]
+  }
+
+  /**
+   * User.disputesAsBorrower
+   */
+  export type User$disputesAsBorrowerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    where?: DisputeWhereInput
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    cursor?: DisputeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DisputeScalarFieldEnum | DisputeScalarFieldEnum[]
+  }
+
+  /**
+   * User.disputesAsLender
+   */
+  export type User$disputesAsLenderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    where?: DisputeWhereInput
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    cursor?: DisputeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DisputeScalarFieldEnum | DisputeScalarFieldEnum[]
+  }
+
+  /**
+   * User.disputeResolutions
+   */
+  export type User$disputeResolutionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    where?: DisputeResolutionWhereInput
+    orderBy?: DisputeResolutionOrderByWithRelationInput | DisputeResolutionOrderByWithRelationInput[]
+    cursor?: DisputeResolutionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DisputeResolutionScalarFieldEnum | DisputeResolutionScalarFieldEnum[]
   }
 
   /**
@@ -8724,6 +9172,7 @@ export namespace Prisma {
     lentItem?: boolean | BorrowCheckout$lentItemArgs<ExtArgs>
     offer?: boolean | BorrowCheckout$offerArgs<ExtArgs>
     trailEntry?: boolean | BorrowCheckout$trailEntryArgs<ExtArgs>
+    dispute?: boolean | BorrowCheckout$disputeArgs<ExtArgs>
   }, ExtArgs["result"]["borrowCheckout"]>
 
 
@@ -8755,6 +9204,7 @@ export namespace Prisma {
     lentItem?: boolean | BorrowCheckout$lentItemArgs<ExtArgs>
     offer?: boolean | BorrowCheckout$offerArgs<ExtArgs>
     trailEntry?: boolean | BorrowCheckout$trailEntryArgs<ExtArgs>
+    dispute?: boolean | BorrowCheckout$disputeArgs<ExtArgs>
   }
 
   export type $BorrowCheckoutPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8766,6 +9216,7 @@ export namespace Prisma {
       lentItem: Prisma.$LentItemPayload<ExtArgs> | null
       offer: Prisma.$BorrowRequestOfferPayload<ExtArgs> | null
       trailEntry: Prisma.$ItemTrailEntryPayload<ExtArgs> | null
+      dispute: Prisma.$DisputePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9132,6 +9583,7 @@ export namespace Prisma {
     lentItem<T extends BorrowCheckout$lentItemArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$lentItemArgs<ExtArgs>>): Prisma__LentItemClient<$Result.GetResult<Prisma.$LentItemPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     offer<T extends BorrowCheckout$offerArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$offerArgs<ExtArgs>>): Prisma__BorrowRequestOfferClient<$Result.GetResult<Prisma.$BorrowRequestOfferPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     trailEntry<T extends BorrowCheckout$trailEntryArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$trailEntryArgs<ExtArgs>>): Prisma__ItemTrailEntryClient<$Result.GetResult<Prisma.$ItemTrailEntryPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    dispute<T extends BorrowCheckout$disputeArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$disputeArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9520,6 +9972,21 @@ export namespace Prisma {
      */
     include?: ItemTrailEntryInclude<ExtArgs> | null
     where?: ItemTrailEntryWhereInput
+  }
+
+  /**
+   * BorrowCheckout.dispute
+   */
+  export type BorrowCheckout$disputeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    where?: DisputeWhereInput
   }
 
   /**
@@ -22601,6 +23068,2945 @@ export namespace Prisma {
 
 
   /**
+   * Model Dispute
+   */
+
+  export type AggregateDispute = {
+    _count: DisputeCountAggregateOutputType | null
+    _avg: DisputeAvgAggregateOutputType | null
+    _sum: DisputeSumAggregateOutputType | null
+    _min: DisputeMinAggregateOutputType | null
+    _max: DisputeMaxAggregateOutputType | null
+  }
+
+  export type DisputeAvgAggregateOutputType = {
+    depositAmount: number | null
+    aiConfidence: number | null
+  }
+
+  export type DisputeSumAggregateOutputType = {
+    depositAmount: number | null
+    aiConfidence: number | null
+  }
+
+  export type DisputeMinAggregateOutputType = {
+    id: string | null
+    checkoutId: string | null
+    raisedById: string | null
+    borrowerId: string | null
+    lenderId: string | null
+    status: $Enums.DisputeStatus | null
+    title: string | null
+    description: string | null
+    depositAmount: number | null
+    beforePhotoUrl: string | null
+    afterPhotoUrl: string | null
+    aiVerdict: string | null
+    aiConfidence: number | null
+    aiNotes: string | null
+    raisedAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DisputeMaxAggregateOutputType = {
+    id: string | null
+    checkoutId: string | null
+    raisedById: string | null
+    borrowerId: string | null
+    lenderId: string | null
+    status: $Enums.DisputeStatus | null
+    title: string | null
+    description: string | null
+    depositAmount: number | null
+    beforePhotoUrl: string | null
+    afterPhotoUrl: string | null
+    aiVerdict: string | null
+    aiConfidence: number | null
+    aiNotes: string | null
+    raisedAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DisputeCountAggregateOutputType = {
+    id: number
+    checkoutId: number
+    raisedById: number
+    borrowerId: number
+    lenderId: number
+    status: number
+    title: number
+    description: number
+    depositAmount: number
+    beforePhotoUrl: number
+    afterPhotoUrl: number
+    aiVerdict: number
+    aiConfidence: number
+    aiNotes: number
+    raisedAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DisputeAvgAggregateInputType = {
+    depositAmount?: true
+    aiConfidence?: true
+  }
+
+  export type DisputeSumAggregateInputType = {
+    depositAmount?: true
+    aiConfidence?: true
+  }
+
+  export type DisputeMinAggregateInputType = {
+    id?: true
+    checkoutId?: true
+    raisedById?: true
+    borrowerId?: true
+    lenderId?: true
+    status?: true
+    title?: true
+    description?: true
+    depositAmount?: true
+    beforePhotoUrl?: true
+    afterPhotoUrl?: true
+    aiVerdict?: true
+    aiConfidence?: true
+    aiNotes?: true
+    raisedAt?: true
+    updatedAt?: true
+  }
+
+  export type DisputeMaxAggregateInputType = {
+    id?: true
+    checkoutId?: true
+    raisedById?: true
+    borrowerId?: true
+    lenderId?: true
+    status?: true
+    title?: true
+    description?: true
+    depositAmount?: true
+    beforePhotoUrl?: true
+    afterPhotoUrl?: true
+    aiVerdict?: true
+    aiConfidence?: true
+    aiNotes?: true
+    raisedAt?: true
+    updatedAt?: true
+  }
+
+  export type DisputeCountAggregateInputType = {
+    id?: true
+    checkoutId?: true
+    raisedById?: true
+    borrowerId?: true
+    lenderId?: true
+    status?: true
+    title?: true
+    description?: true
+    depositAmount?: true
+    beforePhotoUrl?: true
+    afterPhotoUrl?: true
+    aiVerdict?: true
+    aiConfidence?: true
+    aiNotes?: true
+    raisedAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DisputeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Dispute to aggregate.
+     */
+    where?: DisputeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Disputes to fetch.
+     */
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DisputeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Disputes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Disputes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Disputes
+    **/
+    _count?: true | DisputeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DisputeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DisputeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DisputeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DisputeMaxAggregateInputType
+  }
+
+  export type GetDisputeAggregateType<T extends DisputeAggregateArgs> = {
+        [P in keyof T & keyof AggregateDispute]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDispute[P]>
+      : GetScalarType<T[P], AggregateDispute[P]>
+  }
+
+
+
+
+  export type DisputeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputeWhereInput
+    orderBy?: DisputeOrderByWithAggregationInput | DisputeOrderByWithAggregationInput[]
+    by: DisputeScalarFieldEnum[] | DisputeScalarFieldEnum
+    having?: DisputeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DisputeCountAggregateInputType | true
+    _avg?: DisputeAvgAggregateInputType
+    _sum?: DisputeSumAggregateInputType
+    _min?: DisputeMinAggregateInputType
+    _max?: DisputeMaxAggregateInputType
+  }
+
+  export type DisputeGroupByOutputType = {
+    id: string
+    checkoutId: string
+    raisedById: string
+    borrowerId: string
+    lenderId: string
+    status: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl: string | null
+    afterPhotoUrl: string | null
+    aiVerdict: string | null
+    aiConfidence: number | null
+    aiNotes: string | null
+    raisedAt: Date
+    updatedAt: Date
+    _count: DisputeCountAggregateOutputType | null
+    _avg: DisputeAvgAggregateOutputType | null
+    _sum: DisputeSumAggregateOutputType | null
+    _min: DisputeMinAggregateOutputType | null
+    _max: DisputeMaxAggregateOutputType | null
+  }
+
+  type GetDisputeGroupByPayload<T extends DisputeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DisputeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DisputeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DisputeGroupByOutputType[P]>
+            : GetScalarType<T[P], DisputeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DisputeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    checkoutId?: boolean
+    raisedById?: boolean
+    borrowerId?: boolean
+    lenderId?: boolean
+    status?: boolean
+    title?: boolean
+    description?: boolean
+    depositAmount?: boolean
+    beforePhotoUrl?: boolean
+    afterPhotoUrl?: boolean
+    aiVerdict?: boolean
+    aiConfidence?: boolean
+    aiNotes?: boolean
+    raisedAt?: boolean
+    updatedAt?: boolean
+    checkout?: boolean | BorrowCheckoutDefaultArgs<ExtArgs>
+    raisedBy?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    resolution?: boolean | Dispute$resolutionArgs<ExtArgs>
+    events?: boolean | Dispute$eventsArgs<ExtArgs>
+    _count?: boolean | DisputeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["dispute"]>
+
+
+  export type DisputeSelectScalar = {
+    id?: boolean
+    checkoutId?: boolean
+    raisedById?: boolean
+    borrowerId?: boolean
+    lenderId?: boolean
+    status?: boolean
+    title?: boolean
+    description?: boolean
+    depositAmount?: boolean
+    beforePhotoUrl?: boolean
+    afterPhotoUrl?: boolean
+    aiVerdict?: boolean
+    aiConfidence?: boolean
+    aiNotes?: boolean
+    raisedAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DisputeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    checkout?: boolean | BorrowCheckoutDefaultArgs<ExtArgs>
+    raisedBy?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    resolution?: boolean | Dispute$resolutionArgs<ExtArgs>
+    events?: boolean | Dispute$eventsArgs<ExtArgs>
+    _count?: boolean | DisputeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $DisputePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Dispute"
+    objects: {
+      checkout: Prisma.$BorrowCheckoutPayload<ExtArgs>
+      raisedBy: Prisma.$UserPayload<ExtArgs>
+      borrower: Prisma.$UserPayload<ExtArgs>
+      lender: Prisma.$UserPayload<ExtArgs>
+      resolution: Prisma.$DisputeResolutionPayload<ExtArgs> | null
+      events: Prisma.$DisputeEventPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      checkoutId: string
+      raisedById: string
+      borrowerId: string
+      lenderId: string
+      status: $Enums.DisputeStatus
+      title: string
+      description: string
+      depositAmount: number
+      beforePhotoUrl: string | null
+      afterPhotoUrl: string | null
+      aiVerdict: string | null
+      aiConfidence: number | null
+      aiNotes: string | null
+      raisedAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["dispute"]>
+    composites: {}
+  }
+
+  type DisputeGetPayload<S extends boolean | null | undefined | DisputeDefaultArgs> = $Result.GetResult<Prisma.$DisputePayload, S>
+
+  type DisputeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<DisputeFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: DisputeCountAggregateInputType | true
+    }
+
+  export interface DisputeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Dispute'], meta: { name: 'Dispute' } }
+    /**
+     * Find zero or one Dispute that matches the filter.
+     * @param {DisputeFindUniqueArgs} args - Arguments to find a Dispute
+     * @example
+     * // Get one Dispute
+     * const dispute = await prisma.dispute.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DisputeFindUniqueArgs>(args: SelectSubset<T, DisputeFindUniqueArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Dispute that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {DisputeFindUniqueOrThrowArgs} args - Arguments to find a Dispute
+     * @example
+     * // Get one Dispute
+     * const dispute = await prisma.dispute.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DisputeFindUniqueOrThrowArgs>(args: SelectSubset<T, DisputeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Dispute that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeFindFirstArgs} args - Arguments to find a Dispute
+     * @example
+     * // Get one Dispute
+     * const dispute = await prisma.dispute.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DisputeFindFirstArgs>(args?: SelectSubset<T, DisputeFindFirstArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Dispute that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeFindFirstOrThrowArgs} args - Arguments to find a Dispute
+     * @example
+     * // Get one Dispute
+     * const dispute = await prisma.dispute.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DisputeFindFirstOrThrowArgs>(args?: SelectSubset<T, DisputeFindFirstOrThrowArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Disputes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Disputes
+     * const disputes = await prisma.dispute.findMany()
+     * 
+     * // Get first 10 Disputes
+     * const disputes = await prisma.dispute.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const disputeWithIdOnly = await prisma.dispute.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DisputeFindManyArgs>(args?: SelectSubset<T, DisputeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Dispute.
+     * @param {DisputeCreateArgs} args - Arguments to create a Dispute.
+     * @example
+     * // Create one Dispute
+     * const Dispute = await prisma.dispute.create({
+     *   data: {
+     *     // ... data to create a Dispute
+     *   }
+     * })
+     * 
+     */
+    create<T extends DisputeCreateArgs>(args: SelectSubset<T, DisputeCreateArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Disputes.
+     * @param {DisputeCreateManyArgs} args - Arguments to create many Disputes.
+     * @example
+     * // Create many Disputes
+     * const dispute = await prisma.dispute.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DisputeCreateManyArgs>(args?: SelectSubset<T, DisputeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Dispute.
+     * @param {DisputeDeleteArgs} args - Arguments to delete one Dispute.
+     * @example
+     * // Delete one Dispute
+     * const Dispute = await prisma.dispute.delete({
+     *   where: {
+     *     // ... filter to delete one Dispute
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DisputeDeleteArgs>(args: SelectSubset<T, DisputeDeleteArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Dispute.
+     * @param {DisputeUpdateArgs} args - Arguments to update one Dispute.
+     * @example
+     * // Update one Dispute
+     * const dispute = await prisma.dispute.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DisputeUpdateArgs>(args: SelectSubset<T, DisputeUpdateArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Disputes.
+     * @param {DisputeDeleteManyArgs} args - Arguments to filter Disputes to delete.
+     * @example
+     * // Delete a few Disputes
+     * const { count } = await prisma.dispute.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DisputeDeleteManyArgs>(args?: SelectSubset<T, DisputeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Disputes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Disputes
+     * const dispute = await prisma.dispute.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DisputeUpdateManyArgs>(args: SelectSubset<T, DisputeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Dispute.
+     * @param {DisputeUpsertArgs} args - Arguments to update or create a Dispute.
+     * @example
+     * // Update or create a Dispute
+     * const dispute = await prisma.dispute.upsert({
+     *   create: {
+     *     // ... data to create a Dispute
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Dispute we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DisputeUpsertArgs>(args: SelectSubset<T, DisputeUpsertArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Disputes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeCountArgs} args - Arguments to filter Disputes to count.
+     * @example
+     * // Count the number of Disputes
+     * const count = await prisma.dispute.count({
+     *   where: {
+     *     // ... the filter for the Disputes we want to count
+     *   }
+     * })
+    **/
+    count<T extends DisputeCountArgs>(
+      args?: Subset<T, DisputeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DisputeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Dispute.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DisputeAggregateArgs>(args: Subset<T, DisputeAggregateArgs>): Prisma.PrismaPromise<GetDisputeAggregateType<T>>
+
+    /**
+     * Group by Dispute.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DisputeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DisputeGroupByArgs['orderBy'] }
+        : { orderBy?: DisputeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DisputeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDisputeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Dispute model
+   */
+  readonly fields: DisputeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Dispute.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DisputeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    checkout<T extends BorrowCheckoutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckoutDefaultArgs<ExtArgs>>): Prisma__BorrowCheckoutClient<$Result.GetResult<Prisma.$BorrowCheckoutPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    raisedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    borrower<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    lender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    resolution<T extends Dispute$resolutionArgs<ExtArgs> = {}>(args?: Subset<T, Dispute$resolutionArgs<ExtArgs>>): Prisma__DisputeResolutionClient<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    events<T extends Dispute$eventsArgs<ExtArgs> = {}>(args?: Subset<T, Dispute$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Dispute model
+   */ 
+  interface DisputeFieldRefs {
+    readonly id: FieldRef<"Dispute", 'String'>
+    readonly checkoutId: FieldRef<"Dispute", 'String'>
+    readonly raisedById: FieldRef<"Dispute", 'String'>
+    readonly borrowerId: FieldRef<"Dispute", 'String'>
+    readonly lenderId: FieldRef<"Dispute", 'String'>
+    readonly status: FieldRef<"Dispute", 'DisputeStatus'>
+    readonly title: FieldRef<"Dispute", 'String'>
+    readonly description: FieldRef<"Dispute", 'String'>
+    readonly depositAmount: FieldRef<"Dispute", 'Int'>
+    readonly beforePhotoUrl: FieldRef<"Dispute", 'String'>
+    readonly afterPhotoUrl: FieldRef<"Dispute", 'String'>
+    readonly aiVerdict: FieldRef<"Dispute", 'String'>
+    readonly aiConfidence: FieldRef<"Dispute", 'Float'>
+    readonly aiNotes: FieldRef<"Dispute", 'String'>
+    readonly raisedAt: FieldRef<"Dispute", 'DateTime'>
+    readonly updatedAt: FieldRef<"Dispute", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Dispute findUnique
+   */
+  export type DisputeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    /**
+     * Filter, which Dispute to fetch.
+     */
+    where: DisputeWhereUniqueInput
+  }
+
+  /**
+   * Dispute findUniqueOrThrow
+   */
+  export type DisputeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    /**
+     * Filter, which Dispute to fetch.
+     */
+    where: DisputeWhereUniqueInput
+  }
+
+  /**
+   * Dispute findFirst
+   */
+  export type DisputeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    /**
+     * Filter, which Dispute to fetch.
+     */
+    where?: DisputeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Disputes to fetch.
+     */
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Disputes.
+     */
+    cursor?: DisputeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Disputes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Disputes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Disputes.
+     */
+    distinct?: DisputeScalarFieldEnum | DisputeScalarFieldEnum[]
+  }
+
+  /**
+   * Dispute findFirstOrThrow
+   */
+  export type DisputeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    /**
+     * Filter, which Dispute to fetch.
+     */
+    where?: DisputeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Disputes to fetch.
+     */
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Disputes.
+     */
+    cursor?: DisputeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Disputes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Disputes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Disputes.
+     */
+    distinct?: DisputeScalarFieldEnum | DisputeScalarFieldEnum[]
+  }
+
+  /**
+   * Dispute findMany
+   */
+  export type DisputeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    /**
+     * Filter, which Disputes to fetch.
+     */
+    where?: DisputeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Disputes to fetch.
+     */
+    orderBy?: DisputeOrderByWithRelationInput | DisputeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Disputes.
+     */
+    cursor?: DisputeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Disputes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Disputes.
+     */
+    skip?: number
+    distinct?: DisputeScalarFieldEnum | DisputeScalarFieldEnum[]
+  }
+
+  /**
+   * Dispute create
+   */
+  export type DisputeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Dispute.
+     */
+    data: XOR<DisputeCreateInput, DisputeUncheckedCreateInput>
+  }
+
+  /**
+   * Dispute createMany
+   */
+  export type DisputeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Disputes.
+     */
+    data: DisputeCreateManyInput | DisputeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Dispute update
+   */
+  export type DisputeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Dispute.
+     */
+    data: XOR<DisputeUpdateInput, DisputeUncheckedUpdateInput>
+    /**
+     * Choose, which Dispute to update.
+     */
+    where: DisputeWhereUniqueInput
+  }
+
+  /**
+   * Dispute updateMany
+   */
+  export type DisputeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Disputes.
+     */
+    data: XOR<DisputeUpdateManyMutationInput, DisputeUncheckedUpdateManyInput>
+    /**
+     * Filter which Disputes to update
+     */
+    where?: DisputeWhereInput
+  }
+
+  /**
+   * Dispute upsert
+   */
+  export type DisputeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Dispute to update in case it exists.
+     */
+    where: DisputeWhereUniqueInput
+    /**
+     * In case the Dispute found by the `where` argument doesn't exist, create a new Dispute with this data.
+     */
+    create: XOR<DisputeCreateInput, DisputeUncheckedCreateInput>
+    /**
+     * In case the Dispute was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DisputeUpdateInput, DisputeUncheckedUpdateInput>
+  }
+
+  /**
+   * Dispute delete
+   */
+  export type DisputeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+    /**
+     * Filter which Dispute to delete.
+     */
+    where: DisputeWhereUniqueInput
+  }
+
+  /**
+   * Dispute deleteMany
+   */
+  export type DisputeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Disputes to delete
+     */
+    where?: DisputeWhereInput
+  }
+
+  /**
+   * Dispute.resolution
+   */
+  export type Dispute$resolutionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    where?: DisputeResolutionWhereInput
+  }
+
+  /**
+   * Dispute.events
+   */
+  export type Dispute$eventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    where?: DisputeEventWhereInput
+    orderBy?: DisputeEventOrderByWithRelationInput | DisputeEventOrderByWithRelationInput[]
+    cursor?: DisputeEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DisputeEventScalarFieldEnum | DisputeEventScalarFieldEnum[]
+  }
+
+  /**
+   * Dispute without action
+   */
+  export type DisputeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Dispute
+     */
+    select?: DisputeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DisputeResolution
+   */
+
+  export type AggregateDisputeResolution = {
+    _count: DisputeResolutionCountAggregateOutputType | null
+    _avg: DisputeResolutionAvgAggregateOutputType | null
+    _sum: DisputeResolutionSumAggregateOutputType | null
+    _min: DisputeResolutionMinAggregateOutputType | null
+    _max: DisputeResolutionMaxAggregateOutputType | null
+  }
+
+  export type DisputeResolutionAvgAggregateOutputType = {
+    amountToLender: number | null
+    amountToBorrower: number | null
+  }
+
+  export type DisputeResolutionSumAggregateOutputType = {
+    amountToLender: number | null
+    amountToBorrower: number | null
+  }
+
+  export type DisputeResolutionMinAggregateOutputType = {
+    id: string | null
+    disputeId: string | null
+    resolvedById: string | null
+    decisionType: $Enums.DecisionType | null
+    amountToLender: number | null
+    amountToBorrower: number | null
+    justification: string | null
+    resolvedAt: Date | null
+  }
+
+  export type DisputeResolutionMaxAggregateOutputType = {
+    id: string | null
+    disputeId: string | null
+    resolvedById: string | null
+    decisionType: $Enums.DecisionType | null
+    amountToLender: number | null
+    amountToBorrower: number | null
+    justification: string | null
+    resolvedAt: Date | null
+  }
+
+  export type DisputeResolutionCountAggregateOutputType = {
+    id: number
+    disputeId: number
+    resolvedById: number
+    decisionType: number
+    amountToLender: number
+    amountToBorrower: number
+    justification: number
+    resolvedAt: number
+    _all: number
+  }
+
+
+  export type DisputeResolutionAvgAggregateInputType = {
+    amountToLender?: true
+    amountToBorrower?: true
+  }
+
+  export type DisputeResolutionSumAggregateInputType = {
+    amountToLender?: true
+    amountToBorrower?: true
+  }
+
+  export type DisputeResolutionMinAggregateInputType = {
+    id?: true
+    disputeId?: true
+    resolvedById?: true
+    decisionType?: true
+    amountToLender?: true
+    amountToBorrower?: true
+    justification?: true
+    resolvedAt?: true
+  }
+
+  export type DisputeResolutionMaxAggregateInputType = {
+    id?: true
+    disputeId?: true
+    resolvedById?: true
+    decisionType?: true
+    amountToLender?: true
+    amountToBorrower?: true
+    justification?: true
+    resolvedAt?: true
+  }
+
+  export type DisputeResolutionCountAggregateInputType = {
+    id?: true
+    disputeId?: true
+    resolvedById?: true
+    decisionType?: true
+    amountToLender?: true
+    amountToBorrower?: true
+    justification?: true
+    resolvedAt?: true
+    _all?: true
+  }
+
+  export type DisputeResolutionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DisputeResolution to aggregate.
+     */
+    where?: DisputeResolutionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DisputeResolutions to fetch.
+     */
+    orderBy?: DisputeResolutionOrderByWithRelationInput | DisputeResolutionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DisputeResolutionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DisputeResolutions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DisputeResolutions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DisputeResolutions
+    **/
+    _count?: true | DisputeResolutionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DisputeResolutionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DisputeResolutionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DisputeResolutionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DisputeResolutionMaxAggregateInputType
+  }
+
+  export type GetDisputeResolutionAggregateType<T extends DisputeResolutionAggregateArgs> = {
+        [P in keyof T & keyof AggregateDisputeResolution]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDisputeResolution[P]>
+      : GetScalarType<T[P], AggregateDisputeResolution[P]>
+  }
+
+
+
+
+  export type DisputeResolutionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputeResolutionWhereInput
+    orderBy?: DisputeResolutionOrderByWithAggregationInput | DisputeResolutionOrderByWithAggregationInput[]
+    by: DisputeResolutionScalarFieldEnum[] | DisputeResolutionScalarFieldEnum
+    having?: DisputeResolutionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DisputeResolutionCountAggregateInputType | true
+    _avg?: DisputeResolutionAvgAggregateInputType
+    _sum?: DisputeResolutionSumAggregateInputType
+    _min?: DisputeResolutionMinAggregateInputType
+    _max?: DisputeResolutionMaxAggregateInputType
+  }
+
+  export type DisputeResolutionGroupByOutputType = {
+    id: string
+    disputeId: string
+    resolvedById: string
+    decisionType: $Enums.DecisionType
+    amountToLender: number | null
+    amountToBorrower: number | null
+    justification: string
+    resolvedAt: Date
+    _count: DisputeResolutionCountAggregateOutputType | null
+    _avg: DisputeResolutionAvgAggregateOutputType | null
+    _sum: DisputeResolutionSumAggregateOutputType | null
+    _min: DisputeResolutionMinAggregateOutputType | null
+    _max: DisputeResolutionMaxAggregateOutputType | null
+  }
+
+  type GetDisputeResolutionGroupByPayload<T extends DisputeResolutionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DisputeResolutionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DisputeResolutionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DisputeResolutionGroupByOutputType[P]>
+            : GetScalarType<T[P], DisputeResolutionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DisputeResolutionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    disputeId?: boolean
+    resolvedById?: boolean
+    decisionType?: boolean
+    amountToLender?: boolean
+    amountToBorrower?: boolean
+    justification?: boolean
+    resolvedAt?: boolean
+    dispute?: boolean | DisputeDefaultArgs<ExtArgs>
+    resolvedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["disputeResolution"]>
+
+
+  export type DisputeResolutionSelectScalar = {
+    id?: boolean
+    disputeId?: boolean
+    resolvedById?: boolean
+    decisionType?: boolean
+    amountToLender?: boolean
+    amountToBorrower?: boolean
+    justification?: boolean
+    resolvedAt?: boolean
+  }
+
+  export type DisputeResolutionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispute?: boolean | DisputeDefaultArgs<ExtArgs>
+    resolvedBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $DisputeResolutionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DisputeResolution"
+    objects: {
+      dispute: Prisma.$DisputePayload<ExtArgs>
+      resolvedBy: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      disputeId: string
+      resolvedById: string
+      decisionType: $Enums.DecisionType
+      amountToLender: number | null
+      amountToBorrower: number | null
+      justification: string
+      resolvedAt: Date
+    }, ExtArgs["result"]["disputeResolution"]>
+    composites: {}
+  }
+
+  type DisputeResolutionGetPayload<S extends boolean | null | undefined | DisputeResolutionDefaultArgs> = $Result.GetResult<Prisma.$DisputeResolutionPayload, S>
+
+  type DisputeResolutionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<DisputeResolutionFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: DisputeResolutionCountAggregateInputType | true
+    }
+
+  export interface DisputeResolutionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DisputeResolution'], meta: { name: 'DisputeResolution' } }
+    /**
+     * Find zero or one DisputeResolution that matches the filter.
+     * @param {DisputeResolutionFindUniqueArgs} args - Arguments to find a DisputeResolution
+     * @example
+     * // Get one DisputeResolution
+     * const disputeResolution = await prisma.disputeResolution.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DisputeResolutionFindUniqueArgs>(args: SelectSubset<T, DisputeResolutionFindUniqueArgs<ExtArgs>>): Prisma__DisputeResolutionClient<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one DisputeResolution that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {DisputeResolutionFindUniqueOrThrowArgs} args - Arguments to find a DisputeResolution
+     * @example
+     * // Get one DisputeResolution
+     * const disputeResolution = await prisma.disputeResolution.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DisputeResolutionFindUniqueOrThrowArgs>(args: SelectSubset<T, DisputeResolutionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DisputeResolutionClient<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first DisputeResolution that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeResolutionFindFirstArgs} args - Arguments to find a DisputeResolution
+     * @example
+     * // Get one DisputeResolution
+     * const disputeResolution = await prisma.disputeResolution.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DisputeResolutionFindFirstArgs>(args?: SelectSubset<T, DisputeResolutionFindFirstArgs<ExtArgs>>): Prisma__DisputeResolutionClient<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first DisputeResolution that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeResolutionFindFirstOrThrowArgs} args - Arguments to find a DisputeResolution
+     * @example
+     * // Get one DisputeResolution
+     * const disputeResolution = await prisma.disputeResolution.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DisputeResolutionFindFirstOrThrowArgs>(args?: SelectSubset<T, DisputeResolutionFindFirstOrThrowArgs<ExtArgs>>): Prisma__DisputeResolutionClient<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more DisputeResolutions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeResolutionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DisputeResolutions
+     * const disputeResolutions = await prisma.disputeResolution.findMany()
+     * 
+     * // Get first 10 DisputeResolutions
+     * const disputeResolutions = await prisma.disputeResolution.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const disputeResolutionWithIdOnly = await prisma.disputeResolution.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DisputeResolutionFindManyArgs>(args?: SelectSubset<T, DisputeResolutionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a DisputeResolution.
+     * @param {DisputeResolutionCreateArgs} args - Arguments to create a DisputeResolution.
+     * @example
+     * // Create one DisputeResolution
+     * const DisputeResolution = await prisma.disputeResolution.create({
+     *   data: {
+     *     // ... data to create a DisputeResolution
+     *   }
+     * })
+     * 
+     */
+    create<T extends DisputeResolutionCreateArgs>(args: SelectSubset<T, DisputeResolutionCreateArgs<ExtArgs>>): Prisma__DisputeResolutionClient<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many DisputeResolutions.
+     * @param {DisputeResolutionCreateManyArgs} args - Arguments to create many DisputeResolutions.
+     * @example
+     * // Create many DisputeResolutions
+     * const disputeResolution = await prisma.disputeResolution.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DisputeResolutionCreateManyArgs>(args?: SelectSubset<T, DisputeResolutionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a DisputeResolution.
+     * @param {DisputeResolutionDeleteArgs} args - Arguments to delete one DisputeResolution.
+     * @example
+     * // Delete one DisputeResolution
+     * const DisputeResolution = await prisma.disputeResolution.delete({
+     *   where: {
+     *     // ... filter to delete one DisputeResolution
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DisputeResolutionDeleteArgs>(args: SelectSubset<T, DisputeResolutionDeleteArgs<ExtArgs>>): Prisma__DisputeResolutionClient<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one DisputeResolution.
+     * @param {DisputeResolutionUpdateArgs} args - Arguments to update one DisputeResolution.
+     * @example
+     * // Update one DisputeResolution
+     * const disputeResolution = await prisma.disputeResolution.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DisputeResolutionUpdateArgs>(args: SelectSubset<T, DisputeResolutionUpdateArgs<ExtArgs>>): Prisma__DisputeResolutionClient<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more DisputeResolutions.
+     * @param {DisputeResolutionDeleteManyArgs} args - Arguments to filter DisputeResolutions to delete.
+     * @example
+     * // Delete a few DisputeResolutions
+     * const { count } = await prisma.disputeResolution.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DisputeResolutionDeleteManyArgs>(args?: SelectSubset<T, DisputeResolutionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DisputeResolutions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeResolutionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DisputeResolutions
+     * const disputeResolution = await prisma.disputeResolution.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DisputeResolutionUpdateManyArgs>(args: SelectSubset<T, DisputeResolutionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one DisputeResolution.
+     * @param {DisputeResolutionUpsertArgs} args - Arguments to update or create a DisputeResolution.
+     * @example
+     * // Update or create a DisputeResolution
+     * const disputeResolution = await prisma.disputeResolution.upsert({
+     *   create: {
+     *     // ... data to create a DisputeResolution
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DisputeResolution we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DisputeResolutionUpsertArgs>(args: SelectSubset<T, DisputeResolutionUpsertArgs<ExtArgs>>): Prisma__DisputeResolutionClient<$Result.GetResult<Prisma.$DisputeResolutionPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of DisputeResolutions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeResolutionCountArgs} args - Arguments to filter DisputeResolutions to count.
+     * @example
+     * // Count the number of DisputeResolutions
+     * const count = await prisma.disputeResolution.count({
+     *   where: {
+     *     // ... the filter for the DisputeResolutions we want to count
+     *   }
+     * })
+    **/
+    count<T extends DisputeResolutionCountArgs>(
+      args?: Subset<T, DisputeResolutionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DisputeResolutionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DisputeResolution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeResolutionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DisputeResolutionAggregateArgs>(args: Subset<T, DisputeResolutionAggregateArgs>): Prisma.PrismaPromise<GetDisputeResolutionAggregateType<T>>
+
+    /**
+     * Group by DisputeResolution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeResolutionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DisputeResolutionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DisputeResolutionGroupByArgs['orderBy'] }
+        : { orderBy?: DisputeResolutionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DisputeResolutionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDisputeResolutionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DisputeResolution model
+   */
+  readonly fields: DisputeResolutionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DisputeResolution.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DisputeResolutionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    dispute<T extends DisputeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DisputeDefaultArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    resolvedBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DisputeResolution model
+   */ 
+  interface DisputeResolutionFieldRefs {
+    readonly id: FieldRef<"DisputeResolution", 'String'>
+    readonly disputeId: FieldRef<"DisputeResolution", 'String'>
+    readonly resolvedById: FieldRef<"DisputeResolution", 'String'>
+    readonly decisionType: FieldRef<"DisputeResolution", 'DecisionType'>
+    readonly amountToLender: FieldRef<"DisputeResolution", 'Int'>
+    readonly amountToBorrower: FieldRef<"DisputeResolution", 'Int'>
+    readonly justification: FieldRef<"DisputeResolution", 'String'>
+    readonly resolvedAt: FieldRef<"DisputeResolution", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DisputeResolution findUnique
+   */
+  export type DisputeResolutionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeResolution to fetch.
+     */
+    where: DisputeResolutionWhereUniqueInput
+  }
+
+  /**
+   * DisputeResolution findUniqueOrThrow
+   */
+  export type DisputeResolutionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeResolution to fetch.
+     */
+    where: DisputeResolutionWhereUniqueInput
+  }
+
+  /**
+   * DisputeResolution findFirst
+   */
+  export type DisputeResolutionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeResolution to fetch.
+     */
+    where?: DisputeResolutionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DisputeResolutions to fetch.
+     */
+    orderBy?: DisputeResolutionOrderByWithRelationInput | DisputeResolutionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DisputeResolutions.
+     */
+    cursor?: DisputeResolutionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DisputeResolutions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DisputeResolutions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DisputeResolutions.
+     */
+    distinct?: DisputeResolutionScalarFieldEnum | DisputeResolutionScalarFieldEnum[]
+  }
+
+  /**
+   * DisputeResolution findFirstOrThrow
+   */
+  export type DisputeResolutionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeResolution to fetch.
+     */
+    where?: DisputeResolutionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DisputeResolutions to fetch.
+     */
+    orderBy?: DisputeResolutionOrderByWithRelationInput | DisputeResolutionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DisputeResolutions.
+     */
+    cursor?: DisputeResolutionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DisputeResolutions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DisputeResolutions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DisputeResolutions.
+     */
+    distinct?: DisputeResolutionScalarFieldEnum | DisputeResolutionScalarFieldEnum[]
+  }
+
+  /**
+   * DisputeResolution findMany
+   */
+  export type DisputeResolutionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeResolutions to fetch.
+     */
+    where?: DisputeResolutionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DisputeResolutions to fetch.
+     */
+    orderBy?: DisputeResolutionOrderByWithRelationInput | DisputeResolutionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DisputeResolutions.
+     */
+    cursor?: DisputeResolutionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DisputeResolutions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DisputeResolutions.
+     */
+    skip?: number
+    distinct?: DisputeResolutionScalarFieldEnum | DisputeResolutionScalarFieldEnum[]
+  }
+
+  /**
+   * DisputeResolution create
+   */
+  export type DisputeResolutionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DisputeResolution.
+     */
+    data: XOR<DisputeResolutionCreateInput, DisputeResolutionUncheckedCreateInput>
+  }
+
+  /**
+   * DisputeResolution createMany
+   */
+  export type DisputeResolutionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DisputeResolutions.
+     */
+    data: DisputeResolutionCreateManyInput | DisputeResolutionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DisputeResolution update
+   */
+  export type DisputeResolutionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DisputeResolution.
+     */
+    data: XOR<DisputeResolutionUpdateInput, DisputeResolutionUncheckedUpdateInput>
+    /**
+     * Choose, which DisputeResolution to update.
+     */
+    where: DisputeResolutionWhereUniqueInput
+  }
+
+  /**
+   * DisputeResolution updateMany
+   */
+  export type DisputeResolutionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DisputeResolutions.
+     */
+    data: XOR<DisputeResolutionUpdateManyMutationInput, DisputeResolutionUncheckedUpdateManyInput>
+    /**
+     * Filter which DisputeResolutions to update
+     */
+    where?: DisputeResolutionWhereInput
+  }
+
+  /**
+   * DisputeResolution upsert
+   */
+  export type DisputeResolutionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DisputeResolution to update in case it exists.
+     */
+    where: DisputeResolutionWhereUniqueInput
+    /**
+     * In case the DisputeResolution found by the `where` argument doesn't exist, create a new DisputeResolution with this data.
+     */
+    create: XOR<DisputeResolutionCreateInput, DisputeResolutionUncheckedCreateInput>
+    /**
+     * In case the DisputeResolution was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DisputeResolutionUpdateInput, DisputeResolutionUncheckedUpdateInput>
+  }
+
+  /**
+   * DisputeResolution delete
+   */
+  export type DisputeResolutionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+    /**
+     * Filter which DisputeResolution to delete.
+     */
+    where: DisputeResolutionWhereUniqueInput
+  }
+
+  /**
+   * DisputeResolution deleteMany
+   */
+  export type DisputeResolutionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DisputeResolutions to delete
+     */
+    where?: DisputeResolutionWhereInput
+  }
+
+  /**
+   * DisputeResolution without action
+   */
+  export type DisputeResolutionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeResolution
+     */
+    select?: DisputeResolutionSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeResolutionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model DisputeEvent
+   */
+
+  export type AggregateDisputeEvent = {
+    _count: DisputeEventCountAggregateOutputType | null
+    _min: DisputeEventMinAggregateOutputType | null
+    _max: DisputeEventMaxAggregateOutputType | null
+  }
+
+  export type DisputeEventMinAggregateOutputType = {
+    id: string | null
+    disputeId: string | null
+    actorRole: string | null
+    type: string | null
+    body: string | null
+    createdAt: Date | null
+  }
+
+  export type DisputeEventMaxAggregateOutputType = {
+    id: string | null
+    disputeId: string | null
+    actorRole: string | null
+    type: string | null
+    body: string | null
+    createdAt: Date | null
+  }
+
+  export type DisputeEventCountAggregateOutputType = {
+    id: number
+    disputeId: number
+    actorRole: number
+    type: number
+    body: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type DisputeEventMinAggregateInputType = {
+    id?: true
+    disputeId?: true
+    actorRole?: true
+    type?: true
+    body?: true
+    createdAt?: true
+  }
+
+  export type DisputeEventMaxAggregateInputType = {
+    id?: true
+    disputeId?: true
+    actorRole?: true
+    type?: true
+    body?: true
+    createdAt?: true
+  }
+
+  export type DisputeEventCountAggregateInputType = {
+    id?: true
+    disputeId?: true
+    actorRole?: true
+    type?: true
+    body?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type DisputeEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DisputeEvent to aggregate.
+     */
+    where?: DisputeEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DisputeEvents to fetch.
+     */
+    orderBy?: DisputeEventOrderByWithRelationInput | DisputeEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DisputeEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DisputeEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DisputeEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned DisputeEvents
+    **/
+    _count?: true | DisputeEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DisputeEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DisputeEventMaxAggregateInputType
+  }
+
+  export type GetDisputeEventAggregateType<T extends DisputeEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateDisputeEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDisputeEvent[P]>
+      : GetScalarType<T[P], AggregateDisputeEvent[P]>
+  }
+
+
+
+
+  export type DisputeEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DisputeEventWhereInput
+    orderBy?: DisputeEventOrderByWithAggregationInput | DisputeEventOrderByWithAggregationInput[]
+    by: DisputeEventScalarFieldEnum[] | DisputeEventScalarFieldEnum
+    having?: DisputeEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DisputeEventCountAggregateInputType | true
+    _min?: DisputeEventMinAggregateInputType
+    _max?: DisputeEventMaxAggregateInputType
+  }
+
+  export type DisputeEventGroupByOutputType = {
+    id: string
+    disputeId: string
+    actorRole: string
+    type: string
+    body: string | null
+    createdAt: Date
+    _count: DisputeEventCountAggregateOutputType | null
+    _min: DisputeEventMinAggregateOutputType | null
+    _max: DisputeEventMaxAggregateOutputType | null
+  }
+
+  type GetDisputeEventGroupByPayload<T extends DisputeEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DisputeEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DisputeEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DisputeEventGroupByOutputType[P]>
+            : GetScalarType<T[P], DisputeEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DisputeEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    disputeId?: boolean
+    actorRole?: boolean
+    type?: boolean
+    body?: boolean
+    createdAt?: boolean
+    dispute?: boolean | DisputeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["disputeEvent"]>
+
+
+  export type DisputeEventSelectScalar = {
+    id?: boolean
+    disputeId?: boolean
+    actorRole?: boolean
+    type?: boolean
+    body?: boolean
+    createdAt?: boolean
+  }
+
+  export type DisputeEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    dispute?: boolean | DisputeDefaultArgs<ExtArgs>
+  }
+
+  export type $DisputeEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "DisputeEvent"
+    objects: {
+      dispute: Prisma.$DisputePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      disputeId: string
+      actorRole: string
+      type: string
+      body: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["disputeEvent"]>
+    composites: {}
+  }
+
+  type DisputeEventGetPayload<S extends boolean | null | undefined | DisputeEventDefaultArgs> = $Result.GetResult<Prisma.$DisputeEventPayload, S>
+
+  type DisputeEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<DisputeEventFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: DisputeEventCountAggregateInputType | true
+    }
+
+  export interface DisputeEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DisputeEvent'], meta: { name: 'DisputeEvent' } }
+    /**
+     * Find zero or one DisputeEvent that matches the filter.
+     * @param {DisputeEventFindUniqueArgs} args - Arguments to find a DisputeEvent
+     * @example
+     * // Get one DisputeEvent
+     * const disputeEvent = await prisma.disputeEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DisputeEventFindUniqueArgs>(args: SelectSubset<T, DisputeEventFindUniqueArgs<ExtArgs>>): Prisma__DisputeEventClient<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one DisputeEvent that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {DisputeEventFindUniqueOrThrowArgs} args - Arguments to find a DisputeEvent
+     * @example
+     * // Get one DisputeEvent
+     * const disputeEvent = await prisma.disputeEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DisputeEventFindUniqueOrThrowArgs>(args: SelectSubset<T, DisputeEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DisputeEventClient<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first DisputeEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeEventFindFirstArgs} args - Arguments to find a DisputeEvent
+     * @example
+     * // Get one DisputeEvent
+     * const disputeEvent = await prisma.disputeEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DisputeEventFindFirstArgs>(args?: SelectSubset<T, DisputeEventFindFirstArgs<ExtArgs>>): Prisma__DisputeEventClient<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first DisputeEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeEventFindFirstOrThrowArgs} args - Arguments to find a DisputeEvent
+     * @example
+     * // Get one DisputeEvent
+     * const disputeEvent = await prisma.disputeEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DisputeEventFindFirstOrThrowArgs>(args?: SelectSubset<T, DisputeEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__DisputeEventClient<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more DisputeEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all DisputeEvents
+     * const disputeEvents = await prisma.disputeEvent.findMany()
+     * 
+     * // Get first 10 DisputeEvents
+     * const disputeEvents = await prisma.disputeEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const disputeEventWithIdOnly = await prisma.disputeEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DisputeEventFindManyArgs>(args?: SelectSubset<T, DisputeEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a DisputeEvent.
+     * @param {DisputeEventCreateArgs} args - Arguments to create a DisputeEvent.
+     * @example
+     * // Create one DisputeEvent
+     * const DisputeEvent = await prisma.disputeEvent.create({
+     *   data: {
+     *     // ... data to create a DisputeEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends DisputeEventCreateArgs>(args: SelectSubset<T, DisputeEventCreateArgs<ExtArgs>>): Prisma__DisputeEventClient<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many DisputeEvents.
+     * @param {DisputeEventCreateManyArgs} args - Arguments to create many DisputeEvents.
+     * @example
+     * // Create many DisputeEvents
+     * const disputeEvent = await prisma.disputeEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DisputeEventCreateManyArgs>(args?: SelectSubset<T, DisputeEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a DisputeEvent.
+     * @param {DisputeEventDeleteArgs} args - Arguments to delete one DisputeEvent.
+     * @example
+     * // Delete one DisputeEvent
+     * const DisputeEvent = await prisma.disputeEvent.delete({
+     *   where: {
+     *     // ... filter to delete one DisputeEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DisputeEventDeleteArgs>(args: SelectSubset<T, DisputeEventDeleteArgs<ExtArgs>>): Prisma__DisputeEventClient<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one DisputeEvent.
+     * @param {DisputeEventUpdateArgs} args - Arguments to update one DisputeEvent.
+     * @example
+     * // Update one DisputeEvent
+     * const disputeEvent = await prisma.disputeEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DisputeEventUpdateArgs>(args: SelectSubset<T, DisputeEventUpdateArgs<ExtArgs>>): Prisma__DisputeEventClient<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more DisputeEvents.
+     * @param {DisputeEventDeleteManyArgs} args - Arguments to filter DisputeEvents to delete.
+     * @example
+     * // Delete a few DisputeEvents
+     * const { count } = await prisma.disputeEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DisputeEventDeleteManyArgs>(args?: SelectSubset<T, DisputeEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more DisputeEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many DisputeEvents
+     * const disputeEvent = await prisma.disputeEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DisputeEventUpdateManyArgs>(args: SelectSubset<T, DisputeEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one DisputeEvent.
+     * @param {DisputeEventUpsertArgs} args - Arguments to update or create a DisputeEvent.
+     * @example
+     * // Update or create a DisputeEvent
+     * const disputeEvent = await prisma.disputeEvent.upsert({
+     *   create: {
+     *     // ... data to create a DisputeEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the DisputeEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DisputeEventUpsertArgs>(args: SelectSubset<T, DisputeEventUpsertArgs<ExtArgs>>): Prisma__DisputeEventClient<$Result.GetResult<Prisma.$DisputeEventPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of DisputeEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeEventCountArgs} args - Arguments to filter DisputeEvents to count.
+     * @example
+     * // Count the number of DisputeEvents
+     * const count = await prisma.disputeEvent.count({
+     *   where: {
+     *     // ... the filter for the DisputeEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends DisputeEventCountArgs>(
+      args?: Subset<T, DisputeEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DisputeEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a DisputeEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DisputeEventAggregateArgs>(args: Subset<T, DisputeEventAggregateArgs>): Prisma.PrismaPromise<GetDisputeEventAggregateType<T>>
+
+    /**
+     * Group by DisputeEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DisputeEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DisputeEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DisputeEventGroupByArgs['orderBy'] }
+        : { orderBy?: DisputeEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DisputeEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDisputeEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the DisputeEvent model
+   */
+  readonly fields: DisputeEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for DisputeEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DisputeEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    dispute<T extends DisputeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DisputeDefaultArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the DisputeEvent model
+   */ 
+  interface DisputeEventFieldRefs {
+    readonly id: FieldRef<"DisputeEvent", 'String'>
+    readonly disputeId: FieldRef<"DisputeEvent", 'String'>
+    readonly actorRole: FieldRef<"DisputeEvent", 'String'>
+    readonly type: FieldRef<"DisputeEvent", 'String'>
+    readonly body: FieldRef<"DisputeEvent", 'String'>
+    readonly createdAt: FieldRef<"DisputeEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * DisputeEvent findUnique
+   */
+  export type DisputeEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeEvent to fetch.
+     */
+    where: DisputeEventWhereUniqueInput
+  }
+
+  /**
+   * DisputeEvent findUniqueOrThrow
+   */
+  export type DisputeEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeEvent to fetch.
+     */
+    where: DisputeEventWhereUniqueInput
+  }
+
+  /**
+   * DisputeEvent findFirst
+   */
+  export type DisputeEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeEvent to fetch.
+     */
+    where?: DisputeEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DisputeEvents to fetch.
+     */
+    orderBy?: DisputeEventOrderByWithRelationInput | DisputeEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DisputeEvents.
+     */
+    cursor?: DisputeEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DisputeEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DisputeEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DisputeEvents.
+     */
+    distinct?: DisputeEventScalarFieldEnum | DisputeEventScalarFieldEnum[]
+  }
+
+  /**
+   * DisputeEvent findFirstOrThrow
+   */
+  export type DisputeEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeEvent to fetch.
+     */
+    where?: DisputeEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DisputeEvents to fetch.
+     */
+    orderBy?: DisputeEventOrderByWithRelationInput | DisputeEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for DisputeEvents.
+     */
+    cursor?: DisputeEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DisputeEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DisputeEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of DisputeEvents.
+     */
+    distinct?: DisputeEventScalarFieldEnum | DisputeEventScalarFieldEnum[]
+  }
+
+  /**
+   * DisputeEvent findMany
+   */
+  export type DisputeEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    /**
+     * Filter, which DisputeEvents to fetch.
+     */
+    where?: DisputeEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of DisputeEvents to fetch.
+     */
+    orderBy?: DisputeEventOrderByWithRelationInput | DisputeEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing DisputeEvents.
+     */
+    cursor?: DisputeEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` DisputeEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` DisputeEvents.
+     */
+    skip?: number
+    distinct?: DisputeEventScalarFieldEnum | DisputeEventScalarFieldEnum[]
+  }
+
+  /**
+   * DisputeEvent create
+   */
+  export type DisputeEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a DisputeEvent.
+     */
+    data: XOR<DisputeEventCreateInput, DisputeEventUncheckedCreateInput>
+  }
+
+  /**
+   * DisputeEvent createMany
+   */
+  export type DisputeEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many DisputeEvents.
+     */
+    data: DisputeEventCreateManyInput | DisputeEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * DisputeEvent update
+   */
+  export type DisputeEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a DisputeEvent.
+     */
+    data: XOR<DisputeEventUpdateInput, DisputeEventUncheckedUpdateInput>
+    /**
+     * Choose, which DisputeEvent to update.
+     */
+    where: DisputeEventWhereUniqueInput
+  }
+
+  /**
+   * DisputeEvent updateMany
+   */
+  export type DisputeEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update DisputeEvents.
+     */
+    data: XOR<DisputeEventUpdateManyMutationInput, DisputeEventUncheckedUpdateManyInput>
+    /**
+     * Filter which DisputeEvents to update
+     */
+    where?: DisputeEventWhereInput
+  }
+
+  /**
+   * DisputeEvent upsert
+   */
+  export type DisputeEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the DisputeEvent to update in case it exists.
+     */
+    where: DisputeEventWhereUniqueInput
+    /**
+     * In case the DisputeEvent found by the `where` argument doesn't exist, create a new DisputeEvent with this data.
+     */
+    create: XOR<DisputeEventCreateInput, DisputeEventUncheckedCreateInput>
+    /**
+     * In case the DisputeEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DisputeEventUpdateInput, DisputeEventUncheckedUpdateInput>
+  }
+
+  /**
+   * DisputeEvent delete
+   */
+  export type DisputeEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+    /**
+     * Filter which DisputeEvent to delete.
+     */
+    where: DisputeEventWhereUniqueInput
+  }
+
+  /**
+   * DisputeEvent deleteMany
+   */
+  export type DisputeEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which DisputeEvents to delete
+     */
+    where?: DisputeEventWhereInput
+  }
+
+  /**
+   * DisputeEvent without action
+   */
+  export type DisputeEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DisputeEvent
+     */
+    select?: DisputeEventSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DisputeEventInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -22635,6 +26041,7 @@ export namespace Prisma {
     addressVerified: 'addressVerified',
     meetupVerified: 'meetupVerified',
     verifiedAt: 'verifiedAt',
+    isAdmin: 'isAdmin',
     createdAt: 'createdAt'
   };
 
@@ -22925,6 +26332,54 @@ export namespace Prisma {
   export type IdVerificationScalarFieldEnum = (typeof IdVerificationScalarFieldEnum)[keyof typeof IdVerificationScalarFieldEnum]
 
 
+  export const DisputeScalarFieldEnum: {
+    id: 'id',
+    checkoutId: 'checkoutId',
+    raisedById: 'raisedById',
+    borrowerId: 'borrowerId',
+    lenderId: 'lenderId',
+    status: 'status',
+    title: 'title',
+    description: 'description',
+    depositAmount: 'depositAmount',
+    beforePhotoUrl: 'beforePhotoUrl',
+    afterPhotoUrl: 'afterPhotoUrl',
+    aiVerdict: 'aiVerdict',
+    aiConfidence: 'aiConfidence',
+    aiNotes: 'aiNotes',
+    raisedAt: 'raisedAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DisputeScalarFieldEnum = (typeof DisputeScalarFieldEnum)[keyof typeof DisputeScalarFieldEnum]
+
+
+  export const DisputeResolutionScalarFieldEnum: {
+    id: 'id',
+    disputeId: 'disputeId',
+    resolvedById: 'resolvedById',
+    decisionType: 'decisionType',
+    amountToLender: 'amountToLender',
+    amountToBorrower: 'amountToBorrower',
+    justification: 'justification',
+    resolvedAt: 'resolvedAt'
+  };
+
+  export type DisputeResolutionScalarFieldEnum = (typeof DisputeResolutionScalarFieldEnum)[keyof typeof DisputeResolutionScalarFieldEnum]
+
+
+  export const DisputeEventScalarFieldEnum: {
+    id: 'id',
+    disputeId: 'disputeId',
+    actorRole: 'actorRole',
+    type: 'type',
+    body: 'body',
+    createdAt: 'createdAt'
+  };
+
+  export type DisputeEventScalarFieldEnum = (typeof DisputeEventScalarFieldEnum)[keyof typeof DisputeEventScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -23031,6 +26486,20 @@ export namespace Prisma {
    */
   export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
     
+
+
+  /**
+   * Reference to a field of type 'DisputeStatus'
+   */
+  export type EnumDisputeStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DisputeStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'DecisionType'
+   */
+  export type EnumDecisionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DecisionType'>
+    
   /**
    * Deep Input Types
    */
@@ -23060,6 +26529,7 @@ export namespace Prisma {
     addressVerified?: BoolFilter<"User"> | boolean
     meetupVerified?: BoolFilter<"User"> | boolean
     verifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    isAdmin?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
@@ -23079,6 +26549,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionListRelationFilter
     notifications?: NotificationListRelationFilter
     idVerification?: XOR<IdVerificationNullableRelationFilter, IdVerificationWhereInput> | null
+    disputesRaised?: DisputeListRelationFilter
+    disputesAsBorrower?: DisputeListRelationFilter
+    disputesAsLender?: DisputeListRelationFilter
+    disputeResolutions?: DisputeResolutionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -23102,6 +26576,7 @@ export namespace Prisma {
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrderInput | SortOrder
+    isAdmin?: SortOrder
     createdAt?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
@@ -23121,6 +26596,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
     idVerification?: IdVerificationOrderByWithRelationInput
+    disputesRaised?: DisputeOrderByRelationAggregateInput
+    disputesAsBorrower?: DisputeOrderByRelationAggregateInput
+    disputesAsLender?: DisputeOrderByRelationAggregateInput
+    disputeResolutions?: DisputeResolutionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -23147,6 +26626,7 @@ export namespace Prisma {
     addressVerified?: BoolFilter<"User"> | boolean
     meetupVerified?: BoolFilter<"User"> | boolean
     verifiedAt?: DateTimeNullableFilter<"User"> | Date | string | null
+    isAdmin?: BoolFilter<"User"> | boolean
     createdAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
@@ -23166,6 +26646,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionListRelationFilter
     notifications?: NotificationListRelationFilter
     idVerification?: XOR<IdVerificationNullableRelationFilter, IdVerificationWhereInput> | null
+    disputesRaised?: DisputeListRelationFilter
+    disputesAsBorrower?: DisputeListRelationFilter
+    disputesAsLender?: DisputeListRelationFilter
+    disputeResolutions?: DisputeResolutionListRelationFilter
   }, "id" | "userName" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -23189,6 +26673,7 @@ export namespace Prisma {
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrderInput | SortOrder
+    isAdmin?: SortOrder
     createdAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -23221,6 +26706,7 @@ export namespace Prisma {
     addressVerified?: BoolWithAggregatesFilter<"User"> | boolean
     meetupVerified?: BoolWithAggregatesFilter<"User"> | boolean
     verifiedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    isAdmin?: BoolWithAggregatesFilter<"User"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
@@ -23637,6 +27123,7 @@ export namespace Prisma {
     lentItem?: XOR<LentItemNullableRelationFilter, LentItemWhereInput> | null
     offer?: XOR<BorrowRequestOfferNullableRelationFilter, BorrowRequestOfferWhereInput> | null
     trailEntry?: XOR<ItemTrailEntryNullableRelationFilter, ItemTrailEntryWhereInput> | null
+    dispute?: XOR<DisputeNullableRelationFilter, DisputeWhereInput> | null
   }
 
   export type BorrowCheckoutOrderByWithRelationInput = {
@@ -23664,6 +27151,7 @@ export namespace Prisma {
     lentItem?: LentItemOrderByWithRelationInput
     offer?: BorrowRequestOfferOrderByWithRelationInput
     trailEntry?: ItemTrailEntryOrderByWithRelationInput
+    dispute?: DisputeOrderByWithRelationInput
   }
 
   export type BorrowCheckoutWhereUniqueInput = Prisma.AtLeast<{
@@ -23694,6 +27182,7 @@ export namespace Prisma {
     lentItem?: XOR<LentItemNullableRelationFilter, LentItemWhereInput> | null
     offer?: XOR<BorrowRequestOfferNullableRelationFilter, BorrowRequestOfferWhereInput> | null
     trailEntry?: XOR<ItemTrailEntryNullableRelationFilter, ItemTrailEntryWhereInput> | null
+    dispute?: XOR<DisputeNullableRelationFilter, DisputeWhereInput> | null
   }, "id" | "borrowRequestOfferId">
 
   export type BorrowCheckoutOrderByWithAggregationInput = {
@@ -24749,6 +28238,268 @@ export namespace Prisma {
     reviewedAt?: DateTimeNullableWithAggregatesFilter<"IdVerification"> | Date | string | null
   }
 
+  export type DisputeWhereInput = {
+    AND?: DisputeWhereInput | DisputeWhereInput[]
+    OR?: DisputeWhereInput[]
+    NOT?: DisputeWhereInput | DisputeWhereInput[]
+    id?: StringFilter<"Dispute"> | string
+    checkoutId?: StringFilter<"Dispute"> | string
+    raisedById?: StringFilter<"Dispute"> | string
+    borrowerId?: StringFilter<"Dispute"> | string
+    lenderId?: StringFilter<"Dispute"> | string
+    status?: EnumDisputeStatusFilter<"Dispute"> | $Enums.DisputeStatus
+    title?: StringFilter<"Dispute"> | string
+    description?: StringFilter<"Dispute"> | string
+    depositAmount?: IntFilter<"Dispute"> | number
+    beforePhotoUrl?: StringNullableFilter<"Dispute"> | string | null
+    afterPhotoUrl?: StringNullableFilter<"Dispute"> | string | null
+    aiVerdict?: StringNullableFilter<"Dispute"> | string | null
+    aiConfidence?: FloatNullableFilter<"Dispute"> | number | null
+    aiNotes?: StringNullableFilter<"Dispute"> | string | null
+    raisedAt?: DateTimeFilter<"Dispute"> | Date | string
+    updatedAt?: DateTimeFilter<"Dispute"> | Date | string
+    checkout?: XOR<BorrowCheckoutRelationFilter, BorrowCheckoutWhereInput>
+    raisedBy?: XOR<UserRelationFilter, UserWhereInput>
+    borrower?: XOR<UserRelationFilter, UserWhereInput>
+    lender?: XOR<UserRelationFilter, UserWhereInput>
+    resolution?: XOR<DisputeResolutionNullableRelationFilter, DisputeResolutionWhereInput> | null
+    events?: DisputeEventListRelationFilter
+  }
+
+  export type DisputeOrderByWithRelationInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    raisedById?: SortOrder
+    borrowerId?: SortOrder
+    lenderId?: SortOrder
+    status?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    depositAmount?: SortOrder
+    beforePhotoUrl?: SortOrderInput | SortOrder
+    afterPhotoUrl?: SortOrderInput | SortOrder
+    aiVerdict?: SortOrderInput | SortOrder
+    aiConfidence?: SortOrderInput | SortOrder
+    aiNotes?: SortOrderInput | SortOrder
+    raisedAt?: SortOrder
+    updatedAt?: SortOrder
+    checkout?: BorrowCheckoutOrderByWithRelationInput
+    raisedBy?: UserOrderByWithRelationInput
+    borrower?: UserOrderByWithRelationInput
+    lender?: UserOrderByWithRelationInput
+    resolution?: DisputeResolutionOrderByWithRelationInput
+    events?: DisputeEventOrderByRelationAggregateInput
+  }
+
+  export type DisputeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    checkoutId?: string
+    AND?: DisputeWhereInput | DisputeWhereInput[]
+    OR?: DisputeWhereInput[]
+    NOT?: DisputeWhereInput | DisputeWhereInput[]
+    raisedById?: StringFilter<"Dispute"> | string
+    borrowerId?: StringFilter<"Dispute"> | string
+    lenderId?: StringFilter<"Dispute"> | string
+    status?: EnumDisputeStatusFilter<"Dispute"> | $Enums.DisputeStatus
+    title?: StringFilter<"Dispute"> | string
+    description?: StringFilter<"Dispute"> | string
+    depositAmount?: IntFilter<"Dispute"> | number
+    beforePhotoUrl?: StringNullableFilter<"Dispute"> | string | null
+    afterPhotoUrl?: StringNullableFilter<"Dispute"> | string | null
+    aiVerdict?: StringNullableFilter<"Dispute"> | string | null
+    aiConfidence?: FloatNullableFilter<"Dispute"> | number | null
+    aiNotes?: StringNullableFilter<"Dispute"> | string | null
+    raisedAt?: DateTimeFilter<"Dispute"> | Date | string
+    updatedAt?: DateTimeFilter<"Dispute"> | Date | string
+    checkout?: XOR<BorrowCheckoutRelationFilter, BorrowCheckoutWhereInput>
+    raisedBy?: XOR<UserRelationFilter, UserWhereInput>
+    borrower?: XOR<UserRelationFilter, UserWhereInput>
+    lender?: XOR<UserRelationFilter, UserWhereInput>
+    resolution?: XOR<DisputeResolutionNullableRelationFilter, DisputeResolutionWhereInput> | null
+    events?: DisputeEventListRelationFilter
+  }, "id" | "checkoutId">
+
+  export type DisputeOrderByWithAggregationInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    raisedById?: SortOrder
+    borrowerId?: SortOrder
+    lenderId?: SortOrder
+    status?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    depositAmount?: SortOrder
+    beforePhotoUrl?: SortOrderInput | SortOrder
+    afterPhotoUrl?: SortOrderInput | SortOrder
+    aiVerdict?: SortOrderInput | SortOrder
+    aiConfidence?: SortOrderInput | SortOrder
+    aiNotes?: SortOrderInput | SortOrder
+    raisedAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DisputeCountOrderByAggregateInput
+    _avg?: DisputeAvgOrderByAggregateInput
+    _max?: DisputeMaxOrderByAggregateInput
+    _min?: DisputeMinOrderByAggregateInput
+    _sum?: DisputeSumOrderByAggregateInput
+  }
+
+  export type DisputeScalarWhereWithAggregatesInput = {
+    AND?: DisputeScalarWhereWithAggregatesInput | DisputeScalarWhereWithAggregatesInput[]
+    OR?: DisputeScalarWhereWithAggregatesInput[]
+    NOT?: DisputeScalarWhereWithAggregatesInput | DisputeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Dispute"> | string
+    checkoutId?: StringWithAggregatesFilter<"Dispute"> | string
+    raisedById?: StringWithAggregatesFilter<"Dispute"> | string
+    borrowerId?: StringWithAggregatesFilter<"Dispute"> | string
+    lenderId?: StringWithAggregatesFilter<"Dispute"> | string
+    status?: EnumDisputeStatusWithAggregatesFilter<"Dispute"> | $Enums.DisputeStatus
+    title?: StringWithAggregatesFilter<"Dispute"> | string
+    description?: StringWithAggregatesFilter<"Dispute"> | string
+    depositAmount?: IntWithAggregatesFilter<"Dispute"> | number
+    beforePhotoUrl?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
+    afterPhotoUrl?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
+    aiVerdict?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
+    aiConfidence?: FloatNullableWithAggregatesFilter<"Dispute"> | number | null
+    aiNotes?: StringNullableWithAggregatesFilter<"Dispute"> | string | null
+    raisedAt?: DateTimeWithAggregatesFilter<"Dispute"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Dispute"> | Date | string
+  }
+
+  export type DisputeResolutionWhereInput = {
+    AND?: DisputeResolutionWhereInput | DisputeResolutionWhereInput[]
+    OR?: DisputeResolutionWhereInput[]
+    NOT?: DisputeResolutionWhereInput | DisputeResolutionWhereInput[]
+    id?: StringFilter<"DisputeResolution"> | string
+    disputeId?: StringFilter<"DisputeResolution"> | string
+    resolvedById?: StringFilter<"DisputeResolution"> | string
+    decisionType?: EnumDecisionTypeFilter<"DisputeResolution"> | $Enums.DecisionType
+    amountToLender?: IntNullableFilter<"DisputeResolution"> | number | null
+    amountToBorrower?: IntNullableFilter<"DisputeResolution"> | number | null
+    justification?: StringFilter<"DisputeResolution"> | string
+    resolvedAt?: DateTimeFilter<"DisputeResolution"> | Date | string
+    dispute?: XOR<DisputeRelationFilter, DisputeWhereInput>
+    resolvedBy?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type DisputeResolutionOrderByWithRelationInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    resolvedById?: SortOrder
+    decisionType?: SortOrder
+    amountToLender?: SortOrderInput | SortOrder
+    amountToBorrower?: SortOrderInput | SortOrder
+    justification?: SortOrder
+    resolvedAt?: SortOrder
+    dispute?: DisputeOrderByWithRelationInput
+    resolvedBy?: UserOrderByWithRelationInput
+  }
+
+  export type DisputeResolutionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    disputeId?: string
+    AND?: DisputeResolutionWhereInput | DisputeResolutionWhereInput[]
+    OR?: DisputeResolutionWhereInput[]
+    NOT?: DisputeResolutionWhereInput | DisputeResolutionWhereInput[]
+    resolvedById?: StringFilter<"DisputeResolution"> | string
+    decisionType?: EnumDecisionTypeFilter<"DisputeResolution"> | $Enums.DecisionType
+    amountToLender?: IntNullableFilter<"DisputeResolution"> | number | null
+    amountToBorrower?: IntNullableFilter<"DisputeResolution"> | number | null
+    justification?: StringFilter<"DisputeResolution"> | string
+    resolvedAt?: DateTimeFilter<"DisputeResolution"> | Date | string
+    dispute?: XOR<DisputeRelationFilter, DisputeWhereInput>
+    resolvedBy?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id" | "disputeId">
+
+  export type DisputeResolutionOrderByWithAggregationInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    resolvedById?: SortOrder
+    decisionType?: SortOrder
+    amountToLender?: SortOrderInput | SortOrder
+    amountToBorrower?: SortOrderInput | SortOrder
+    justification?: SortOrder
+    resolvedAt?: SortOrder
+    _count?: DisputeResolutionCountOrderByAggregateInput
+    _avg?: DisputeResolutionAvgOrderByAggregateInput
+    _max?: DisputeResolutionMaxOrderByAggregateInput
+    _min?: DisputeResolutionMinOrderByAggregateInput
+    _sum?: DisputeResolutionSumOrderByAggregateInput
+  }
+
+  export type DisputeResolutionScalarWhereWithAggregatesInput = {
+    AND?: DisputeResolutionScalarWhereWithAggregatesInput | DisputeResolutionScalarWhereWithAggregatesInput[]
+    OR?: DisputeResolutionScalarWhereWithAggregatesInput[]
+    NOT?: DisputeResolutionScalarWhereWithAggregatesInput | DisputeResolutionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DisputeResolution"> | string
+    disputeId?: StringWithAggregatesFilter<"DisputeResolution"> | string
+    resolvedById?: StringWithAggregatesFilter<"DisputeResolution"> | string
+    decisionType?: EnumDecisionTypeWithAggregatesFilter<"DisputeResolution"> | $Enums.DecisionType
+    amountToLender?: IntNullableWithAggregatesFilter<"DisputeResolution"> | number | null
+    amountToBorrower?: IntNullableWithAggregatesFilter<"DisputeResolution"> | number | null
+    justification?: StringWithAggregatesFilter<"DisputeResolution"> | string
+    resolvedAt?: DateTimeWithAggregatesFilter<"DisputeResolution"> | Date | string
+  }
+
+  export type DisputeEventWhereInput = {
+    AND?: DisputeEventWhereInput | DisputeEventWhereInput[]
+    OR?: DisputeEventWhereInput[]
+    NOT?: DisputeEventWhereInput | DisputeEventWhereInput[]
+    id?: StringFilter<"DisputeEvent"> | string
+    disputeId?: StringFilter<"DisputeEvent"> | string
+    actorRole?: StringFilter<"DisputeEvent"> | string
+    type?: StringFilter<"DisputeEvent"> | string
+    body?: StringNullableFilter<"DisputeEvent"> | string | null
+    createdAt?: DateTimeFilter<"DisputeEvent"> | Date | string
+    dispute?: XOR<DisputeRelationFilter, DisputeWhereInput>
+  }
+
+  export type DisputeEventOrderByWithRelationInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    actorRole?: SortOrder
+    type?: SortOrder
+    body?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    dispute?: DisputeOrderByWithRelationInput
+  }
+
+  export type DisputeEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DisputeEventWhereInput | DisputeEventWhereInput[]
+    OR?: DisputeEventWhereInput[]
+    NOT?: DisputeEventWhereInput | DisputeEventWhereInput[]
+    disputeId?: StringFilter<"DisputeEvent"> | string
+    actorRole?: StringFilter<"DisputeEvent"> | string
+    type?: StringFilter<"DisputeEvent"> | string
+    body?: StringNullableFilter<"DisputeEvent"> | string | null
+    createdAt?: DateTimeFilter<"DisputeEvent"> | Date | string
+    dispute?: XOR<DisputeRelationFilter, DisputeWhereInput>
+  }, "id">
+
+  export type DisputeEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    actorRole?: SortOrder
+    type?: SortOrder
+    body?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: DisputeEventCountOrderByAggregateInput
+    _max?: DisputeEventMaxOrderByAggregateInput
+    _min?: DisputeEventMinOrderByAggregateInput
+  }
+
+  export type DisputeEventScalarWhereWithAggregatesInput = {
+    AND?: DisputeEventScalarWhereWithAggregatesInput | DisputeEventScalarWhereWithAggregatesInput[]
+    OR?: DisputeEventScalarWhereWithAggregatesInput[]
+    NOT?: DisputeEventScalarWhereWithAggregatesInput | DisputeEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"DisputeEvent"> | string
+    disputeId?: StringWithAggregatesFilter<"DisputeEvent"> | string
+    actorRole?: StringWithAggregatesFilter<"DisputeEvent"> | string
+    type?: StringWithAggregatesFilter<"DisputeEvent"> | string
+    body?: StringNullableWithAggregatesFilter<"DisputeEvent"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"DisputeEvent"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -24770,6 +28521,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -24789,6 +28541,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -24812,6 +28568,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -24831,6 +28588,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUpdateInput = {
@@ -24854,6 +28615,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -24873,6 +28635,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -24896,6 +28662,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -24915,6 +28682,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -24938,6 +28709,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
   }
 
@@ -24962,6 +28734,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -24986,6 +28759,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -25437,6 +29211,7 @@ export namespace Prisma {
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateInput = {
@@ -25459,6 +29234,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUpdateInput = {
@@ -25481,6 +29257,7 @@ export namespace Prisma {
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateInput = {
@@ -25503,6 +29280,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutCreateManyInput = {
@@ -26603,6 +30381,280 @@ export namespace Prisma {
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type DisputeCreateInput = {
+    id?: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    checkout: BorrowCheckoutCreateNestedOneWithoutDisputeInput
+    raisedBy: UserCreateNestedOneWithoutDisputesRaisedInput
+    borrower: UserCreateNestedOneWithoutDisputesAsBorrowerInput
+    lender: UserCreateNestedOneWithoutDisputesAsLenderInput
+    resolution?: DisputeResolutionCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeUncheckedCreateInput = {
+    id?: string
+    checkoutId: string
+    raisedById: string
+    borrowerId: string
+    lenderId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    resolution?: DisputeResolutionUncheckedCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventUncheckedCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkout?: BorrowCheckoutUpdateOneRequiredWithoutDisputeNestedInput
+    raisedBy?: UserUpdateOneRequiredWithoutDisputesRaisedNestedInput
+    borrower?: UserUpdateOneRequiredWithoutDisputesAsBorrowerNestedInput
+    lender?: UserUpdateOneRequiredWithoutDisputesAsLenderNestedInput
+    resolution?: DisputeResolutionUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    raisedById?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolution?: DisputeResolutionUncheckedUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUncheckedUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeCreateManyInput = {
+    id?: string
+    checkoutId: string
+    raisedById: string
+    borrowerId: string
+    lenderId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DisputeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    raisedById?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeResolutionCreateInput = {
+    id?: string
+    decisionType: $Enums.DecisionType
+    amountToLender?: number | null
+    amountToBorrower?: number | null
+    justification: string
+    resolvedAt?: Date | string
+    dispute: DisputeCreateNestedOneWithoutResolutionInput
+    resolvedBy: UserCreateNestedOneWithoutDisputeResolutionsInput
+  }
+
+  export type DisputeResolutionUncheckedCreateInput = {
+    id?: string
+    disputeId: string
+    resolvedById: string
+    decisionType: $Enums.DecisionType
+    amountToLender?: number | null
+    amountToBorrower?: number | null
+    justification: string
+    resolvedAt?: Date | string
+  }
+
+  export type DisputeResolutionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumDecisionTypeFieldUpdateOperationsInput | $Enums.DecisionType
+    amountToLender?: NullableIntFieldUpdateOperationsInput | number | null
+    amountToBorrower?: NullableIntFieldUpdateOperationsInput | number | null
+    justification?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispute?: DisputeUpdateOneRequiredWithoutResolutionNestedInput
+    resolvedBy?: UserUpdateOneRequiredWithoutDisputeResolutionsNestedInput
+  }
+
+  export type DisputeResolutionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disputeId?: StringFieldUpdateOperationsInput | string
+    resolvedById?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumDecisionTypeFieldUpdateOperationsInput | $Enums.DecisionType
+    amountToLender?: NullableIntFieldUpdateOperationsInput | number | null
+    amountToBorrower?: NullableIntFieldUpdateOperationsInput | number | null
+    justification?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeResolutionCreateManyInput = {
+    id?: string
+    disputeId: string
+    resolvedById: string
+    decisionType: $Enums.DecisionType
+    amountToLender?: number | null
+    amountToBorrower?: number | null
+    justification: string
+    resolvedAt?: Date | string
+  }
+
+  export type DisputeResolutionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumDecisionTypeFieldUpdateOperationsInput | $Enums.DecisionType
+    amountToLender?: NullableIntFieldUpdateOperationsInput | number | null
+    amountToBorrower?: NullableIntFieldUpdateOperationsInput | number | null
+    justification?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeResolutionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disputeId?: StringFieldUpdateOperationsInput | string
+    resolvedById?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumDecisionTypeFieldUpdateOperationsInput | $Enums.DecisionType
+    amountToLender?: NullableIntFieldUpdateOperationsInput | number | null
+    amountToBorrower?: NullableIntFieldUpdateOperationsInput | number | null
+    justification?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeEventCreateInput = {
+    id?: string
+    actorRole: string
+    type: string
+    body?: string | null
+    createdAt?: Date | string
+    dispute: DisputeCreateNestedOneWithoutEventsInput
+  }
+
+  export type DisputeEventUncheckedCreateInput = {
+    id?: string
+    disputeId: string
+    actorRole: string
+    type: string
+    body?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DisputeEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorRole?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispute?: DisputeUpdateOneRequiredWithoutEventsNestedInput
+  }
+
+  export type DisputeEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disputeId?: StringFieldUpdateOperationsInput | string
+    actorRole?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeEventCreateManyInput = {
+    id?: string
+    disputeId: string
+    actorRole: string
+    type: string
+    body?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DisputeEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorRole?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disputeId?: StringFieldUpdateOperationsInput | string
+    actorRole?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -26769,6 +30821,18 @@ export namespace Prisma {
     isNot?: IdVerificationWhereInput | null
   }
 
+  export type DisputeListRelationFilter = {
+    every?: DisputeWhereInput
+    some?: DisputeWhereInput
+    none?: DisputeWhereInput
+  }
+
+  export type DisputeResolutionListRelationFilter = {
+    every?: DisputeResolutionWhereInput
+    some?: DisputeResolutionWhereInput
+    none?: DisputeResolutionWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -26834,6 +30898,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type DisputeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DisputeResolutionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -26855,6 +30927,7 @@ export namespace Prisma {
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrder
+    isAdmin?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -26884,6 +30957,7 @@ export namespace Prisma {
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrder
+    isAdmin?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -26908,6 +30982,7 @@ export namespace Prisma {
     addressVerified?: SortOrder
     meetupVerified?: SortOrder
     verifiedAt?: SortOrder
+    isAdmin?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -27343,6 +31418,11 @@ export namespace Prisma {
   export type ItemTrailEntryNullableRelationFilter = {
     is?: ItemTrailEntryWhereInput | null
     isNot?: ItemTrailEntryWhereInput | null
+  }
+
+  export type DisputeNullableRelationFilter = {
+    is?: DisputeWhereInput | null
+    isNot?: DisputeWhereInput | null
   }
 
   export type BorrowCheckoutCountOrderByAggregateInput = {
@@ -28051,6 +32131,202 @@ export namespace Prisma {
     _max?: NestedBytesNullableFilter<$PrismaModel>
   }
 
+  export type EnumDisputeStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.DisputeStatus | EnumDisputeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.DisputeStatus[]
+    notIn?: $Enums.DisputeStatus[]
+    not?: NestedEnumDisputeStatusFilter<$PrismaModel> | $Enums.DisputeStatus
+  }
+
+  export type BorrowCheckoutRelationFilter = {
+    is?: BorrowCheckoutWhereInput
+    isNot?: BorrowCheckoutWhereInput
+  }
+
+  export type DisputeResolutionNullableRelationFilter = {
+    is?: DisputeResolutionWhereInput | null
+    isNot?: DisputeResolutionWhereInput | null
+  }
+
+  export type DisputeEventListRelationFilter = {
+    every?: DisputeEventWhereInput
+    some?: DisputeEventWhereInput
+    none?: DisputeEventWhereInput
+  }
+
+  export type DisputeEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DisputeCountOrderByAggregateInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    raisedById?: SortOrder
+    borrowerId?: SortOrder
+    lenderId?: SortOrder
+    status?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    depositAmount?: SortOrder
+    beforePhotoUrl?: SortOrder
+    afterPhotoUrl?: SortOrder
+    aiVerdict?: SortOrder
+    aiConfidence?: SortOrder
+    aiNotes?: SortOrder
+    raisedAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DisputeAvgOrderByAggregateInput = {
+    depositAmount?: SortOrder
+    aiConfidence?: SortOrder
+  }
+
+  export type DisputeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    raisedById?: SortOrder
+    borrowerId?: SortOrder
+    lenderId?: SortOrder
+    status?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    depositAmount?: SortOrder
+    beforePhotoUrl?: SortOrder
+    afterPhotoUrl?: SortOrder
+    aiVerdict?: SortOrder
+    aiConfidence?: SortOrder
+    aiNotes?: SortOrder
+    raisedAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DisputeMinOrderByAggregateInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    raisedById?: SortOrder
+    borrowerId?: SortOrder
+    lenderId?: SortOrder
+    status?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    depositAmount?: SortOrder
+    beforePhotoUrl?: SortOrder
+    afterPhotoUrl?: SortOrder
+    aiVerdict?: SortOrder
+    aiConfidence?: SortOrder
+    aiNotes?: SortOrder
+    raisedAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DisputeSumOrderByAggregateInput = {
+    depositAmount?: SortOrder
+    aiConfidence?: SortOrder
+  }
+
+  export type EnumDisputeStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DisputeStatus | EnumDisputeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.DisputeStatus[]
+    notIn?: $Enums.DisputeStatus[]
+    not?: NestedEnumDisputeStatusWithAggregatesFilter<$PrismaModel> | $Enums.DisputeStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDisputeStatusFilter<$PrismaModel>
+    _max?: NestedEnumDisputeStatusFilter<$PrismaModel>
+  }
+
+  export type EnumDecisionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DecisionType | EnumDecisionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DecisionType[]
+    notIn?: $Enums.DecisionType[]
+    not?: NestedEnumDecisionTypeFilter<$PrismaModel> | $Enums.DecisionType
+  }
+
+  export type DisputeRelationFilter = {
+    is?: DisputeWhereInput
+    isNot?: DisputeWhereInput
+  }
+
+  export type DisputeResolutionCountOrderByAggregateInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    resolvedById?: SortOrder
+    decisionType?: SortOrder
+    amountToLender?: SortOrder
+    amountToBorrower?: SortOrder
+    justification?: SortOrder
+    resolvedAt?: SortOrder
+  }
+
+  export type DisputeResolutionAvgOrderByAggregateInput = {
+    amountToLender?: SortOrder
+    amountToBorrower?: SortOrder
+  }
+
+  export type DisputeResolutionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    resolvedById?: SortOrder
+    decisionType?: SortOrder
+    amountToLender?: SortOrder
+    amountToBorrower?: SortOrder
+    justification?: SortOrder
+    resolvedAt?: SortOrder
+  }
+
+  export type DisputeResolutionMinOrderByAggregateInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    resolvedById?: SortOrder
+    decisionType?: SortOrder
+    amountToLender?: SortOrder
+    amountToBorrower?: SortOrder
+    justification?: SortOrder
+    resolvedAt?: SortOrder
+  }
+
+  export type DisputeResolutionSumOrderByAggregateInput = {
+    amountToLender?: SortOrder
+    amountToBorrower?: SortOrder
+  }
+
+  export type EnumDecisionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DecisionType | EnumDecisionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DecisionType[]
+    notIn?: $Enums.DecisionType[]
+    not?: NestedEnumDecisionTypeWithAggregatesFilter<$PrismaModel> | $Enums.DecisionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDecisionTypeFilter<$PrismaModel>
+    _max?: NestedEnumDecisionTypeFilter<$PrismaModel>
+  }
+
+  export type DisputeEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    actorRole?: SortOrder
+    type?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DisputeEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    actorRole?: SortOrder
+    type?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type DisputeEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    disputeId?: SortOrder
+    actorRole?: SortOrder
+    type?: SortOrder
+    body?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type AccountCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -28175,6 +32451,34 @@ export namespace Prisma {
     connect?: IdVerificationWhereUniqueInput
   }
 
+  export type DisputeCreateNestedManyWithoutRaisedByInput = {
+    create?: XOR<DisputeCreateWithoutRaisedByInput, DisputeUncheckedCreateWithoutRaisedByInput> | DisputeCreateWithoutRaisedByInput[] | DisputeUncheckedCreateWithoutRaisedByInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutRaisedByInput | DisputeCreateOrConnectWithoutRaisedByInput[]
+    createMany?: DisputeCreateManyRaisedByInputEnvelope
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+  }
+
+  export type DisputeCreateNestedManyWithoutBorrowerInput = {
+    create?: XOR<DisputeCreateWithoutBorrowerInput, DisputeUncheckedCreateWithoutBorrowerInput> | DisputeCreateWithoutBorrowerInput[] | DisputeUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutBorrowerInput | DisputeCreateOrConnectWithoutBorrowerInput[]
+    createMany?: DisputeCreateManyBorrowerInputEnvelope
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+  }
+
+  export type DisputeCreateNestedManyWithoutLenderInput = {
+    create?: XOR<DisputeCreateWithoutLenderInput, DisputeUncheckedCreateWithoutLenderInput> | DisputeCreateWithoutLenderInput[] | DisputeUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutLenderInput | DisputeCreateOrConnectWithoutLenderInput[]
+    createMany?: DisputeCreateManyLenderInputEnvelope
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+  }
+
+  export type DisputeResolutionCreateNestedManyWithoutResolvedByInput = {
+    create?: XOR<DisputeResolutionCreateWithoutResolvedByInput, DisputeResolutionUncheckedCreateWithoutResolvedByInput> | DisputeResolutionCreateWithoutResolvedByInput[] | DisputeResolutionUncheckedCreateWithoutResolvedByInput[]
+    connectOrCreate?: DisputeResolutionCreateOrConnectWithoutResolvedByInput | DisputeResolutionCreateOrConnectWithoutResolvedByInput[]
+    createMany?: DisputeResolutionCreateManyResolvedByInputEnvelope
+    connect?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -28297,6 +32601,34 @@ export namespace Prisma {
     create?: XOR<IdVerificationCreateWithoutUserInput, IdVerificationUncheckedCreateWithoutUserInput>
     connectOrCreate?: IdVerificationCreateOrConnectWithoutUserInput
     connect?: IdVerificationWhereUniqueInput
+  }
+
+  export type DisputeUncheckedCreateNestedManyWithoutRaisedByInput = {
+    create?: XOR<DisputeCreateWithoutRaisedByInput, DisputeUncheckedCreateWithoutRaisedByInput> | DisputeCreateWithoutRaisedByInput[] | DisputeUncheckedCreateWithoutRaisedByInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutRaisedByInput | DisputeCreateOrConnectWithoutRaisedByInput[]
+    createMany?: DisputeCreateManyRaisedByInputEnvelope
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+  }
+
+  export type DisputeUncheckedCreateNestedManyWithoutBorrowerInput = {
+    create?: XOR<DisputeCreateWithoutBorrowerInput, DisputeUncheckedCreateWithoutBorrowerInput> | DisputeCreateWithoutBorrowerInput[] | DisputeUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutBorrowerInput | DisputeCreateOrConnectWithoutBorrowerInput[]
+    createMany?: DisputeCreateManyBorrowerInputEnvelope
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+  }
+
+  export type DisputeUncheckedCreateNestedManyWithoutLenderInput = {
+    create?: XOR<DisputeCreateWithoutLenderInput, DisputeUncheckedCreateWithoutLenderInput> | DisputeCreateWithoutLenderInput[] | DisputeUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutLenderInput | DisputeCreateOrConnectWithoutLenderInput[]
+    createMany?: DisputeCreateManyLenderInputEnvelope
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+  }
+
+  export type DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput = {
+    create?: XOR<DisputeResolutionCreateWithoutResolvedByInput, DisputeResolutionUncheckedCreateWithoutResolvedByInput> | DisputeResolutionCreateWithoutResolvedByInput[] | DisputeResolutionUncheckedCreateWithoutResolvedByInput[]
+    connectOrCreate?: DisputeResolutionCreateOrConnectWithoutResolvedByInput | DisputeResolutionCreateOrConnectWithoutResolvedByInput[]
+    createMany?: DisputeResolutionCreateManyResolvedByInputEnvelope
+    connect?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -28571,6 +32903,62 @@ export namespace Prisma {
     update?: XOR<XOR<IdVerificationUpdateToOneWithWhereWithoutUserInput, IdVerificationUpdateWithoutUserInput>, IdVerificationUncheckedUpdateWithoutUserInput>
   }
 
+  export type DisputeUpdateManyWithoutRaisedByNestedInput = {
+    create?: XOR<DisputeCreateWithoutRaisedByInput, DisputeUncheckedCreateWithoutRaisedByInput> | DisputeCreateWithoutRaisedByInput[] | DisputeUncheckedCreateWithoutRaisedByInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutRaisedByInput | DisputeCreateOrConnectWithoutRaisedByInput[]
+    upsert?: DisputeUpsertWithWhereUniqueWithoutRaisedByInput | DisputeUpsertWithWhereUniqueWithoutRaisedByInput[]
+    createMany?: DisputeCreateManyRaisedByInputEnvelope
+    set?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    disconnect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    delete?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    update?: DisputeUpdateWithWhereUniqueWithoutRaisedByInput | DisputeUpdateWithWhereUniqueWithoutRaisedByInput[]
+    updateMany?: DisputeUpdateManyWithWhereWithoutRaisedByInput | DisputeUpdateManyWithWhereWithoutRaisedByInput[]
+    deleteMany?: DisputeScalarWhereInput | DisputeScalarWhereInput[]
+  }
+
+  export type DisputeUpdateManyWithoutBorrowerNestedInput = {
+    create?: XOR<DisputeCreateWithoutBorrowerInput, DisputeUncheckedCreateWithoutBorrowerInput> | DisputeCreateWithoutBorrowerInput[] | DisputeUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutBorrowerInput | DisputeCreateOrConnectWithoutBorrowerInput[]
+    upsert?: DisputeUpsertWithWhereUniqueWithoutBorrowerInput | DisputeUpsertWithWhereUniqueWithoutBorrowerInput[]
+    createMany?: DisputeCreateManyBorrowerInputEnvelope
+    set?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    disconnect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    delete?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    update?: DisputeUpdateWithWhereUniqueWithoutBorrowerInput | DisputeUpdateWithWhereUniqueWithoutBorrowerInput[]
+    updateMany?: DisputeUpdateManyWithWhereWithoutBorrowerInput | DisputeUpdateManyWithWhereWithoutBorrowerInput[]
+    deleteMany?: DisputeScalarWhereInput | DisputeScalarWhereInput[]
+  }
+
+  export type DisputeUpdateManyWithoutLenderNestedInput = {
+    create?: XOR<DisputeCreateWithoutLenderInput, DisputeUncheckedCreateWithoutLenderInput> | DisputeCreateWithoutLenderInput[] | DisputeUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutLenderInput | DisputeCreateOrConnectWithoutLenderInput[]
+    upsert?: DisputeUpsertWithWhereUniqueWithoutLenderInput | DisputeUpsertWithWhereUniqueWithoutLenderInput[]
+    createMany?: DisputeCreateManyLenderInputEnvelope
+    set?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    disconnect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    delete?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    update?: DisputeUpdateWithWhereUniqueWithoutLenderInput | DisputeUpdateWithWhereUniqueWithoutLenderInput[]
+    updateMany?: DisputeUpdateManyWithWhereWithoutLenderInput | DisputeUpdateManyWithWhereWithoutLenderInput[]
+    deleteMany?: DisputeScalarWhereInput | DisputeScalarWhereInput[]
+  }
+
+  export type DisputeResolutionUpdateManyWithoutResolvedByNestedInput = {
+    create?: XOR<DisputeResolutionCreateWithoutResolvedByInput, DisputeResolutionUncheckedCreateWithoutResolvedByInput> | DisputeResolutionCreateWithoutResolvedByInput[] | DisputeResolutionUncheckedCreateWithoutResolvedByInput[]
+    connectOrCreate?: DisputeResolutionCreateOrConnectWithoutResolvedByInput | DisputeResolutionCreateOrConnectWithoutResolvedByInput[]
+    upsert?: DisputeResolutionUpsertWithWhereUniqueWithoutResolvedByInput | DisputeResolutionUpsertWithWhereUniqueWithoutResolvedByInput[]
+    createMany?: DisputeResolutionCreateManyResolvedByInputEnvelope
+    set?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
+    disconnect?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
+    delete?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
+    connect?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
+    update?: DisputeResolutionUpdateWithWhereUniqueWithoutResolvedByInput | DisputeResolutionUpdateWithWhereUniqueWithoutResolvedByInput[]
+    updateMany?: DisputeResolutionUpdateManyWithWhereWithoutResolvedByInput | DisputeResolutionUpdateManyWithWhereWithoutResolvedByInput[]
+    deleteMany?: DisputeResolutionScalarWhereInput | DisputeResolutionScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -28813,6 +33201,62 @@ export namespace Prisma {
     delete?: IdVerificationWhereInput | boolean
     connect?: IdVerificationWhereUniqueInput
     update?: XOR<XOR<IdVerificationUpdateToOneWithWhereWithoutUserInput, IdVerificationUpdateWithoutUserInput>, IdVerificationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type DisputeUncheckedUpdateManyWithoutRaisedByNestedInput = {
+    create?: XOR<DisputeCreateWithoutRaisedByInput, DisputeUncheckedCreateWithoutRaisedByInput> | DisputeCreateWithoutRaisedByInput[] | DisputeUncheckedCreateWithoutRaisedByInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutRaisedByInput | DisputeCreateOrConnectWithoutRaisedByInput[]
+    upsert?: DisputeUpsertWithWhereUniqueWithoutRaisedByInput | DisputeUpsertWithWhereUniqueWithoutRaisedByInput[]
+    createMany?: DisputeCreateManyRaisedByInputEnvelope
+    set?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    disconnect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    delete?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    update?: DisputeUpdateWithWhereUniqueWithoutRaisedByInput | DisputeUpdateWithWhereUniqueWithoutRaisedByInput[]
+    updateMany?: DisputeUpdateManyWithWhereWithoutRaisedByInput | DisputeUpdateManyWithWhereWithoutRaisedByInput[]
+    deleteMany?: DisputeScalarWhereInput | DisputeScalarWhereInput[]
+  }
+
+  export type DisputeUncheckedUpdateManyWithoutBorrowerNestedInput = {
+    create?: XOR<DisputeCreateWithoutBorrowerInput, DisputeUncheckedCreateWithoutBorrowerInput> | DisputeCreateWithoutBorrowerInput[] | DisputeUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutBorrowerInput | DisputeCreateOrConnectWithoutBorrowerInput[]
+    upsert?: DisputeUpsertWithWhereUniqueWithoutBorrowerInput | DisputeUpsertWithWhereUniqueWithoutBorrowerInput[]
+    createMany?: DisputeCreateManyBorrowerInputEnvelope
+    set?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    disconnect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    delete?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    update?: DisputeUpdateWithWhereUniqueWithoutBorrowerInput | DisputeUpdateWithWhereUniqueWithoutBorrowerInput[]
+    updateMany?: DisputeUpdateManyWithWhereWithoutBorrowerInput | DisputeUpdateManyWithWhereWithoutBorrowerInput[]
+    deleteMany?: DisputeScalarWhereInput | DisputeScalarWhereInput[]
+  }
+
+  export type DisputeUncheckedUpdateManyWithoutLenderNestedInput = {
+    create?: XOR<DisputeCreateWithoutLenderInput, DisputeUncheckedCreateWithoutLenderInput> | DisputeCreateWithoutLenderInput[] | DisputeUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: DisputeCreateOrConnectWithoutLenderInput | DisputeCreateOrConnectWithoutLenderInput[]
+    upsert?: DisputeUpsertWithWhereUniqueWithoutLenderInput | DisputeUpsertWithWhereUniqueWithoutLenderInput[]
+    createMany?: DisputeCreateManyLenderInputEnvelope
+    set?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    disconnect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    delete?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    connect?: DisputeWhereUniqueInput | DisputeWhereUniqueInput[]
+    update?: DisputeUpdateWithWhereUniqueWithoutLenderInput | DisputeUpdateWithWhereUniqueWithoutLenderInput[]
+    updateMany?: DisputeUpdateManyWithWhereWithoutLenderInput | DisputeUpdateManyWithWhereWithoutLenderInput[]
+    deleteMany?: DisputeScalarWhereInput | DisputeScalarWhereInput[]
+  }
+
+  export type DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput = {
+    create?: XOR<DisputeResolutionCreateWithoutResolvedByInput, DisputeResolutionUncheckedCreateWithoutResolvedByInput> | DisputeResolutionCreateWithoutResolvedByInput[] | DisputeResolutionUncheckedCreateWithoutResolvedByInput[]
+    connectOrCreate?: DisputeResolutionCreateOrConnectWithoutResolvedByInput | DisputeResolutionCreateOrConnectWithoutResolvedByInput[]
+    upsert?: DisputeResolutionUpsertWithWhereUniqueWithoutResolvedByInput | DisputeResolutionUpsertWithWhereUniqueWithoutResolvedByInput[]
+    createMany?: DisputeResolutionCreateManyResolvedByInputEnvelope
+    set?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
+    disconnect?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
+    delete?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
+    connect?: DisputeResolutionWhereUniqueInput | DisputeResolutionWhereUniqueInput[]
+    update?: DisputeResolutionUpdateWithWhereUniqueWithoutResolvedByInput | DisputeResolutionUpdateWithWhereUniqueWithoutResolvedByInput[]
+    updateMany?: DisputeResolutionUpdateManyWithWhereWithoutResolvedByInput | DisputeResolutionUpdateManyWithWhereWithoutResolvedByInput[]
+    deleteMany?: DisputeResolutionScalarWhereInput | DisputeResolutionScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutProductsInput = {
@@ -29333,10 +33777,22 @@ export namespace Prisma {
     connect?: ItemTrailEntryWhereUniqueInput
   }
 
+  export type DisputeCreateNestedOneWithoutCheckoutInput = {
+    create?: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
+    connectOrCreate?: DisputeCreateOrConnectWithoutCheckoutInput
+    connect?: DisputeWhereUniqueInput
+  }
+
   export type ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput = {
     create?: XOR<ItemTrailEntryCreateWithoutBorrowCheckoutInput, ItemTrailEntryUncheckedCreateWithoutBorrowCheckoutInput>
     connectOrCreate?: ItemTrailEntryCreateOrConnectWithoutBorrowCheckoutInput
     connect?: ItemTrailEntryWhereUniqueInput
+  }
+
+  export type DisputeUncheckedCreateNestedOneWithoutCheckoutInput = {
+    create?: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
+    connectOrCreate?: DisputeCreateOrConnectWithoutCheckoutInput
+    connect?: DisputeWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput = {
@@ -29393,6 +33849,16 @@ export namespace Prisma {
     update?: XOR<XOR<ItemTrailEntryUpdateToOneWithWhereWithoutBorrowCheckoutInput, ItemTrailEntryUpdateWithoutBorrowCheckoutInput>, ItemTrailEntryUncheckedUpdateWithoutBorrowCheckoutInput>
   }
 
+  export type DisputeUpdateOneWithoutCheckoutNestedInput = {
+    create?: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
+    connectOrCreate?: DisputeCreateOrConnectWithoutCheckoutInput
+    upsert?: DisputeUpsertWithoutCheckoutInput
+    disconnect?: DisputeWhereInput | boolean
+    delete?: DisputeWhereInput | boolean
+    connect?: DisputeWhereUniqueInput
+    update?: XOR<XOR<DisputeUpdateToOneWithWhereWithoutCheckoutInput, DisputeUpdateWithoutCheckoutInput>, DisputeUncheckedUpdateWithoutCheckoutInput>
+  }
+
   export type ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput = {
     create?: XOR<ItemTrailEntryCreateWithoutBorrowCheckoutInput, ItemTrailEntryUncheckedCreateWithoutBorrowCheckoutInput>
     connectOrCreate?: ItemTrailEntryCreateOrConnectWithoutBorrowCheckoutInput
@@ -29401,6 +33867,16 @@ export namespace Prisma {
     delete?: ItemTrailEntryWhereInput | boolean
     connect?: ItemTrailEntryWhereUniqueInput
     update?: XOR<XOR<ItemTrailEntryUpdateToOneWithWhereWithoutBorrowCheckoutInput, ItemTrailEntryUpdateWithoutBorrowCheckoutInput>, ItemTrailEntryUncheckedUpdateWithoutBorrowCheckoutInput>
+  }
+
+  export type DisputeUncheckedUpdateOneWithoutCheckoutNestedInput = {
+    create?: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
+    connectOrCreate?: DisputeCreateOrConnectWithoutCheckoutInput
+    upsert?: DisputeUpsertWithoutCheckoutInput
+    disconnect?: DisputeWhereInput | boolean
+    delete?: DisputeWhereInput | boolean
+    connect?: DisputeWhereUniqueInput
+    update?: XOR<XOR<DisputeUpdateToOneWithWhereWithoutCheckoutInput, DisputeUpdateWithoutCheckoutInput>, DisputeUncheckedUpdateWithoutCheckoutInput>
   }
 
   export type UserCreateNestedOneWithoutNotificationsInput = {
@@ -29877,6 +34353,186 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutIdVerificationInput, UserUpdateWithoutIdVerificationInput>, UserUncheckedUpdateWithoutIdVerificationInput>
   }
 
+  export type BorrowCheckoutCreateNestedOneWithoutDisputeInput = {
+    create?: XOR<BorrowCheckoutCreateWithoutDisputeInput, BorrowCheckoutUncheckedCreateWithoutDisputeInput>
+    connectOrCreate?: BorrowCheckoutCreateOrConnectWithoutDisputeInput
+    connect?: BorrowCheckoutWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutDisputesRaisedInput = {
+    create?: XOR<UserCreateWithoutDisputesRaisedInput, UserUncheckedCreateWithoutDisputesRaisedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDisputesRaisedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutDisputesAsBorrowerInput = {
+    create?: XOR<UserCreateWithoutDisputesAsBorrowerInput, UserUncheckedCreateWithoutDisputesAsBorrowerInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDisputesAsBorrowerInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutDisputesAsLenderInput = {
+    create?: XOR<UserCreateWithoutDisputesAsLenderInput, UserUncheckedCreateWithoutDisputesAsLenderInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDisputesAsLenderInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type DisputeResolutionCreateNestedOneWithoutDisputeInput = {
+    create?: XOR<DisputeResolutionCreateWithoutDisputeInput, DisputeResolutionUncheckedCreateWithoutDisputeInput>
+    connectOrCreate?: DisputeResolutionCreateOrConnectWithoutDisputeInput
+    connect?: DisputeResolutionWhereUniqueInput
+  }
+
+  export type DisputeEventCreateNestedManyWithoutDisputeInput = {
+    create?: XOR<DisputeEventCreateWithoutDisputeInput, DisputeEventUncheckedCreateWithoutDisputeInput> | DisputeEventCreateWithoutDisputeInput[] | DisputeEventUncheckedCreateWithoutDisputeInput[]
+    connectOrCreate?: DisputeEventCreateOrConnectWithoutDisputeInput | DisputeEventCreateOrConnectWithoutDisputeInput[]
+    createMany?: DisputeEventCreateManyDisputeInputEnvelope
+    connect?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+  }
+
+  export type DisputeResolutionUncheckedCreateNestedOneWithoutDisputeInput = {
+    create?: XOR<DisputeResolutionCreateWithoutDisputeInput, DisputeResolutionUncheckedCreateWithoutDisputeInput>
+    connectOrCreate?: DisputeResolutionCreateOrConnectWithoutDisputeInput
+    connect?: DisputeResolutionWhereUniqueInput
+  }
+
+  export type DisputeEventUncheckedCreateNestedManyWithoutDisputeInput = {
+    create?: XOR<DisputeEventCreateWithoutDisputeInput, DisputeEventUncheckedCreateWithoutDisputeInput> | DisputeEventCreateWithoutDisputeInput[] | DisputeEventUncheckedCreateWithoutDisputeInput[]
+    connectOrCreate?: DisputeEventCreateOrConnectWithoutDisputeInput | DisputeEventCreateOrConnectWithoutDisputeInput[]
+    createMany?: DisputeEventCreateManyDisputeInputEnvelope
+    connect?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+  }
+
+  export type EnumDisputeStatusFieldUpdateOperationsInput = {
+    set?: $Enums.DisputeStatus
+  }
+
+  export type BorrowCheckoutUpdateOneRequiredWithoutDisputeNestedInput = {
+    create?: XOR<BorrowCheckoutCreateWithoutDisputeInput, BorrowCheckoutUncheckedCreateWithoutDisputeInput>
+    connectOrCreate?: BorrowCheckoutCreateOrConnectWithoutDisputeInput
+    upsert?: BorrowCheckoutUpsertWithoutDisputeInput
+    connect?: BorrowCheckoutWhereUniqueInput
+    update?: XOR<XOR<BorrowCheckoutUpdateToOneWithWhereWithoutDisputeInput, BorrowCheckoutUpdateWithoutDisputeInput>, BorrowCheckoutUncheckedUpdateWithoutDisputeInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutDisputesRaisedNestedInput = {
+    create?: XOR<UserCreateWithoutDisputesRaisedInput, UserUncheckedCreateWithoutDisputesRaisedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDisputesRaisedInput
+    upsert?: UserUpsertWithoutDisputesRaisedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDisputesRaisedInput, UserUpdateWithoutDisputesRaisedInput>, UserUncheckedUpdateWithoutDisputesRaisedInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutDisputesAsBorrowerNestedInput = {
+    create?: XOR<UserCreateWithoutDisputesAsBorrowerInput, UserUncheckedCreateWithoutDisputesAsBorrowerInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDisputesAsBorrowerInput
+    upsert?: UserUpsertWithoutDisputesAsBorrowerInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDisputesAsBorrowerInput, UserUpdateWithoutDisputesAsBorrowerInput>, UserUncheckedUpdateWithoutDisputesAsBorrowerInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutDisputesAsLenderNestedInput = {
+    create?: XOR<UserCreateWithoutDisputesAsLenderInput, UserUncheckedCreateWithoutDisputesAsLenderInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDisputesAsLenderInput
+    upsert?: UserUpsertWithoutDisputesAsLenderInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDisputesAsLenderInput, UserUpdateWithoutDisputesAsLenderInput>, UserUncheckedUpdateWithoutDisputesAsLenderInput>
+  }
+
+  export type DisputeResolutionUpdateOneWithoutDisputeNestedInput = {
+    create?: XOR<DisputeResolutionCreateWithoutDisputeInput, DisputeResolutionUncheckedCreateWithoutDisputeInput>
+    connectOrCreate?: DisputeResolutionCreateOrConnectWithoutDisputeInput
+    upsert?: DisputeResolutionUpsertWithoutDisputeInput
+    disconnect?: DisputeResolutionWhereInput | boolean
+    delete?: DisputeResolutionWhereInput | boolean
+    connect?: DisputeResolutionWhereUniqueInput
+    update?: XOR<XOR<DisputeResolutionUpdateToOneWithWhereWithoutDisputeInput, DisputeResolutionUpdateWithoutDisputeInput>, DisputeResolutionUncheckedUpdateWithoutDisputeInput>
+  }
+
+  export type DisputeEventUpdateManyWithoutDisputeNestedInput = {
+    create?: XOR<DisputeEventCreateWithoutDisputeInput, DisputeEventUncheckedCreateWithoutDisputeInput> | DisputeEventCreateWithoutDisputeInput[] | DisputeEventUncheckedCreateWithoutDisputeInput[]
+    connectOrCreate?: DisputeEventCreateOrConnectWithoutDisputeInput | DisputeEventCreateOrConnectWithoutDisputeInput[]
+    upsert?: DisputeEventUpsertWithWhereUniqueWithoutDisputeInput | DisputeEventUpsertWithWhereUniqueWithoutDisputeInput[]
+    createMany?: DisputeEventCreateManyDisputeInputEnvelope
+    set?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+    disconnect?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+    delete?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+    connect?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+    update?: DisputeEventUpdateWithWhereUniqueWithoutDisputeInput | DisputeEventUpdateWithWhereUniqueWithoutDisputeInput[]
+    updateMany?: DisputeEventUpdateManyWithWhereWithoutDisputeInput | DisputeEventUpdateManyWithWhereWithoutDisputeInput[]
+    deleteMany?: DisputeEventScalarWhereInput | DisputeEventScalarWhereInput[]
+  }
+
+  export type DisputeResolutionUncheckedUpdateOneWithoutDisputeNestedInput = {
+    create?: XOR<DisputeResolutionCreateWithoutDisputeInput, DisputeResolutionUncheckedCreateWithoutDisputeInput>
+    connectOrCreate?: DisputeResolutionCreateOrConnectWithoutDisputeInput
+    upsert?: DisputeResolutionUpsertWithoutDisputeInput
+    disconnect?: DisputeResolutionWhereInput | boolean
+    delete?: DisputeResolutionWhereInput | boolean
+    connect?: DisputeResolutionWhereUniqueInput
+    update?: XOR<XOR<DisputeResolutionUpdateToOneWithWhereWithoutDisputeInput, DisputeResolutionUpdateWithoutDisputeInput>, DisputeResolutionUncheckedUpdateWithoutDisputeInput>
+  }
+
+  export type DisputeEventUncheckedUpdateManyWithoutDisputeNestedInput = {
+    create?: XOR<DisputeEventCreateWithoutDisputeInput, DisputeEventUncheckedCreateWithoutDisputeInput> | DisputeEventCreateWithoutDisputeInput[] | DisputeEventUncheckedCreateWithoutDisputeInput[]
+    connectOrCreate?: DisputeEventCreateOrConnectWithoutDisputeInput | DisputeEventCreateOrConnectWithoutDisputeInput[]
+    upsert?: DisputeEventUpsertWithWhereUniqueWithoutDisputeInput | DisputeEventUpsertWithWhereUniqueWithoutDisputeInput[]
+    createMany?: DisputeEventCreateManyDisputeInputEnvelope
+    set?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+    disconnect?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+    delete?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+    connect?: DisputeEventWhereUniqueInput | DisputeEventWhereUniqueInput[]
+    update?: DisputeEventUpdateWithWhereUniqueWithoutDisputeInput | DisputeEventUpdateWithWhereUniqueWithoutDisputeInput[]
+    updateMany?: DisputeEventUpdateManyWithWhereWithoutDisputeInput | DisputeEventUpdateManyWithWhereWithoutDisputeInput[]
+    deleteMany?: DisputeEventScalarWhereInput | DisputeEventScalarWhereInput[]
+  }
+
+  export type DisputeCreateNestedOneWithoutResolutionInput = {
+    create?: XOR<DisputeCreateWithoutResolutionInput, DisputeUncheckedCreateWithoutResolutionInput>
+    connectOrCreate?: DisputeCreateOrConnectWithoutResolutionInput
+    connect?: DisputeWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutDisputeResolutionsInput = {
+    create?: XOR<UserCreateWithoutDisputeResolutionsInput, UserUncheckedCreateWithoutDisputeResolutionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDisputeResolutionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumDecisionTypeFieldUpdateOperationsInput = {
+    set?: $Enums.DecisionType
+  }
+
+  export type DisputeUpdateOneRequiredWithoutResolutionNestedInput = {
+    create?: XOR<DisputeCreateWithoutResolutionInput, DisputeUncheckedCreateWithoutResolutionInput>
+    connectOrCreate?: DisputeCreateOrConnectWithoutResolutionInput
+    upsert?: DisputeUpsertWithoutResolutionInput
+    connect?: DisputeWhereUniqueInput
+    update?: XOR<XOR<DisputeUpdateToOneWithWhereWithoutResolutionInput, DisputeUpdateWithoutResolutionInput>, DisputeUncheckedUpdateWithoutResolutionInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutDisputeResolutionsNestedInput = {
+    create?: XOR<UserCreateWithoutDisputeResolutionsInput, UserUncheckedCreateWithoutDisputeResolutionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDisputeResolutionsInput
+    upsert?: UserUpsertWithoutDisputeResolutionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDisputeResolutionsInput, UserUpdateWithoutDisputeResolutionsInput>, UserUncheckedUpdateWithoutDisputeResolutionsInput>
+  }
+
+  export type DisputeCreateNestedOneWithoutEventsInput = {
+    create?: XOR<DisputeCreateWithoutEventsInput, DisputeUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: DisputeCreateOrConnectWithoutEventsInput
+    connect?: DisputeWhereUniqueInput
+  }
+
+  export type DisputeUpdateOneRequiredWithoutEventsNestedInput = {
+    create?: XOR<DisputeCreateWithoutEventsInput, DisputeUncheckedCreateWithoutEventsInput>
+    connectOrCreate?: DisputeCreateOrConnectWithoutEventsInput
+    upsert?: DisputeUpsertWithoutEventsInput
+    connect?: DisputeWhereUniqueInput
+    update?: XOR<XOR<DisputeUpdateToOneWithWhereWithoutEventsInput, DisputeUpdateWithoutEventsInput>, DisputeUncheckedUpdateWithoutEventsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -30199,6 +34855,40 @@ export namespace Prisma {
     _max?: NestedBytesNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumDisputeStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.DisputeStatus | EnumDisputeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.DisputeStatus[]
+    notIn?: $Enums.DisputeStatus[]
+    not?: NestedEnumDisputeStatusFilter<$PrismaModel> | $Enums.DisputeStatus
+  }
+
+  export type NestedEnumDisputeStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DisputeStatus | EnumDisputeStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.DisputeStatus[]
+    notIn?: $Enums.DisputeStatus[]
+    not?: NestedEnumDisputeStatusWithAggregatesFilter<$PrismaModel> | $Enums.DisputeStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDisputeStatusFilter<$PrismaModel>
+    _max?: NestedEnumDisputeStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumDecisionTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DecisionType | EnumDecisionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DecisionType[]
+    notIn?: $Enums.DecisionType[]
+    not?: NestedEnumDecisionTypeFilter<$PrismaModel> | $Enums.DecisionType
+  }
+
+  export type NestedEnumDecisionTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DecisionType | EnumDecisionTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DecisionType[]
+    notIn?: $Enums.DecisionType[]
+    not?: NestedEnumDecisionTypeWithAggregatesFilter<$PrismaModel> | $Enums.DecisionType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDecisionTypeFilter<$PrismaModel>
+    _max?: NestedEnumDecisionTypeFilter<$PrismaModel>
+  }
+
   export type AccountCreateWithoutUserInput = {
     id?: string
     type: string
@@ -30471,6 +35161,7 @@ export namespace Prisma {
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutBorrowerInput = {
@@ -30492,6 +35183,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutBorrowerInput = {
@@ -30523,6 +35215,7 @@ export namespace Prisma {
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutLenderInput = {
@@ -30544,6 +35237,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutLenderInput = {
@@ -30829,6 +35523,186 @@ export namespace Prisma {
   export type IdVerificationCreateOrConnectWithoutUserInput = {
     where: IdVerificationWhereUniqueInput
     create: XOR<IdVerificationCreateWithoutUserInput, IdVerificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type DisputeCreateWithoutRaisedByInput = {
+    id?: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    checkout: BorrowCheckoutCreateNestedOneWithoutDisputeInput
+    borrower: UserCreateNestedOneWithoutDisputesAsBorrowerInput
+    lender: UserCreateNestedOneWithoutDisputesAsLenderInput
+    resolution?: DisputeResolutionCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeUncheckedCreateWithoutRaisedByInput = {
+    id?: string
+    checkoutId: string
+    borrowerId: string
+    lenderId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    resolution?: DisputeResolutionUncheckedCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventUncheckedCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeCreateOrConnectWithoutRaisedByInput = {
+    where: DisputeWhereUniqueInput
+    create: XOR<DisputeCreateWithoutRaisedByInput, DisputeUncheckedCreateWithoutRaisedByInput>
+  }
+
+  export type DisputeCreateManyRaisedByInputEnvelope = {
+    data: DisputeCreateManyRaisedByInput | DisputeCreateManyRaisedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DisputeCreateWithoutBorrowerInput = {
+    id?: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    checkout: BorrowCheckoutCreateNestedOneWithoutDisputeInput
+    raisedBy: UserCreateNestedOneWithoutDisputesRaisedInput
+    lender: UserCreateNestedOneWithoutDisputesAsLenderInput
+    resolution?: DisputeResolutionCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeUncheckedCreateWithoutBorrowerInput = {
+    id?: string
+    checkoutId: string
+    raisedById: string
+    lenderId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    resolution?: DisputeResolutionUncheckedCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventUncheckedCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeCreateOrConnectWithoutBorrowerInput = {
+    where: DisputeWhereUniqueInput
+    create: XOR<DisputeCreateWithoutBorrowerInput, DisputeUncheckedCreateWithoutBorrowerInput>
+  }
+
+  export type DisputeCreateManyBorrowerInputEnvelope = {
+    data: DisputeCreateManyBorrowerInput | DisputeCreateManyBorrowerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DisputeCreateWithoutLenderInput = {
+    id?: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    checkout: BorrowCheckoutCreateNestedOneWithoutDisputeInput
+    raisedBy: UserCreateNestedOneWithoutDisputesRaisedInput
+    borrower: UserCreateNestedOneWithoutDisputesAsBorrowerInput
+    resolution?: DisputeResolutionCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeUncheckedCreateWithoutLenderInput = {
+    id?: string
+    checkoutId: string
+    raisedById: string
+    borrowerId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    resolution?: DisputeResolutionUncheckedCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventUncheckedCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeCreateOrConnectWithoutLenderInput = {
+    where: DisputeWhereUniqueInput
+    create: XOR<DisputeCreateWithoutLenderInput, DisputeUncheckedCreateWithoutLenderInput>
+  }
+
+  export type DisputeCreateManyLenderInputEnvelope = {
+    data: DisputeCreateManyLenderInput | DisputeCreateManyLenderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DisputeResolutionCreateWithoutResolvedByInput = {
+    id?: string
+    decisionType: $Enums.DecisionType
+    amountToLender?: number | null
+    amountToBorrower?: number | null
+    justification: string
+    resolvedAt?: Date | string
+    dispute: DisputeCreateNestedOneWithoutResolutionInput
+  }
+
+  export type DisputeResolutionUncheckedCreateWithoutResolvedByInput = {
+    id?: string
+    disputeId: string
+    decisionType: $Enums.DecisionType
+    amountToLender?: number | null
+    amountToBorrower?: number | null
+    justification: string
+    resolvedAt?: Date | string
+  }
+
+  export type DisputeResolutionCreateOrConnectWithoutResolvedByInput = {
+    where: DisputeResolutionWhereUniqueInput
+    create: XOR<DisputeResolutionCreateWithoutResolvedByInput, DisputeResolutionUncheckedCreateWithoutResolvedByInput>
+  }
+
+  export type DisputeResolutionCreateManyResolvedByInputEnvelope = {
+    data: DisputeResolutionCreateManyResolvedByInput | DisputeResolutionCreateManyResolvedByInput[]
+    skipDuplicates?: boolean
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -31401,6 +36275,106 @@ export namespace Prisma {
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type DisputeUpsertWithWhereUniqueWithoutRaisedByInput = {
+    where: DisputeWhereUniqueInput
+    update: XOR<DisputeUpdateWithoutRaisedByInput, DisputeUncheckedUpdateWithoutRaisedByInput>
+    create: XOR<DisputeCreateWithoutRaisedByInput, DisputeUncheckedCreateWithoutRaisedByInput>
+  }
+
+  export type DisputeUpdateWithWhereUniqueWithoutRaisedByInput = {
+    where: DisputeWhereUniqueInput
+    data: XOR<DisputeUpdateWithoutRaisedByInput, DisputeUncheckedUpdateWithoutRaisedByInput>
+  }
+
+  export type DisputeUpdateManyWithWhereWithoutRaisedByInput = {
+    where: DisputeScalarWhereInput
+    data: XOR<DisputeUpdateManyMutationInput, DisputeUncheckedUpdateManyWithoutRaisedByInput>
+  }
+
+  export type DisputeScalarWhereInput = {
+    AND?: DisputeScalarWhereInput | DisputeScalarWhereInput[]
+    OR?: DisputeScalarWhereInput[]
+    NOT?: DisputeScalarWhereInput | DisputeScalarWhereInput[]
+    id?: StringFilter<"Dispute"> | string
+    checkoutId?: StringFilter<"Dispute"> | string
+    raisedById?: StringFilter<"Dispute"> | string
+    borrowerId?: StringFilter<"Dispute"> | string
+    lenderId?: StringFilter<"Dispute"> | string
+    status?: EnumDisputeStatusFilter<"Dispute"> | $Enums.DisputeStatus
+    title?: StringFilter<"Dispute"> | string
+    description?: StringFilter<"Dispute"> | string
+    depositAmount?: IntFilter<"Dispute"> | number
+    beforePhotoUrl?: StringNullableFilter<"Dispute"> | string | null
+    afterPhotoUrl?: StringNullableFilter<"Dispute"> | string | null
+    aiVerdict?: StringNullableFilter<"Dispute"> | string | null
+    aiConfidence?: FloatNullableFilter<"Dispute"> | number | null
+    aiNotes?: StringNullableFilter<"Dispute"> | string | null
+    raisedAt?: DateTimeFilter<"Dispute"> | Date | string
+    updatedAt?: DateTimeFilter<"Dispute"> | Date | string
+  }
+
+  export type DisputeUpsertWithWhereUniqueWithoutBorrowerInput = {
+    where: DisputeWhereUniqueInput
+    update: XOR<DisputeUpdateWithoutBorrowerInput, DisputeUncheckedUpdateWithoutBorrowerInput>
+    create: XOR<DisputeCreateWithoutBorrowerInput, DisputeUncheckedCreateWithoutBorrowerInput>
+  }
+
+  export type DisputeUpdateWithWhereUniqueWithoutBorrowerInput = {
+    where: DisputeWhereUniqueInput
+    data: XOR<DisputeUpdateWithoutBorrowerInput, DisputeUncheckedUpdateWithoutBorrowerInput>
+  }
+
+  export type DisputeUpdateManyWithWhereWithoutBorrowerInput = {
+    where: DisputeScalarWhereInput
+    data: XOR<DisputeUpdateManyMutationInput, DisputeUncheckedUpdateManyWithoutBorrowerInput>
+  }
+
+  export type DisputeUpsertWithWhereUniqueWithoutLenderInput = {
+    where: DisputeWhereUniqueInput
+    update: XOR<DisputeUpdateWithoutLenderInput, DisputeUncheckedUpdateWithoutLenderInput>
+    create: XOR<DisputeCreateWithoutLenderInput, DisputeUncheckedCreateWithoutLenderInput>
+  }
+
+  export type DisputeUpdateWithWhereUniqueWithoutLenderInput = {
+    where: DisputeWhereUniqueInput
+    data: XOR<DisputeUpdateWithoutLenderInput, DisputeUncheckedUpdateWithoutLenderInput>
+  }
+
+  export type DisputeUpdateManyWithWhereWithoutLenderInput = {
+    where: DisputeScalarWhereInput
+    data: XOR<DisputeUpdateManyMutationInput, DisputeUncheckedUpdateManyWithoutLenderInput>
+  }
+
+  export type DisputeResolutionUpsertWithWhereUniqueWithoutResolvedByInput = {
+    where: DisputeResolutionWhereUniqueInput
+    update: XOR<DisputeResolutionUpdateWithoutResolvedByInput, DisputeResolutionUncheckedUpdateWithoutResolvedByInput>
+    create: XOR<DisputeResolutionCreateWithoutResolvedByInput, DisputeResolutionUncheckedCreateWithoutResolvedByInput>
+  }
+
+  export type DisputeResolutionUpdateWithWhereUniqueWithoutResolvedByInput = {
+    where: DisputeResolutionWhereUniqueInput
+    data: XOR<DisputeResolutionUpdateWithoutResolvedByInput, DisputeResolutionUncheckedUpdateWithoutResolvedByInput>
+  }
+
+  export type DisputeResolutionUpdateManyWithWhereWithoutResolvedByInput = {
+    where: DisputeResolutionScalarWhereInput
+    data: XOR<DisputeResolutionUpdateManyMutationInput, DisputeResolutionUncheckedUpdateManyWithoutResolvedByInput>
+  }
+
+  export type DisputeResolutionScalarWhereInput = {
+    AND?: DisputeResolutionScalarWhereInput | DisputeResolutionScalarWhereInput[]
+    OR?: DisputeResolutionScalarWhereInput[]
+    NOT?: DisputeResolutionScalarWhereInput | DisputeResolutionScalarWhereInput[]
+    id?: StringFilter<"DisputeResolution"> | string
+    disputeId?: StringFilter<"DisputeResolution"> | string
+    resolvedById?: StringFilter<"DisputeResolution"> | string
+    decisionType?: EnumDecisionTypeFilter<"DisputeResolution"> | $Enums.DecisionType
+    amountToLender?: IntNullableFilter<"DisputeResolution"> | number | null
+    amountToBorrower?: IntNullableFilter<"DisputeResolution"> | number | null
+    justification?: StringFilter<"DisputeResolution"> | string
+    resolvedAt?: DateTimeFilter<"DisputeResolution"> | Date | string
+  }
+
   export type UserCreateWithoutProductsInput = {
     id?: string
     name?: string | null
@@ -31422,6 +36396,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -31440,6 +36415,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutProductsInput = {
@@ -31463,6 +36442,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -31481,6 +36461,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutProductsInput = {
@@ -31569,6 +36553,7 @@ export namespace Prisma {
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutProductInput = {
@@ -31590,6 +36575,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutProductInput = {
@@ -31676,6 +36662,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -31694,6 +36681,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProductsInput = {
@@ -31717,6 +36708,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -31735,6 +36727,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type LentItemUpsertWithWhereUniqueWithoutProductInput = {
@@ -31875,6 +36871,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -31893,6 +36890,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutLentItemsInput = {
@@ -31916,6 +36917,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -31934,6 +36936,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutLentItemsInput = {
@@ -31984,6 +36990,7 @@ export namespace Prisma {
     product: ProductCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutLentItemInput = {
@@ -32005,6 +37012,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutLentItemInput = {
@@ -32150,6 +37158,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -32168,6 +37177,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLentItemsInput = {
@@ -32191,6 +37204,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -32209,6 +37223,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type CartItemUpsertWithWhereUniqueWithoutLentItemInput = {
@@ -32280,6 +37298,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -32298,6 +37317,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutBorrowRequestsInput = {
@@ -32321,6 +37344,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -32339,6 +37363,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutBorrowRequestsInput = {
@@ -32408,6 +37436,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -32426,6 +37455,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBorrowRequestsInput = {
@@ -32449,6 +37482,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -32467,6 +37501,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type BorrowRequestOfferUpsertWithWhereUniqueWithoutBorrowRequestInput = {
@@ -32598,6 +37636,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -32616,6 +37655,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutBorrowRequestOffersInput = {
@@ -32639,6 +37682,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -32657,6 +37701,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutBorrowRequestOffersInput = {
@@ -32683,6 +37731,7 @@ export namespace Prisma {
     product: ProductCreateNestedOneWithoutCheckoutsInput
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutOfferInput = {
@@ -32704,6 +37753,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutOfferInput = {
@@ -32847,6 +37897,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -32865,6 +37916,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBorrowRequestOffersInput = {
@@ -32888,6 +37943,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -32906,6 +37962,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type BorrowCheckoutUpsertWithoutOfferInput = {
@@ -32938,6 +37998,7 @@ export namespace Prisma {
     product?: ProductUpdateOneRequiredWithoutCheckoutsNestedInput
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutOfferInput = {
@@ -32959,6 +38020,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
   export type UserCreateWithoutCheckoutsAsBorrowerInput = {
@@ -32982,6 +38044,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -33000,6 +38063,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutCheckoutsAsBorrowerInput = {
@@ -33023,6 +38090,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -33041,6 +38109,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutCheckoutsAsBorrowerInput = {
@@ -33069,6 +38141,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -33087,6 +38160,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutCheckoutsAsLenderInput = {
@@ -33110,6 +38187,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -33128,6 +38206,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutCheckoutsAsLenderInput = {
@@ -33277,6 +38359,51 @@ export namespace Prisma {
     create: XOR<ItemTrailEntryCreateWithoutBorrowCheckoutInput, ItemTrailEntryUncheckedCreateWithoutBorrowCheckoutInput>
   }
 
+  export type DisputeCreateWithoutCheckoutInput = {
+    id?: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    raisedBy: UserCreateNestedOneWithoutDisputesRaisedInput
+    borrower: UserCreateNestedOneWithoutDisputesAsBorrowerInput
+    lender: UserCreateNestedOneWithoutDisputesAsLenderInput
+    resolution?: DisputeResolutionCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeUncheckedCreateWithoutCheckoutInput = {
+    id?: string
+    raisedById: string
+    borrowerId: string
+    lenderId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    resolution?: DisputeResolutionUncheckedCreateNestedOneWithoutDisputeInput
+    events?: DisputeEventUncheckedCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeCreateOrConnectWithoutCheckoutInput = {
+    where: DisputeWhereUniqueInput
+    create: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
+  }
+
   export type UserUpsertWithoutCheckoutsAsBorrowerInput = {
     update: XOR<UserUpdateWithoutCheckoutsAsBorrowerInput, UserUncheckedUpdateWithoutCheckoutsAsBorrowerInput>
     create: XOR<UserCreateWithoutCheckoutsAsBorrowerInput, UserUncheckedCreateWithoutCheckoutsAsBorrowerInput>
@@ -33309,6 +38436,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -33327,6 +38455,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCheckoutsAsBorrowerInput = {
@@ -33350,6 +38482,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -33368,6 +38501,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUpsertWithoutCheckoutsAsLenderInput = {
@@ -33402,6 +38539,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -33420,6 +38558,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCheckoutsAsLenderInput = {
@@ -33443,6 +38585,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -33461,6 +38604,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type ProductUpsertWithoutCheckoutsInput = {
@@ -33629,6 +38776,57 @@ export namespace Prisma {
     reactions?: TrailReactionUncheckedUpdateManyWithoutTrailEntryNestedInput
   }
 
+  export type DisputeUpsertWithoutCheckoutInput = {
+    update: XOR<DisputeUpdateWithoutCheckoutInput, DisputeUncheckedUpdateWithoutCheckoutInput>
+    create: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
+    where?: DisputeWhereInput
+  }
+
+  export type DisputeUpdateToOneWithWhereWithoutCheckoutInput = {
+    where?: DisputeWhereInput
+    data: XOR<DisputeUpdateWithoutCheckoutInput, DisputeUncheckedUpdateWithoutCheckoutInput>
+  }
+
+  export type DisputeUpdateWithoutCheckoutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    raisedBy?: UserUpdateOneRequiredWithoutDisputesRaisedNestedInput
+    borrower?: UserUpdateOneRequiredWithoutDisputesAsBorrowerNestedInput
+    lender?: UserUpdateOneRequiredWithoutDisputesAsLenderNestedInput
+    resolution?: DisputeResolutionUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateWithoutCheckoutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    raisedById?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolution?: DisputeResolutionUncheckedUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUncheckedUpdateManyWithoutDisputeNestedInput
+  }
+
   export type UserCreateWithoutNotificationsInput = {
     id?: string
     name?: string | null
@@ -33650,6 +38848,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -33668,6 +38867,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -33691,6 +38894,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -33709,6 +38913,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -33748,6 +38956,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -33766,6 +38975,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -33789,6 +39002,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -33807,6 +39021,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserCreateWithoutMentorInput = {
@@ -33830,6 +39048,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -33848,6 +39067,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutMentorInput = {
@@ -33871,6 +39094,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -33889,6 +39113,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutMentorInput = {
@@ -33958,6 +39186,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -33976,6 +39205,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMentorInput = {
@@ -33999,6 +39232,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -34017,6 +39251,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type MentorBookingUpsertWithWhereUniqueWithoutMentorInput = {
@@ -34099,6 +39337,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -34117,6 +39356,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutMentorBookingsInput = {
@@ -34140,6 +39383,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -34158,6 +39402,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutMentorBookingsInput = {
@@ -34246,6 +39494,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -34264,6 +39513,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMentorBookingsInput = {
@@ -34287,6 +39540,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -34305,6 +39559,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type ConversationParticipantCreateWithoutConversationInput = {
@@ -34427,6 +39685,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -34445,6 +39704,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutConversationParticipantsInput = {
@@ -34468,6 +39731,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -34486,6 +39750,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutConversationParticipantsInput = {
@@ -34550,6 +39818,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -34568,6 +39837,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationParticipantsInput = {
@@ -34591,6 +39864,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -34609,6 +39883,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type ConversationCreateWithoutMessagesInput = {
@@ -34651,6 +39929,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -34669,6 +39948,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -34692,6 +39975,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -34710,6 +39994,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -34774,6 +40062,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -34792,6 +40081,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -34815,6 +40108,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -34833,6 +40127,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserCreateWithoutCartItemsInput = {
@@ -34856,6 +40154,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -34874,6 +40173,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutCartItemsInput = {
@@ -34897,6 +40200,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -34915,6 +40219,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutCartItemsInput = {
@@ -34981,6 +40289,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -34999,6 +40308,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCartItemsInput = {
@@ -35022,6 +40335,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -35040,6 +40354,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type LentItemUpsertWithoutCartItemsInput = {
@@ -35096,6 +40414,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
@@ -35114,6 +40433,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -35137,6 +40460,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
@@ -35155,6 +40479,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -35194,6 +40522,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
@@ -35212,6 +40541,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -35235,6 +40568,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
@@ -35253,6 +40587,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -35276,6 +40614,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
@@ -35294,6 +40633,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -35317,6 +40660,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
@@ -35335,6 +40679,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -35374,6 +40722,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
@@ -35392,6 +40741,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -35415,6 +40768,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
@@ -35433,6 +40787,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserCreateWithoutAuthenticatorsInput = {
@@ -35456,6 +40814,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -35474,6 +40833,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutAuthenticatorsInput = {
@@ -35497,6 +40860,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -35515,6 +40879,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutAuthenticatorsInput = {
@@ -35554,6 +40922,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -35572,6 +40941,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuthenticatorsInput = {
@@ -35595,6 +40968,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -35613,6 +40987,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type ProductCreateWithoutTrailEntriesInput = {
@@ -35714,6 +41092,7 @@ export namespace Prisma {
     product: ProductCreateNestedOneWithoutCheckoutsInput
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
+    dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutTrailEntryInput = {
@@ -35735,6 +41114,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutTrailEntryInput = {
@@ -35763,6 +41143,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -35781,6 +41162,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutTrailEntriesInput = {
@@ -35804,6 +41189,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -35822,6 +41208,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutTrailEntriesInput = {
@@ -35975,6 +41365,7 @@ export namespace Prisma {
     product?: ProductUpdateOneRequiredWithoutCheckoutsNestedInput
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
+    dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutTrailEntryInput = {
@@ -35996,6 +41387,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
   export type UserUpsertWithoutTrailEntriesInput = {
@@ -36030,6 +41422,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -36048,6 +41441,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTrailEntriesInput = {
@@ -36071,6 +41468,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -36089,6 +41487,10 @@ export namespace Prisma {
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type TrailReactionUpsertWithWhereUniqueWithoutTrailEntryInput = {
@@ -36165,6 +41567,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -36183,6 +41586,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutTrailReactionsInput = {
@@ -36206,6 +41613,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -36224,6 +41632,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutTrailReactionsInput = {
@@ -36306,6 +41718,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -36324,6 +41737,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTrailReactionsInput = {
@@ -36347,6 +41764,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -36365,6 +41783,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserCreateWithoutIdVerificationInput = {
@@ -36388,6 +41810,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -36406,6 +41829,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserUncheckedCreateWithoutIdVerificationInput = {
@@ -36429,6 +41856,7 @@ export namespace Prisma {
     addressVerified?: boolean
     meetupVerified?: boolean
     verifiedAt?: Date | string | null
+    isAdmin?: boolean
     createdAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -36447,6 +41875,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
   }
 
   export type UserCreateOrConnectWithoutIdVerificationInput = {
@@ -36486,6 +41918,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -36504,6 +41937,10 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutIdVerificationInput = {
@@ -36527,6 +41964,7 @@ export namespace Prisma {
     addressVerified?: BoolFieldUpdateOperationsInput | boolean
     meetupVerified?: BoolFieldUpdateOperationsInput | boolean
     verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -36545,6 +41983,1216 @@ export namespace Prisma {
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type BorrowCheckoutCreateWithoutDisputeInput = {
+    id?: string
+    originType: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    totalPrice?: number | null
+    deposit?: number | null
+    notes?: string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: Date | string | null
+    cancelledBy?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
+    lender: UserCreateNestedOneWithoutCheckoutsAsLenderInput
+    product: ProductCreateNestedOneWithoutCheckoutsInput
+    lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
+    offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
+    trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+  }
+
+  export type BorrowCheckoutUncheckedCreateWithoutDisputeInput = {
+    id?: string
+    borrowerId: string
+    lenderId: string
+    productId: string
+    lentItemId?: string | null
+    borrowRequestOfferId?: string | null
+    originType: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    totalPrice?: number | null
+    deposit?: number | null
+    notes?: string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: Date | string | null
+    cancelledBy?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+  }
+
+  export type BorrowCheckoutCreateOrConnectWithoutDisputeInput = {
+    where: BorrowCheckoutWhereUniqueInput
+    create: XOR<BorrowCheckoutCreateWithoutDisputeInput, BorrowCheckoutUncheckedCreateWithoutDisputeInput>
+  }
+
+  export type UserCreateWithoutDisputesRaisedInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
+    products?: ProductCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserUncheckedCreateWithoutDisputesRaisedInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserCreateOrConnectWithoutDisputesRaisedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDisputesRaisedInput, UserUncheckedCreateWithoutDisputesRaisedInput>
+  }
+
+  export type UserCreateWithoutDisputesAsBorrowerInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
+    products?: ProductCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserUncheckedCreateWithoutDisputesAsBorrowerInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserCreateOrConnectWithoutDisputesAsBorrowerInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDisputesAsBorrowerInput, UserUncheckedCreateWithoutDisputesAsBorrowerInput>
+  }
+
+  export type UserCreateWithoutDisputesAsLenderInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
+    products?: ProductCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserUncheckedCreateWithoutDisputesAsLenderInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserCreateOrConnectWithoutDisputesAsLenderInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDisputesAsLenderInput, UserUncheckedCreateWithoutDisputesAsLenderInput>
+  }
+
+  export type DisputeResolutionCreateWithoutDisputeInput = {
+    id?: string
+    decisionType: $Enums.DecisionType
+    amountToLender?: number | null
+    amountToBorrower?: number | null
+    justification: string
+    resolvedAt?: Date | string
+    resolvedBy: UserCreateNestedOneWithoutDisputeResolutionsInput
+  }
+
+  export type DisputeResolutionUncheckedCreateWithoutDisputeInput = {
+    id?: string
+    resolvedById: string
+    decisionType: $Enums.DecisionType
+    amountToLender?: number | null
+    amountToBorrower?: number | null
+    justification: string
+    resolvedAt?: Date | string
+  }
+
+  export type DisputeResolutionCreateOrConnectWithoutDisputeInput = {
+    where: DisputeResolutionWhereUniqueInput
+    create: XOR<DisputeResolutionCreateWithoutDisputeInput, DisputeResolutionUncheckedCreateWithoutDisputeInput>
+  }
+
+  export type DisputeEventCreateWithoutDisputeInput = {
+    id?: string
+    actorRole: string
+    type: string
+    body?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DisputeEventUncheckedCreateWithoutDisputeInput = {
+    id?: string
+    actorRole: string
+    type: string
+    body?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DisputeEventCreateOrConnectWithoutDisputeInput = {
+    where: DisputeEventWhereUniqueInput
+    create: XOR<DisputeEventCreateWithoutDisputeInput, DisputeEventUncheckedCreateWithoutDisputeInput>
+  }
+
+  export type DisputeEventCreateManyDisputeInputEnvelope = {
+    data: DisputeEventCreateManyDisputeInput | DisputeEventCreateManyDisputeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BorrowCheckoutUpsertWithoutDisputeInput = {
+    update: XOR<BorrowCheckoutUpdateWithoutDisputeInput, BorrowCheckoutUncheckedUpdateWithoutDisputeInput>
+    create: XOR<BorrowCheckoutCreateWithoutDisputeInput, BorrowCheckoutUncheckedCreateWithoutDisputeInput>
+    where?: BorrowCheckoutWhereInput
+  }
+
+  export type BorrowCheckoutUpdateToOneWithWhereWithoutDisputeInput = {
+    where?: BorrowCheckoutWhereInput
+    data: XOR<BorrowCheckoutUpdateWithoutDisputeInput, BorrowCheckoutUncheckedUpdateWithoutDisputeInput>
+  }
+
+  export type BorrowCheckoutUpdateWithoutDisputeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    originType?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalPrice?: NullableIntFieldUpdateOperationsInput | number | null
+    deposit?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
+    lender?: UserUpdateOneRequiredWithoutCheckoutsAsLenderNestedInput
+    product?: ProductUpdateOneRequiredWithoutCheckoutsNestedInput
+    lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
+    offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
+    trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+  }
+
+  export type BorrowCheckoutUncheckedUpdateWithoutDisputeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    lentItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    borrowRequestOfferId?: NullableStringFieldUpdateOperationsInput | string | null
+    originType?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalPrice?: NullableIntFieldUpdateOperationsInput | number | null
+    deposit?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+  }
+
+  export type UserUpsertWithoutDisputesRaisedInput = {
+    update: XOR<UserUpdateWithoutDisputesRaisedInput, UserUncheckedUpdateWithoutDisputesRaisedInput>
+    create: XOR<UserCreateWithoutDisputesRaisedInput, UserUncheckedCreateWithoutDisputesRaisedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDisputesRaisedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDisputesRaisedInput, UserUncheckedUpdateWithoutDisputesRaisedInput>
+  }
+
+  export type UserUpdateWithoutDisputesRaisedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
+    products?: ProductUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDisputesRaisedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUpsertWithoutDisputesAsBorrowerInput = {
+    update: XOR<UserUpdateWithoutDisputesAsBorrowerInput, UserUncheckedUpdateWithoutDisputesAsBorrowerInput>
+    create: XOR<UserCreateWithoutDisputesAsBorrowerInput, UserUncheckedCreateWithoutDisputesAsBorrowerInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDisputesAsBorrowerInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDisputesAsBorrowerInput, UserUncheckedUpdateWithoutDisputesAsBorrowerInput>
+  }
+
+  export type UserUpdateWithoutDisputesAsBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
+    products?: ProductUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDisputesAsBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUpsertWithoutDisputesAsLenderInput = {
+    update: XOR<UserUpdateWithoutDisputesAsLenderInput, UserUncheckedUpdateWithoutDisputesAsLenderInput>
+    create: XOR<UserCreateWithoutDisputesAsLenderInput, UserUncheckedCreateWithoutDisputesAsLenderInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDisputesAsLenderInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDisputesAsLenderInput, UserUncheckedUpdateWithoutDisputesAsLenderInput>
+  }
+
+  export type UserUpdateWithoutDisputesAsLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
+    products?: ProductUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDisputesAsLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type DisputeResolutionUpsertWithoutDisputeInput = {
+    update: XOR<DisputeResolutionUpdateWithoutDisputeInput, DisputeResolutionUncheckedUpdateWithoutDisputeInput>
+    create: XOR<DisputeResolutionCreateWithoutDisputeInput, DisputeResolutionUncheckedCreateWithoutDisputeInput>
+    where?: DisputeResolutionWhereInput
+  }
+
+  export type DisputeResolutionUpdateToOneWithWhereWithoutDisputeInput = {
+    where?: DisputeResolutionWhereInput
+    data: XOR<DisputeResolutionUpdateWithoutDisputeInput, DisputeResolutionUncheckedUpdateWithoutDisputeInput>
+  }
+
+  export type DisputeResolutionUpdateWithoutDisputeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumDecisionTypeFieldUpdateOperationsInput | $Enums.DecisionType
+    amountToLender?: NullableIntFieldUpdateOperationsInput | number | null
+    amountToBorrower?: NullableIntFieldUpdateOperationsInput | number | null
+    justification?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolvedBy?: UserUpdateOneRequiredWithoutDisputeResolutionsNestedInput
+  }
+
+  export type DisputeResolutionUncheckedUpdateWithoutDisputeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    resolvedById?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumDecisionTypeFieldUpdateOperationsInput | $Enums.DecisionType
+    amountToLender?: NullableIntFieldUpdateOperationsInput | number | null
+    amountToBorrower?: NullableIntFieldUpdateOperationsInput | number | null
+    justification?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeEventUpsertWithWhereUniqueWithoutDisputeInput = {
+    where: DisputeEventWhereUniqueInput
+    update: XOR<DisputeEventUpdateWithoutDisputeInput, DisputeEventUncheckedUpdateWithoutDisputeInput>
+    create: XOR<DisputeEventCreateWithoutDisputeInput, DisputeEventUncheckedCreateWithoutDisputeInput>
+  }
+
+  export type DisputeEventUpdateWithWhereUniqueWithoutDisputeInput = {
+    where: DisputeEventWhereUniqueInput
+    data: XOR<DisputeEventUpdateWithoutDisputeInput, DisputeEventUncheckedUpdateWithoutDisputeInput>
+  }
+
+  export type DisputeEventUpdateManyWithWhereWithoutDisputeInput = {
+    where: DisputeEventScalarWhereInput
+    data: XOR<DisputeEventUpdateManyMutationInput, DisputeEventUncheckedUpdateManyWithoutDisputeInput>
+  }
+
+  export type DisputeEventScalarWhereInput = {
+    AND?: DisputeEventScalarWhereInput | DisputeEventScalarWhereInput[]
+    OR?: DisputeEventScalarWhereInput[]
+    NOT?: DisputeEventScalarWhereInput | DisputeEventScalarWhereInput[]
+    id?: StringFilter<"DisputeEvent"> | string
+    disputeId?: StringFilter<"DisputeEvent"> | string
+    actorRole?: StringFilter<"DisputeEvent"> | string
+    type?: StringFilter<"DisputeEvent"> | string
+    body?: StringNullableFilter<"DisputeEvent"> | string | null
+    createdAt?: DateTimeFilter<"DisputeEvent"> | Date | string
+  }
+
+  export type DisputeCreateWithoutResolutionInput = {
+    id?: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    checkout: BorrowCheckoutCreateNestedOneWithoutDisputeInput
+    raisedBy: UserCreateNestedOneWithoutDisputesRaisedInput
+    borrower: UserCreateNestedOneWithoutDisputesAsBorrowerInput
+    lender: UserCreateNestedOneWithoutDisputesAsLenderInput
+    events?: DisputeEventCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeUncheckedCreateWithoutResolutionInput = {
+    id?: string
+    checkoutId: string
+    raisedById: string
+    borrowerId: string
+    lenderId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    events?: DisputeEventUncheckedCreateNestedManyWithoutDisputeInput
+  }
+
+  export type DisputeCreateOrConnectWithoutResolutionInput = {
+    where: DisputeWhereUniqueInput
+    create: XOR<DisputeCreateWithoutResolutionInput, DisputeUncheckedCreateWithoutResolutionInput>
+  }
+
+  export type UserCreateWithoutDisputeResolutionsInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
+    products?: ProductCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+  }
+
+  export type UserUncheckedCreateWithoutDisputeResolutionsInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+  }
+
+  export type UserCreateOrConnectWithoutDisputeResolutionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDisputeResolutionsInput, UserUncheckedCreateWithoutDisputeResolutionsInput>
+  }
+
+  export type DisputeUpsertWithoutResolutionInput = {
+    update: XOR<DisputeUpdateWithoutResolutionInput, DisputeUncheckedUpdateWithoutResolutionInput>
+    create: XOR<DisputeCreateWithoutResolutionInput, DisputeUncheckedCreateWithoutResolutionInput>
+    where?: DisputeWhereInput
+  }
+
+  export type DisputeUpdateToOneWithWhereWithoutResolutionInput = {
+    where?: DisputeWhereInput
+    data: XOR<DisputeUpdateWithoutResolutionInput, DisputeUncheckedUpdateWithoutResolutionInput>
+  }
+
+  export type DisputeUpdateWithoutResolutionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkout?: BorrowCheckoutUpdateOneRequiredWithoutDisputeNestedInput
+    raisedBy?: UserUpdateOneRequiredWithoutDisputesRaisedNestedInput
+    borrower?: UserUpdateOneRequiredWithoutDisputesAsBorrowerNestedInput
+    lender?: UserUpdateOneRequiredWithoutDisputesAsLenderNestedInput
+    events?: DisputeEventUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateWithoutResolutionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    raisedById?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    events?: DisputeEventUncheckedUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type UserUpsertWithoutDisputeResolutionsInput = {
+    update: XOR<UserUpdateWithoutDisputeResolutionsInput, UserUncheckedUpdateWithoutDisputeResolutionsInput>
+    create: XOR<UserCreateWithoutDisputeResolutionsInput, UserUncheckedCreateWithoutDisputeResolutionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDisputeResolutionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDisputeResolutionsInput, UserUncheckedUpdateWithoutDisputeResolutionsInput>
+  }
+
+  export type UserUpdateWithoutDisputeResolutionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
+    products?: ProductUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDisputeResolutionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+  }
+
+  export type DisputeCreateWithoutEventsInput = {
+    id?: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    checkout: BorrowCheckoutCreateNestedOneWithoutDisputeInput
+    raisedBy: UserCreateNestedOneWithoutDisputesRaisedInput
+    borrower: UserCreateNestedOneWithoutDisputesAsBorrowerInput
+    lender: UserCreateNestedOneWithoutDisputesAsLenderInput
+    resolution?: DisputeResolutionCreateNestedOneWithoutDisputeInput
+  }
+
+  export type DisputeUncheckedCreateWithoutEventsInput = {
+    id?: string
+    checkoutId: string
+    raisedById: string
+    borrowerId: string
+    lenderId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+    resolution?: DisputeResolutionUncheckedCreateNestedOneWithoutDisputeInput
+  }
+
+  export type DisputeCreateOrConnectWithoutEventsInput = {
+    where: DisputeWhereUniqueInput
+    create: XOR<DisputeCreateWithoutEventsInput, DisputeUncheckedCreateWithoutEventsInput>
+  }
+
+  export type DisputeUpsertWithoutEventsInput = {
+    update: XOR<DisputeUpdateWithoutEventsInput, DisputeUncheckedUpdateWithoutEventsInput>
+    create: XOR<DisputeCreateWithoutEventsInput, DisputeUncheckedCreateWithoutEventsInput>
+    where?: DisputeWhereInput
+  }
+
+  export type DisputeUpdateToOneWithWhereWithoutEventsInput = {
+    where?: DisputeWhereInput
+    data: XOR<DisputeUpdateWithoutEventsInput, DisputeUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type DisputeUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkout?: BorrowCheckoutUpdateOneRequiredWithoutDisputeNestedInput
+    raisedBy?: UserUpdateOneRequiredWithoutDisputesRaisedNestedInput
+    borrower?: UserUpdateOneRequiredWithoutDisputesAsBorrowerNestedInput
+    lender?: UserUpdateOneRequiredWithoutDisputesAsLenderNestedInput
+    resolution?: DisputeResolutionUpdateOneWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateWithoutEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    raisedById?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolution?: DisputeResolutionUncheckedUpdateOneWithoutDisputeNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -36731,6 +43379,70 @@ export namespace Prisma {
     read?: boolean
     link?: string | null
     createdAt?: Date | string
+  }
+
+  export type DisputeCreateManyRaisedByInput = {
+    id?: string
+    checkoutId: string
+    borrowerId: string
+    lenderId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DisputeCreateManyBorrowerInput = {
+    id?: string
+    checkoutId: string
+    raisedById: string
+    lenderId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DisputeCreateManyLenderInput = {
+    id?: string
+    checkoutId: string
+    raisedById: string
+    borrowerId: string
+    status?: $Enums.DisputeStatus
+    title: string
+    description: string
+    depositAmount: number
+    beforePhotoUrl?: string | null
+    afterPhotoUrl?: string | null
+    aiVerdict?: string | null
+    aiConfidence?: number | null
+    aiNotes?: string | null
+    raisedAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DisputeResolutionCreateManyResolvedByInput = {
+    id?: string
+    disputeId: string
+    decisionType: $Enums.DecisionType
+    amountToLender?: number | null
+    amountToBorrower?: number | null
+    justification: string
+    resolvedAt?: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -36970,6 +43682,7 @@ export namespace Prisma {
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutBorrowerInput = {
@@ -36991,6 +43704,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateManyWithoutBorrowerInput = {
@@ -37032,6 +43746,7 @@ export namespace Prisma {
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutLenderInput = {
@@ -37053,6 +43768,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateManyWithoutLenderInput = {
@@ -37315,6 +44031,210 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DisputeUpdateWithoutRaisedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkout?: BorrowCheckoutUpdateOneRequiredWithoutDisputeNestedInput
+    borrower?: UserUpdateOneRequiredWithoutDisputesAsBorrowerNestedInput
+    lender?: UserUpdateOneRequiredWithoutDisputesAsLenderNestedInput
+    resolution?: DisputeResolutionUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateWithoutRaisedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolution?: DisputeResolutionUncheckedUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUncheckedUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateManyWithoutRaisedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeUpdateWithoutBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkout?: BorrowCheckoutUpdateOneRequiredWithoutDisputeNestedInput
+    raisedBy?: UserUpdateOneRequiredWithoutDisputesRaisedNestedInput
+    lender?: UserUpdateOneRequiredWithoutDisputesAsLenderNestedInput
+    resolution?: DisputeResolutionUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateWithoutBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    raisedById?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolution?: DisputeResolutionUncheckedUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUncheckedUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateManyWithoutBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    raisedById?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeUpdateWithoutLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkout?: BorrowCheckoutUpdateOneRequiredWithoutDisputeNestedInput
+    raisedBy?: UserUpdateOneRequiredWithoutDisputesRaisedNestedInput
+    borrower?: UserUpdateOneRequiredWithoutDisputesAsBorrowerNestedInput
+    resolution?: DisputeResolutionUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateWithoutLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    raisedById?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resolution?: DisputeResolutionUncheckedUpdateOneWithoutDisputeNestedInput
+    events?: DisputeEventUncheckedUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type DisputeUncheckedUpdateManyWithoutLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    raisedById?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    status?: EnumDisputeStatusFieldUpdateOperationsInput | $Enums.DisputeStatus
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    depositAmount?: IntFieldUpdateOperationsInput | number
+    beforePhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    afterPhotoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    aiVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    raisedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeResolutionUpdateWithoutResolvedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumDecisionTypeFieldUpdateOperationsInput | $Enums.DecisionType
+    amountToLender?: NullableIntFieldUpdateOperationsInput | number | null
+    amountToBorrower?: NullableIntFieldUpdateOperationsInput | number | null
+    justification?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispute?: DisputeUpdateOneRequiredWithoutResolutionNestedInput
+  }
+
+  export type DisputeResolutionUncheckedUpdateWithoutResolvedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disputeId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumDecisionTypeFieldUpdateOperationsInput | $Enums.DecisionType
+    amountToLender?: NullableIntFieldUpdateOperationsInput | number | null
+    amountToBorrower?: NullableIntFieldUpdateOperationsInput | number | null
+    justification?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeResolutionUncheckedUpdateManyWithoutResolvedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    disputeId?: StringFieldUpdateOperationsInput | string
+    decisionType?: EnumDecisionTypeFieldUpdateOperationsInput | $Enums.DecisionType
+    amountToLender?: NullableIntFieldUpdateOperationsInput | number | null
+    amountToBorrower?: NullableIntFieldUpdateOperationsInput | number | null
+    justification?: StringFieldUpdateOperationsInput | string
+    resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type LentItemCreateManyProductInput = {
     id?: string
     lenderId: string
@@ -37445,6 +44365,7 @@ export namespace Prisma {
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutProductInput = {
@@ -37466,6 +44387,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateManyWithoutProductInput = {
@@ -37617,6 +44539,7 @@ export namespace Prisma {
     product?: ProductUpdateOneRequiredWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutLentItemInput = {
@@ -37638,6 +44561,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateManyWithoutLentItemInput = {
@@ -37869,6 +44793,38 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type DisputeEventCreateManyDisputeInput = {
+    id?: string
+    actorRole: string
+    type: string
+    body?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DisputeEventUpdateWithoutDisputeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorRole?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeEventUncheckedUpdateWithoutDisputeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorRole?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DisputeEventUncheckedUpdateManyWithoutDisputeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    actorRole?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
 
 
   /**
@@ -37902,6 +44858,10 @@ export namespace Prisma {
      * @deprecated Use ItemTrailEntryCountOutputTypeDefaultArgs instead
      */
     export type ItemTrailEntryCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ItemTrailEntryCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use DisputeCountOutputTypeDefaultArgs instead
+     */
+    export type DisputeCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DisputeCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -37982,6 +44942,18 @@ export namespace Prisma {
      * @deprecated Use IdVerificationDefaultArgs instead
      */
     export type IdVerificationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = IdVerificationDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use DisputeDefaultArgs instead
+     */
+    export type DisputeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DisputeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use DisputeResolutionDefaultArgs instead
+     */
+    export type DisputeResolutionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DisputeResolutionDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use DisputeEventDefaultArgs instead
+     */
+    export type DisputeEventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DisputeEventDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

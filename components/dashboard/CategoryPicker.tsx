@@ -10,6 +10,7 @@ type Props = {
   onChange: (v: string[]) => void;
   disabled?: boolean;
   placeholder?: string;
+  variant?: "light" | "dark";
 };
 
 export default function CategoryPicker({
@@ -18,6 +19,7 @@ export default function CategoryPicker({
   onChange,
   disabled = false,
   placeholder = "Select a category",
+  variant = "light",
 }: Props) {
   const [open, setOpen] = useState(false);
   const [expandedCat, setExpandedCat] = useState<string | null>(null);
@@ -69,7 +71,13 @@ export default function CategoryPicker({
         disabled={disabled}
         onClick={() => setOpen((v) => !v)}
         className={`flex w-full items-center justify-between rounded-2xl border px-4 py-3 text-sm font-semibold transition-colors focus:outline-none disabled:opacity-50 ${
-          open
+          variant === "dark"
+            ? open
+              ? "border-white/30 bg-white/15 text-white"
+              : hasValue
+              ? "border-white/25 bg-white/12 text-white"
+              : "border-white/15 bg-white/8 text-white/60"
+            : open
             ? "border-(--primary) bg-white text-(--foreground)"
             : hasValue
             ? "border-(--primary)/50 bg-(--primary-soft) text-(--primary)"

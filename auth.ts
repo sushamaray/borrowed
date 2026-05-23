@@ -68,23 +68,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    authorized({ request, auth }) {
-      const { pathname } = request.nextUrl;
-      const isAuthenticated = Boolean(auth?.user);
-      const isDashboardRoute = pathname.startsWith("/dashboard");
-      const isAuthRoute =
-        pathname.startsWith("/login") || pathname.startsWith("/register");
-
-      if (isDashboardRoute) {
-        return isAuthenticated;
-      }
-
-      if (isAuthRoute && isAuthenticated) {
-        return Response.redirect(new URL("/dashboard", request.nextUrl));
-      }
-
-      return true;
-    },
     async jwt({ token, user, trigger }) {
       if (user) {
         token.userId = user.id;
@@ -97,8 +80,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (user || trigger === "update" || !("isMentor" in token)) {
         const userId = user?.id ?? (typeof token.userId === "string" ? token.userId : null);
         if (userId) {
-          const mentor = await prisma.mentor.findUnique({ where: { userId } });
+          const [mentor, dbUser] = await Promise.all([
+            prisma.mentor.findUnique({ where: { userId } }),
+            prisma.user.findUnique({ where: { id: userId }, select: { isAdmin: true } }),
+          ]);
           token.isMentor = Boolean(mentor);
+          token.isAdmin = Boolean(dbUser?.isAdmin);
         }
       }
 
@@ -112,6 +99,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.location =
           typeof token.userLocation === "string" ? token.userLocation : null;
         session.user.isMentor = Boolean(token.isMentor);
+        session.user.isAdmin = Boolean(token.isAdmin);
       }
 
       return session;

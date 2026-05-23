@@ -4,9 +4,10 @@ import { useEffect, useState, useCallback } from "react";
 import {
   MapPin, Package, ClipboardList, Clock3, Check, X,
   RotateCcw, Inbox, History, Activity, Eye, Trash2,
-  TrendingUp, Star, CircleCheck, CircleMinus, ShoppingBag,
+  TrendingUp, Star, CircleCheck, CircleMinus, ShoppingBag, ShieldAlert,
 } from "lucide-react";
 import AddItemModal from "./AddItemModal";
+import RaiseDisputeModal from "./RaiseDisputeModal";
 import toast from "react-hot-toast";
 import FallbackImage from "@/components/FallbackImage";
 
@@ -31,6 +32,7 @@ type LentItem = {
 type BorrowCheckout = {
   id: string;
   status: string;
+  deposit: number | null;
   createdAt: string;
   returnedAt: string | null;
   startDate: string | null;
@@ -41,6 +43,7 @@ type BorrowCheckout = {
   borrower: { id: string; name: string | null; firstName: string | null; lastName: string | null; userName: string | null };
   lender:   { id: string; name: string | null; firstName: string | null; lastName: string | null; userName: string | null };
   trailEntry: { id: string; useFor: string; itemRating: number } | null;
+  dispute:    { id: string; status: string } | null;
 };
 
 type Tab = "listings" | "requests" | "active" | "history";
@@ -63,6 +66,7 @@ export default function MyItemsPage() {
   const [loading, setLoading] = useState(true);
   const [actionPending, setActionPending] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [disputeTarget, setDisputeTarget] = useState<BorrowCheckout | null>(null);
 
   const fetchAll = useCallback(async () => {
     setLoading(true);
@@ -380,15 +384,31 @@ export default function MyItemsPage() {
                             </div>
                           )}
                         </div>
-                        {order.lentItem && (
-                          <button
-                            onClick={() => handleRelist(order.lentItem!.id)}
-                            disabled={actionPending === order.lentItem.id}
-                            className="flex items-center gap-1.5 rounded-xl bg-[var(--primary-soft)] px-4 py-2 text-sm font-bold text-[var(--primary)] transition-colors hover:bg-[var(--primary)]/20 disabled:opacity-50"
-                          >
-                            <RotateCcw className="h-4 w-4" /> Re-list
-                          </button>
-                        )}
+                        <div className="flex shrink-0 gap-2">
+                          {!order.dispute && (
+                            <button
+                              onClick={() => setDisputeTarget(order)}
+                              className="flex items-center gap-1.5 rounded-xl bg-red-50 px-3 py-2 text-sm font-bold text-red-600 transition-colors hover:bg-red-100"
+                            >
+                              <ShieldAlert className="h-4 w-4" /> Dispute
+                            </button>
+                          )}
+                          {order.dispute && (
+                            <span className="flex items-center gap-1.5 rounded-xl bg-amber-50 px-3 py-2 text-sm font-bold text-amber-700">
+                              <ShieldAlert className="h-4 w-4" />
+                              {order.dispute.status === "RESOLVED" ? "Resolved" : "Disputed"}
+                            </span>
+                          )}
+                          {order.lentItem && (
+                            <button
+                              onClick={() => handleRelist(order.lentItem!.id)}
+                              disabled={actionPending === order.lentItem.id}
+                              className="flex items-center gap-1.5 rounded-xl bg-[var(--primary-soft)] px-4 py-2 text-sm font-bold text-[var(--primary)] transition-colors hover:bg-[var(--primary)]/20 disabled:opacity-50"
+                            >
+                              <RotateCcw className="h-4 w-4" /> Re-list
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -398,6 +418,14 @@ export default function MyItemsPage() {
           </>
         )}
       </div>
+
+      {disputeTarget && (
+        <RaiseDisputeModal
+          checkout={disputeTarget}
+          onClose={() => setDisputeTarget(null)}
+          onSuccess={() => { setDisputeTarget(null); void fetchAll(); }}
+        />
+      )}
     </div>
   );
 }

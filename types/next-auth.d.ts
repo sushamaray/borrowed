@@ -10,6 +10,7 @@ declare module "next-auth" {
       id: string;
       location?: string | null;
       isMentor: boolean;
+      isAdmin: boolean;
     };
   }
 }
@@ -21,5 +22,6 @@ declare module "next-auth/jwt" {
     userName?: string | null;
     userLocation?: string | null;
     isMentor?: boolean;
+    isAdmin?: boolean;
   }
 }

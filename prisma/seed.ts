@@ -928,6 +928,51 @@ const CHECKOUTS = [
     deposit: 4000,
     notes: "Designing UI mockups for a client project.",
   },
+  {
+    id: "test_checkout_9",
+    borrowerId: "test_user_bob",
+    lenderId: "test_user_alice",
+    productId: "test_prod_alice_1",
+    lentItemId: "test_lent_alice_1",
+    originType: "lent_item",
+    status: "returned",
+    startDate: daysAgo(18),
+    endDate: daysAgo(12),
+    returnedAt: daysAgo(12),
+    totalPrice: 2400,
+    deposit: 5000,
+    notes: "Borrowing for a wedding shoot in Sylhet.",
+  },
+  {
+    id: "test_checkout_10",
+    borrowerId: "test_user_dave",
+    lenderId: "test_user_carol",
+    productId: "test_prod_carol_2",
+    lentItemId: "test_lent_carol_2",
+    originType: "lent_item",
+    status: "returned",
+    startDate: daysAgo(14),
+    endDate: daysAgo(9),
+    returnedAt: daysAgo(9),
+    totalPrice: 8400,
+    deposit: 8000,
+    notes: "Resort promo video in Rangamati.",
+  },
+  {
+    id: "test_checkout_11",
+    borrowerId: "test_user_alice",
+    lenderId: "test_user_bob",
+    productId: "test_prod_bob_4",
+    lentItemId: "test_lent_bob_4",
+    originType: "lent_item",
+    status: "returned",
+    startDate: daysAgo(30),
+    endDate: daysAgo(22),
+    returnedAt: daysAgo(22),
+    totalPrice: 6000,
+    deposit: 4000,
+    notes: "Needed for a client presentation in Chittagong.",
+  },
 ];
 
 // â”€â”€ Trail Entries (product IDs updated to match test products) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -1634,6 +1679,115 @@ const trailEntries = [
 
 // â”€â”€ Main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
+
+// -- Disputes -----------------------------------------------------------------------
+
+const DISPUTES = [
+  {
+    id: "test_dispute_1",
+    checkoutId: "test_checkout_9",
+    raisedById: "test_user_alice",
+    borrowerId: "test_user_bob",
+    lenderId: "test_user_alice",
+    status: "OPEN",
+    title: "Lens scratched on return",
+    description: "The Canon EOS R5 was returned with visible scratches on the main lens element. Multiple hairline scratches are visible under light. This was not present at pickup.",
+    depositAmount: 5000,
+    beforePhotoUrl: null,
+    afterPhotoUrl: null,
+    aiVerdict: "lender_favored",
+    aiConfidence: 82,
+    aiNotes: "Surface abrasions detected on lens element. Optical path likely affected. High confidence damage occurred during borrow period.",
+    raisedAt: daysAgo(3),
+    events: [
+      { actorRole: "system", type: "raised",          body: "Dispute raised by lender.",            daysAgo: 3 },
+      { actorRole: "system", type: "status_changed",  body: "Status changed to OPEN.",              daysAgo: 3 },
+      { actorRole: "lender", type: "message",         body: "I noticed the scratches immediately when I unpacked the camera. I have photos from pickup showing the lens was clean.", daysAgo: 2, actorName: "Alice Rahman" },
+      { actorRole: "borrower", type: "message",       body: "I handled the camera with extreme care the entire time. The scratches may have been pre-existing — I never touched the lens glass.", daysAgo: 1, actorName: "Bob Hossain" },
+    ],
+  },
+  {
+    id: "test_dispute_2",
+    checkoutId: "test_checkout_4",
+    raisedById: "test_user_bob",
+    borrowerId: "test_user_carol",
+    lenderId: "test_user_bob",
+    status: "ESCALATED",
+    title: "Headphones returned with broken headband",
+    description: "The Sony WH-1000XM5 headphones have a cracked headband on the left side. The borrower claims it was pre-existing but it clearly was not.",
+    depositAmount: 2000,
+    beforePhotoUrl: null,
+    afterPhotoUrl: null,
+    aiVerdict: "lender_favored",
+    aiConfidence: 67,
+    aiNotes: "Structural stress fracture detected on left headband arm. Consistent with impact or excessive force. Moderate confidence — requires visual verification.",
+    raisedAt: daysAgo(8),
+    events: [
+      { actorRole: "system",   type: "raised",         body: "Dispute raised by lender.",             daysAgo: 8 },
+      { actorRole: "system",   type: "status_changed", body: "Status changed to OPEN.",               daysAgo: 8 },
+      { actorRole: "lender",   type: "message",        body: "The headband was perfectly fine when I handed it over. The photos I took at checkout clearly show no damage.", daysAgo: 7, actorName: "Bob Hossain" },
+      { actorRole: "borrower", type: "message",        body: "I never used excessive force on them. I believe the crack was already there — it was just not obvious at pickup.", daysAgo: 6, actorName: "Carol Ahmed" },
+      { actorRole: "lender",   type: "message",        body: "I am not satisfied with this explanation. Requesting escalation.", daysAgo: 5, actorName: "Bob Hossain" },
+      { actorRole: "system",   type: "status_changed", body: "Status escalated for senior review.",  daysAgo: 5 },
+    ],
+  },
+  {
+    id: "test_dispute_3",
+    checkoutId: "test_checkout_10",
+    raisedById: "test_user_carol",
+    borrowerId: "test_user_dave",
+    lenderId: "test_user_carol",
+    status: "UNDER_REVIEW",
+    title: "DJI drone gimbal malfunctioning after return",
+    description: "The DJI Air 3S drone gimbal is not stabilising correctly since the return. Footage now has visible shake. The borrower denies any incident.",
+    depositAmount: 8000,
+    beforePhotoUrl: null,
+    afterPhotoUrl: null,
+    aiVerdict: "inconclusive",
+    aiConfidence: 45,
+    aiNotes: "Gimbal motor telemetry shows calibration errors. Cannot confirm if caused by impact or firmware issue. Manual inspection recommended.",
+    raisedAt: daysAgo(5),
+    events: [
+      { actorRole: "system",   type: "raised",         body: "Dispute raised by lender.",              daysAgo: 5 },
+      { actorRole: "system",   type: "status_changed", body: "Status changed to OPEN.",                daysAgo: 5 },
+      { actorRole: "lender",   type: "message",        body: "The gimbal worked perfectly before the borrow. I tested it the day before handover. Now it drifts constantly.", daysAgo: 4, actorName: "Carol Ahmed" },
+      { actorRole: "system",   type: "status_changed", body: "Status changed to UNDER_REVIEW. Admin assigned.", daysAgo: 3 },
+      { actorRole: "borrower", type: "message",        body: "I flew it responsibly and landed normally every time. No crashes. Could be a firmware update that broke calibration.", daysAgo: 2, actorName: "Dave Islam" },
+    ],
+  },
+  {
+    id: "test_dispute_4",
+    checkoutId: "test_checkout_11",
+    raisedById: "test_user_bob",
+    borrowerId: "test_user_alice",
+    lenderId: "test_user_bob",
+    status: "RESOLVED",
+    title: "MacBook returned with cracked screen corner",
+    description: "Small crack in the bottom-left corner of the MacBook Pro screen. Borrower acknowledged it happened during transport.",
+    depositAmount: 4000,
+    beforePhotoUrl: null,
+    afterPhotoUrl: null,
+    aiVerdict: "lender_favored",
+    aiConfidence: 91,
+    aiNotes: "Physical impact fracture detected in display panel corner. Pattern consistent with drop or sharp impact. High confidence damage occurred during borrow period.",
+    raisedAt: daysAgo(25),
+    events: [
+      { actorRole: "system",   type: "raised",         body: "Dispute raised by lender.",             daysAgo: 25 },
+      { actorRole: "lender",   type: "message",        body: "Alice, the screen was perfect when I handed it over. The crack must have happened during your use.", daysAgo: 24, actorName: "Bob Hossain" },
+      { actorRole: "borrower", type: "message",        body: "I am really sorry, it slipped off the table at the hotel. I will accept a partial deposit deduction.", daysAgo: 23, actorName: "Alice Rahman" },
+      { actorRole: "system",   type: "status_changed", body: "Both parties agreed to settlement. Admin finalising.",   daysAgo: 22 },
+      { actorRole: "admin",    type: "resolved",       body: "Borrower accepted liability. 70% deposit released to lender (৳2800). Remaining 30% returned to borrower.", daysAgo: 22 },
+    ],
+    resolution: {
+      resolvedById: "test_user_superadmin",
+      decisionType: "SPLIT",
+      amountToLender: 2800,
+      amountToBorrower: 1200,
+      justification: "Borrower acknowledged responsibility for the drop that cracked the screen. Lender provided clear before-photo evidence. 70/30 split applied.",
+    },
+  },
+];
+
 async function main() {
   console.log("Hashing passwordâ€¦");
   const hashedPassword = await bcrypt.hash(PASSWORD, 10);
@@ -1670,6 +1824,24 @@ async function main() {
     });
     console.log(`  âœ“ ${user.firstName} ${user.lastName} (${user.email})`);
   }
+
+
+  // Superadmin
+  const adminPassword = await bcrypt.hash("admin", 10);
+  {
+    const existing = await prisma.user.findFirst({ where: { OR: [{ id: "test_user_superadmin" }, { email: "superadmin@test.com" }] }, select: { id: true } });
+    if (existing) {
+      await prisma.user.update({
+        where: { id: existing.id },
+        data: { email: "superadmin@test.com", userName: "superadmin", firstName: "Super", lastName: "Admin", password: adminPassword, isAdmin: true, identityVerified: true, contactVerified: true },
+      });
+    } else {
+      await prisma.user.create({
+        data: { id: "test_user_superadmin", email: "superadmin@test.com", userName: "superadmin", firstName: "Super", lastName: "Admin", password: adminPassword, isAdmin: true, identityVerified: true, contactVerified: true },
+      });
+    }
+  }
+  console.log("  ✔ superadmin (superadmin@test.com)");
 
   // 2. Mentors
   console.log("\nSeeding mentorsâ€¦");
@@ -1743,6 +1915,71 @@ async function main() {
   }
 
   console.log("\nâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€");
+
+  // 7. Disputes
+  console.log("\nSeeding disputes...");
+  for (const d of DISPUTES) {
+    await prisma.dispute.upsert({
+      where: { id: d.id },
+      update: { status: d.status as any, title: d.title, description: d.description, aiVerdict: d.aiVerdict, aiConfidence: d.aiConfidence, aiNotes: d.aiNotes },
+      create: {
+        id: d.id,
+        checkoutId: d.checkoutId,
+        raisedById: d.raisedById,
+        borrowerId: d.borrowerId,
+        lenderId: d.lenderId,
+        status: d.status as any,
+        title: d.title,
+        description: d.description,
+        depositAmount: d.depositAmount,
+        beforePhotoUrl: d.beforePhotoUrl,
+        afterPhotoUrl: d.afterPhotoUrl,
+        aiVerdict: d.aiVerdict,
+        aiConfidence: d.aiConfidence,
+        aiNotes: d.aiNotes,
+        raisedAt: d.raisedAt,
+      },
+    });
+
+    // Seed events (skip if already exist)
+    for (const ev of d.events) {
+      const exists = await prisma.disputeEvent.findFirst({
+        where: { disputeId: d.id, type: ev.type, actorRole: ev.actorRole, body: ev.body },
+        select: { id: true },
+      });
+      if (!exists) {
+        await prisma.disputeEvent.create({
+          data: {
+            disputeId: d.id,
+            actorRole: ev.actorRole,
+            type: ev.type,
+            body: ev.body,
+            createdAt: daysAgo(ev.daysAgo),
+          },
+        });
+      }
+    }
+
+    // Seed resolution for RESOLVED disputes
+    if (d.resolution && d.status === "RESOLVED") {
+      const resExists = await prisma.disputeResolution.findUnique({ where: { disputeId: d.id }, select: { id: true } });
+      if (!resExists) {
+        await prisma.disputeResolution.create({
+          data: {
+            disputeId: d.id,
+            resolvedById: d.resolution.resolvedById,
+            decisionType: d.resolution.decisionType as any,
+            amountToLender: d.resolution.amountToLender,
+            amountToBorrower: d.resolution.amountToBorrower,
+            justification: d.resolution.justification,
+          },
+        });
+      }
+    }
+
+    console.log(`  - ${d.id} [${d.status}]`);
+  }
+
   console.log("Seed complete! Login credentials (password: test1234):");
   USERS.forEach((u) =>
     console.log(`  ${u.email.padEnd(22)} â†’ ${u.firstName} ${u.lastName}`)

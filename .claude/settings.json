@@ -17,7 +17,17 @@
       "Bash(Select-Object FullName)",
       "Bash(cd \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\\\\\" && ls -la app/api/dashboard/stats/route.ts app/api/borrow-requests/route.ts app/api/users/[id]/route.ts app/api/lent-items/route.ts app/api/my-items/route.ts 2>&1)",
       "Read(//d/Niloy All Major Projects/Software-Engineering-Project\" && ls -la app/api/dashboard/stats/route.ts app/api/borrow-requests/route.ts app/api/**)",
-      "Bash(cd \"d:\\\\\\\\Niloy All Major Projects\\\\\\\\Software-Engineering-Project\")"
+      "Bash(cd \"d:\\\\\\\\Niloy All Major Projects\\\\\\\\Software-Engineering-Project\")",
+      "Bash(Select-Object Name, Mode, LastWriteTime)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(xargs grep -l \"POST\\\\|PUT\\\\|DELETE\")",
+      "Bash(Get-ChildItem -Path \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\" -Recurse -Force)",
+      "Bash(Select-Object -First 50)",
+      "Bash(Format-Table FullName)",
+      "PowerShell(Set-Location \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\"; node -e \"const { PrismaClient } = require\\('./lib/generated/prisma'\\); const p = new PrismaClient\\(\\); p.user.findUnique\\({ where: { email: 'superadmin@test.com' }, select: { id: true, email: true, userName: true, isAdmin: true } }\\).then\\(u => { console.log\\(JSON.stringify\\(u, null, 2\\)\\); p.\\\\$disconnect\\(\\); }\\)\")",
+      "Bash(Get-ChildItem -Path \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\" -Name)",
+      "Bash(mkdir -p \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\\\\app\\\\api\\\\admin\\\\users\\\\[id]\\\\id-image\")",
+      "Bash(mkdir -p \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\\\\app\\\\api\\\\admin\\\\users\\\\[id]\\\\update\")"
     ],
     "additionalDirectories": [
       "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\users"
