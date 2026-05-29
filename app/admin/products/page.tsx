@@ -5,7 +5,9 @@ import {
   Package, MapPin, Tag, Star, ArrowLeftRight,
   Activity, User, CheckCircle, XCircle, Clock,
   TrendingUp, ShoppingBag, Layers, FileText, Search, X, SlidersHorizontal, ExternalLink,
+  ChevronDown, ChevronUp, Eye, EyeOff, Trash2,
 } from "lucide-react";
+import toast from "react-hot-toast";
 import Link from "next/link";
 import ListingStatusPicker from "@/components/admin/products/ListingStatusPicker";
 import ProductQueue from "@/components/admin/products/ProductQueue";
@@ -317,47 +319,161 @@ function TransactionsTab({ p }: { p: ProductDetail }) {
 
 // ── Tab: Trail ────────────────────────────────────────────────────────────────
 
-function TrailTab({ p }: { p: ProductDetail }) {
+type ProductTrailEntry = ProductDetail["trailEntries"][number];
+
+function ProductTrailEntryRow({
+  entry,
+  onToggleVisibility,
+  onDelete,
+}: {
+  entry: ProductTrailEntry;
+  onToggleVisibility: (id: string, isPublic: boolean) => void;
+  onDelete: (id: string) => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const [pending, setPending] = useState<"visibility" | "delete" | null>(null);
+
+  const tags = Array.isArray(entry.tags) ? (entry.tags as string[]) : [];
+
+  async function toggleVisibility() {
+    setPending("visibility");
+    try {
+      const res = await fetch(`/api/admin/trail/${entry.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ isPublic: !entry.isPublic }),
+      });
+      if (res.ok) {
+        onToggleVisibility(entry.id, !entry.isPublic);
+        toast.success(entry.isPublic ? "Review hidden" : "Review made public");
+      } else {
+        toast.error("Failed to update visibility");
+      }
+    } finally {
+      setPending(null);
+    }
+  }
+
+  async function handleDelete() {
+    setPending("delete");
+    try {
+      const res = await fetch(`/api/admin/trail/${entry.id}`, { method: "DELETE" });
+      if (res.ok) {
+        onDelete(entry.id);
+        toast.success("Review deleted");
+      } else {
+        toast.error("Failed to delete review");
+      }
+    } finally {
+      setPending(null);
+    }
+  }
+
+  return (
+    <div className="py-3 border-b border-(--border) last:border-0">
+      <div className="flex items-start gap-3">
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-semibold text-(--ink) truncate">
+            {entry.anonymous ? "Anonymous" : (entry.borrower?.name ?? "Unknown")}
+          </p>
+          <p className="text-xs text-(--text-muted) truncate">{entry.useFor}</p>
+          {entry.location && (
+            <div className="flex items-center gap-1 mt-0.5">
+              <MapPin className="h-2.5 w-2.5 text-(--text-muted)" />
+              <p className="text-[0.65rem] text-(--text-muted)">{entry.location}</p>
+            </div>
+          )}
+        </div>
+        <div className="shrink-0 flex items-center gap-2">
+          <div className="flex items-center gap-0.5">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star
+                key={i}
+                className={`h-3 w-3 ${i < entry.itemRating ? "text-amber-400 fill-amber-400" : "text-(--border)"}`}
+              />
+            ))}
+          </div>
+          <button
+            onClick={() => setExpanded((v) => !v)}
+            className="p-1 rounded-lg text-(--text-muted) hover:text-(--ink) hover:bg-(--surface-soft) transition-colors"
+            title="View details"
+          >
+            {expanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+          </button>
+          <button
+            onClick={toggleVisibility}
+            disabled={pending !== null}
+            className="p-1 rounded-lg text-(--text-muted) hover:text-(--ink) hover:bg-(--surface-soft) transition-colors disabled:opacity-50"
+            title={entry.isPublic ? "Hide review" : "Make public"}
+          >
+            {entry.isPublic ? <Eye className="h-3.5 w-3.5" /> : <EyeOff className="h-3.5 w-3.5" />}
+          </button>
+          <button
+            onClick={handleDelete}
+            disabled={pending !== null}
+            className="p-1 rounded-lg text-red-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
+            title="Delete review"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-1 mt-1">
+        {!entry.isPublic && (
+          <span className="text-[0.58rem] font-bold bg-amber-50 text-amber-600 rounded px-1.5 py-0.5">Hidden</span>
+        )}
+        {entry.anonymous && (
+          <span className="text-[0.58rem] font-bold bg-gray-100 text-gray-500 rounded px-1.5 py-0.5">Anon</span>
+        )}
+        <span className="text-[0.6rem] text-(--text-muted)">{fmt(entry.createdAt)}</span>
+      </div>
+
+      {expanded && (
+        <div className="mt-2 rounded-xl bg-(--surface-soft) p-3 space-y-1.5 text-xs text-(--text-muted)">
+          <p><span className="font-semibold text-(--ink)">Used for:</span> {entry.useFor}</p>
+          {entry.location && <p><span className="font-semibold text-(--ink)">Location:</span> {entry.location}</p>}
+          {tags.length > 0 && (
+            <p><span className="font-semibold text-(--ink)">Tags:</span> {tags.join(", ")}</p>
+          )}
+          {entry.borrower && !entry.anonymous && (
+            <p><span className="font-semibold text-(--ink)">Borrower ID:</span> {entry.borrower.id}</p>
+          )}
+          <p><span className="font-semibold text-(--ink)">Posted:</span> {new Date(entry.createdAt).toISOString()}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function TrailTab({
+  p,
+  onUpdateTrail,
+}: {
+  p: ProductDetail;
+  onUpdateTrail: (updater: (entries: ProductTrailEntry[]) => ProductTrailEntry[]) => void;
+}) {
+  function handleToggleVisibility(id: string, isPublic: boolean) {
+    onUpdateTrail((entries) => entries.map((e) => (e.id === id ? { ...e, isPublic } : e)));
+  }
+
+  function handleDelete(id: string) {
+    onUpdateTrail((entries) => entries.filter((e) => e.id !== id));
+  }
+
   return (
     <Section title="Item Trail Posts" icon={<Activity className="h-3.5 w-3.5" />} count={p.trailEntries.length}>
       {p.trailEntries.length === 0 ? (
         <EmptyState label="No trail posts yet" />
       ) : (
-        <div className="space-y-0">
+        <div>
           {p.trailEntries.map((t) => (
-            <div key={t.id} className="flex items-center gap-3 py-3 border-b border-[var(--border)] last:border-0">
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-[var(--ink)] truncate">
-                  {t.anonymous ? "Anonymous" : (t.borrower?.name ?? "Unknown")}
-                </p>
-                <p className="text-xs text-[var(--text-muted)] truncate">{t.useFor}</p>
-                {t.location && (
-                  <div className="flex items-center gap-1 mt-0.5">
-                    <MapPin className="h-2.5 w-2.5 text-[var(--text-muted)]" />
-                    <p className="text-[0.65rem] text-[var(--text-muted)]">{t.location}</p>
-                  </div>
-                )}
-              </div>
-              <div className="shrink-0 text-right space-y-1">
-                <div className="flex items-center gap-0.5 justify-end">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-3 w-3 ${i < t.itemRating ? "text-amber-400 fill-amber-400" : "text-[var(--border)]"}`}
-                    />
-                  ))}
-                </div>
-                <div className="flex gap-1 justify-end">
-                  {!t.isPublic && (
-                    <span className="text-[0.58rem] font-bold bg-gray-100 text-gray-500 rounded px-1.5 py-0.5">Private</span>
-                  )}
-                  {t.anonymous && (
-                    <span className="text-[0.58rem] font-bold bg-gray-100 text-gray-500 rounded px-1.5 py-0.5">Anon</span>
-                  )}
-                  <span className="text-[0.6rem] text-[var(--text-muted)]">{fmt(t.createdAt)}</span>
-                </div>
-              </div>
-            </div>
+            <ProductTrailEntryRow
+              key={t.id}
+              entry={t}
+              onToggleVisibility={handleToggleVisibility}
+              onDelete={handleDelete}
+            />
           ))}
         </div>
       )}
@@ -687,7 +803,16 @@ export default function AdminProductsPage() {
               {activeTab === "overview"     && <OverviewTab p={detail} />}
               {activeTab === "listings"     && <ListingsTab p={detail} />}
               {activeTab === "transactions" && <TransactionsTab p={detail} />}
-              {activeTab === "trail"        && <TrailTab p={detail} />}
+              {activeTab === "trail"        && (
+                <TrailTab
+                  p={detail}
+                  onUpdateTrail={(updater) =>
+                    setDetail((prev) =>
+                      prev ? { ...prev, trailEntries: updater(prev.trailEntries) } : prev
+                    )
+                  }
+                />
+              )}
             </div>
           ) : (
             <div className="flex-1 flex items-center justify-center h-full">

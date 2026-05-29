@@ -42,8 +42,9 @@ type BorrowCheckout = {
   lentItem: { id: string; status: string } | null;
   borrower: { id: string; name: string | null; firstName: string | null; lastName: string | null; userName: string | null };
   lender:   { id: string; name: string | null; firstName: string | null; lastName: string | null; userName: string | null };
-  trailEntry: { id: string; useFor: string; itemRating: number } | null;
-  dispute:    { id: string; status: string } | null;
+  trailEntry:     { id: string; useFor: string; itemRating: number } | null;
+  borrowerReview: { id: string } | null;
+  dispute:        { id: string; status: string } | null;
 };
 
 type Tab = "listings" | "requests" | "active" | "history";
@@ -67,6 +68,10 @@ export default function MyItemsPage() {
   const [actionPending, setActionPending] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
   const [disputeTarget, setDisputeTarget] = useState<BorrowCheckout | null>(null);
+  const [ratingTarget, setRatingTarget] = useState<BorrowCheckout | null>(null);
+  const [ratingValue, setRatingValue] = useState(5);
+  const [ratingComment, setRatingComment] = useState("");
+  const [ratingSubmitting, setRatingSubmitting] = useState(false);
 
   const fetchAll = useCallback(async () => {
     setLoading(true);
@@ -138,6 +143,30 @@ export default function MyItemsPage() {
       if (res.ok) { toast.success("Request declined"); void fetchAll(); }
       else toast.error("Failed to decline request");
     } finally { setActionPending(null); }
+  }
+
+  async function submitBorrowerReview() {
+    if (!ratingTarget || ratingSubmitting) return;
+    setRatingSubmitting(true);
+    try {
+      const res = await fetch(`/api/borrow-orders/${ratingTarget.id}/review-borrower`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rating: ratingValue, comment: ratingComment.trim() || undefined }),
+      });
+      if (res.ok) {
+        toast.success("Borrower rated!");
+        setRatingTarget(null);
+        setRatingComment("");
+        setRatingValue(5);
+        void fetchAll();
+      } else {
+        const d = await res.json().catch(() => ({}));
+        toast.error((d as { error?: string }).error ?? "Failed to submit rating");
+      }
+    } finally {
+      setRatingSubmitting(false);
+    }
   }
 
   async function handleRelist(lentItemId: string) {
@@ -399,6 +428,18 @@ export default function MyItemsPage() {
                               {order.dispute.status === "RESOLVED" ? "Resolved" : "Disputed"}
                             </span>
                           )}
+                          {!order.borrowerReview ? (
+                            <button
+                              onClick={() => { setRatingTarget(order); setRatingValue(5); setRatingComment(""); }}
+                              className="flex items-center gap-1.5 rounded-xl bg-amber-50 px-3 py-2 text-sm font-bold text-amber-700 transition-colors hover:bg-amber-100"
+                            >
+                              <Star className="h-4 w-4" /> Rate Borrower
+                            </button>
+                          ) : (
+                            <span className="flex items-center gap-1.5 rounded-xl bg-(--surface-soft) px-3 py-2 text-sm font-bold text-(--text-muted)">
+                              <Star className="h-4 w-4" /> Rated
+                            </span>
+                          )}
                           {order.lentItem && (
                             <button
                               onClick={() => handleRelist(order.lentItem!.id)}
@@ -425,6 +466,51 @@ export default function MyItemsPage() {
           onClose={() => setDisputeTarget(null)}
           onSuccess={() => { setDisputeTarget(null); void fetchAll(); }}
         />
+      )}
+
+      {ratingTarget && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+          <div className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-2xl">
+            <h3 className="mb-1 text-lg font-black text-(--ink)">Rate Borrower</h3>
+            <p className="mb-4 text-sm text-(--text-muted)">
+              How was {ratingTarget.borrower.name ?? ratingTarget.borrower.userName ?? "this borrower"}?
+            </p>
+
+            <div className="mb-4 flex justify-center gap-2">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <button key={n} onClick={() => setRatingValue(n)}>
+                  <Star
+                    className={`h-8 w-8 transition-colors ${n <= ratingValue ? "fill-amber-400 text-amber-400" : "text-gray-200"}`}
+                  />
+                </button>
+              ))}
+            </div>
+
+            <textarea
+              value={ratingComment}
+              onChange={(e) => setRatingComment(e.target.value)}
+              placeholder="Optional comment…"
+              rows={3}
+              className="mb-4 w-full resize-none rounded-2xl border border-(--border) bg-(--surface-soft) px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-(--primary)/30"
+            />
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => setRatingTarget(null)}
+                className="flex-1 rounded-2xl border border-(--border) py-2.5 text-sm font-bold text-(--text-muted) hover:bg-(--surface-soft)"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={submitBorrowerReview}
+                disabled={ratingSubmitting}
+                className="flex-1 rounded-2xl bg-(--primary) py-2.5 text-sm font-bold text-white hover:opacity-90 disabled:opacity-50"
+              >
+                {ratingSubmitting ? "Submitting…" : "Submit Rating"}
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

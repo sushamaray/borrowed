@@ -34,6 +34,7 @@ model User {
   addressVerified  Boolean   @default(false)
   meetupVerified   Boolean   @default(false)
   verifiedAt       DateTime?
+  isAdmin          Boolean   @default(false)
   createdAt        DateTime  @default(now())
 
   accounts                 Account[]
@@ -52,8 +53,14 @@ model User {
   cartItems                CartItem[]
   trailEntries             ItemTrailEntry[]
   trailReactions           TrailReaction[]
+  lenderReviews            BorrowerReview[]          @relation("LenderReviews")
+  borrowerReviews          BorrowerReview[]          @relation("BorrowerReviews")
   notifications            Notification[]
   idVerification           IdVerification?
+  disputesRaised           Dispute[]                 @relation("DisputeRaisedBy")
+  disputesAsBorrower       Dispute[]                 @relation("DisputeBorrower")
+  disputesAsLender         Dispute[]                 @relation("DisputeLender")
+  disputeResolutions       DisputeResolution[]       @relation("DisputeResolvedBy")
 }
 
 // ── Product — central item info store ────────────────────────────────────────
@@ -186,12 +193,14 @@ model BorrowCheckout {
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
 
-  borrower   User                @relation("CheckoutBorrower", fields: [borrowerId], references: [id], onDelete: Cascade)
-  lender     User                @relation("CheckoutLender", fields: [lenderId], references: [id], onDelete: Cascade)
-  product    Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
-  lentItem   LentItem?           @relation(fields: [lentItemId], references: [id], onDelete: SetNull)
-  offer      BorrowRequestOffer? @relation(fields: [borrowRequestOfferId], references: [id], onDelete: SetNull)
-  trailEntry ItemTrailEntry?
+  borrower       User                @relation("CheckoutBorrower", fields: [borrowerId], references: [id], onDelete: Cascade)
+  lender         User                @relation("CheckoutLender", fields: [lenderId], references: [id], onDelete: Cascade)
+  product        Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  lentItem       LentItem?           @relation(fields: [lentItemId], references: [id], onDelete: SetNull)
+  offer          BorrowRequestOffer? @relation(fields: [borrowRequestOfferId], references: [id], onDelete: SetNull)
+  trailEntry     ItemTrailEntry?
+  borrowerReview BorrowerReview?
+  dispute        Dispute?
 
   @@index([borrowerId])
   @@index([lenderId])
@@ -413,6 +422,25 @@ model TrailReaction {
   @@index([userId])
 }
 
+// ── Borrower Reviews (lender rates borrower after return) ─────────────────────
+
+model BorrowerReview {
+  id               String   @id @default(cuid())
+  borrowCheckoutId String   @unique
+  lenderId         String
+  borrowerId       String
+  rating           Int
+  comment          String?  @db.Text
+  createdAt        DateTime @default(now())
+
+  borrowCheckout BorrowCheckout @relation(fields: [borrowCheckoutId], references: [id])
+  lender         User           @relation("LenderReviews", fields: [lenderId], references: [id])
+  borrower       User           @relation("BorrowerReviews", fields: [borrowerId], references: [id])
+
+  @@index([lenderId])
+  @@index([borrowerId])
+}
+
 // ── ID Verification ───────────────────────────────────────────────────────────
 
 model IdVerification {
@@ -432,4 +460,78 @@ model IdVerification {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+// ── Disputes ──────────────────────────────────────────────────────────────────
+
+enum DisputeStatus {
+  OPEN
+  UNDER_REVIEW
+  ESCALATED
+  RESOLVED
+  CLOSED
+}
+
+enum DecisionType {
+  RELEASE_TO_LENDER
+  RETURN_TO_BORROWER
+  SPLIT
+}
+
+model Dispute {
+  id             String        @id @default(cuid())
+  checkoutId     String        @unique
+  raisedById     String
+  borrowerId     String
+  lenderId       String
+  status         DisputeStatus @default(OPEN)
+  title          String
+  description    String        @db.Text
+  depositAmount  Int
+  beforePhotoUrl String?
+  afterPhotoUrl  String?
+  aiVerdict      String?
+  aiConfidence   Float?
+  aiNotes        String?       @db.Text
+  raisedAt       DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  checkout   BorrowCheckout     @relation(fields: [checkoutId], references: [id], onDelete: Restrict)
+  raisedBy   User               @relation("DisputeRaisedBy", fields: [raisedById], references: [id])
+  borrower   User               @relation("DisputeBorrower", fields: [borrowerId], references: [id])
+  lender     User               @relation("DisputeLender", fields: [lenderId], references: [id])
+  resolution DisputeResolution?
+  events     DisputeEvent[]
+
+  @@index([status])
+  @@index([raisedAt])
+  @@index([borrowerId])
+  @@index([lenderId])
+}
+
+model DisputeResolution {
+  id               String       @id @default(cuid())
+  disputeId        String       @unique
+  resolvedById     String
+  decisionType     DecisionType
+  amountToLender   Int?
+  amountToBorrower Int?
+  justification    String       @db.Text
+  resolvedAt       DateTime     @default(now())
+
+  dispute    Dispute @relation(fields: [disputeId], references: [id], onDelete: Cascade)
+  resolvedBy User    @relation("DisputeResolvedBy", fields: [resolvedById], references: [id])
+}
+
+model DisputeEvent {
+  id        String   @id @default(cuid())
+  disputeId String
+  actorRole String
+  type      String
+  body      String?  @db.Text
+  createdAt DateTime @default(now())
+
+  dispute Dispute @relation(fields: [disputeId], references: [id], onDelete: Cascade)
+
+  @@index([disputeId])
 }

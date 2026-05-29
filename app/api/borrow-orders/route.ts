@@ -19,8 +19,9 @@ export async function GET(request: NextRequest) {
       lentItem: { select: { id: true, status: true } },
       borrower: { select: { id: true, name: true, firstName: true, lastName: true, userName: true } },
       lender:   { select: { id: true, name: true, firstName: true, lastName: true, userName: true } },
-      trailEntry: { select: { id: true, useFor: true, itemRating: true } },
-      dispute:    { select: { id: true, status: true } },
+      trailEntry:     { select: { id: true, useFor: true, itemRating: true } },
+      borrowerReview: { select: { id: true } },
+      dispute:        { select: { id: true, status: true } },
     };
 
     const whereBase = status ? { status } : {};

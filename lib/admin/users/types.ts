@@ -105,10 +105,21 @@ export interface UserDetail {
     requestTitle: string;
   }[];
   disputes: UserDispute[];
+  reports: {
+    id: string;
+    reason: string;
+    description: string | null;
+    status: string;
+    createdAt: string;
+    reporterName: string;
+    reporterId: string;
+  }[];
   trailEntries: {
     id: string;
     itemRating: number;
     useFor: string;
+    location: string | null;
+    tags: unknown;
     isPublic: boolean;
     anonymous: boolean;
     createdAt: string;
@@ -134,5 +145,6 @@ export interface UserDetail {
     disputes: number;
     borrowRequests: number;
     trailEntries: number;
+    reports: number;
   };
 }

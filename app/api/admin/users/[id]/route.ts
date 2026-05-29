@@ -151,6 +151,8 @@ export async function GET(
             id: true,
             itemRating: true,
             useFor: true,
+            location: true,
+            tags: true,
             isPublic: true,
             anonymous: true,
             createdAt: true,
@@ -175,6 +177,17 @@ export async function GET(
             lentItem: { select: { product: { select: { name: true } } } },
           },
         },
+        reportsReceived: {
+          orderBy: { createdAt: "desc" },
+          select: {
+            id: true,
+            reason: true,
+            description: true,
+            status: true,
+            createdAt: true,
+            reporter: { select: { id: true, name: true, firstName: true, userName: true } },
+          },
+        },
         _count: {
           select: {
             products: true,
@@ -183,6 +196,7 @@ export async function GET(
             disputesRaised: true,
             borrowRequests: true,
             trailEntries: true,
+            reportsReceived: true,
           },
         },
       },
@@ -303,10 +317,21 @@ export async function GET(
         requestTitle: o.borrowRequest.title,
       })),
       disputes: allDisputes,
+      reports: u.reportsReceived.map((r) => ({
+        id: r.id,
+        reason: r.reason,
+        description: r.description,
+        status: r.status,
+        createdAt: r.createdAt.toISOString(),
+        reporterName: displayName(r.reporter),
+        reporterId: r.reporter.id,
+      })),
       trailEntries: u.trailEntries.map((t) => ({
         id: t.id,
         itemRating: t.itemRating,
         useFor: t.useFor,
+        location: t.location,
+        tags: t.tags,
         isPublic: t.isPublic,
         anonymous: t.anonymous,
         createdAt: t.createdAt.toISOString(),
@@ -332,6 +357,7 @@ export async function GET(
         disputes:      u._count.disputesRaised,
         borrowRequests: u._count.borrowRequests,
         trailEntries:  u._count.trailEntries,
+        reports:       u._count.reportsReceived,
       },
     };
 

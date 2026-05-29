@@ -61,6 +61,7 @@ export interface ProductDetail {
     id: string;
     useFor: string;
     location: string | null;
+    tags: unknown;
     itemRating: number;
     isPublic: boolean;
     anonymous: boolean;

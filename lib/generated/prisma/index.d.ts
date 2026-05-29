@@ -109,6 +109,16 @@ export type ItemTrailEntry = $Result.DefaultSelection<Prisma.$ItemTrailEntryPayl
  */
 export type TrailReaction = $Result.DefaultSelection<Prisma.$TrailReactionPayload>
 /**
+ * Model BorrowerReview
+ * 
+ */
+export type BorrowerReview = $Result.DefaultSelection<Prisma.$BorrowerReviewPayload>
+/**
+ * Model UserReport
+ * 
+ */
+export type UserReport = $Result.DefaultSelection<Prisma.$UserReportPayload>
+/**
  * Model IdVerification
  * 
  */
@@ -486,6 +496,26 @@ export class PrismaClient<
     * ```
     */
   get trailReaction(): Prisma.TrailReactionDelegate<ExtArgs>;
+
+  /**
+   * `prisma.borrowerReview`: Exposes CRUD operations for the **BorrowerReview** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BorrowerReviews
+    * const borrowerReviews = await prisma.borrowerReview.findMany()
+    * ```
+    */
+  get borrowerReview(): Prisma.BorrowerReviewDelegate<ExtArgs>;
+
+  /**
+   * `prisma.userReport`: Exposes CRUD operations for the **UserReport** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserReports
+    * const userReports = await prisma.userReport.findMany()
+    * ```
+    */
+  get userReport(): Prisma.UserReportDelegate<ExtArgs>;
 
   /**
    * `prisma.idVerification`: Exposes CRUD operations for the **IdVerification** model.
@@ -986,6 +1016,8 @@ export namespace Prisma {
     Authenticator: 'Authenticator',
     ItemTrailEntry: 'ItemTrailEntry',
     TrailReaction: 'TrailReaction',
+    BorrowerReview: 'BorrowerReview',
+    UserReport: 'UserReport',
     IdVerification: 'IdVerification',
     Dispute: 'Dispute',
     DisputeResolution: 'DisputeResolution',
@@ -1005,7 +1037,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "product" | "lentItem" | "borrowRequest" | "borrowRequestOffer" | "borrowCheckout" | "notification" | "mentor" | "mentorBooking" | "conversation" | "conversationParticipant" | "message" | "cartItem" | "account" | "session" | "verificationToken" | "authenticator" | "itemTrailEntry" | "trailReaction" | "idVerification" | "dispute" | "disputeResolution" | "disputeEvent"
+      modelProps: "user" | "product" | "lentItem" | "borrowRequest" | "borrowRequestOffer" | "borrowCheckout" | "notification" | "mentor" | "mentorBooking" | "conversation" | "conversationParticipant" | "message" | "cartItem" | "account" | "session" | "verificationToken" | "authenticator" | "itemTrailEntry" | "trailReaction" | "borrowerReview" | "userReport" | "idVerification" | "dispute" | "disputeResolution" | "disputeEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2263,6 +2295,138 @@ export namespace Prisma {
           }
         }
       }
+      BorrowerReview: {
+        payload: Prisma.$BorrowerReviewPayload<ExtArgs>
+        fields: Prisma.BorrowerReviewFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BorrowerReviewFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BorrowerReviewPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BorrowerReviewFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BorrowerReviewPayload>
+          }
+          findFirst: {
+            args: Prisma.BorrowerReviewFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BorrowerReviewPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BorrowerReviewFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BorrowerReviewPayload>
+          }
+          findMany: {
+            args: Prisma.BorrowerReviewFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BorrowerReviewPayload>[]
+          }
+          create: {
+            args: Prisma.BorrowerReviewCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BorrowerReviewPayload>
+          }
+          createMany: {
+            args: Prisma.BorrowerReviewCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.BorrowerReviewDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BorrowerReviewPayload>
+          }
+          update: {
+            args: Prisma.BorrowerReviewUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BorrowerReviewPayload>
+          }
+          deleteMany: {
+            args: Prisma.BorrowerReviewDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BorrowerReviewUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.BorrowerReviewUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BorrowerReviewPayload>
+          }
+          aggregate: {
+            args: Prisma.BorrowerReviewAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBorrowerReview>
+          }
+          groupBy: {
+            args: Prisma.BorrowerReviewGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BorrowerReviewGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BorrowerReviewCountArgs<ExtArgs>
+            result: $Utils.Optional<BorrowerReviewCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserReport: {
+        payload: Prisma.$UserReportPayload<ExtArgs>
+        fields: Prisma.UserReportFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserReportFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserReportPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserReportFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserReportPayload>
+          }
+          findFirst: {
+            args: Prisma.UserReportFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserReportPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserReportFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserReportPayload>
+          }
+          findMany: {
+            args: Prisma.UserReportFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserReportPayload>[]
+          }
+          create: {
+            args: Prisma.UserReportCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserReportPayload>
+          }
+          createMany: {
+            args: Prisma.UserReportCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.UserReportDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserReportPayload>
+          }
+          update: {
+            args: Prisma.UserReportUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserReportPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserReportDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserReportUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.UserReportUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserReportPayload>
+          }
+          aggregate: {
+            args: Prisma.UserReportAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserReport>
+          }
+          groupBy: {
+            args: Prisma.UserReportGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserReportGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserReportCountArgs<ExtArgs>
+            result: $Utils.Optional<UserReportCountAggregateOutputType> | number
+          }
+        }
+      }
       IdVerification: {
         payload: Prisma.$IdVerificationPayload<ExtArgs>
         fields: Prisma.IdVerificationFieldRefs
@@ -2703,6 +2867,10 @@ export namespace Prisma {
     cartItems: number
     trailEntries: number
     trailReactions: number
+    lenderReviews: number
+    borrowerReviews: number
+    reportsMade: number
+    reportsReceived: number
     notifications: number
     disputesRaised: number
     disputesAsBorrower: number
@@ -2726,6 +2894,10 @@ export namespace Prisma {
     cartItems?: boolean | UserCountOutputTypeCountCartItemsArgs
     trailEntries?: boolean | UserCountOutputTypeCountTrailEntriesArgs
     trailReactions?: boolean | UserCountOutputTypeCountTrailReactionsArgs
+    lenderReviews?: boolean | UserCountOutputTypeCountLenderReviewsArgs
+    borrowerReviews?: boolean | UserCountOutputTypeCountBorrowerReviewsArgs
+    reportsMade?: boolean | UserCountOutputTypeCountReportsMadeArgs
+    reportsReceived?: boolean | UserCountOutputTypeCountReportsReceivedArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     disputesRaised?: boolean | UserCountOutputTypeCountDisputesRaisedArgs
     disputesAsBorrower?: boolean | UserCountOutputTypeCountDisputesAsBorrowerArgs
@@ -2847,6 +3019,34 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountTrailReactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TrailReactionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountLenderReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BorrowerReviewWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBorrowerReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BorrowerReviewWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReportsMadeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserReportWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReportsReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserReportWhereInput
   }
 
   /**
@@ -3514,6 +3714,10 @@ export namespace Prisma {
     cartItems?: boolean | User$cartItemsArgs<ExtArgs>
     trailEntries?: boolean | User$trailEntriesArgs<ExtArgs>
     trailReactions?: boolean | User$trailReactionsArgs<ExtArgs>
+    lenderReviews?: boolean | User$lenderReviewsArgs<ExtArgs>
+    borrowerReviews?: boolean | User$borrowerReviewsArgs<ExtArgs>
+    reportsMade?: boolean | User$reportsMadeArgs<ExtArgs>
+    reportsReceived?: boolean | User$reportsReceivedArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     idVerification?: boolean | User$idVerificationArgs<ExtArgs>
     disputesRaised?: boolean | User$disputesRaisedArgs<ExtArgs>
@@ -3566,6 +3770,10 @@ export namespace Prisma {
     cartItems?: boolean | User$cartItemsArgs<ExtArgs>
     trailEntries?: boolean | User$trailEntriesArgs<ExtArgs>
     trailReactions?: boolean | User$trailReactionsArgs<ExtArgs>
+    lenderReviews?: boolean | User$lenderReviewsArgs<ExtArgs>
+    borrowerReviews?: boolean | User$borrowerReviewsArgs<ExtArgs>
+    reportsMade?: boolean | User$reportsMadeArgs<ExtArgs>
+    reportsReceived?: boolean | User$reportsReceivedArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
     idVerification?: boolean | User$idVerificationArgs<ExtArgs>
     disputesRaised?: boolean | User$disputesRaisedArgs<ExtArgs>
@@ -3594,6 +3802,10 @@ export namespace Prisma {
       cartItems: Prisma.$CartItemPayload<ExtArgs>[]
       trailEntries: Prisma.$ItemTrailEntryPayload<ExtArgs>[]
       trailReactions: Prisma.$TrailReactionPayload<ExtArgs>[]
+      lenderReviews: Prisma.$BorrowerReviewPayload<ExtArgs>[]
+      borrowerReviews: Prisma.$BorrowerReviewPayload<ExtArgs>[]
+      reportsMade: Prisma.$UserReportPayload<ExtArgs>[]
+      reportsReceived: Prisma.$UserReportPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
       idVerification: Prisma.$IdVerificationPayload<ExtArgs> | null
       disputesRaised: Prisma.$DisputePayload<ExtArgs>[]
@@ -3980,6 +4192,10 @@ export namespace Prisma {
     cartItems<T extends User$cartItemsArgs<ExtArgs> = {}>(args?: Subset<T, User$cartItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CartItemPayload<ExtArgs>, T, "findMany"> | Null>
     trailEntries<T extends User$trailEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$trailEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemTrailEntryPayload<ExtArgs>, T, "findMany"> | Null>
     trailReactions<T extends User$trailReactionsArgs<ExtArgs> = {}>(args?: Subset<T, User$trailReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TrailReactionPayload<ExtArgs>, T, "findMany"> | Null>
+    lenderReviews<T extends User$lenderReviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$lenderReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "findMany"> | Null>
+    borrowerReviews<T extends User$borrowerReviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$borrowerReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "findMany"> | Null>
+    reportsMade<T extends User$reportsMadeArgs<ExtArgs> = {}>(args?: Subset<T, User$reportsMadeArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "findMany"> | Null>
+    reportsReceived<T extends User$reportsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, User$reportsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "findMany"> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany"> | Null>
     idVerification<T extends User$idVerificationArgs<ExtArgs> = {}>(args?: Subset<T, User$idVerificationArgs<ExtArgs>>): Prisma__IdVerificationClient<$Result.GetResult<Prisma.$IdVerificationPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     disputesRaised<T extends User$disputesRaisedArgs<ExtArgs> = {}>(args?: Subset<T, User$disputesRaisedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findMany"> | Null>
@@ -4648,6 +4864,86 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TrailReactionScalarFieldEnum | TrailReactionScalarFieldEnum[]
+  }
+
+  /**
+   * User.lenderReviews
+   */
+  export type User$lenderReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    where?: BorrowerReviewWhereInput
+    orderBy?: BorrowerReviewOrderByWithRelationInput | BorrowerReviewOrderByWithRelationInput[]
+    cursor?: BorrowerReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BorrowerReviewScalarFieldEnum | BorrowerReviewScalarFieldEnum[]
+  }
+
+  /**
+   * User.borrowerReviews
+   */
+  export type User$borrowerReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    where?: BorrowerReviewWhereInput
+    orderBy?: BorrowerReviewOrderByWithRelationInput | BorrowerReviewOrderByWithRelationInput[]
+    cursor?: BorrowerReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BorrowerReviewScalarFieldEnum | BorrowerReviewScalarFieldEnum[]
+  }
+
+  /**
+   * User.reportsMade
+   */
+  export type User$reportsMadeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    where?: UserReportWhereInput
+    orderBy?: UserReportOrderByWithRelationInput | UserReportOrderByWithRelationInput[]
+    cursor?: UserReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserReportScalarFieldEnum | UserReportScalarFieldEnum[]
+  }
+
+  /**
+   * User.reportsReceived
+   */
+  export type User$reportsReceivedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    where?: UserReportWhereInput
+    orderBy?: UserReportOrderByWithRelationInput | UserReportOrderByWithRelationInput[]
+    cursor?: UserReportWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserReportScalarFieldEnum | UserReportScalarFieldEnum[]
   }
 
   /**
@@ -9172,6 +9468,7 @@ export namespace Prisma {
     lentItem?: boolean | BorrowCheckout$lentItemArgs<ExtArgs>
     offer?: boolean | BorrowCheckout$offerArgs<ExtArgs>
     trailEntry?: boolean | BorrowCheckout$trailEntryArgs<ExtArgs>
+    borrowerReview?: boolean | BorrowCheckout$borrowerReviewArgs<ExtArgs>
     dispute?: boolean | BorrowCheckout$disputeArgs<ExtArgs>
   }, ExtArgs["result"]["borrowCheckout"]>
 
@@ -9204,6 +9501,7 @@ export namespace Prisma {
     lentItem?: boolean | BorrowCheckout$lentItemArgs<ExtArgs>
     offer?: boolean | BorrowCheckout$offerArgs<ExtArgs>
     trailEntry?: boolean | BorrowCheckout$trailEntryArgs<ExtArgs>
+    borrowerReview?: boolean | BorrowCheckout$borrowerReviewArgs<ExtArgs>
     dispute?: boolean | BorrowCheckout$disputeArgs<ExtArgs>
   }
 
@@ -9216,6 +9514,7 @@ export namespace Prisma {
       lentItem: Prisma.$LentItemPayload<ExtArgs> | null
       offer: Prisma.$BorrowRequestOfferPayload<ExtArgs> | null
       trailEntry: Prisma.$ItemTrailEntryPayload<ExtArgs> | null
+      borrowerReview: Prisma.$BorrowerReviewPayload<ExtArgs> | null
       dispute: Prisma.$DisputePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -9583,6 +9882,7 @@ export namespace Prisma {
     lentItem<T extends BorrowCheckout$lentItemArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$lentItemArgs<ExtArgs>>): Prisma__LentItemClient<$Result.GetResult<Prisma.$LentItemPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     offer<T extends BorrowCheckout$offerArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$offerArgs<ExtArgs>>): Prisma__BorrowRequestOfferClient<$Result.GetResult<Prisma.$BorrowRequestOfferPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     trailEntry<T extends BorrowCheckout$trailEntryArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$trailEntryArgs<ExtArgs>>): Prisma__ItemTrailEntryClient<$Result.GetResult<Prisma.$ItemTrailEntryPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    borrowerReview<T extends BorrowCheckout$borrowerReviewArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$borrowerReviewArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     dispute<T extends BorrowCheckout$disputeArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$disputeArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9972,6 +10272,21 @@ export namespace Prisma {
      */
     include?: ItemTrailEntryInclude<ExtArgs> | null
     where?: ItemTrailEntryWhereInput
+  }
+
+  /**
+   * BorrowCheckout.borrowerReview
+   */
+  export type BorrowCheckout$borrowerReviewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    where?: BorrowerReviewWhereInput
   }
 
   /**
@@ -22078,6 +22393,1854 @@ export namespace Prisma {
 
 
   /**
+   * Model BorrowerReview
+   */
+
+  export type AggregateBorrowerReview = {
+    _count: BorrowerReviewCountAggregateOutputType | null
+    _avg: BorrowerReviewAvgAggregateOutputType | null
+    _sum: BorrowerReviewSumAggregateOutputType | null
+    _min: BorrowerReviewMinAggregateOutputType | null
+    _max: BorrowerReviewMaxAggregateOutputType | null
+  }
+
+  export type BorrowerReviewAvgAggregateOutputType = {
+    rating: number | null
+  }
+
+  export type BorrowerReviewSumAggregateOutputType = {
+    rating: number | null
+  }
+
+  export type BorrowerReviewMinAggregateOutputType = {
+    id: string | null
+    borrowCheckoutId: string | null
+    lenderId: string | null
+    borrowerId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+  }
+
+  export type BorrowerReviewMaxAggregateOutputType = {
+    id: string | null
+    borrowCheckoutId: string | null
+    lenderId: string | null
+    borrowerId: string | null
+    rating: number | null
+    comment: string | null
+    createdAt: Date | null
+  }
+
+  export type BorrowerReviewCountAggregateOutputType = {
+    id: number
+    borrowCheckoutId: number
+    lenderId: number
+    borrowerId: number
+    rating: number
+    comment: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BorrowerReviewAvgAggregateInputType = {
+    rating?: true
+  }
+
+  export type BorrowerReviewSumAggregateInputType = {
+    rating?: true
+  }
+
+  export type BorrowerReviewMinAggregateInputType = {
+    id?: true
+    borrowCheckoutId?: true
+    lenderId?: true
+    borrowerId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+  }
+
+  export type BorrowerReviewMaxAggregateInputType = {
+    id?: true
+    borrowCheckoutId?: true
+    lenderId?: true
+    borrowerId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+  }
+
+  export type BorrowerReviewCountAggregateInputType = {
+    id?: true
+    borrowCheckoutId?: true
+    lenderId?: true
+    borrowerId?: true
+    rating?: true
+    comment?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BorrowerReviewAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BorrowerReview to aggregate.
+     */
+    where?: BorrowerReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BorrowerReviews to fetch.
+     */
+    orderBy?: BorrowerReviewOrderByWithRelationInput | BorrowerReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BorrowerReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BorrowerReviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BorrowerReviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BorrowerReviews
+    **/
+    _count?: true | BorrowerReviewCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BorrowerReviewAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BorrowerReviewSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BorrowerReviewMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BorrowerReviewMaxAggregateInputType
+  }
+
+  export type GetBorrowerReviewAggregateType<T extends BorrowerReviewAggregateArgs> = {
+        [P in keyof T & keyof AggregateBorrowerReview]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBorrowerReview[P]>
+      : GetScalarType<T[P], AggregateBorrowerReview[P]>
+  }
+
+
+
+
+  export type BorrowerReviewGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BorrowerReviewWhereInput
+    orderBy?: BorrowerReviewOrderByWithAggregationInput | BorrowerReviewOrderByWithAggregationInput[]
+    by: BorrowerReviewScalarFieldEnum[] | BorrowerReviewScalarFieldEnum
+    having?: BorrowerReviewScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BorrowerReviewCountAggregateInputType | true
+    _avg?: BorrowerReviewAvgAggregateInputType
+    _sum?: BorrowerReviewSumAggregateInputType
+    _min?: BorrowerReviewMinAggregateInputType
+    _max?: BorrowerReviewMaxAggregateInputType
+  }
+
+  export type BorrowerReviewGroupByOutputType = {
+    id: string
+    borrowCheckoutId: string
+    lenderId: string
+    borrowerId: string
+    rating: number
+    comment: string | null
+    createdAt: Date
+    _count: BorrowerReviewCountAggregateOutputType | null
+    _avg: BorrowerReviewAvgAggregateOutputType | null
+    _sum: BorrowerReviewSumAggregateOutputType | null
+    _min: BorrowerReviewMinAggregateOutputType | null
+    _max: BorrowerReviewMaxAggregateOutputType | null
+  }
+
+  type GetBorrowerReviewGroupByPayload<T extends BorrowerReviewGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BorrowerReviewGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BorrowerReviewGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BorrowerReviewGroupByOutputType[P]>
+            : GetScalarType<T[P], BorrowerReviewGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BorrowerReviewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    borrowCheckoutId?: boolean
+    lenderId?: boolean
+    borrowerId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+    borrowCheckout?: boolean | BorrowCheckoutDefaultArgs<ExtArgs>
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["borrowerReview"]>
+
+
+  export type BorrowerReviewSelectScalar = {
+    id?: boolean
+    borrowCheckoutId?: boolean
+    lenderId?: boolean
+    borrowerId?: boolean
+    rating?: boolean
+    comment?: boolean
+    createdAt?: boolean
+  }
+
+  export type BorrowerReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    borrowCheckout?: boolean | BorrowCheckoutDefaultArgs<ExtArgs>
+    lender?: boolean | UserDefaultArgs<ExtArgs>
+    borrower?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BorrowerReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BorrowerReview"
+    objects: {
+      borrowCheckout: Prisma.$BorrowCheckoutPayload<ExtArgs>
+      lender: Prisma.$UserPayload<ExtArgs>
+      borrower: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      borrowCheckoutId: string
+      lenderId: string
+      borrowerId: string
+      rating: number
+      comment: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["borrowerReview"]>
+    composites: {}
+  }
+
+  type BorrowerReviewGetPayload<S extends boolean | null | undefined | BorrowerReviewDefaultArgs> = $Result.GetResult<Prisma.$BorrowerReviewPayload, S>
+
+  type BorrowerReviewCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<BorrowerReviewFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: BorrowerReviewCountAggregateInputType | true
+    }
+
+  export interface BorrowerReviewDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BorrowerReview'], meta: { name: 'BorrowerReview' } }
+    /**
+     * Find zero or one BorrowerReview that matches the filter.
+     * @param {BorrowerReviewFindUniqueArgs} args - Arguments to find a BorrowerReview
+     * @example
+     * // Get one BorrowerReview
+     * const borrowerReview = await prisma.borrowerReview.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BorrowerReviewFindUniqueArgs>(args: SelectSubset<T, BorrowerReviewFindUniqueArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one BorrowerReview that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {BorrowerReviewFindUniqueOrThrowArgs} args - Arguments to find a BorrowerReview
+     * @example
+     * // Get one BorrowerReview
+     * const borrowerReview = await prisma.borrowerReview.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BorrowerReviewFindUniqueOrThrowArgs>(args: SelectSubset<T, BorrowerReviewFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first BorrowerReview that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BorrowerReviewFindFirstArgs} args - Arguments to find a BorrowerReview
+     * @example
+     * // Get one BorrowerReview
+     * const borrowerReview = await prisma.borrowerReview.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BorrowerReviewFindFirstArgs>(args?: SelectSubset<T, BorrowerReviewFindFirstArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first BorrowerReview that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BorrowerReviewFindFirstOrThrowArgs} args - Arguments to find a BorrowerReview
+     * @example
+     * // Get one BorrowerReview
+     * const borrowerReview = await prisma.borrowerReview.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BorrowerReviewFindFirstOrThrowArgs>(args?: SelectSubset<T, BorrowerReviewFindFirstOrThrowArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more BorrowerReviews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BorrowerReviewFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BorrowerReviews
+     * const borrowerReviews = await prisma.borrowerReview.findMany()
+     * 
+     * // Get first 10 BorrowerReviews
+     * const borrowerReviews = await prisma.borrowerReview.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const borrowerReviewWithIdOnly = await prisma.borrowerReview.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BorrowerReviewFindManyArgs>(args?: SelectSubset<T, BorrowerReviewFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a BorrowerReview.
+     * @param {BorrowerReviewCreateArgs} args - Arguments to create a BorrowerReview.
+     * @example
+     * // Create one BorrowerReview
+     * const BorrowerReview = await prisma.borrowerReview.create({
+     *   data: {
+     *     // ... data to create a BorrowerReview
+     *   }
+     * })
+     * 
+     */
+    create<T extends BorrowerReviewCreateArgs>(args: SelectSubset<T, BorrowerReviewCreateArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many BorrowerReviews.
+     * @param {BorrowerReviewCreateManyArgs} args - Arguments to create many BorrowerReviews.
+     * @example
+     * // Create many BorrowerReviews
+     * const borrowerReview = await prisma.borrowerReview.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BorrowerReviewCreateManyArgs>(args?: SelectSubset<T, BorrowerReviewCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a BorrowerReview.
+     * @param {BorrowerReviewDeleteArgs} args - Arguments to delete one BorrowerReview.
+     * @example
+     * // Delete one BorrowerReview
+     * const BorrowerReview = await prisma.borrowerReview.delete({
+     *   where: {
+     *     // ... filter to delete one BorrowerReview
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BorrowerReviewDeleteArgs>(args: SelectSubset<T, BorrowerReviewDeleteArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one BorrowerReview.
+     * @param {BorrowerReviewUpdateArgs} args - Arguments to update one BorrowerReview.
+     * @example
+     * // Update one BorrowerReview
+     * const borrowerReview = await prisma.borrowerReview.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BorrowerReviewUpdateArgs>(args: SelectSubset<T, BorrowerReviewUpdateArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more BorrowerReviews.
+     * @param {BorrowerReviewDeleteManyArgs} args - Arguments to filter BorrowerReviews to delete.
+     * @example
+     * // Delete a few BorrowerReviews
+     * const { count } = await prisma.borrowerReview.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BorrowerReviewDeleteManyArgs>(args?: SelectSubset<T, BorrowerReviewDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BorrowerReviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BorrowerReviewUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BorrowerReviews
+     * const borrowerReview = await prisma.borrowerReview.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BorrowerReviewUpdateManyArgs>(args: SelectSubset<T, BorrowerReviewUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one BorrowerReview.
+     * @param {BorrowerReviewUpsertArgs} args - Arguments to update or create a BorrowerReview.
+     * @example
+     * // Update or create a BorrowerReview
+     * const borrowerReview = await prisma.borrowerReview.upsert({
+     *   create: {
+     *     // ... data to create a BorrowerReview
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BorrowerReview we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BorrowerReviewUpsertArgs>(args: SelectSubset<T, BorrowerReviewUpsertArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of BorrowerReviews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BorrowerReviewCountArgs} args - Arguments to filter BorrowerReviews to count.
+     * @example
+     * // Count the number of BorrowerReviews
+     * const count = await prisma.borrowerReview.count({
+     *   where: {
+     *     // ... the filter for the BorrowerReviews we want to count
+     *   }
+     * })
+    **/
+    count<T extends BorrowerReviewCountArgs>(
+      args?: Subset<T, BorrowerReviewCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BorrowerReviewCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BorrowerReview.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BorrowerReviewAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BorrowerReviewAggregateArgs>(args: Subset<T, BorrowerReviewAggregateArgs>): Prisma.PrismaPromise<GetBorrowerReviewAggregateType<T>>
+
+    /**
+     * Group by BorrowerReview.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BorrowerReviewGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BorrowerReviewGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BorrowerReviewGroupByArgs['orderBy'] }
+        : { orderBy?: BorrowerReviewGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BorrowerReviewGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBorrowerReviewGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BorrowerReview model
+   */
+  readonly fields: BorrowerReviewFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BorrowerReview.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BorrowerReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    borrowCheckout<T extends BorrowCheckoutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckoutDefaultArgs<ExtArgs>>): Prisma__BorrowCheckoutClient<$Result.GetResult<Prisma.$BorrowCheckoutPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    lender<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    borrower<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BorrowerReview model
+   */ 
+  interface BorrowerReviewFieldRefs {
+    readonly id: FieldRef<"BorrowerReview", 'String'>
+    readonly borrowCheckoutId: FieldRef<"BorrowerReview", 'String'>
+    readonly lenderId: FieldRef<"BorrowerReview", 'String'>
+    readonly borrowerId: FieldRef<"BorrowerReview", 'String'>
+    readonly rating: FieldRef<"BorrowerReview", 'Int'>
+    readonly comment: FieldRef<"BorrowerReview", 'String'>
+    readonly createdAt: FieldRef<"BorrowerReview", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BorrowerReview findUnique
+   */
+  export type BorrowerReviewFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which BorrowerReview to fetch.
+     */
+    where: BorrowerReviewWhereUniqueInput
+  }
+
+  /**
+   * BorrowerReview findUniqueOrThrow
+   */
+  export type BorrowerReviewFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which BorrowerReview to fetch.
+     */
+    where: BorrowerReviewWhereUniqueInput
+  }
+
+  /**
+   * BorrowerReview findFirst
+   */
+  export type BorrowerReviewFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which BorrowerReview to fetch.
+     */
+    where?: BorrowerReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BorrowerReviews to fetch.
+     */
+    orderBy?: BorrowerReviewOrderByWithRelationInput | BorrowerReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BorrowerReviews.
+     */
+    cursor?: BorrowerReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BorrowerReviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BorrowerReviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BorrowerReviews.
+     */
+    distinct?: BorrowerReviewScalarFieldEnum | BorrowerReviewScalarFieldEnum[]
+  }
+
+  /**
+   * BorrowerReview findFirstOrThrow
+   */
+  export type BorrowerReviewFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which BorrowerReview to fetch.
+     */
+    where?: BorrowerReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BorrowerReviews to fetch.
+     */
+    orderBy?: BorrowerReviewOrderByWithRelationInput | BorrowerReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BorrowerReviews.
+     */
+    cursor?: BorrowerReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BorrowerReviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BorrowerReviews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BorrowerReviews.
+     */
+    distinct?: BorrowerReviewScalarFieldEnum | BorrowerReviewScalarFieldEnum[]
+  }
+
+  /**
+   * BorrowerReview findMany
+   */
+  export type BorrowerReviewFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    /**
+     * Filter, which BorrowerReviews to fetch.
+     */
+    where?: BorrowerReviewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BorrowerReviews to fetch.
+     */
+    orderBy?: BorrowerReviewOrderByWithRelationInput | BorrowerReviewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BorrowerReviews.
+     */
+    cursor?: BorrowerReviewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BorrowerReviews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BorrowerReviews.
+     */
+    skip?: number
+    distinct?: BorrowerReviewScalarFieldEnum | BorrowerReviewScalarFieldEnum[]
+  }
+
+  /**
+   * BorrowerReview create
+   */
+  export type BorrowerReviewCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BorrowerReview.
+     */
+    data: XOR<BorrowerReviewCreateInput, BorrowerReviewUncheckedCreateInput>
+  }
+
+  /**
+   * BorrowerReview createMany
+   */
+  export type BorrowerReviewCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BorrowerReviews.
+     */
+    data: BorrowerReviewCreateManyInput | BorrowerReviewCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BorrowerReview update
+   */
+  export type BorrowerReviewUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BorrowerReview.
+     */
+    data: XOR<BorrowerReviewUpdateInput, BorrowerReviewUncheckedUpdateInput>
+    /**
+     * Choose, which BorrowerReview to update.
+     */
+    where: BorrowerReviewWhereUniqueInput
+  }
+
+  /**
+   * BorrowerReview updateMany
+   */
+  export type BorrowerReviewUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BorrowerReviews.
+     */
+    data: XOR<BorrowerReviewUpdateManyMutationInput, BorrowerReviewUncheckedUpdateManyInput>
+    /**
+     * Filter which BorrowerReviews to update
+     */
+    where?: BorrowerReviewWhereInput
+  }
+
+  /**
+   * BorrowerReview upsert
+   */
+  export type BorrowerReviewUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BorrowerReview to update in case it exists.
+     */
+    where: BorrowerReviewWhereUniqueInput
+    /**
+     * In case the BorrowerReview found by the `where` argument doesn't exist, create a new BorrowerReview with this data.
+     */
+    create: XOR<BorrowerReviewCreateInput, BorrowerReviewUncheckedCreateInput>
+    /**
+     * In case the BorrowerReview was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BorrowerReviewUpdateInput, BorrowerReviewUncheckedUpdateInput>
+  }
+
+  /**
+   * BorrowerReview delete
+   */
+  export type BorrowerReviewDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+    /**
+     * Filter which BorrowerReview to delete.
+     */
+    where: BorrowerReviewWhereUniqueInput
+  }
+
+  /**
+   * BorrowerReview deleteMany
+   */
+  export type BorrowerReviewDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BorrowerReviews to delete
+     */
+    where?: BorrowerReviewWhereInput
+  }
+
+  /**
+   * BorrowerReview without action
+   */
+  export type BorrowerReviewDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowerReview
+     */
+    select?: BorrowerReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BorrowerReviewInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserReport
+   */
+
+  export type AggregateUserReport = {
+    _count: UserReportCountAggregateOutputType | null
+    _min: UserReportMinAggregateOutputType | null
+    _max: UserReportMaxAggregateOutputType | null
+  }
+
+  export type UserReportMinAggregateOutputType = {
+    id: string | null
+    reporterId: string | null
+    reportedUserId: string | null
+    reason: string | null
+    description: string | null
+    status: string | null
+    createdAt: Date | null
+  }
+
+  export type UserReportMaxAggregateOutputType = {
+    id: string | null
+    reporterId: string | null
+    reportedUserId: string | null
+    reason: string | null
+    description: string | null
+    status: string | null
+    createdAt: Date | null
+  }
+
+  export type UserReportCountAggregateOutputType = {
+    id: number
+    reporterId: number
+    reportedUserId: number
+    reason: number
+    description: number
+    status: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type UserReportMinAggregateInputType = {
+    id?: true
+    reporterId?: true
+    reportedUserId?: true
+    reason?: true
+    description?: true
+    status?: true
+    createdAt?: true
+  }
+
+  export type UserReportMaxAggregateInputType = {
+    id?: true
+    reporterId?: true
+    reportedUserId?: true
+    reason?: true
+    description?: true
+    status?: true
+    createdAt?: true
+  }
+
+  export type UserReportCountAggregateInputType = {
+    id?: true
+    reporterId?: true
+    reportedUserId?: true
+    reason?: true
+    description?: true
+    status?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type UserReportAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserReport to aggregate.
+     */
+    where?: UserReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserReports to fetch.
+     */
+    orderBy?: UserReportOrderByWithRelationInput | UserReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserReports
+    **/
+    _count?: true | UserReportCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserReportMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserReportMaxAggregateInputType
+  }
+
+  export type GetUserReportAggregateType<T extends UserReportAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserReport]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserReport[P]>
+      : GetScalarType<T[P], AggregateUserReport[P]>
+  }
+
+
+
+
+  export type UserReportGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserReportWhereInput
+    orderBy?: UserReportOrderByWithAggregationInput | UserReportOrderByWithAggregationInput[]
+    by: UserReportScalarFieldEnum[] | UserReportScalarFieldEnum
+    having?: UserReportScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserReportCountAggregateInputType | true
+    _min?: UserReportMinAggregateInputType
+    _max?: UserReportMaxAggregateInputType
+  }
+
+  export type UserReportGroupByOutputType = {
+    id: string
+    reporterId: string
+    reportedUserId: string
+    reason: string
+    description: string | null
+    status: string
+    createdAt: Date
+    _count: UserReportCountAggregateOutputType | null
+    _min: UserReportMinAggregateOutputType | null
+    _max: UserReportMaxAggregateOutputType | null
+  }
+
+  type GetUserReportGroupByPayload<T extends UserReportGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserReportGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserReportGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserReportGroupByOutputType[P]>
+            : GetScalarType<T[P], UserReportGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserReportSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    reporterId?: boolean
+    reportedUserId?: boolean
+    reason?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+    reported?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userReport"]>
+
+
+  export type UserReportSelectScalar = {
+    id?: boolean
+    reporterId?: boolean
+    reportedUserId?: boolean
+    reason?: boolean
+    description?: boolean
+    status?: boolean
+    createdAt?: boolean
+  }
+
+  export type UserReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reporter?: boolean | UserDefaultArgs<ExtArgs>
+    reported?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserReportPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserReport"
+    objects: {
+      reporter: Prisma.$UserPayload<ExtArgs>
+      reported: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      reporterId: string
+      reportedUserId: string
+      reason: string
+      description: string | null
+      status: string
+      createdAt: Date
+    }, ExtArgs["result"]["userReport"]>
+    composites: {}
+  }
+
+  type UserReportGetPayload<S extends boolean | null | undefined | UserReportDefaultArgs> = $Result.GetResult<Prisma.$UserReportPayload, S>
+
+  type UserReportCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<UserReportFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: UserReportCountAggregateInputType | true
+    }
+
+  export interface UserReportDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserReport'], meta: { name: 'UserReport' } }
+    /**
+     * Find zero or one UserReport that matches the filter.
+     * @param {UserReportFindUniqueArgs} args - Arguments to find a UserReport
+     * @example
+     * // Get one UserReport
+     * const userReport = await prisma.userReport.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserReportFindUniqueArgs>(args: SelectSubset<T, UserReportFindUniqueArgs<ExtArgs>>): Prisma__UserReportClient<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one UserReport that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {UserReportFindUniqueOrThrowArgs} args - Arguments to find a UserReport
+     * @example
+     * // Get one UserReport
+     * const userReport = await prisma.userReport.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserReportFindUniqueOrThrowArgs>(args: SelectSubset<T, UserReportFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserReportClient<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first UserReport that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserReportFindFirstArgs} args - Arguments to find a UserReport
+     * @example
+     * // Get one UserReport
+     * const userReport = await prisma.userReport.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserReportFindFirstArgs>(args?: SelectSubset<T, UserReportFindFirstArgs<ExtArgs>>): Prisma__UserReportClient<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first UserReport that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserReportFindFirstOrThrowArgs} args - Arguments to find a UserReport
+     * @example
+     * // Get one UserReport
+     * const userReport = await prisma.userReport.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserReportFindFirstOrThrowArgs>(args?: SelectSubset<T, UserReportFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserReportClient<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more UserReports that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserReportFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserReports
+     * const userReports = await prisma.userReport.findMany()
+     * 
+     * // Get first 10 UserReports
+     * const userReports = await prisma.userReport.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userReportWithIdOnly = await prisma.userReport.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserReportFindManyArgs>(args?: SelectSubset<T, UserReportFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a UserReport.
+     * @param {UserReportCreateArgs} args - Arguments to create a UserReport.
+     * @example
+     * // Create one UserReport
+     * const UserReport = await prisma.userReport.create({
+     *   data: {
+     *     // ... data to create a UserReport
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserReportCreateArgs>(args: SelectSubset<T, UserReportCreateArgs<ExtArgs>>): Prisma__UserReportClient<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many UserReports.
+     * @param {UserReportCreateManyArgs} args - Arguments to create many UserReports.
+     * @example
+     * // Create many UserReports
+     * const userReport = await prisma.userReport.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserReportCreateManyArgs>(args?: SelectSubset<T, UserReportCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a UserReport.
+     * @param {UserReportDeleteArgs} args - Arguments to delete one UserReport.
+     * @example
+     * // Delete one UserReport
+     * const UserReport = await prisma.userReport.delete({
+     *   where: {
+     *     // ... filter to delete one UserReport
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserReportDeleteArgs>(args: SelectSubset<T, UserReportDeleteArgs<ExtArgs>>): Prisma__UserReportClient<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one UserReport.
+     * @param {UserReportUpdateArgs} args - Arguments to update one UserReport.
+     * @example
+     * // Update one UserReport
+     * const userReport = await prisma.userReport.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserReportUpdateArgs>(args: SelectSubset<T, UserReportUpdateArgs<ExtArgs>>): Prisma__UserReportClient<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more UserReports.
+     * @param {UserReportDeleteManyArgs} args - Arguments to filter UserReports to delete.
+     * @example
+     * // Delete a few UserReports
+     * const { count } = await prisma.userReport.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserReportDeleteManyArgs>(args?: SelectSubset<T, UserReportDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserReportUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserReports
+     * const userReport = await prisma.userReport.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserReportUpdateManyArgs>(args: SelectSubset<T, UserReportUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one UserReport.
+     * @param {UserReportUpsertArgs} args - Arguments to update or create a UserReport.
+     * @example
+     * // Update or create a UserReport
+     * const userReport = await prisma.userReport.upsert({
+     *   create: {
+     *     // ... data to create a UserReport
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserReport we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserReportUpsertArgs>(args: SelectSubset<T, UserReportUpsertArgs<ExtArgs>>): Prisma__UserReportClient<$Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of UserReports.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserReportCountArgs} args - Arguments to filter UserReports to count.
+     * @example
+     * // Count the number of UserReports
+     * const count = await prisma.userReport.count({
+     *   where: {
+     *     // ... the filter for the UserReports we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserReportCountArgs>(
+      args?: Subset<T, UserReportCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserReportCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserReportAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserReportAggregateArgs>(args: Subset<T, UserReportAggregateArgs>): Prisma.PrismaPromise<GetUserReportAggregateType<T>>
+
+    /**
+     * Group by UserReport.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserReportGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserReportGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserReportGroupByArgs['orderBy'] }
+        : { orderBy?: UserReportGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserReportGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserReportGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserReport model
+   */
+  readonly fields: UserReportFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserReport.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserReportClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    reporter<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    reported<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserReport model
+   */ 
+  interface UserReportFieldRefs {
+    readonly id: FieldRef<"UserReport", 'String'>
+    readonly reporterId: FieldRef<"UserReport", 'String'>
+    readonly reportedUserId: FieldRef<"UserReport", 'String'>
+    readonly reason: FieldRef<"UserReport", 'String'>
+    readonly description: FieldRef<"UserReport", 'String'>
+    readonly status: FieldRef<"UserReport", 'String'>
+    readonly createdAt: FieldRef<"UserReport", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserReport findUnique
+   */
+  export type UserReportFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    /**
+     * Filter, which UserReport to fetch.
+     */
+    where: UserReportWhereUniqueInput
+  }
+
+  /**
+   * UserReport findUniqueOrThrow
+   */
+  export type UserReportFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    /**
+     * Filter, which UserReport to fetch.
+     */
+    where: UserReportWhereUniqueInput
+  }
+
+  /**
+   * UserReport findFirst
+   */
+  export type UserReportFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    /**
+     * Filter, which UserReport to fetch.
+     */
+    where?: UserReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserReports to fetch.
+     */
+    orderBy?: UserReportOrderByWithRelationInput | UserReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserReports.
+     */
+    cursor?: UserReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserReports.
+     */
+    distinct?: UserReportScalarFieldEnum | UserReportScalarFieldEnum[]
+  }
+
+  /**
+   * UserReport findFirstOrThrow
+   */
+  export type UserReportFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    /**
+     * Filter, which UserReport to fetch.
+     */
+    where?: UserReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserReports to fetch.
+     */
+    orderBy?: UserReportOrderByWithRelationInput | UserReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserReports.
+     */
+    cursor?: UserReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserReports.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserReports.
+     */
+    distinct?: UserReportScalarFieldEnum | UserReportScalarFieldEnum[]
+  }
+
+  /**
+   * UserReport findMany
+   */
+  export type UserReportFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    /**
+     * Filter, which UserReports to fetch.
+     */
+    where?: UserReportWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserReports to fetch.
+     */
+    orderBy?: UserReportOrderByWithRelationInput | UserReportOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserReports.
+     */
+    cursor?: UserReportWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserReports from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserReports.
+     */
+    skip?: number
+    distinct?: UserReportScalarFieldEnum | UserReportScalarFieldEnum[]
+  }
+
+  /**
+   * UserReport create
+   */
+  export type UserReportCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserReport.
+     */
+    data: XOR<UserReportCreateInput, UserReportUncheckedCreateInput>
+  }
+
+  /**
+   * UserReport createMany
+   */
+  export type UserReportCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserReports.
+     */
+    data: UserReportCreateManyInput | UserReportCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserReport update
+   */
+  export type UserReportUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserReport.
+     */
+    data: XOR<UserReportUpdateInput, UserReportUncheckedUpdateInput>
+    /**
+     * Choose, which UserReport to update.
+     */
+    where: UserReportWhereUniqueInput
+  }
+
+  /**
+   * UserReport updateMany
+   */
+  export type UserReportUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserReports.
+     */
+    data: XOR<UserReportUpdateManyMutationInput, UserReportUncheckedUpdateManyInput>
+    /**
+     * Filter which UserReports to update
+     */
+    where?: UserReportWhereInput
+  }
+
+  /**
+   * UserReport upsert
+   */
+  export type UserReportUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserReport to update in case it exists.
+     */
+    where: UserReportWhereUniqueInput
+    /**
+     * In case the UserReport found by the `where` argument doesn't exist, create a new UserReport with this data.
+     */
+    create: XOR<UserReportCreateInput, UserReportUncheckedCreateInput>
+    /**
+     * In case the UserReport was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserReportUpdateInput, UserReportUncheckedUpdateInput>
+  }
+
+  /**
+   * UserReport delete
+   */
+  export type UserReportDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+    /**
+     * Filter which UserReport to delete.
+     */
+    where: UserReportWhereUniqueInput
+  }
+
+  /**
+   * UserReport deleteMany
+   */
+  export type UserReportDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserReports to delete
+     */
+    where?: UserReportWhereInput
+  }
+
+  /**
+   * UserReport without action
+   */
+  export type UserReportDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserReport
+     */
+    select?: UserReportSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserReportInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model IdVerification
    */
 
@@ -26314,6 +28477,32 @@ export namespace Prisma {
   export type TrailReactionScalarFieldEnum = (typeof TrailReactionScalarFieldEnum)[keyof typeof TrailReactionScalarFieldEnum]
 
 
+  export const BorrowerReviewScalarFieldEnum: {
+    id: 'id',
+    borrowCheckoutId: 'borrowCheckoutId',
+    lenderId: 'lenderId',
+    borrowerId: 'borrowerId',
+    rating: 'rating',
+    comment: 'comment',
+    createdAt: 'createdAt'
+  };
+
+  export type BorrowerReviewScalarFieldEnum = (typeof BorrowerReviewScalarFieldEnum)[keyof typeof BorrowerReviewScalarFieldEnum]
+
+
+  export const UserReportScalarFieldEnum: {
+    id: 'id',
+    reporterId: 'reporterId',
+    reportedUserId: 'reportedUserId',
+    reason: 'reason',
+    description: 'description',
+    status: 'status',
+    createdAt: 'createdAt'
+  };
+
+  export type UserReportScalarFieldEnum = (typeof UserReportScalarFieldEnum)[keyof typeof UserReportScalarFieldEnum]
+
+
   export const IdVerificationScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -26547,6 +28736,10 @@ export namespace Prisma {
     cartItems?: CartItemListRelationFilter
     trailEntries?: ItemTrailEntryListRelationFilter
     trailReactions?: TrailReactionListRelationFilter
+    lenderReviews?: BorrowerReviewListRelationFilter
+    borrowerReviews?: BorrowerReviewListRelationFilter
+    reportsMade?: UserReportListRelationFilter
+    reportsReceived?: UserReportListRelationFilter
     notifications?: NotificationListRelationFilter
     idVerification?: XOR<IdVerificationNullableRelationFilter, IdVerificationWhereInput> | null
     disputesRaised?: DisputeListRelationFilter
@@ -26594,6 +28787,10 @@ export namespace Prisma {
     cartItems?: CartItemOrderByRelationAggregateInput
     trailEntries?: ItemTrailEntryOrderByRelationAggregateInput
     trailReactions?: TrailReactionOrderByRelationAggregateInput
+    lenderReviews?: BorrowerReviewOrderByRelationAggregateInput
+    borrowerReviews?: BorrowerReviewOrderByRelationAggregateInput
+    reportsMade?: UserReportOrderByRelationAggregateInput
+    reportsReceived?: UserReportOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
     idVerification?: IdVerificationOrderByWithRelationInput
     disputesRaised?: DisputeOrderByRelationAggregateInput
@@ -26644,6 +28841,10 @@ export namespace Prisma {
     cartItems?: CartItemListRelationFilter
     trailEntries?: ItemTrailEntryListRelationFilter
     trailReactions?: TrailReactionListRelationFilter
+    lenderReviews?: BorrowerReviewListRelationFilter
+    borrowerReviews?: BorrowerReviewListRelationFilter
+    reportsMade?: UserReportListRelationFilter
+    reportsReceived?: UserReportListRelationFilter
     notifications?: NotificationListRelationFilter
     idVerification?: XOR<IdVerificationNullableRelationFilter, IdVerificationWhereInput> | null
     disputesRaised?: DisputeListRelationFilter
@@ -27123,6 +29324,7 @@ export namespace Prisma {
     lentItem?: XOR<LentItemNullableRelationFilter, LentItemWhereInput> | null
     offer?: XOR<BorrowRequestOfferNullableRelationFilter, BorrowRequestOfferWhereInput> | null
     trailEntry?: XOR<ItemTrailEntryNullableRelationFilter, ItemTrailEntryWhereInput> | null
+    borrowerReview?: XOR<BorrowerReviewNullableRelationFilter, BorrowerReviewWhereInput> | null
     dispute?: XOR<DisputeNullableRelationFilter, DisputeWhereInput> | null
   }
 
@@ -27151,6 +29353,7 @@ export namespace Prisma {
     lentItem?: LentItemOrderByWithRelationInput
     offer?: BorrowRequestOfferOrderByWithRelationInput
     trailEntry?: ItemTrailEntryOrderByWithRelationInput
+    borrowerReview?: BorrowerReviewOrderByWithRelationInput
     dispute?: DisputeOrderByWithRelationInput
   }
 
@@ -27182,6 +29385,7 @@ export namespace Prisma {
     lentItem?: XOR<LentItemNullableRelationFilter, LentItemWhereInput> | null
     offer?: XOR<BorrowRequestOfferNullableRelationFilter, BorrowRequestOfferWhereInput> | null
     trailEntry?: XOR<ItemTrailEntryNullableRelationFilter, ItemTrailEntryWhereInput> | null
+    borrowerReview?: XOR<BorrowerReviewNullableRelationFilter, BorrowerReviewWhereInput> | null
     dispute?: XOR<DisputeNullableRelationFilter, DisputeWhereInput> | null
   }, "id" | "borrowRequestOfferId">
 
@@ -28146,6 +30350,147 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"TrailReaction"> | Date | string
   }
 
+  export type BorrowerReviewWhereInput = {
+    AND?: BorrowerReviewWhereInput | BorrowerReviewWhereInput[]
+    OR?: BorrowerReviewWhereInput[]
+    NOT?: BorrowerReviewWhereInput | BorrowerReviewWhereInput[]
+    id?: StringFilter<"BorrowerReview"> | string
+    borrowCheckoutId?: StringFilter<"BorrowerReview"> | string
+    lenderId?: StringFilter<"BorrowerReview"> | string
+    borrowerId?: StringFilter<"BorrowerReview"> | string
+    rating?: IntFilter<"BorrowerReview"> | number
+    comment?: StringNullableFilter<"BorrowerReview"> | string | null
+    createdAt?: DateTimeFilter<"BorrowerReview"> | Date | string
+    borrowCheckout?: XOR<BorrowCheckoutRelationFilter, BorrowCheckoutWhereInput>
+    lender?: XOR<UserRelationFilter, UserWhereInput>
+    borrower?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type BorrowerReviewOrderByWithRelationInput = {
+    id?: SortOrder
+    borrowCheckoutId?: SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    borrowCheckout?: BorrowCheckoutOrderByWithRelationInput
+    lender?: UserOrderByWithRelationInput
+    borrower?: UserOrderByWithRelationInput
+  }
+
+  export type BorrowerReviewWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    borrowCheckoutId?: string
+    AND?: BorrowerReviewWhereInput | BorrowerReviewWhereInput[]
+    OR?: BorrowerReviewWhereInput[]
+    NOT?: BorrowerReviewWhereInput | BorrowerReviewWhereInput[]
+    lenderId?: StringFilter<"BorrowerReview"> | string
+    borrowerId?: StringFilter<"BorrowerReview"> | string
+    rating?: IntFilter<"BorrowerReview"> | number
+    comment?: StringNullableFilter<"BorrowerReview"> | string | null
+    createdAt?: DateTimeFilter<"BorrowerReview"> | Date | string
+    borrowCheckout?: XOR<BorrowCheckoutRelationFilter, BorrowCheckoutWhereInput>
+    lender?: XOR<UserRelationFilter, UserWhereInput>
+    borrower?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id" | "borrowCheckoutId">
+
+  export type BorrowerReviewOrderByWithAggregationInput = {
+    id?: SortOrder
+    borrowCheckoutId?: SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: BorrowerReviewCountOrderByAggregateInput
+    _avg?: BorrowerReviewAvgOrderByAggregateInput
+    _max?: BorrowerReviewMaxOrderByAggregateInput
+    _min?: BorrowerReviewMinOrderByAggregateInput
+    _sum?: BorrowerReviewSumOrderByAggregateInput
+  }
+
+  export type BorrowerReviewScalarWhereWithAggregatesInput = {
+    AND?: BorrowerReviewScalarWhereWithAggregatesInput | BorrowerReviewScalarWhereWithAggregatesInput[]
+    OR?: BorrowerReviewScalarWhereWithAggregatesInput[]
+    NOT?: BorrowerReviewScalarWhereWithAggregatesInput | BorrowerReviewScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BorrowerReview"> | string
+    borrowCheckoutId?: StringWithAggregatesFilter<"BorrowerReview"> | string
+    lenderId?: StringWithAggregatesFilter<"BorrowerReview"> | string
+    borrowerId?: StringWithAggregatesFilter<"BorrowerReview"> | string
+    rating?: IntWithAggregatesFilter<"BorrowerReview"> | number
+    comment?: StringNullableWithAggregatesFilter<"BorrowerReview"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BorrowerReview"> | Date | string
+  }
+
+  export type UserReportWhereInput = {
+    AND?: UserReportWhereInput | UserReportWhereInput[]
+    OR?: UserReportWhereInput[]
+    NOT?: UserReportWhereInput | UserReportWhereInput[]
+    id?: StringFilter<"UserReport"> | string
+    reporterId?: StringFilter<"UserReport"> | string
+    reportedUserId?: StringFilter<"UserReport"> | string
+    reason?: StringFilter<"UserReport"> | string
+    description?: StringNullableFilter<"UserReport"> | string | null
+    status?: StringFilter<"UserReport"> | string
+    createdAt?: DateTimeFilter<"UserReport"> | Date | string
+    reporter?: XOR<UserRelationFilter, UserWhereInput>
+    reported?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type UserReportOrderByWithRelationInput = {
+    id?: SortOrder
+    reporterId?: SortOrder
+    reportedUserId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    reporter?: UserOrderByWithRelationInput
+    reported?: UserOrderByWithRelationInput
+  }
+
+  export type UserReportWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: UserReportWhereInput | UserReportWhereInput[]
+    OR?: UserReportWhereInput[]
+    NOT?: UserReportWhereInput | UserReportWhereInput[]
+    reporterId?: StringFilter<"UserReport"> | string
+    reportedUserId?: StringFilter<"UserReport"> | string
+    reason?: StringFilter<"UserReport"> | string
+    description?: StringNullableFilter<"UserReport"> | string | null
+    status?: StringFilter<"UserReport"> | string
+    createdAt?: DateTimeFilter<"UserReport"> | Date | string
+    reporter?: XOR<UserRelationFilter, UserWhereInput>
+    reported?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type UserReportOrderByWithAggregationInput = {
+    id?: SortOrder
+    reporterId?: SortOrder
+    reportedUserId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    _count?: UserReportCountOrderByAggregateInput
+    _max?: UserReportMaxOrderByAggregateInput
+    _min?: UserReportMinOrderByAggregateInput
+  }
+
+  export type UserReportScalarWhereWithAggregatesInput = {
+    AND?: UserReportScalarWhereWithAggregatesInput | UserReportScalarWhereWithAggregatesInput[]
+    OR?: UserReportScalarWhereWithAggregatesInput[]
+    NOT?: UserReportScalarWhereWithAggregatesInput | UserReportScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserReport"> | string
+    reporterId?: StringWithAggregatesFilter<"UserReport"> | string
+    reportedUserId?: StringWithAggregatesFilter<"UserReport"> | string
+    reason?: StringWithAggregatesFilter<"UserReport"> | string
+    description?: StringNullableWithAggregatesFilter<"UserReport"> | string | null
+    status?: StringWithAggregatesFilter<"UserReport"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserReport"> | Date | string
+  }
+
   export type IdVerificationWhereInput = {
     AND?: IdVerificationWhereInput | IdVerificationWhereInput[]
     OR?: IdVerificationWhereInput[]
@@ -28539,6 +30884,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -28586,6 +30935,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -28633,6 +30986,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -28680,6 +31037,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -29211,6 +31572,7 @@ export namespace Prisma {
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
@@ -29234,6 +31596,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
@@ -29257,6 +31620,7 @@ export namespace Prisma {
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -29280,6 +31644,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -30277,6 +32642,141 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type BorrowerReviewCreateInput = {
+    id?: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    borrowCheckout: BorrowCheckoutCreateNestedOneWithoutBorrowerReviewInput
+    lender: UserCreateNestedOneWithoutLenderReviewsInput
+    borrower: UserCreateNestedOneWithoutBorrowerReviewsInput
+  }
+
+  export type BorrowerReviewUncheckedCreateInput = {
+    id?: string
+    borrowCheckoutId: string
+    lenderId: string
+    borrowerId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BorrowerReviewUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    borrowCheckout?: BorrowCheckoutUpdateOneRequiredWithoutBorrowerReviewNestedInput
+    lender?: UserUpdateOneRequiredWithoutLenderReviewsNestedInput
+    borrower?: UserUpdateOneRequiredWithoutBorrowerReviewsNestedInput
+  }
+
+  export type BorrowerReviewUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    borrowCheckoutId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BorrowerReviewCreateManyInput = {
+    id?: string
+    borrowCheckoutId: string
+    lenderId: string
+    borrowerId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BorrowerReviewUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BorrowerReviewUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    borrowCheckoutId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserReportCreateInput = {
+    id?: string
+    reason: string
+    description?: string | null
+    status?: string
+    createdAt?: Date | string
+    reporter: UserCreateNestedOneWithoutReportsMadeInput
+    reported: UserCreateNestedOneWithoutReportsReceivedInput
+  }
+
+  export type UserReportUncheckedCreateInput = {
+    id?: string
+    reporterId: string
+    reportedUserId: string
+    reason: string
+    description?: string | null
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type UserReportUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reporter?: UserUpdateOneRequiredWithoutReportsMadeNestedInput
+    reported?: UserUpdateOneRequiredWithoutReportsReceivedNestedInput
+  }
+
+  export type UserReportUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reportedUserId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserReportCreateManyInput = {
+    id?: string
+    reporterId: string
+    reportedUserId: string
+    reason: string
+    description?: string | null
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type UserReportUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserReportUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reportedUserId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IdVerificationCreateInput = {
     id?: string
     frontImage?: Buffer | null
@@ -30810,6 +33310,18 @@ export namespace Prisma {
     none?: TrailReactionWhereInput
   }
 
+  export type BorrowerReviewListRelationFilter = {
+    every?: BorrowerReviewWhereInput
+    some?: BorrowerReviewWhereInput
+    none?: BorrowerReviewWhereInput
+  }
+
+  export type UserReportListRelationFilter = {
+    every?: UserReportWhereInput
+    some?: UserReportWhereInput
+    none?: UserReportWhereInput
+  }
+
   export type NotificationListRelationFilter = {
     every?: NotificationWhereInput
     some?: NotificationWhereInput
@@ -30891,6 +33403,14 @@ export namespace Prisma {
   }
 
   export type TrailReactionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BorrowerReviewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UserReportOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -31418,6 +33938,11 @@ export namespace Prisma {
   export type ItemTrailEntryNullableRelationFilter = {
     is?: ItemTrailEntryWhereInput | null
     isNot?: ItemTrailEntryWhereInput | null
+  }
+
+  export type BorrowerReviewNullableRelationFilter = {
+    is?: BorrowerReviewWhereInput | null
+    isNot?: BorrowerReviewWhereInput | null
   }
 
   export type DisputeNullableRelationFilter = {
@@ -32061,6 +34586,79 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
+  export type BorrowCheckoutRelationFilter = {
+    is?: BorrowCheckoutWhereInput
+    isNot?: BorrowCheckoutWhereInput
+  }
+
+  export type BorrowerReviewCountOrderByAggregateInput = {
+    id?: SortOrder
+    borrowCheckoutId?: SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BorrowerReviewAvgOrderByAggregateInput = {
+    rating?: SortOrder
+  }
+
+  export type BorrowerReviewMaxOrderByAggregateInput = {
+    id?: SortOrder
+    borrowCheckoutId?: SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BorrowerReviewMinOrderByAggregateInput = {
+    id?: SortOrder
+    borrowCheckoutId?: SortOrder
+    lenderId?: SortOrder
+    borrowerId?: SortOrder
+    rating?: SortOrder
+    comment?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BorrowerReviewSumOrderByAggregateInput = {
+    rating?: SortOrder
+  }
+
+  export type UserReportCountOrderByAggregateInput = {
+    id?: SortOrder
+    reporterId?: SortOrder
+    reportedUserId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type UserReportMaxOrderByAggregateInput = {
+    id?: SortOrder
+    reporterId?: SortOrder
+    reportedUserId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type UserReportMinOrderByAggregateInput = {
+    id?: SortOrder
+    reporterId?: SortOrder
+    reportedUserId?: SortOrder
+    reason?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type BytesNullableFilter<$PrismaModel = never> = {
     equals?: Buffer | BytesFieldRefInput<$PrismaModel> | null
     in?: Buffer[] | null
@@ -32136,11 +34734,6 @@ export namespace Prisma {
     in?: $Enums.DisputeStatus[]
     notIn?: $Enums.DisputeStatus[]
     not?: NestedEnumDisputeStatusFilter<$PrismaModel> | $Enums.DisputeStatus
-  }
-
-  export type BorrowCheckoutRelationFilter = {
-    is?: BorrowCheckoutWhereInput
-    isNot?: BorrowCheckoutWhereInput
   }
 
   export type DisputeResolutionNullableRelationFilter = {
@@ -32438,6 +35031,34 @@ export namespace Prisma {
     connect?: TrailReactionWhereUniqueInput | TrailReactionWhereUniqueInput[]
   }
 
+  export type BorrowerReviewCreateNestedManyWithoutLenderInput = {
+    create?: XOR<BorrowerReviewCreateWithoutLenderInput, BorrowerReviewUncheckedCreateWithoutLenderInput> | BorrowerReviewCreateWithoutLenderInput[] | BorrowerReviewUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutLenderInput | BorrowerReviewCreateOrConnectWithoutLenderInput[]
+    createMany?: BorrowerReviewCreateManyLenderInputEnvelope
+    connect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+  }
+
+  export type BorrowerReviewCreateNestedManyWithoutBorrowerInput = {
+    create?: XOR<BorrowerReviewCreateWithoutBorrowerInput, BorrowerReviewUncheckedCreateWithoutBorrowerInput> | BorrowerReviewCreateWithoutBorrowerInput[] | BorrowerReviewUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutBorrowerInput | BorrowerReviewCreateOrConnectWithoutBorrowerInput[]
+    createMany?: BorrowerReviewCreateManyBorrowerInputEnvelope
+    connect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+  }
+
+  export type UserReportCreateNestedManyWithoutReporterInput = {
+    create?: XOR<UserReportCreateWithoutReporterInput, UserReportUncheckedCreateWithoutReporterInput> | UserReportCreateWithoutReporterInput[] | UserReportUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: UserReportCreateOrConnectWithoutReporterInput | UserReportCreateOrConnectWithoutReporterInput[]
+    createMany?: UserReportCreateManyReporterInputEnvelope
+    connect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+  }
+
+  export type UserReportCreateNestedManyWithoutReportedInput = {
+    create?: XOR<UserReportCreateWithoutReportedInput, UserReportUncheckedCreateWithoutReportedInput> | UserReportCreateWithoutReportedInput[] | UserReportUncheckedCreateWithoutReportedInput[]
+    connectOrCreate?: UserReportCreateOrConnectWithoutReportedInput | UserReportCreateOrConnectWithoutReportedInput[]
+    createMany?: UserReportCreateManyReportedInputEnvelope
+    connect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+  }
+
   export type NotificationCreateNestedManyWithoutUserInput = {
     create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
@@ -32588,6 +35209,34 @@ export namespace Prisma {
     connectOrCreate?: TrailReactionCreateOrConnectWithoutUserInput | TrailReactionCreateOrConnectWithoutUserInput[]
     createMany?: TrailReactionCreateManyUserInputEnvelope
     connect?: TrailReactionWhereUniqueInput | TrailReactionWhereUniqueInput[]
+  }
+
+  export type BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput = {
+    create?: XOR<BorrowerReviewCreateWithoutLenderInput, BorrowerReviewUncheckedCreateWithoutLenderInput> | BorrowerReviewCreateWithoutLenderInput[] | BorrowerReviewUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutLenderInput | BorrowerReviewCreateOrConnectWithoutLenderInput[]
+    createMany?: BorrowerReviewCreateManyLenderInputEnvelope
+    connect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+  }
+
+  export type BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput = {
+    create?: XOR<BorrowerReviewCreateWithoutBorrowerInput, BorrowerReviewUncheckedCreateWithoutBorrowerInput> | BorrowerReviewCreateWithoutBorrowerInput[] | BorrowerReviewUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutBorrowerInput | BorrowerReviewCreateOrConnectWithoutBorrowerInput[]
+    createMany?: BorrowerReviewCreateManyBorrowerInputEnvelope
+    connect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+  }
+
+  export type UserReportUncheckedCreateNestedManyWithoutReporterInput = {
+    create?: XOR<UserReportCreateWithoutReporterInput, UserReportUncheckedCreateWithoutReporterInput> | UserReportCreateWithoutReporterInput[] | UserReportUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: UserReportCreateOrConnectWithoutReporterInput | UserReportCreateOrConnectWithoutReporterInput[]
+    createMany?: UserReportCreateManyReporterInputEnvelope
+    connect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+  }
+
+  export type UserReportUncheckedCreateNestedManyWithoutReportedInput = {
+    create?: XOR<UserReportCreateWithoutReportedInput, UserReportUncheckedCreateWithoutReportedInput> | UserReportCreateWithoutReportedInput[] | UserReportUncheckedCreateWithoutReportedInput[]
+    connectOrCreate?: UserReportCreateOrConnectWithoutReportedInput | UserReportCreateOrConnectWithoutReportedInput[]
+    createMany?: UserReportCreateManyReportedInputEnvelope
+    connect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
   }
 
   export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
@@ -32877,6 +35526,62 @@ export namespace Prisma {
     update?: TrailReactionUpdateWithWhereUniqueWithoutUserInput | TrailReactionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: TrailReactionUpdateManyWithWhereWithoutUserInput | TrailReactionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: TrailReactionScalarWhereInput | TrailReactionScalarWhereInput[]
+  }
+
+  export type BorrowerReviewUpdateManyWithoutLenderNestedInput = {
+    create?: XOR<BorrowerReviewCreateWithoutLenderInput, BorrowerReviewUncheckedCreateWithoutLenderInput> | BorrowerReviewCreateWithoutLenderInput[] | BorrowerReviewUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutLenderInput | BorrowerReviewCreateOrConnectWithoutLenderInput[]
+    upsert?: BorrowerReviewUpsertWithWhereUniqueWithoutLenderInput | BorrowerReviewUpsertWithWhereUniqueWithoutLenderInput[]
+    createMany?: BorrowerReviewCreateManyLenderInputEnvelope
+    set?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    disconnect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    delete?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    connect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    update?: BorrowerReviewUpdateWithWhereUniqueWithoutLenderInput | BorrowerReviewUpdateWithWhereUniqueWithoutLenderInput[]
+    updateMany?: BorrowerReviewUpdateManyWithWhereWithoutLenderInput | BorrowerReviewUpdateManyWithWhereWithoutLenderInput[]
+    deleteMany?: BorrowerReviewScalarWhereInput | BorrowerReviewScalarWhereInput[]
+  }
+
+  export type BorrowerReviewUpdateManyWithoutBorrowerNestedInput = {
+    create?: XOR<BorrowerReviewCreateWithoutBorrowerInput, BorrowerReviewUncheckedCreateWithoutBorrowerInput> | BorrowerReviewCreateWithoutBorrowerInput[] | BorrowerReviewUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutBorrowerInput | BorrowerReviewCreateOrConnectWithoutBorrowerInput[]
+    upsert?: BorrowerReviewUpsertWithWhereUniqueWithoutBorrowerInput | BorrowerReviewUpsertWithWhereUniqueWithoutBorrowerInput[]
+    createMany?: BorrowerReviewCreateManyBorrowerInputEnvelope
+    set?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    disconnect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    delete?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    connect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    update?: BorrowerReviewUpdateWithWhereUniqueWithoutBorrowerInput | BorrowerReviewUpdateWithWhereUniqueWithoutBorrowerInput[]
+    updateMany?: BorrowerReviewUpdateManyWithWhereWithoutBorrowerInput | BorrowerReviewUpdateManyWithWhereWithoutBorrowerInput[]
+    deleteMany?: BorrowerReviewScalarWhereInput | BorrowerReviewScalarWhereInput[]
+  }
+
+  export type UserReportUpdateManyWithoutReporterNestedInput = {
+    create?: XOR<UserReportCreateWithoutReporterInput, UserReportUncheckedCreateWithoutReporterInput> | UserReportCreateWithoutReporterInput[] | UserReportUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: UserReportCreateOrConnectWithoutReporterInput | UserReportCreateOrConnectWithoutReporterInput[]
+    upsert?: UserReportUpsertWithWhereUniqueWithoutReporterInput | UserReportUpsertWithWhereUniqueWithoutReporterInput[]
+    createMany?: UserReportCreateManyReporterInputEnvelope
+    set?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    disconnect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    delete?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    connect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    update?: UserReportUpdateWithWhereUniqueWithoutReporterInput | UserReportUpdateWithWhereUniqueWithoutReporterInput[]
+    updateMany?: UserReportUpdateManyWithWhereWithoutReporterInput | UserReportUpdateManyWithWhereWithoutReporterInput[]
+    deleteMany?: UserReportScalarWhereInput | UserReportScalarWhereInput[]
+  }
+
+  export type UserReportUpdateManyWithoutReportedNestedInput = {
+    create?: XOR<UserReportCreateWithoutReportedInput, UserReportUncheckedCreateWithoutReportedInput> | UserReportCreateWithoutReportedInput[] | UserReportUncheckedCreateWithoutReportedInput[]
+    connectOrCreate?: UserReportCreateOrConnectWithoutReportedInput | UserReportCreateOrConnectWithoutReportedInput[]
+    upsert?: UserReportUpsertWithWhereUniqueWithoutReportedInput | UserReportUpsertWithWhereUniqueWithoutReportedInput[]
+    createMany?: UserReportCreateManyReportedInputEnvelope
+    set?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    disconnect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    delete?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    connect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    update?: UserReportUpdateWithWhereUniqueWithoutReportedInput | UserReportUpdateWithWhereUniqueWithoutReportedInput[]
+    updateMany?: UserReportUpdateManyWithWhereWithoutReportedInput | UserReportUpdateManyWithWhereWithoutReportedInput[]
+    deleteMany?: UserReportScalarWhereInput | UserReportScalarWhereInput[]
   }
 
   export type NotificationUpdateManyWithoutUserNestedInput = {
@@ -33177,6 +35882,62 @@ export namespace Prisma {
     update?: TrailReactionUpdateWithWhereUniqueWithoutUserInput | TrailReactionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: TrailReactionUpdateManyWithWhereWithoutUserInput | TrailReactionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: TrailReactionScalarWhereInput | TrailReactionScalarWhereInput[]
+  }
+
+  export type BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput = {
+    create?: XOR<BorrowerReviewCreateWithoutLenderInput, BorrowerReviewUncheckedCreateWithoutLenderInput> | BorrowerReviewCreateWithoutLenderInput[] | BorrowerReviewUncheckedCreateWithoutLenderInput[]
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutLenderInput | BorrowerReviewCreateOrConnectWithoutLenderInput[]
+    upsert?: BorrowerReviewUpsertWithWhereUniqueWithoutLenderInput | BorrowerReviewUpsertWithWhereUniqueWithoutLenderInput[]
+    createMany?: BorrowerReviewCreateManyLenderInputEnvelope
+    set?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    disconnect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    delete?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    connect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    update?: BorrowerReviewUpdateWithWhereUniqueWithoutLenderInput | BorrowerReviewUpdateWithWhereUniqueWithoutLenderInput[]
+    updateMany?: BorrowerReviewUpdateManyWithWhereWithoutLenderInput | BorrowerReviewUpdateManyWithWhereWithoutLenderInput[]
+    deleteMany?: BorrowerReviewScalarWhereInput | BorrowerReviewScalarWhereInput[]
+  }
+
+  export type BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput = {
+    create?: XOR<BorrowerReviewCreateWithoutBorrowerInput, BorrowerReviewUncheckedCreateWithoutBorrowerInput> | BorrowerReviewCreateWithoutBorrowerInput[] | BorrowerReviewUncheckedCreateWithoutBorrowerInput[]
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutBorrowerInput | BorrowerReviewCreateOrConnectWithoutBorrowerInput[]
+    upsert?: BorrowerReviewUpsertWithWhereUniqueWithoutBorrowerInput | BorrowerReviewUpsertWithWhereUniqueWithoutBorrowerInput[]
+    createMany?: BorrowerReviewCreateManyBorrowerInputEnvelope
+    set?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    disconnect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    delete?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    connect?: BorrowerReviewWhereUniqueInput | BorrowerReviewWhereUniqueInput[]
+    update?: BorrowerReviewUpdateWithWhereUniqueWithoutBorrowerInput | BorrowerReviewUpdateWithWhereUniqueWithoutBorrowerInput[]
+    updateMany?: BorrowerReviewUpdateManyWithWhereWithoutBorrowerInput | BorrowerReviewUpdateManyWithWhereWithoutBorrowerInput[]
+    deleteMany?: BorrowerReviewScalarWhereInput | BorrowerReviewScalarWhereInput[]
+  }
+
+  export type UserReportUncheckedUpdateManyWithoutReporterNestedInput = {
+    create?: XOR<UserReportCreateWithoutReporterInput, UserReportUncheckedCreateWithoutReporterInput> | UserReportCreateWithoutReporterInput[] | UserReportUncheckedCreateWithoutReporterInput[]
+    connectOrCreate?: UserReportCreateOrConnectWithoutReporterInput | UserReportCreateOrConnectWithoutReporterInput[]
+    upsert?: UserReportUpsertWithWhereUniqueWithoutReporterInput | UserReportUpsertWithWhereUniqueWithoutReporterInput[]
+    createMany?: UserReportCreateManyReporterInputEnvelope
+    set?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    disconnect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    delete?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    connect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    update?: UserReportUpdateWithWhereUniqueWithoutReporterInput | UserReportUpdateWithWhereUniqueWithoutReporterInput[]
+    updateMany?: UserReportUpdateManyWithWhereWithoutReporterInput | UserReportUpdateManyWithWhereWithoutReporterInput[]
+    deleteMany?: UserReportScalarWhereInput | UserReportScalarWhereInput[]
+  }
+
+  export type UserReportUncheckedUpdateManyWithoutReportedNestedInput = {
+    create?: XOR<UserReportCreateWithoutReportedInput, UserReportUncheckedCreateWithoutReportedInput> | UserReportCreateWithoutReportedInput[] | UserReportUncheckedCreateWithoutReportedInput[]
+    connectOrCreate?: UserReportCreateOrConnectWithoutReportedInput | UserReportCreateOrConnectWithoutReportedInput[]
+    upsert?: UserReportUpsertWithWhereUniqueWithoutReportedInput | UserReportUpsertWithWhereUniqueWithoutReportedInput[]
+    createMany?: UserReportCreateManyReportedInputEnvelope
+    set?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    disconnect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    delete?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    connect?: UserReportWhereUniqueInput | UserReportWhereUniqueInput[]
+    update?: UserReportUpdateWithWhereUniqueWithoutReportedInput | UserReportUpdateWithWhereUniqueWithoutReportedInput[]
+    updateMany?: UserReportUpdateManyWithWhereWithoutReportedInput | UserReportUpdateManyWithWhereWithoutReportedInput[]
+    deleteMany?: UserReportScalarWhereInput | UserReportScalarWhereInput[]
   }
 
   export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
@@ -33777,6 +36538,12 @@ export namespace Prisma {
     connect?: ItemTrailEntryWhereUniqueInput
   }
 
+  export type BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput = {
+    create?: XOR<BorrowerReviewCreateWithoutBorrowCheckoutInput, BorrowerReviewUncheckedCreateWithoutBorrowCheckoutInput>
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutBorrowCheckoutInput
+    connect?: BorrowerReviewWhereUniqueInput
+  }
+
   export type DisputeCreateNestedOneWithoutCheckoutInput = {
     create?: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
     connectOrCreate?: DisputeCreateOrConnectWithoutCheckoutInput
@@ -33787,6 +36554,12 @@ export namespace Prisma {
     create?: XOR<ItemTrailEntryCreateWithoutBorrowCheckoutInput, ItemTrailEntryUncheckedCreateWithoutBorrowCheckoutInput>
     connectOrCreate?: ItemTrailEntryCreateOrConnectWithoutBorrowCheckoutInput
     connect?: ItemTrailEntryWhereUniqueInput
+  }
+
+  export type BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput = {
+    create?: XOR<BorrowerReviewCreateWithoutBorrowCheckoutInput, BorrowerReviewUncheckedCreateWithoutBorrowCheckoutInput>
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutBorrowCheckoutInput
+    connect?: BorrowerReviewWhereUniqueInput
   }
 
   export type DisputeUncheckedCreateNestedOneWithoutCheckoutInput = {
@@ -33849,6 +36622,16 @@ export namespace Prisma {
     update?: XOR<XOR<ItemTrailEntryUpdateToOneWithWhereWithoutBorrowCheckoutInput, ItemTrailEntryUpdateWithoutBorrowCheckoutInput>, ItemTrailEntryUncheckedUpdateWithoutBorrowCheckoutInput>
   }
 
+  export type BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput = {
+    create?: XOR<BorrowerReviewCreateWithoutBorrowCheckoutInput, BorrowerReviewUncheckedCreateWithoutBorrowCheckoutInput>
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutBorrowCheckoutInput
+    upsert?: BorrowerReviewUpsertWithoutBorrowCheckoutInput
+    disconnect?: BorrowerReviewWhereInput | boolean
+    delete?: BorrowerReviewWhereInput | boolean
+    connect?: BorrowerReviewWhereUniqueInput
+    update?: XOR<XOR<BorrowerReviewUpdateToOneWithWhereWithoutBorrowCheckoutInput, BorrowerReviewUpdateWithoutBorrowCheckoutInput>, BorrowerReviewUncheckedUpdateWithoutBorrowCheckoutInput>
+  }
+
   export type DisputeUpdateOneWithoutCheckoutNestedInput = {
     create?: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
     connectOrCreate?: DisputeCreateOrConnectWithoutCheckoutInput
@@ -33867,6 +36650,16 @@ export namespace Prisma {
     delete?: ItemTrailEntryWhereInput | boolean
     connect?: ItemTrailEntryWhereUniqueInput
     update?: XOR<XOR<ItemTrailEntryUpdateToOneWithWhereWithoutBorrowCheckoutInput, ItemTrailEntryUpdateWithoutBorrowCheckoutInput>, ItemTrailEntryUncheckedUpdateWithoutBorrowCheckoutInput>
+  }
+
+  export type BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput = {
+    create?: XOR<BorrowerReviewCreateWithoutBorrowCheckoutInput, BorrowerReviewUncheckedCreateWithoutBorrowCheckoutInput>
+    connectOrCreate?: BorrowerReviewCreateOrConnectWithoutBorrowCheckoutInput
+    upsert?: BorrowerReviewUpsertWithoutBorrowCheckoutInput
+    disconnect?: BorrowerReviewWhereInput | boolean
+    delete?: BorrowerReviewWhereInput | boolean
+    connect?: BorrowerReviewWhereUniqueInput
+    update?: XOR<XOR<BorrowerReviewUpdateToOneWithWhereWithoutBorrowCheckoutInput, BorrowerReviewUpdateWithoutBorrowCheckoutInput>, BorrowerReviewUncheckedUpdateWithoutBorrowCheckoutInput>
   }
 
   export type DisputeUncheckedUpdateOneWithoutCheckoutNestedInput = {
@@ -34333,6 +37126,76 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutTrailReactionsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTrailReactionsInput, UserUpdateWithoutTrailReactionsInput>, UserUncheckedUpdateWithoutTrailReactionsInput>
+  }
+
+  export type BorrowCheckoutCreateNestedOneWithoutBorrowerReviewInput = {
+    create?: XOR<BorrowCheckoutCreateWithoutBorrowerReviewInput, BorrowCheckoutUncheckedCreateWithoutBorrowerReviewInput>
+    connectOrCreate?: BorrowCheckoutCreateOrConnectWithoutBorrowerReviewInput
+    connect?: BorrowCheckoutWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutLenderReviewsInput = {
+    create?: XOR<UserCreateWithoutLenderReviewsInput, UserUncheckedCreateWithoutLenderReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLenderReviewsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutBorrowerReviewsInput = {
+    create?: XOR<UserCreateWithoutBorrowerReviewsInput, UserUncheckedCreateWithoutBorrowerReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBorrowerReviewsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type BorrowCheckoutUpdateOneRequiredWithoutBorrowerReviewNestedInput = {
+    create?: XOR<BorrowCheckoutCreateWithoutBorrowerReviewInput, BorrowCheckoutUncheckedCreateWithoutBorrowerReviewInput>
+    connectOrCreate?: BorrowCheckoutCreateOrConnectWithoutBorrowerReviewInput
+    upsert?: BorrowCheckoutUpsertWithoutBorrowerReviewInput
+    connect?: BorrowCheckoutWhereUniqueInput
+    update?: XOR<XOR<BorrowCheckoutUpdateToOneWithWhereWithoutBorrowerReviewInput, BorrowCheckoutUpdateWithoutBorrowerReviewInput>, BorrowCheckoutUncheckedUpdateWithoutBorrowerReviewInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutLenderReviewsNestedInput = {
+    create?: XOR<UserCreateWithoutLenderReviewsInput, UserUncheckedCreateWithoutLenderReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutLenderReviewsInput
+    upsert?: UserUpsertWithoutLenderReviewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutLenderReviewsInput, UserUpdateWithoutLenderReviewsInput>, UserUncheckedUpdateWithoutLenderReviewsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutBorrowerReviewsNestedInput = {
+    create?: XOR<UserCreateWithoutBorrowerReviewsInput, UserUncheckedCreateWithoutBorrowerReviewsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBorrowerReviewsInput
+    upsert?: UserUpsertWithoutBorrowerReviewsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBorrowerReviewsInput, UserUpdateWithoutBorrowerReviewsInput>, UserUncheckedUpdateWithoutBorrowerReviewsInput>
+  }
+
+  export type UserCreateNestedOneWithoutReportsMadeInput = {
+    create?: XOR<UserCreateWithoutReportsMadeInput, UserUncheckedCreateWithoutReportsMadeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReportsMadeInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutReportsReceivedInput = {
+    create?: XOR<UserCreateWithoutReportsReceivedInput, UserUncheckedCreateWithoutReportsReceivedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReportsReceivedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutReportsMadeNestedInput = {
+    create?: XOR<UserCreateWithoutReportsMadeInput, UserUncheckedCreateWithoutReportsMadeInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReportsMadeInput
+    upsert?: UserUpsertWithoutReportsMadeInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReportsMadeInput, UserUpdateWithoutReportsMadeInput>, UserUncheckedUpdateWithoutReportsMadeInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutReportsReceivedNestedInput = {
+    create?: XOR<UserCreateWithoutReportsReceivedInput, UserUncheckedCreateWithoutReportsReceivedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReportsReceivedInput
+    upsert?: UserUpsertWithoutReportsReceivedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReportsReceivedInput, UserUpdateWithoutReportsReceivedInput>, UserUncheckedUpdateWithoutReportsReceivedInput>
   }
 
   export type UserCreateNestedOneWithoutIdVerificationInput = {
@@ -35161,6 +38024,7 @@ export namespace Prisma {
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
@@ -35183,6 +38047,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
@@ -35215,6 +38080,7 @@ export namespace Prisma {
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
@@ -35237,6 +38103,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
@@ -35459,6 +38326,118 @@ export namespace Prisma {
 
   export type TrailReactionCreateManyUserInputEnvelope = {
     data: TrailReactionCreateManyUserInput | TrailReactionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BorrowerReviewCreateWithoutLenderInput = {
+    id?: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    borrowCheckout: BorrowCheckoutCreateNestedOneWithoutBorrowerReviewInput
+    borrower: UserCreateNestedOneWithoutBorrowerReviewsInput
+  }
+
+  export type BorrowerReviewUncheckedCreateWithoutLenderInput = {
+    id?: string
+    borrowCheckoutId: string
+    borrowerId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BorrowerReviewCreateOrConnectWithoutLenderInput = {
+    where: BorrowerReviewWhereUniqueInput
+    create: XOR<BorrowerReviewCreateWithoutLenderInput, BorrowerReviewUncheckedCreateWithoutLenderInput>
+  }
+
+  export type BorrowerReviewCreateManyLenderInputEnvelope = {
+    data: BorrowerReviewCreateManyLenderInput | BorrowerReviewCreateManyLenderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BorrowerReviewCreateWithoutBorrowerInput = {
+    id?: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    borrowCheckout: BorrowCheckoutCreateNestedOneWithoutBorrowerReviewInput
+    lender: UserCreateNestedOneWithoutLenderReviewsInput
+  }
+
+  export type BorrowerReviewUncheckedCreateWithoutBorrowerInput = {
+    id?: string
+    borrowCheckoutId: string
+    lenderId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BorrowerReviewCreateOrConnectWithoutBorrowerInput = {
+    where: BorrowerReviewWhereUniqueInput
+    create: XOR<BorrowerReviewCreateWithoutBorrowerInput, BorrowerReviewUncheckedCreateWithoutBorrowerInput>
+  }
+
+  export type BorrowerReviewCreateManyBorrowerInputEnvelope = {
+    data: BorrowerReviewCreateManyBorrowerInput | BorrowerReviewCreateManyBorrowerInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserReportCreateWithoutReporterInput = {
+    id?: string
+    reason: string
+    description?: string | null
+    status?: string
+    createdAt?: Date | string
+    reported: UserCreateNestedOneWithoutReportsReceivedInput
+  }
+
+  export type UserReportUncheckedCreateWithoutReporterInput = {
+    id?: string
+    reportedUserId: string
+    reason: string
+    description?: string | null
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type UserReportCreateOrConnectWithoutReporterInput = {
+    where: UserReportWhereUniqueInput
+    create: XOR<UserReportCreateWithoutReporterInput, UserReportUncheckedCreateWithoutReporterInput>
+  }
+
+  export type UserReportCreateManyReporterInputEnvelope = {
+    data: UserReportCreateManyReporterInput | UserReportCreateManyReporterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserReportCreateWithoutReportedInput = {
+    id?: string
+    reason: string
+    description?: string | null
+    status?: string
+    createdAt?: Date | string
+    reporter: UserCreateNestedOneWithoutReportsMadeInput
+  }
+
+  export type UserReportUncheckedCreateWithoutReportedInput = {
+    id?: string
+    reporterId: string
+    reason: string
+    description?: string | null
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type UserReportCreateOrConnectWithoutReportedInput = {
+    where: UserReportWhereUniqueInput
+    create: XOR<UserReportCreateWithoutReportedInput, UserReportUncheckedCreateWithoutReportedInput>
+  }
+
+  export type UserReportCreateManyReportedInputEnvelope = {
+    data: UserReportCreateManyReportedInput | UserReportCreateManyReportedInput[]
     skipDuplicates?: boolean
   }
 
@@ -36206,6 +39185,96 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"TrailReaction"> | Date | string
   }
 
+  export type BorrowerReviewUpsertWithWhereUniqueWithoutLenderInput = {
+    where: BorrowerReviewWhereUniqueInput
+    update: XOR<BorrowerReviewUpdateWithoutLenderInput, BorrowerReviewUncheckedUpdateWithoutLenderInput>
+    create: XOR<BorrowerReviewCreateWithoutLenderInput, BorrowerReviewUncheckedCreateWithoutLenderInput>
+  }
+
+  export type BorrowerReviewUpdateWithWhereUniqueWithoutLenderInput = {
+    where: BorrowerReviewWhereUniqueInput
+    data: XOR<BorrowerReviewUpdateWithoutLenderInput, BorrowerReviewUncheckedUpdateWithoutLenderInput>
+  }
+
+  export type BorrowerReviewUpdateManyWithWhereWithoutLenderInput = {
+    where: BorrowerReviewScalarWhereInput
+    data: XOR<BorrowerReviewUpdateManyMutationInput, BorrowerReviewUncheckedUpdateManyWithoutLenderInput>
+  }
+
+  export type BorrowerReviewScalarWhereInput = {
+    AND?: BorrowerReviewScalarWhereInput | BorrowerReviewScalarWhereInput[]
+    OR?: BorrowerReviewScalarWhereInput[]
+    NOT?: BorrowerReviewScalarWhereInput | BorrowerReviewScalarWhereInput[]
+    id?: StringFilter<"BorrowerReview"> | string
+    borrowCheckoutId?: StringFilter<"BorrowerReview"> | string
+    lenderId?: StringFilter<"BorrowerReview"> | string
+    borrowerId?: StringFilter<"BorrowerReview"> | string
+    rating?: IntFilter<"BorrowerReview"> | number
+    comment?: StringNullableFilter<"BorrowerReview"> | string | null
+    createdAt?: DateTimeFilter<"BorrowerReview"> | Date | string
+  }
+
+  export type BorrowerReviewUpsertWithWhereUniqueWithoutBorrowerInput = {
+    where: BorrowerReviewWhereUniqueInput
+    update: XOR<BorrowerReviewUpdateWithoutBorrowerInput, BorrowerReviewUncheckedUpdateWithoutBorrowerInput>
+    create: XOR<BorrowerReviewCreateWithoutBorrowerInput, BorrowerReviewUncheckedCreateWithoutBorrowerInput>
+  }
+
+  export type BorrowerReviewUpdateWithWhereUniqueWithoutBorrowerInput = {
+    where: BorrowerReviewWhereUniqueInput
+    data: XOR<BorrowerReviewUpdateWithoutBorrowerInput, BorrowerReviewUncheckedUpdateWithoutBorrowerInput>
+  }
+
+  export type BorrowerReviewUpdateManyWithWhereWithoutBorrowerInput = {
+    where: BorrowerReviewScalarWhereInput
+    data: XOR<BorrowerReviewUpdateManyMutationInput, BorrowerReviewUncheckedUpdateManyWithoutBorrowerInput>
+  }
+
+  export type UserReportUpsertWithWhereUniqueWithoutReporterInput = {
+    where: UserReportWhereUniqueInput
+    update: XOR<UserReportUpdateWithoutReporterInput, UserReportUncheckedUpdateWithoutReporterInput>
+    create: XOR<UserReportCreateWithoutReporterInput, UserReportUncheckedCreateWithoutReporterInput>
+  }
+
+  export type UserReportUpdateWithWhereUniqueWithoutReporterInput = {
+    where: UserReportWhereUniqueInput
+    data: XOR<UserReportUpdateWithoutReporterInput, UserReportUncheckedUpdateWithoutReporterInput>
+  }
+
+  export type UserReportUpdateManyWithWhereWithoutReporterInput = {
+    where: UserReportScalarWhereInput
+    data: XOR<UserReportUpdateManyMutationInput, UserReportUncheckedUpdateManyWithoutReporterInput>
+  }
+
+  export type UserReportScalarWhereInput = {
+    AND?: UserReportScalarWhereInput | UserReportScalarWhereInput[]
+    OR?: UserReportScalarWhereInput[]
+    NOT?: UserReportScalarWhereInput | UserReportScalarWhereInput[]
+    id?: StringFilter<"UserReport"> | string
+    reporterId?: StringFilter<"UserReport"> | string
+    reportedUserId?: StringFilter<"UserReport"> | string
+    reason?: StringFilter<"UserReport"> | string
+    description?: StringNullableFilter<"UserReport"> | string | null
+    status?: StringFilter<"UserReport"> | string
+    createdAt?: DateTimeFilter<"UserReport"> | Date | string
+  }
+
+  export type UserReportUpsertWithWhereUniqueWithoutReportedInput = {
+    where: UserReportWhereUniqueInput
+    update: XOR<UserReportUpdateWithoutReportedInput, UserReportUncheckedUpdateWithoutReportedInput>
+    create: XOR<UserReportCreateWithoutReportedInput, UserReportUncheckedCreateWithoutReportedInput>
+  }
+
+  export type UserReportUpdateWithWhereUniqueWithoutReportedInput = {
+    where: UserReportWhereUniqueInput
+    data: XOR<UserReportUpdateWithoutReportedInput, UserReportUncheckedUpdateWithoutReportedInput>
+  }
+
+  export type UserReportUpdateManyWithWhereWithoutReportedInput = {
+    where: UserReportScalarWhereInput
+    data: XOR<UserReportUpdateManyMutationInput, UserReportUncheckedUpdateManyWithoutReportedInput>
+  }
+
   export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
     where: NotificationWhereUniqueInput
     update: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
@@ -36413,6 +39482,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -36459,6 +39532,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -36553,6 +39630,7 @@ export namespace Prisma {
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
@@ -36575,6 +39653,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
@@ -36679,6 +39758,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -36725,6 +39808,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -36888,6 +39975,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -36934,6 +40025,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -36990,6 +40085,7 @@ export namespace Prisma {
     product: ProductCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
@@ -37012,6 +40108,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
@@ -37175,6 +40272,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -37221,6 +40322,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -37315,6 +40420,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -37361,6 +40470,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -37453,6 +40566,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -37499,6 +40616,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -37653,6 +40774,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -37699,6 +40824,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -37731,6 +40860,7 @@ export namespace Prisma {
     product: ProductCreateNestedOneWithoutCheckoutsInput
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
@@ -37753,6 +40883,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
@@ -37914,6 +41045,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -37960,6 +41095,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -37998,6 +41137,7 @@ export namespace Prisma {
     product?: ProductUpdateOneRequiredWithoutCheckoutsNestedInput
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -38020,6 +41160,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -38061,6 +41202,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -38107,6 +41252,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -38158,6 +41307,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -38204,6 +41357,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -38359,6 +41516,29 @@ export namespace Prisma {
     create: XOR<ItemTrailEntryCreateWithoutBorrowCheckoutInput, ItemTrailEntryUncheckedCreateWithoutBorrowCheckoutInput>
   }
 
+  export type BorrowerReviewCreateWithoutBorrowCheckoutInput = {
+    id?: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+    lender: UserCreateNestedOneWithoutLenderReviewsInput
+    borrower: UserCreateNestedOneWithoutBorrowerReviewsInput
+  }
+
+  export type BorrowerReviewUncheckedCreateWithoutBorrowCheckoutInput = {
+    id?: string
+    lenderId: string
+    borrowerId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BorrowerReviewCreateOrConnectWithoutBorrowCheckoutInput = {
+    where: BorrowerReviewWhereUniqueInput
+    create: XOR<BorrowerReviewCreateWithoutBorrowCheckoutInput, BorrowerReviewUncheckedCreateWithoutBorrowCheckoutInput>
+  }
+
   export type DisputeCreateWithoutCheckoutInput = {
     id?: string
     status?: $Enums.DisputeStatus
@@ -38453,6 +41633,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -38499,6 +41683,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -38556,6 +41744,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -38602,6 +41794,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -38776,6 +41972,35 @@ export namespace Prisma {
     reactions?: TrailReactionUncheckedUpdateManyWithoutTrailEntryNestedInput
   }
 
+  export type BorrowerReviewUpsertWithoutBorrowCheckoutInput = {
+    update: XOR<BorrowerReviewUpdateWithoutBorrowCheckoutInput, BorrowerReviewUncheckedUpdateWithoutBorrowCheckoutInput>
+    create: XOR<BorrowerReviewCreateWithoutBorrowCheckoutInput, BorrowerReviewUncheckedCreateWithoutBorrowCheckoutInput>
+    where?: BorrowerReviewWhereInput
+  }
+
+  export type BorrowerReviewUpdateToOneWithWhereWithoutBorrowCheckoutInput = {
+    where?: BorrowerReviewWhereInput
+    data: XOR<BorrowerReviewUpdateWithoutBorrowCheckoutInput, BorrowerReviewUncheckedUpdateWithoutBorrowCheckoutInput>
+  }
+
+  export type BorrowerReviewUpdateWithoutBorrowCheckoutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lender?: UserUpdateOneRequiredWithoutLenderReviewsNestedInput
+    borrower?: UserUpdateOneRequiredWithoutBorrowerReviewsNestedInput
+  }
+
+  export type BorrowerReviewUncheckedUpdateWithoutBorrowCheckoutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type DisputeUpsertWithoutCheckoutInput = {
     update: XOR<DisputeUpdateWithoutCheckoutInput, DisputeUncheckedUpdateWithoutCheckoutInput>
     create: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
@@ -38866,6 +42091,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
     disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
@@ -38912,6 +42141,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
     disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
@@ -38974,6 +42207,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
     disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
@@ -39020,6 +42257,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
     disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
@@ -39065,6 +42306,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -39111,6 +42356,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -39203,6 +42452,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -39249,6 +42502,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -39354,6 +42611,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -39400,6 +42661,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -39511,6 +42776,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -39557,6 +42826,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -39702,6 +42975,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -39748,6 +43025,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -39835,6 +43116,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -39881,6 +43166,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -39946,6 +43235,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -39992,6 +43285,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -40079,6 +43376,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -40125,6 +43426,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -40171,6 +43476,10 @@ export namespace Prisma {
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -40217,6 +43526,10 @@ export namespace Prisma {
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -40306,6 +43619,10 @@ export namespace Prisma {
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -40352,6 +43669,10 @@ export namespace Prisma {
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -40431,6 +43752,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -40477,6 +43802,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -40539,6 +43868,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -40585,6 +43918,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -40631,6 +43968,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -40677,6 +44018,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -40739,6 +44084,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -40785,6 +44134,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -40831,6 +44184,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -40877,6 +44234,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -40939,6 +44300,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -40985,6 +44350,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -41092,6 +44461,7 @@ export namespace Prisma {
     product: ProductCreateNestedOneWithoutCheckoutsInput
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
+    borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
   }
 
@@ -41114,6 +44484,7 @@ export namespace Prisma {
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
   }
 
@@ -41160,6 +44531,10 @@ export namespace Prisma {
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -41206,6 +44581,10 @@ export namespace Prisma {
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -41365,6 +44744,7 @@ export namespace Prisma {
     product?: ProductUpdateOneRequiredWithoutCheckoutsNestedInput
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -41387,6 +44767,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -41439,6 +44820,10 @@ export namespace Prisma {
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -41485,6 +44870,10 @@ export namespace Prisma {
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -41584,6 +44973,10 @@ export namespace Prisma {
     sentMessages?: MessageCreateNestedManyWithoutSenderInput
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -41630,6 +45023,10 @@ export namespace Prisma {
     sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -41735,6 +45132,10 @@ export namespace Prisma {
     sentMessages?: MessageUpdateManyWithoutSenderNestedInput
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -41781,6 +45182,982 @@ export namespace Prisma {
     sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type BorrowCheckoutCreateWithoutBorrowerReviewInput = {
+    id?: string
+    originType: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    totalPrice?: number | null
+    deposit?: number | null
+    notes?: string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: Date | string | null
+    cancelledBy?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
+    lender: UserCreateNestedOneWithoutCheckoutsAsLenderInput
+    product: ProductCreateNestedOneWithoutCheckoutsInput
+    lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
+    offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
+    trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+  }
+
+  export type BorrowCheckoutUncheckedCreateWithoutBorrowerReviewInput = {
+    id?: string
+    borrowerId: string
+    lenderId: string
+    productId: string
+    lentItemId?: string | null
+    borrowRequestOfferId?: string | null
+    originType: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    totalPrice?: number | null
+    deposit?: number | null
+    notes?: string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: Date | string | null
+    cancelledBy?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+  }
+
+  export type BorrowCheckoutCreateOrConnectWithoutBorrowerReviewInput = {
+    where: BorrowCheckoutWhereUniqueInput
+    create: XOR<BorrowCheckoutCreateWithoutBorrowerReviewInput, BorrowCheckoutUncheckedCreateWithoutBorrowerReviewInput>
+  }
+
+  export type UserCreateWithoutLenderReviewsInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
+    products?: ProductCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserUncheckedCreateWithoutLenderReviewsInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserCreateOrConnectWithoutLenderReviewsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutLenderReviewsInput, UserUncheckedCreateWithoutLenderReviewsInput>
+  }
+
+  export type UserCreateWithoutBorrowerReviewsInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
+    products?: ProductCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserUncheckedCreateWithoutBorrowerReviewsInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserCreateOrConnectWithoutBorrowerReviewsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBorrowerReviewsInput, UserUncheckedCreateWithoutBorrowerReviewsInput>
+  }
+
+  export type BorrowCheckoutUpsertWithoutBorrowerReviewInput = {
+    update: XOR<BorrowCheckoutUpdateWithoutBorrowerReviewInput, BorrowCheckoutUncheckedUpdateWithoutBorrowerReviewInput>
+    create: XOR<BorrowCheckoutCreateWithoutBorrowerReviewInput, BorrowCheckoutUncheckedCreateWithoutBorrowerReviewInput>
+    where?: BorrowCheckoutWhereInput
+  }
+
+  export type BorrowCheckoutUpdateToOneWithWhereWithoutBorrowerReviewInput = {
+    where?: BorrowCheckoutWhereInput
+    data: XOR<BorrowCheckoutUpdateWithoutBorrowerReviewInput, BorrowCheckoutUncheckedUpdateWithoutBorrowerReviewInput>
+  }
+
+  export type BorrowCheckoutUpdateWithoutBorrowerReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    originType?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalPrice?: NullableIntFieldUpdateOperationsInput | number | null
+    deposit?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
+    lender?: UserUpdateOneRequiredWithoutCheckoutsAsLenderNestedInput
+    product?: ProductUpdateOneRequiredWithoutCheckoutsNestedInput
+    lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
+    offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
+    trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+  }
+
+  export type BorrowCheckoutUncheckedUpdateWithoutBorrowerReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    lentItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    borrowRequestOfferId?: NullableStringFieldUpdateOperationsInput | string | null
+    originType?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalPrice?: NullableIntFieldUpdateOperationsInput | number | null
+    deposit?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+  }
+
+  export type UserUpsertWithoutLenderReviewsInput = {
+    update: XOR<UserUpdateWithoutLenderReviewsInput, UserUncheckedUpdateWithoutLenderReviewsInput>
+    create: XOR<UserCreateWithoutLenderReviewsInput, UserUncheckedCreateWithoutLenderReviewsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutLenderReviewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutLenderReviewsInput, UserUncheckedUpdateWithoutLenderReviewsInput>
+  }
+
+  export type UserUpdateWithoutLenderReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
+    products?: ProductUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutLenderReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUpsertWithoutBorrowerReviewsInput = {
+    update: XOR<UserUpdateWithoutBorrowerReviewsInput, UserUncheckedUpdateWithoutBorrowerReviewsInput>
+    create: XOR<UserCreateWithoutBorrowerReviewsInput, UserUncheckedCreateWithoutBorrowerReviewsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBorrowerReviewsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBorrowerReviewsInput, UserUncheckedUpdateWithoutBorrowerReviewsInput>
+  }
+
+  export type UserUpdateWithoutBorrowerReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
+    products?: ProductUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBorrowerReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserCreateWithoutReportsMadeInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
+    products?: ProductCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserUncheckedCreateWithoutReportsMadeInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserCreateOrConnectWithoutReportsMadeInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReportsMadeInput, UserUncheckedCreateWithoutReportsMadeInput>
+  }
+
+  export type UserCreateWithoutReportsReceivedInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorCreateNestedManyWithoutUserInput
+    products?: ProductCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemCreateNestedManyWithoutLenderInput
+    mentor?: MentorCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantCreateNestedManyWithoutUserInput
+    sentMessages?: MessageCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserUncheckedCreateWithoutReportsReceivedInput = {
+    id?: string
+    name?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    userName?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    location?: string | null
+    latitude?: number | null
+    longitude?: number | null
+    password?: string | null
+    profilePicture?: string | null
+    phoneNumber?: string | null
+    identityVerified?: boolean
+    contactVerified?: boolean
+    idVerified?: boolean
+    addressVerified?: boolean
+    meetupVerified?: boolean
+    verifiedAt?: Date | string | null
+    isAdmin?: boolean
+    createdAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    authenticators?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    products?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutLenderInput
+    mentor?: MentorUncheckedCreateNestedOneWithoutUserInput
+    mentorBookings?: MentorBookingUncheckedCreateNestedManyWithoutUserInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedCreateNestedManyWithoutBorrowerInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedCreateNestedManyWithoutLenderInput
+    borrowRequests?: BorrowRequestUncheckedCreateNestedManyWithoutRequesterInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutLenderInput
+    conversationParticipants?: ConversationParticipantUncheckedCreateNestedManyWithoutUserInput
+    sentMessages?: MessageUncheckedCreateNestedManyWithoutSenderInput
+    cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
+    trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
+    disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
+    disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
+    disputesAsLender?: DisputeUncheckedCreateNestedManyWithoutLenderInput
+    disputeResolutions?: DisputeResolutionUncheckedCreateNestedManyWithoutResolvedByInput
+  }
+
+  export type UserCreateOrConnectWithoutReportsReceivedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReportsReceivedInput, UserUncheckedCreateWithoutReportsReceivedInput>
+  }
+
+  export type UserUpsertWithoutReportsMadeInput = {
+    update: XOR<UserUpdateWithoutReportsMadeInput, UserUncheckedUpdateWithoutReportsMadeInput>
+    create: XOR<UserCreateWithoutReportsMadeInput, UserUncheckedCreateWithoutReportsMadeInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReportsMadeInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReportsMadeInput, UserUncheckedUpdateWithoutReportsMadeInput>
+  }
+
+  export type UserUpdateWithoutReportsMadeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
+    products?: ProductUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReportsMadeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUncheckedUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUncheckedUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUpsertWithoutReportsReceivedInput = {
+    update: XOR<UserUpdateWithoutReportsReceivedInput, UserUncheckedUpdateWithoutReportsReceivedInput>
+    create: XOR<UserCreateWithoutReportsReceivedInput, UserUncheckedCreateWithoutReportsReceivedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReportsReceivedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReportsReceivedInput, UserUncheckedUpdateWithoutReportsReceivedInput>
+  }
+
+  export type UserUpdateWithoutReportsReceivedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUpdateManyWithoutUserNestedInput
+    products?: ProductUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
+    disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
+    disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
+    disputesAsLender?: DisputeUpdateManyWithoutLenderNestedInput
+    disputeResolutions?: DisputeResolutionUpdateManyWithoutResolvedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReportsReceivedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    userName?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    password?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    identityVerified?: BoolFieldUpdateOperationsInput | boolean
+    contactVerified?: BoolFieldUpdateOperationsInput | boolean
+    idVerified?: BoolFieldUpdateOperationsInput | boolean
+    addressVerified?: BoolFieldUpdateOperationsInput | boolean
+    meetupVerified?: BoolFieldUpdateOperationsInput | boolean
+    verifiedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    authenticators?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    products?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    lentItems?: LentItemUncheckedUpdateManyWithoutLenderNestedInput
+    mentor?: MentorUncheckedUpdateOneWithoutUserNestedInput
+    mentorBookings?: MentorBookingUncheckedUpdateManyWithoutUserNestedInput
+    checkoutsAsBorrower?: BorrowCheckoutUncheckedUpdateManyWithoutBorrowerNestedInput
+    checkoutsAsLender?: BorrowCheckoutUncheckedUpdateManyWithoutLenderNestedInput
+    borrowRequests?: BorrowRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    borrowRequestOffers?: BorrowRequestOfferUncheckedUpdateManyWithoutLenderNestedInput
+    conversationParticipants?: ConversationParticipantUncheckedUpdateManyWithoutUserNestedInput
+    sentMessages?: MessageUncheckedUpdateManyWithoutSenderNestedInput
+    cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
+    trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -41828,6 +46205,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
     disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
@@ -41874,6 +46255,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
     disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
@@ -41936,6 +46321,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
     disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
@@ -41982,6 +46371,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
     disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
@@ -42009,6 +46402,7 @@ export namespace Prisma {
     lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutDisputeInput = {
@@ -42031,6 +46425,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutDisputeInput = {
@@ -42077,6 +46472,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesAsBorrower?: DisputeCreateNestedManyWithoutBorrowerInput
@@ -42123,6 +46522,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesAsBorrower?: DisputeUncheckedCreateNestedManyWithoutBorrowerInput
@@ -42174,6 +46577,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -42220,6 +46627,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -42271,6 +46682,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -42317,6 +46732,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -42411,6 +46830,7 @@ export namespace Prisma {
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutDisputeInput = {
@@ -42433,6 +46853,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
   }
 
   export type UserUpsertWithoutDisputesRaisedInput = {
@@ -42485,6 +46906,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesAsBorrower?: DisputeUpdateManyWithoutBorrowerNestedInput
@@ -42531,6 +46956,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesAsBorrower?: DisputeUncheckedUpdateManyWithoutBorrowerNestedInput
@@ -42588,6 +47017,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -42634,6 +47067,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -42691,6 +47128,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -42737,6 +47178,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -42887,6 +47332,10 @@ export namespace Prisma {
     cartItems?: CartItemCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportCreateNestedManyWithoutReportedInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeCreateNestedManyWithoutRaisedByInput
@@ -42933,6 +47382,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedCreateNestedManyWithoutUserInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutBorrowerInput
     trailReactions?: TrailReactionUncheckedCreateNestedManyWithoutUserInput
+    lenderReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutLenderInput
+    borrowerReviews?: BorrowerReviewUncheckedCreateNestedManyWithoutBorrowerInput
+    reportsMade?: UserReportUncheckedCreateNestedManyWithoutReporterInput
+    reportsReceived?: UserReportUncheckedCreateNestedManyWithoutReportedInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     idVerification?: IdVerificationUncheckedCreateNestedOneWithoutUserInput
     disputesRaised?: DisputeUncheckedCreateNestedManyWithoutRaisedByInput
@@ -43046,6 +47499,10 @@ export namespace Prisma {
     cartItems?: CartItemUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUpdateManyWithoutRaisedByNestedInput
@@ -43092,6 +47549,10 @@ export namespace Prisma {
     cartItems?: CartItemUncheckedUpdateManyWithoutUserNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutBorrowerNestedInput
     trailReactions?: TrailReactionUncheckedUpdateManyWithoutUserNestedInput
+    lenderReviews?: BorrowerReviewUncheckedUpdateManyWithoutLenderNestedInput
+    borrowerReviews?: BorrowerReviewUncheckedUpdateManyWithoutBorrowerNestedInput
+    reportsMade?: UserReportUncheckedUpdateManyWithoutReporterNestedInput
+    reportsReceived?: UserReportUncheckedUpdateManyWithoutReportedNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     idVerification?: IdVerificationUncheckedUpdateOneWithoutUserNestedInput
     disputesRaised?: DisputeUncheckedUpdateManyWithoutRaisedByNestedInput
@@ -43368,6 +47829,42 @@ export namespace Prisma {
     id?: string
     trailEntryId: string
     type?: string
+    createdAt?: Date | string
+  }
+
+  export type BorrowerReviewCreateManyLenderInput = {
+    id?: string
+    borrowCheckoutId: string
+    borrowerId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+  }
+
+  export type BorrowerReviewCreateManyBorrowerInput = {
+    id?: string
+    borrowCheckoutId: string
+    lenderId: string
+    rating: number
+    comment?: string | null
+    createdAt?: Date | string
+  }
+
+  export type UserReportCreateManyReporterInput = {
+    id?: string
+    reportedUserId: string
+    reason: string
+    description?: string | null
+    status?: string
+    createdAt?: Date | string
+  }
+
+  export type UserReportCreateManyReportedInput = {
+    id?: string
+    reporterId: string
+    reason: string
+    description?: string | null
+    status?: string
     createdAt?: Date | string
   }
 
@@ -43682,6 +48179,7 @@ export namespace Prisma {
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -43704,6 +48202,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -43746,6 +48245,7 @@ export namespace Prisma {
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -43768,6 +48268,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -43998,6 +48499,114 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     trailEntryId?: StringFieldUpdateOperationsInput | string
     type?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BorrowerReviewUpdateWithoutLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    borrowCheckout?: BorrowCheckoutUpdateOneRequiredWithoutBorrowerReviewNestedInput
+    borrower?: UserUpdateOneRequiredWithoutBorrowerReviewsNestedInput
+  }
+
+  export type BorrowerReviewUncheckedUpdateWithoutLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    borrowCheckoutId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BorrowerReviewUncheckedUpdateManyWithoutLenderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    borrowCheckoutId?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BorrowerReviewUpdateWithoutBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    borrowCheckout?: BorrowCheckoutUpdateOneRequiredWithoutBorrowerReviewNestedInput
+    lender?: UserUpdateOneRequiredWithoutLenderReviewsNestedInput
+  }
+
+  export type BorrowerReviewUncheckedUpdateWithoutBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    borrowCheckoutId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BorrowerReviewUncheckedUpdateManyWithoutBorrowerInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    borrowCheckoutId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserReportUpdateWithoutReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reported?: UserUpdateOneRequiredWithoutReportsReceivedNestedInput
+  }
+
+  export type UserReportUncheckedUpdateWithoutReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reportedUserId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserReportUncheckedUpdateManyWithoutReporterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reportedUserId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserReportUpdateWithoutReportedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reporter?: UserUpdateOneRequiredWithoutReportsMadeNestedInput
+  }
+
+  export type UserReportUncheckedUpdateWithoutReportedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserReportUncheckedUpdateManyWithoutReportedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    reporterId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -44365,6 +48974,7 @@ export namespace Prisma {
     lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -44387,6 +48997,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -44539,6 +49150,7 @@ export namespace Prisma {
     product?: ProductUpdateOneRequiredWithoutCheckoutsNestedInput
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -44561,6 +49173,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
   }
 
@@ -44938,6 +49551,14 @@ export namespace Prisma {
      * @deprecated Use TrailReactionDefaultArgs instead
      */
     export type TrailReactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = TrailReactionDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use BorrowerReviewDefaultArgs instead
+     */
+    export type BorrowerReviewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = BorrowerReviewDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use UserReportDefaultArgs instead
+     */
+    export type UserReportArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserReportDefaultArgs<ExtArgs>
     /**
      * @deprecated Use IdVerificationDefaultArgs instead
      */

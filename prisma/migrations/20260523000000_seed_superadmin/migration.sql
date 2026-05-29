@@ -1,7 +1,7 @@
 -- Migration: seed_superadmin
 -- Ensures the isAdmin column exists on User, then upserts the superadmin account.
 
-ALTER TABLE `User` ADD COLUMN IF NOT EXISTS `isAdmin` BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE `User` ADD COLUMN `isAdmin` BOOLEAN NOT NULL DEFAULT false;
 
 INSERT INTO `User` (
   `id`,
@@ -13,8 +13,7 @@ INSERT INTO `User` (
   `isAdmin`,
   `identityVerified`,
   `contactVerified`,
-  `createdAt`,
-  `updatedAt`
+  `createdAt`
 ) VALUES (
   'test_user_superadmin',
   'superadmin@test.com',
@@ -25,7 +24,6 @@ INSERT INTO `User` (
   true,
   true,
   true,
-  NOW(),
   NOW()
 )
 ON DUPLICATE KEY UPDATE
@@ -35,5 +33,4 @@ ON DUPLICATE KEY UPDATE
   `password`          = VALUES(`password`),
   `isAdmin`           = true,
   `identityVerified`  = true,
-  `contactVerified`   = true,
-  `updatedAt`         = NOW();
+  `contactVerified`   = true;

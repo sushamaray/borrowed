@@ -51,6 +51,7 @@ function withFeatureList(
     };
   },
   lentItemId?: string,
+  lenderRating = 0,
 ): ProductWithFeatureList {
   const lenderName =
     product.createdBy.firstName && product.createdBy.lastName
@@ -61,7 +62,7 @@ function withFeatureList(
 
   return {
     ...product,
-    lenderRating: 0,
+    lenderRating,
     featureList: readFeatures(product.features),
     drawbackList: readFeatures(raw.drawbacks),
     lenderName,
@@ -112,7 +113,11 @@ export async function getProductBySlug(
       include: { product: { include: { createdBy: createdBySelect } } },
     });
     if (!item) return null;
-    return withFeatureList(item.product, item.id);
+    const agg = await prisma.itemTrailEntry.aggregate({
+      where: { isPublic: true, product: { createdById: item.product.createdBy.id } },
+      _avg: { itemRating: true },
+    });
+    return withFeatureList(item.product, item.id, agg._avg.itemRating ?? 0);
   }
 
   const product = await prisma.product.findUnique({
@@ -120,7 +125,11 @@ export async function getProductBySlug(
     include: { createdBy: createdBySelect },
   });
   if (!product) return null;
-  return withFeatureList(product);
+  const agg = await prisma.itemTrailEntry.aggregate({
+    where: { isPublic: true, product: { createdById: product.createdBy.id } },
+    _avg: { itemRating: true },
+  });
+  return withFeatureList(product, undefined, agg._avg.itemRating ?? 0);
 }
 
 export async function getSimilarProducts(
@@ -136,5 +145,13 @@ export async function getSimilarProducts(
     take: 3,
   });
 
-  return items.map((item) => withFeatureList(item.product, item.id));
+  return Promise.all(
+    items.map(async (item) => {
+      const agg = await prisma.itemTrailEntry.aggregate({
+        where: { isPublic: true, product: { createdById: item.product.createdBy.id } },
+        _avg: { itemRating: true },
+      });
+      return withFeatureList(item.product, item.id, agg._avg.itemRating ?? 0);
+    }),
+  );
 }

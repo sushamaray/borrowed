@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { X, MapPin, ShieldCheck, Package, MessageCircle, ExternalLink, UserRound, BadgeCheck } from "lucide-react";
+import { X, MapPin, ShieldCheck, Package, MessageCircle, ExternalLink, UserRound, BadgeCheck, Star, Flag } from "lucide-react";
 import FallbackImage from "@/components/FallbackImage";
 
 interface UserItem {
@@ -55,10 +55,28 @@ function ProfileAvatar({ name, imageUrl, size = 64 }: { name: string; imageUrl?:
   );
 }
 
+const REPORT_REASONS = [
+  { value: "spam",          label: "Spam" },
+  { value: "scam",          label: "Scam / Fraud" },
+  { value: "harassment",    label: "Harassment" },
+  { value: "fake_listing",  label: "Fake Listing" },
+  { value: "inappropriate", label: "Inappropriate Content" },
+  { value: "other",         label: "Other" },
+];
+
 export default function UserProfileModal({ userId, onClose }: Props) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const backdropRef = useRef<HTMLDivElement>(null);
+
+  const [borrowerRating, setBorrowerRating] = useState<{ count: number; average: number | null } | null>(null);
+
+  const [showReportForm, setShowReportForm] = useState(false);
+  const [reportReason, setReportReason] = useState("spam");
+  const [reportDescription, setReportDescription] = useState("");
+  const [reportSubmitting, setReportSubmitting] = useState(false);
+  const [reportSubmitted, setReportSubmitted] = useState(false);
+  const [reportError, setReportError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`/api/users/${userId}`)
@@ -66,6 +84,35 @@ export default function UserProfileModal({ userId, onClose }: Props) {
       .then((d: UserProfile) => setProfile(d))
       .finally(() => setLoading(false));
   }, [userId]);
+
+  useEffect(() => {
+    fetch(`/api/user/${userId}/borrower-rating`)
+      .then((r) => r.ok ? r.json() as Promise<{ count: number; average: number | null }> : Promise.reject())
+      .then(setBorrowerRating)
+      .catch(() => {});
+  }, [userId]);
+
+  async function submitReport() {
+    setReportSubmitting(true);
+    setReportError(null);
+    try {
+      const res = await fetch(`/api/users/${userId}/report`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reason: reportReason, description: reportDescription.trim() || undefined }),
+      });
+      if (res.ok) {
+        setReportSubmitted(true);
+        setShowReportForm(false);
+      } else {
+        setReportError("Failed to submit report. Please try again.");
+      }
+    } catch {
+      setReportError("Failed to submit report. Please try again.");
+    } finally {
+      setReportSubmitting(false);
+    }
+  }
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -178,6 +225,26 @@ export default function UserProfileModal({ userId, onClose }: Props) {
               </div>
             </div>
 
+            {/* Borrower rating */}
+            {borrowerRating && borrowerRating.count > 0 && (
+              <div className="border-b border-(--border) px-6 py-3 flex items-center gap-3">
+                <div className="flex items-center gap-0.5">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <Star
+                      key={n}
+                      className={`h-3.5 w-3.5 ${n <= Math.round(borrowerRating.average ?? 0) ? "fill-amber-400 text-amber-400" : "text-(--border)"}`}
+                    />
+                  ))}
+                </div>
+                <span className="text-sm font-bold text-(--foreground)">
+                  {borrowerRating.average != null ? borrowerRating.average.toFixed(1) : "—"}
+                </span>
+                <span className="text-xs text-(--text-muted)">
+                  · {borrowerRating.count} lender {borrowerRating.count === 1 ? "review" : "reviews"}
+                </span>
+              </div>
+            )}
+
             {/* Stats */}
             <div className="border-b border-[var(--border)] px-6 py-3">
               <span className="text-sm text-[var(--text-secondary)]">
@@ -225,23 +292,81 @@ export default function UserProfileModal({ userId, onClose }: Props) {
 
             {/* Actions */}
             {!profile.isCurrentUser && (
-              <div className="flex gap-3 border-t border-[var(--border)] px-4 py-3">
-                <Link
-                  href={`/dashboard/messages?userId=${profile.id}`}
-                  onClick={onClose}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--border)] py-2 text-sm font-semibold text-[var(--foreground)] transition-colors hover:border-[var(--primary)]/40 hover:text-[var(--primary)]"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  Message
-                </Link>
-                <Link
-                  href={`/dashboard/browse?lender=${profile.id}`}
-                  onClick={onClose}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[var(--primary)] py-2 text-sm font-bold text-white transition-opacity hover:opacity-90"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  All Listings
-                </Link>
+              <div className="border-t border-(--border) px-4 py-3 space-y-3">
+                <div className="flex gap-3">
+                  <Link
+                    href={`/dashboard/messages?userId=${profile.id}`}
+                    onClick={onClose}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-(--border) py-2 text-sm font-semibold text-(--foreground) transition-colors hover:border-(--primary)/40 hover:text-(--primary)"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Message
+                  </Link>
+                  <Link
+                    href={`/dashboard/browse?lender=${profile.id}`}
+                    onClick={onClose}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-(--primary) py-2 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    All Listings
+                  </Link>
+                </div>
+
+                {!reportSubmitted && !showReportForm && (
+                  <button
+                    onClick={() => setShowReportForm(true)}
+                    className="flex w-full items-center justify-center gap-1.5 py-1.5 text-xs font-semibold text-(--text-muted) hover:text-red-500 transition-colors"
+                  >
+                    <Flag className="h-3.5 w-3.5" />
+                    Report this user
+                  </button>
+                )}
+
+                {showReportForm && (
+                  <div className="space-y-2.5">
+                    <p className="text-sm font-bold text-(--foreground)">Report this user</p>
+                    <select
+                      value={reportReason}
+                      onChange={(e) => setReportReason(e.target.value)}
+                      className="w-full rounded-xl border border-(--border) bg-(--surface-soft) px-3 py-2 text-sm text-(--foreground)"
+                    >
+                      {REPORT_REASONS.map((r) => (
+                        <option key={r.value} value={r.value}>{r.label}</option>
+                      ))}
+                    </select>
+                    <textarea
+                      value={reportDescription}
+                      onChange={(e) => setReportDescription(e.target.value)}
+                      placeholder="Optional: describe the issue…"
+                      rows={2}
+                      className="w-full resize-none rounded-xl border border-(--border) bg-(--surface-soft) px-3 py-2 text-sm text-(--foreground)"
+                    />
+                    {reportError && (
+                      <p className="text-xs text-red-600">{reportError}</p>
+                    )}
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => { setShowReportForm(false); setReportError(null); }}
+                        className="flex-1 rounded-xl border border-(--border) py-2 text-sm font-bold text-(--text-muted) hover:bg-(--surface-soft) transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={submitReport}
+                        disabled={reportSubmitting}
+                        className="flex-1 rounded-xl bg-red-50 py-2 text-sm font-bold text-red-600 hover:bg-red-100 disabled:opacity-50 transition-colors"
+                      >
+                        {reportSubmitting ? "Submitting…" : "Submit Report"}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {reportSubmitted && (
+                  <p className="text-center text-xs font-semibold text-emerald-600">
+                    Report submitted. Thank you.
+                  </p>
+                )}
               </div>
             )}
           </>

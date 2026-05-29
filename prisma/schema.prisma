@@ -53,6 +53,10 @@ model User {
   cartItems                CartItem[]
   trailEntries             ItemTrailEntry[]
   trailReactions           TrailReaction[]
+  lenderReviews            BorrowerReview[] @relation("LenderReviews")
+  borrowerReviews          BorrowerReview[] @relation("BorrowerReviews")
+  reportsMade              UserReport[]     @relation("ReportsMade")
+  reportsReceived          UserReport[]     @relation("ReportsReceived")
   notifications            Notification[]
   idVerification           IdVerification?
   disputesRaised           Dispute[]                @relation("DisputeRaisedBy")
@@ -196,8 +200,9 @@ model BorrowCheckout {
   product     Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
   lentItem    LentItem?           @relation(fields: [lentItemId], references: [id], onDelete: SetNull)
   offer       BorrowRequestOffer? @relation(fields: [borrowRequestOfferId], references: [id], onDelete: SetNull)
-  trailEntry  ItemTrailEntry?
-  dispute     Dispute?
+  trailEntry     ItemTrailEntry?
+  borrowerReview BorrowerReview?
+  dispute        Dispute?
 
   @@index([borrowerId])
   @@index([lenderId])
@@ -417,6 +422,44 @@ model TrailReaction {
   @@unique([trailEntryId, userId])
   @@index([trailEntryId])
   @@index([userId])
+}
+
+// ── Borrower Reviews (lender rates borrower after return) ─────────────────────
+
+model BorrowerReview {
+  id               String         @id @default(cuid())
+  borrowCheckoutId String         @unique
+  lenderId         String
+  borrowerId       String
+  rating           Int
+  comment          String?        @db.Text
+  createdAt        DateTime       @default(now())
+
+  borrowCheckout BorrowCheckout @relation(fields: [borrowCheckoutId], references: [id])
+  lender         User           @relation("LenderReviews",   fields: [lenderId],   references: [id])
+  borrower       User           @relation("BorrowerReviews", fields: [borrowerId], references: [id])
+
+  @@index([lenderId])
+  @@index([borrowerId])
+}
+
+// ── User Reports ──────────────────────────────────────────────────────────────
+
+model UserReport {
+  id             String   @id @default(cuid())
+  reporterId     String
+  reportedUserId String
+  reason         String
+  description    String?  @db.Text
+  status         String   @default("pending")
+  createdAt      DateTime @default(now())
+
+  reporter User @relation("ReportsMade",     fields: [reporterId],     references: [id])
+  reported User @relation("ReportsReceived", fields: [reportedUserId], references: [id])
+
+  @@index([reportedUserId])
+  @@index([reporterId])
+  @@index([status])
 }
 
 // ── ID Verification ───────────────────────────────────────────────────────────
