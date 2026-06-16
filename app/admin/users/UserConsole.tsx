@@ -6,7 +6,7 @@ import {
   FileText, AlertTriangle, Activity, MapPin,
   Phone, Mail, Calendar, Star, ShoppingCart,
   Users, Video, Clock, ChevronDown, ChevronUp,
-  Eye, EyeOff, Trash2, Flag,
+  Eye, EyeOff, Trash2, Flag, CheckCircle, XCircle,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import UserQueue from "@/components/admin/users/UserQueue";
@@ -818,25 +818,41 @@ const REPORT_STATUS_STYLES: Record<string, { bg: string; text: string; label: st
 
 type ReportItem = UserDetail["reports"][number];
 
-function ReportsTab({
-  u,
+function ReportRow({
+  r,
   onUpdateReport,
 }: {
-  u: UserDetail;
-  onUpdateReport: (id: string, status: string) => void;
+  r: ReportItem;
+  onUpdateReport: (id: string, status: string, readByAdmin?: boolean) => void;
 }) {
+  const [expanded, setExpanded] = useState(false);
   const [pending, setPending] = useState<string | null>(null);
 
-  async function setStatus(reportId: string, status: "reviewed" | "dismissed") {
-    setPending(reportId);
+  const st = REPORT_STATUS_STYLES[r.status] ?? { bg: "bg-gray-100", text: "text-gray-500", label: r.status };
+  const isUnread = !r.readByAdmin;
+
+  function handleExpand() {
+    if (!expanded && isUnread) {
+      onUpdateReport(r.id, r.status, true);
+      fetch(`/api/admin/reports/${r.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ readByAdmin: true }),
+      }).catch(() => {});
+    }
+    setExpanded((v) => !v);
+  }
+
+  async function setStatus(status: "reviewed" | "dismissed") {
+    setPending(status);
     try {
-      const res = await fetch(`/api/admin/reports/${reportId}`, {
+      const res = await fetch(`/api/admin/reports/${r.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
       });
       if (res.ok) {
-        onUpdateReport(reportId, status);
+        onUpdateReport(r.id, status, true);
         toast.success(status === "reviewed" ? "Marked as reviewed" : "Report dismissed");
       } else {
         toast.error("Failed to update report");
@@ -847,52 +863,119 @@ function ReportsTab({
   }
 
   return (
+    <div className={`group relative border-b border-(--border) last:border-0 transition-all duration-150 hover:bg-(--surface-soft)`}>
+      {/* Unread accent */}
+      <div className={`absolute left-0 top-0 bottom-0 w-0.5 rounded-r transition-all duration-150
+        ${isUnread ? "bg-[var(--primary)]" : "bg-transparent group-hover:bg-[var(--border)]"}`}
+      />
+
+      <button
+        onClick={handleExpand}
+        className="w-full text-left px-4 py-3 flex items-start gap-2.5 focus:outline-none"
+      >
+        <div className="mt-1.5 shrink-0 w-3 flex items-center justify-center">
+          {isUnread && (
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary)] opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--primary)]" />
+            </span>
+          )}
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1.5 flex-wrap mb-0.5">
+            <span className={`text-sm text-(--ink) ${isUnread ? "font-extrabold" : "font-semibold"}`}>
+              {REPORT_REASON_LABELS[r.reason] ?? r.reason}
+            </span>
+            {isUnread && (
+              <span className="text-[0.55rem] font-extrabold bg-[var(--primary)] text-white rounded-full px-1.5 py-0.5">NEW</span>
+            )}
+          </div>
+          <p className="text-xs text-(--text-muted)">
+            By {r.reporterName} · {fmt(r.createdAt)}
+          </p>
+          {!expanded && r.description && (
+            <p className="mt-0.5 text-xs text-(--text-muted) italic line-clamp-1">{r.description}</p>
+          )}
+        </div>
+
+        <div className="shrink-0 flex items-center gap-1.5">
+          <span className={`text-[0.65rem] font-extrabold rounded-full px-2 py-0.5 ${st.bg} ${st.text}`}>
+            {st.label}
+          </span>
+          <span className="text-(--text-muted) group-hover:text-(--ink) transition-colors">
+            {expanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+          </span>
+        </div>
+      </button>
+
+      {expanded && (
+        <div className="px-4 pb-3 ml-5 space-y-2.5">
+          <div className="rounded-xl bg-(--surface-soft) border border-(--border) p-3 space-y-2 text-xs">
+            {r.description && (
+              <div>
+                <span className="font-extrabold text-(--text-muted) uppercase tracking-widest text-[0.6rem]">Details</span>
+                <p className="mt-0.5 text-(--ink) leading-relaxed">{r.description}</p>
+              </div>
+            )}
+            <div className="flex gap-3">
+              <div>
+                <span className="font-extrabold text-(--text-muted) uppercase tracking-widest text-[0.6rem]">Reporter</span>
+                <p className="mt-0.5 text-(--ink) font-semibold">{r.reporterName}</p>
+              </div>
+              <div>
+                <span className="font-extrabold text-(--text-muted) uppercase tracking-widest text-[0.6rem]">Reported</span>
+                <p className="mt-0.5 text-(--ink) font-semibold">{fmt(r.createdAt)}</p>
+              </div>
+            </div>
+          </div>
+
+          {r.status === "pending" && (
+            <div className="flex gap-2">
+              <button
+                disabled={pending !== null}
+                onClick={() => setStatus("reviewed")}
+                className="flex-1 flex items-center justify-center gap-1 rounded-xl bg-blue-50 py-1.5 text-xs font-bold text-blue-700
+                  hover:bg-blue-100 hover:shadow-sm hover:scale-[1.01] active:scale-[0.99]
+                  disabled:opacity-50 transition-all duration-150"
+              >
+                <CheckCircle className="h-3 w-3" />
+                Mark Reviewed
+              </button>
+              <button
+                disabled={pending !== null}
+                onClick={() => setStatus("dismissed")}
+                className="flex-1 flex items-center justify-center gap-1 rounded-xl bg-gray-100 py-1.5 text-xs font-bold text-gray-600
+                  hover:bg-gray-200 hover:shadow-sm hover:scale-[1.01] active:scale-[0.99]
+                  disabled:opacity-50 transition-all duration-150"
+              >
+                <XCircle className="h-3 w-3" />
+                Dismiss
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ReportsTab({
+  u,
+  onUpdateReport,
+}: {
+  u: UserDetail;
+  onUpdateReport: (id: string, status: string, readByAdmin?: boolean) => void;
+}) {
+  return (
     <Section title="Reports Received" icon={<Flag className="h-3.5 w-3.5" />} count={u.reports.length}>
       {u.reports.length === 0 ? (
         <EmptyState label="No reports against this user" />
       ) : (
-        <div>
-          {u.reports.map((r: ReportItem) => {
-            const st = REPORT_STATUS_STYLES[r.status] ?? { bg: "bg-gray-100", text: "text-gray-500", label: r.status };
-            return (
-              <div key={r.id} className="py-3 border-b border-(--border) last:border-0 space-y-2">
-                <div className="flex items-start gap-3">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-(--ink)">
-                      {REPORT_REASON_LABELS[r.reason] ?? r.reason}
-                    </p>
-                    <p className="text-xs text-(--text-muted)">
-                      By {r.reporterName} · {fmt(r.createdAt)}
-                    </p>
-                    {r.description && (
-                      <p className="mt-1 text-xs text-(--text-muted) italic line-clamp-2">{r.description}</p>
-                    )}
-                  </div>
-                  <span className={`text-[0.65rem] font-extrabold rounded-full px-2.5 py-0.5 shrink-0 ${st.bg} ${st.text}`}>
-                    {st.label}
-                  </span>
-                </div>
-                {r.status === "pending" && (
-                  <div className="flex gap-2">
-                    <button
-                      disabled={pending === r.id}
-                      onClick={() => setStatus(r.id, "reviewed")}
-                      className="flex-1 rounded-xl bg-blue-50 py-1.5 text-xs font-bold text-blue-700 hover:bg-blue-100 disabled:opacity-50 transition-colors"
-                    >
-                      Mark Reviewed
-                    </button>
-                    <button
-                      disabled={pending === r.id}
-                      onClick={() => setStatus(r.id, "dismissed")}
-                      className="flex-1 rounded-xl bg-gray-100 py-1.5 text-xs font-bold text-gray-600 hover:bg-gray-200 disabled:opacity-50 transition-colors"
-                    >
-                      Dismiss
-                    </button>
-                  </div>
-                )}
-              </div>
-            );
-          })}
+        <div className="-mx-5 -mb-5">
+          {u.reports.map((r: ReportItem) => (
+            <ReportRow key={r.id} r={r} onUpdateReport={onUpdateReport} />
+          ))}
         </div>
       )}
     </Section>
@@ -1034,10 +1117,17 @@ export default function UserConsole() {
               {activeTab === "reports" && (
                 <ReportsTab
                   u={detail}
-                  onUpdateReport={(id, status) =>
+                  onUpdateReport={(id, status, readByAdmin) =>
                     setDetail((prev) =>
                       prev
-                        ? { ...prev, reports: prev.reports.map((r) => r.id === id ? { ...r, status } : r) }
+                        ? {
+                            ...prev,
+                            reports: prev.reports.map((r) =>
+                              r.id === id
+                                ? { ...r, status, ...(readByAdmin !== undefined ? { readByAdmin } : {}) }
+                                : r
+                            ),
+                          }
                         : prev
                     )
                   }

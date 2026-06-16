@@ -62,9 +62,9 @@ export default function ProductQueue({ products, selectedId, onSelect, hasMore, 
             >
               <div className="flex items-center gap-2.5">
                 <div className="h-10 w-10 rounded-lg shrink-0 overflow-hidden bg-white/5 flex items-center justify-center">
-                  {p.imageUrl ? (
+                  {(p.images[0] ? `/api/products/images/${p.images[0].id}` : p.imageUrl) ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={p.imageUrl} alt={p.name} className="h-full w-full object-cover" />
+                    <img src={p.images[0] ? `/api/products/images/${p.images[0].id}` : p.imageUrl!} alt={p.name} className="h-full w-full object-cover" />
                   ) : (
                     <Package className="h-4 w-4 text-white/20" />
                   )}

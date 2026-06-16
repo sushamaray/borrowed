@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import {
   MapPin, Package, ClipboardList, Clock3, Check, X,
-  RotateCcw, Inbox, History, Activity, Eye, Trash2,
-  TrendingUp, Star, CircleCheck, CircleMinus, ShoppingBag, ShieldAlert,
+  RotateCcw, Inbox, History, Activity, Eye, Trash2, Pencil,
+  TrendingUp, Star, CircleCheck, CircleMinus, ShoppingBag, ShieldAlert, Camera, MessageSquare,
 } from "lucide-react";
+import DamageReportCard from "@/components/dashboard/DamageReportCard";
 import AddItemModal from "./AddItemModal";
+import EditItemModal from "./EditItemModal";
 import RaiseDisputeModal from "./RaiseDisputeModal";
 import toast from "react-hot-toast";
 import FallbackImage from "@/components/FallbackImage";
@@ -24,8 +27,14 @@ type LentItem = {
     subcategory: string | null;
     location: string;
     imageUrl: string | null;
+    images: { id: string; order: number }[];
     pricePerDay: number;
     deposit: number | null;
+    features: unknown;
+    drawbacks: unknown;
+    compensationMajor: string | null;
+    compensationMinor: string | null;
+    lenderNote: string | null;
   };
 };
 
@@ -38,13 +47,18 @@ type BorrowCheckout = {
   startDate: string | null;
   endDate: string | null;
   notes: string | null;
+  aiDamageVerdict:    string | null;
+  aiDamageConfidence: number | null;
+  aiDamageNotes:      string | null;
+  aiDamageCheckedAt:  string | null;
   product: { id: string; name: string; imageUrl: string | null; category: string };
   lentItem: { id: string; status: string } | null;
   borrower: { id: string; name: string | null; firstName: string | null; lastName: string | null; userName: string | null };
   lender:   { id: string; name: string | null; firstName: string | null; lastName: string | null; userName: string | null };
-  trailEntry:     { id: string; useFor: string; itemRating: number } | null;
-  borrowerReview: { id: string } | null;
-  dispute:        { id: string; status: string } | null;
+  trailEntry:      { id: string; useFor: string; itemRating: number } | null;
+  borrowerReview:  { id: string } | null;
+  dispute:         { id: string; status: string } | null;
+  conditionPhotos: { id: string; role: string }[];
 };
 
 type Tab = "listings" | "requests" | "active" | "history";
@@ -59,6 +73,7 @@ function fmt(n: number) {
 }
 
 export default function MyItemsPage() {
+  const router = useRouter();
   const [tab, setTab] = useState<Tab>("listings");
   const [lentItems, setLentItems] = useState<LentItem[]>([]);
   const [requests, setRequests] = useState<BorrowCheckout[]>([]);
@@ -67,11 +82,16 @@ export default function MyItemsPage() {
   const [loading, setLoading] = useState(true);
   const [actionPending, setActionPending] = useState<string | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
+  const [editTarget, setEditTarget] = useState<LentItem | null>(null);
   const [disputeTarget, setDisputeTarget] = useState<BorrowCheckout | null>(null);
   const [ratingTarget, setRatingTarget] = useState<BorrowCheckout | null>(null);
   const [ratingValue, setRatingValue] = useState(5);
   const [ratingComment, setRatingComment] = useState("");
   const [ratingSubmitting, setRatingSubmitting] = useState(false);
+  const [acceptPhotoTarget, setAcceptPhotoTarget] = useState<string | null>(null);
+  const [acceptPhotoFile, setAcceptPhotoFile] = useState<File | null>(null);
+  const [acceptPhotoPreview, setAcceptPhotoPreview] = useState<string | null>(null);
+  const [acceptSubmitting, setAcceptSubmitting] = useState(false);
 
   const fetchAll = useCallback(async () => {
     setLoading(true);
@@ -127,13 +147,39 @@ export default function MyItemsPage() {
     }
   }
 
-  async function handleAccept(orderId: string) {
-    setActionPending(orderId);
+  function openAcceptModal(orderId: string) {
+    setAcceptPhotoTarget(orderId);
+    setAcceptPhotoFile(null);
+    setAcceptPhotoPreview(null);
+  }
+
+  function closeAcceptModal() {
+    setAcceptPhotoTarget(null);
+    setAcceptPhotoFile(null);
+    setAcceptPhotoPreview(null);
+  }
+
+  async function handleAcceptWithPhoto() {
+    if (!acceptPhotoTarget || !acceptPhotoFile || acceptSubmitting) return;
+    setAcceptSubmitting(true);
     try {
-      const res = await fetch(`/api/borrow-orders/${orderId}/accept`, { method: "PATCH" });
-      if (res.ok) { toast.success("Request accepted!"); void fetchAll(); }
-      else toast.error("Failed to accept request");
-    } finally { setActionPending(null); }
+      const fd = new FormData();
+      fd.append("beforePhoto", acceptPhotoFile);
+      const res = await fetch(`/api/borrow-orders/${acceptPhotoTarget}/accept`, {
+        method: "PATCH",
+        body: fd,
+      });
+      if (res.ok) {
+        toast.success("Request accepted!");
+        closeAcceptModal();
+        void fetchAll();
+      } else {
+        const d = await res.json().catch(() => ({})) as { error?: string };
+        toast.error(d.error ?? "Failed to accept request");
+      }
+    } finally {
+      setAcceptSubmitting(false);
+    }
   }
 
   async function handleReject(orderId: string) {
@@ -280,6 +326,7 @@ export default function MyItemsPage() {
                       actionPending={actionPending}
                       confirmDelete={confirmDelete}
                       onToggle={handleToggleStatus}
+                      onEdit={(i) => setEditTarget(i)}
                       onDeleteRequest={(id) => setConfirmDelete(id)}
                       onDeleteConfirm={handleDelete}
                       onDeleteCancel={() => setConfirmDelete(null)}
@@ -318,7 +365,7 @@ export default function MyItemsPage() {
                         </div>
                         <div className="flex shrink-0 gap-2">
                           <button
-                            onClick={() => handleAccept(order.id)}
+                            onClick={() => openAcceptModal(order.id)}
                             disabled={actionPending === order.id}
                             className="flex items-center gap-1.5 rounded-xl bg-emerald-500 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-emerald-600 disabled:opacity-50"
                           >
@@ -412,8 +459,24 @@ export default function MyItemsPage() {
                               </span>
                             </div>
                           )}
+                          <DamageReportCard
+                            aiDamageVerdict={order.aiDamageVerdict}
+                            aiDamageConfidence={order.aiDamageConfidence}
+                            aiDamageNotes={order.aiDamageNotes}
+                            aiDamageCheckedAt={order.aiDamageCheckedAt}
+                            beforePhotoId={order.conditionPhotos.find(p => p.role === "before")?.id ?? null}
+                            afterPhotoId={order.conditionPhotos.find(p => p.role === "after")?.id ?? null}
+                          />
                         </div>
                         <div className="flex shrink-0 gap-2">
+                          {order.aiDamageVerdict !== null && (
+                            <button
+                              onClick={() => router.push(`/dashboard/messages?userId=${order.borrower.id}&checkoutId=${order.id}`)}
+                              className="flex items-center gap-1.5 rounded-xl bg-blue-50 px-3 py-2 text-sm font-bold text-blue-600 transition-colors hover:bg-blue-100"
+                            >
+                              <MessageSquare className="h-4 w-4" /> Message
+                            </button>
+                          )}
                           {!order.dispute && (
                             <button
                               onClick={() => setDisputeTarget(order)}
@@ -459,6 +522,62 @@ export default function MyItemsPage() {
           </>
         )}
       </div>
+
+      {acceptPhotoTarget && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+          <div className="w-full max-w-sm rounded-3xl bg-white p-6 shadow-2xl">
+            <h3 className="mb-1 text-lg font-black text-(--ink)">Upload Condition Photo</h3>
+            <p className="mb-4 text-sm text-(--text-muted)">
+              Take a clear photo of the item before handing it over. This protects both parties if a damage dispute arises later.
+            </p>
+
+            <label className="mb-4 flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-(--border) bg-(--surface-soft) p-6 transition-colors hover:border-(--primary)">
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0] ?? null;
+                  setAcceptPhotoFile(file);
+                  setAcceptPhotoPreview(file ? URL.createObjectURL(file) : null);
+                }}
+              />
+              {acceptPhotoPreview ? (
+                <img src={acceptPhotoPreview} alt="Preview" className="h-36 w-full rounded-xl object-cover" />
+              ) : (
+                <div className="text-center">
+                  <Camera className="mx-auto mb-2 h-8 w-8 text-(--text-muted)" />
+                  <span className="text-sm font-medium text-(--text-muted)">Tap to select photo</span>
+                </div>
+              )}
+            </label>
+
+            <div className="flex gap-2">
+              <button
+                onClick={closeAcceptModal}
+                className="flex-1 rounded-2xl border border-(--border) py-2.5 text-sm font-bold text-(--text-muted) hover:bg-(--surface-soft)"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAcceptWithPhoto}
+                disabled={!acceptPhotoFile || acceptSubmitting}
+                className="flex-1 rounded-2xl bg-emerald-500 py-2.5 text-sm font-bold text-white hover:bg-emerald-600 disabled:opacity-50"
+              >
+                {acceptSubmitting ? "Accepting…" : "Accept & Upload"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {editTarget && (
+        <EditItemModal
+          item={editTarget}
+          onClose={() => setEditTarget(null)}
+          onSuccess={() => { setEditTarget(null); void fetchAll(); }}
+        />
+      )}
 
       {disputeTarget && (
         <RaiseDisputeModal
@@ -523,6 +642,7 @@ function ListingCard({
   actionPending,
   confirmDelete,
   onToggle,
+  onEdit,
   onDeleteRequest,
   onDeleteConfirm,
   onDeleteCancel,
@@ -531,6 +651,7 @@ function ListingCard({
   actionPending: string | null;
   confirmDelete: string | null;
   onToggle: (item: LentItem) => void;
+  onEdit: (item: LentItem) => void;
   onDeleteRequest: (id: string) => void;
   onDeleteConfirm: (id: string) => void;
   onDeleteCancel: () => void;
@@ -550,7 +671,7 @@ function ListingCard({
           className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-[var(--surface-soft)]"
         >
           <FallbackImage
-            src={item.product.imageUrl}
+            src={item.product.images[0] ? `/api/products/images/${item.product.images[0].id}` : (item.product.imageUrl ?? "")}
             alt={item.product.name}
             fill
             sizes="80px"
@@ -666,6 +787,16 @@ function ListingCard({
             >
               <Eye className="h-4 w-4" />
             </a>
+            {!isBorrowed && (
+              <button
+                onClick={() => onEdit(item)}
+                disabled={isPending}
+                title="Edit listing"
+                className="rounded-xl p-2 text-(--text-secondary) transition-colors hover:bg-(--primary-soft) hover:text-(--primary) disabled:opacity-50"
+              >
+                <Pencil className="h-4 w-4" />
+              </button>
+            )}
             {!isBorrowed && (
               <button
                 onClick={() => onDeleteRequest(item.id)}

@@ -13,6 +13,7 @@ export async function GET() {
         pricePerDay: true,
         imageUrl: true,
         description: true,
+        images: { select: { id: true, order: true }, orderBy: { order: "asc" }, take: 1 },
       },
       orderBy: {
         createdAt: "desc",

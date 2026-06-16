@@ -12,6 +12,7 @@ import Link from "next/link";
 import ListingStatusPicker from "@/components/admin/products/ListingStatusPicker";
 import ProductQueue from "@/components/admin/products/ProductQueue";
 import CategoryPicker from "@/components/dashboard/CategoryPicker";
+import ImageLightbox from "@/components/ImageLightbox";
 import type { ProductListItem, ProductDetail, ProductPage } from "@/lib/admin/products/types";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -70,6 +71,8 @@ function EmptyState({ label }: { label: string }) {
 // ── Tab: Overview ─────────────────────────────────────────────────────────────
 
 function OverviewTab({ p }: { p: ProductDetail }) {
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
   // Semantic colors: same system as STATUS_STYLES badges — blue=transactional,
   // emerald=active/healthy, amber=engagement, primary=brand metric (revenue)
   const stats = [
@@ -103,24 +106,46 @@ function OverviewTab({ p }: { p: ProductDetail }) {
     },
   ];
 
+  const allImages = [
+    ...p.images.map((img) => `/api/products/images/${img.id}`),
+    ...(p.imageUrl && p.images.length === 0 ? [p.imageUrl] : []),
+  ];
+
   return (
     <div className="space-y-3">
+      {lightboxIndex !== null && (
+        <ImageLightbox
+          images={allImages}
+          index={lightboxIndex}
+          alt={p.name}
+          onClose={() => setLightboxIndex(null)}
+          onJump={setLightboxIndex}
+        />
+      )}
+
       {/* Hero card */}
       <div className="rounded-2xl border border-(--border) bg-(--surface) shadow-sm overflow-hidden">
         <div className="flex gap-5 p-5">
           {/* Product image / initial placeholder */}
-          <div className="h-20 w-20 rounded-2xl shrink-0 overflow-hidden flex items-center justify-center"
-            style={{ background: p.imageUrl ? undefined : "linear-gradient(135deg,#3b2a80,#6d5bba)" }}
-          >
-            {p.imageUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={p.imageUrl} alt={p.name} className="h-full w-full object-cover" />
-            ) : (
-              <span className="text-3xl font-black text-white select-none">
-                {p.name[0]?.toUpperCase()}
-              </span>
-            )}
-          </div>
+          {(() => {
+            const imgSrc = p.images[0] ? `/api/products/images/${p.images[0].id}` : p.imageUrl;
+            return (
+              <div
+                className={`h-20 w-20 rounded-2xl shrink-0 overflow-hidden flex items-center justify-center ${imgSrc ? "cursor-zoom-in" : ""}`}
+                style={{ background: imgSrc ? undefined : "linear-gradient(135deg,#3b2a80,#6d5bba)" }}
+                onClick={imgSrc ? () => setLightboxIndex(0) : undefined}
+              >
+                {imgSrc ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={imgSrc} alt={p.name} className="h-full w-full object-cover" />
+                ) : (
+                  <span className="text-3xl font-black text-white select-none">
+                    {p.name[0]?.toUpperCase()}
+                  </span>
+                )}
+              </div>
+            );
+          })()}
 
           <div className="flex-1 min-w-0">
             <h2 className="text-xl font-black text-(--ink) tracking-tight leading-tight mb-1">{p.name}</h2>

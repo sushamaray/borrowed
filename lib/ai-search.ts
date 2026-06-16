@@ -31,7 +31,7 @@ export async function expandQueryWithAI(query: string): Promise<{ keywords: stri
 
   try {
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     const prompt = `You help users search a peer-to-peer item lending platform in Bangladesh.
 Given a user query, respond with JSON only (no markdown, no code block):
 {"keywords": string[], "categories": string[]}

@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import type { Product } from "@/lib/generated/prisma";
+import type { Product, ProductImage } from "@/lib/generated/prisma";
 
 export interface LenderPublicInfo {
   id: string;
@@ -22,6 +22,7 @@ export type ProductWithFeatureList = Omit<Product, "deposit"> & {
   deposit: number | null;
   lenderName: string;
   lender: LenderPublicInfo;
+  images: Pick<ProductImage, "id" | "order">[];
   // set when accessed via a lent listing slug
   lentItemId?: string;
 };
@@ -49,6 +50,7 @@ function withFeatureList(
       idVerified: boolean;
       createdAt: Date;
     };
+    images: Pick<ProductImage, "id" | "order">[];
   },
   lentItemId?: string,
   lenderRating = 0,
@@ -66,6 +68,7 @@ function withFeatureList(
     featureList: readFeatures(product.features),
     drawbackList: readFeatures(raw.drawbacks),
     lenderName,
+    images: product.images,
     lender: {
       id: product.createdBy.id,
       displayName: lenderName,
@@ -106,11 +109,13 @@ export async function getProductBySlug(
   slug: string,
 ): Promise<ProductWithFeatureList | null> {
   // Browse page links lent items as "lent-<lentItemId>"
+  const imagesSelect = { select: { id: true, order: true }, orderBy: { order: "asc" as const } };
+
   if (slug.startsWith("lent-")) {
     const lentItemId = slug.slice(5);
     const item = await prisma.lentItem.findUnique({
       where: { id: lentItemId },
-      include: { product: { include: { createdBy: createdBySelect } } },
+      include: { product: { include: { createdBy: createdBySelect, images: imagesSelect } } },
     });
     if (!item) return null;
     const agg = await prisma.itemTrailEntry.aggregate({
@@ -122,7 +127,7 @@ export async function getProductBySlug(
 
   const product = await prisma.product.findUnique({
     where: { slug },
-    include: { createdBy: createdBySelect },
+    include: { createdBy: createdBySelect, images: imagesSelect },
   });
   if (!product) return null;
   const agg = await prisma.itemTrailEntry.aggregate({
@@ -136,12 +141,14 @@ export async function getSimilarProducts(
   category: string,
   excludeProductId: string,
 ): Promise<ProductWithFeatureList[]> {
+  const imagesSelect = { select: { id: true, order: true }, orderBy: { order: "asc" as const } };
+
   const items = await prisma.lentItem.findMany({
     where: {
       status: "active",
       product: { category, NOT: { id: excludeProductId } },
     },
-    include: { product: { include: { createdBy: createdBySelect } } },
+    include: { product: { include: { createdBy: createdBySelect, images: imagesSelect } } },
     take: 3,
   });
 

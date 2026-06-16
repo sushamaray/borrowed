@@ -83,6 +83,7 @@ export async function POST(request: NextRequest) {
         product:  { select: { name: true } },
         borrower: { select: { name: true, firstName: true, userName: true } },
         dispute:  { select: { id: true } },
+        conditionPhotos: { select: { id: true, role: true } },
       },
     });
 
@@ -105,6 +106,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Auto-derive photo URLs from stored condition photos if not supplied by client
+    const beforePhoto = checkout.conditionPhotos.find((p) => p.role === "before");
+    const afterPhoto  = checkout.conditionPhotos.find((p) => p.role === "after");
+    const resolvedBeforeUrl = beforePhotoUrl ?? (beforePhoto ? `/api/condition-photos/${beforePhoto.id}` : null);
+    const resolvedAfterUrl  = afterPhotoUrl  ?? (afterPhoto  ? `/api/condition-photos/${afterPhoto.id}`  : null);
+
     const depositAmount = checkout.deposit ?? 0;
 
     const [dispute] = await prisma.$transaction([
@@ -117,8 +124,12 @@ export async function POST(request: NextRequest) {
           title: title.trim(),
           description: description.trim(),
           depositAmount,
-          beforePhotoUrl: beforePhotoUrl ?? null,
-          afterPhotoUrl: afterPhotoUrl ?? null,
+          beforePhotoUrl: resolvedBeforeUrl,
+          afterPhotoUrl:  resolvedAfterUrl,
+          // Auto-populate AI damage analysis from the checkout
+          aiVerdict:    checkout.aiDamageVerdict    ?? null,
+          aiConfidence: checkout.aiDamageConfidence ?? null,
+          aiNotes:      checkout.aiDamageNotes      ?? null,
         },
       }),
     ]);
@@ -142,6 +153,44 @@ export async function POST(request: NextRequest) {
         },
       }),
     ]);
+
+    // Copy existing lender–borrower conversation messages into the dispute as
+    // DisputeEvent rows so the admin chat log shows real communication history
+    // instead of the MOCK_CHAT placeholder.
+    const conversation = await prisma.conversation.findFirst({
+      where: {
+        AND: [
+          { participants: { some: { userId: checkout.lenderId } } },
+          { participants: { some: { userId: checkout.borrowerId } } },
+        ],
+      },
+      include: {
+        messages: {
+          orderBy: { createdAt: "asc" },
+          take: 50,
+          select: { senderId: true, content: true, createdAt: true },
+        },
+      },
+    });
+
+    if (conversation && conversation.messages.length > 0) {
+      // Only include messages from the "damage-context" session (after item was returned)
+      const relevantMessages = checkout.returnedAt
+        ? conversation.messages.filter((m) => m.createdAt >= checkout.returnedAt!)
+        : conversation.messages;
+
+      if (relevantMessages.length > 0) {
+        await prisma.disputeEvent.createMany({
+          data: relevantMessages.map((m) => ({
+            disputeId: dispute.id,
+            actorRole: m.senderId === checkout.lenderId ? "lender" : "borrower",
+            type: "message",
+            body: m.content,
+            createdAt: m.createdAt,
+          })),
+        });
+      }
+    }
 
     return NextResponse.json({ disputeId: dispute.id }, { status: 201 });
   } catch (error) {

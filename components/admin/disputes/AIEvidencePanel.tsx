@@ -1,21 +1,25 @@
+"use client";
+
+import { useState } from "react";
 import { Zap, ImageOff } from "lucide-react";
+import ImageLightbox from "@/components/ImageLightbox";
 
 const VERDICT_CONFIG = {
-  lender_favored: {
+  damaged: {
     label: "Possible damage — see highlight",
     bannerBg: "bg-amber-50 border-amber-100",
     iconBg:   "bg-amber-500",
     textColor: "text-amber-700",
     barColor:  "bg-amber-400",
   },
-  borrower_favored: {
+  no_damage: {
     label: "No damage detected",
     bannerBg: "bg-emerald-50 border-emerald-100",
     iconBg:   "bg-emerald-500",
     textColor: "text-emerald-700",
     barColor:  "bg-emerald-500",
   },
-  inconclusive: {
+  unclear: {
     label: "Inconclusive — manual review required",
     bannerBg: "bg-blue-50 border-blue-100",
     iconBg:   "bg-blue-500",
@@ -32,6 +36,7 @@ function PhotoBox({
   photoUrl,
   flagged,
   confidence,
+  onClick,
 }: {
   label: string;
   date: string;
@@ -40,11 +45,12 @@ function PhotoBox({
   photoUrl?: string | null;
   flagged?: boolean;
   confidence?: number | null;
+  onClick?: () => void;
 }) {
   return (
     <div>
       <div className="flex items-center justify-between mb-1.5">
-        <span className="text-[0.67rem] font-extrabold text-[var(--text-muted)] uppercase tracking-widest">
+        <span className="text-[0.67rem] font-extrabold text-(--text-muted) uppercase tracking-widest">
           {label} · {date}
         </span>
         <span className={`text-[0.6rem] font-extrabold rounded-full px-2 py-0.5 ${badgeCls}`}>
@@ -53,9 +59,10 @@ function PhotoBox({
       </div>
 
       <div
+        onClick={photoUrl ? onClick : undefined}
         className={`relative h-40 rounded-xl overflow-hidden border-2 ${
-          flagged ? "border-red-400" : "border-[var(--border)]"
-        } bg-gradient-to-br from-violet-950 to-violet-800 flex items-center justify-center`}
+          flagged ? "border-red-400" : "border-(--border)"
+        } bg-linear-to-br from-violet-950 to-violet-800 flex items-center justify-center ${photoUrl ? "cursor-zoom-in" : ""}`}
       >
         {photoUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -111,35 +118,49 @@ export default function AIEvidencePanel({
   afterPhotoUrl?: string | null;
   raisedAt: string;
 }) {
-  const cfg = VERDICT_CONFIG[aiVerdict as keyof typeof VERDICT_CONFIG] ?? VERDICT_CONFIG.inconclusive;
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+
+  const photos = [beforePhotoUrl, afterPhotoUrl].filter(Boolean) as string[];
+
+  const cfg = VERDICT_CONFIG[aiVerdict as keyof typeof VERDICT_CONFIG] ?? VERDICT_CONFIG.unclear;
   const conf = aiConfidence ?? 0;
 
   const returnDate = new Date(raisedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short" });
 
   return (
     <div>
+      {lightboxIndex !== null && (
+        <ImageLightbox
+          images={photos}
+          index={lightboxIndex}
+          alt="Condition photo"
+          onClose={() => setLightboxIndex(null)}
+          onJump={setLightboxIndex}
+        />
+      )}
+
       {/* Verdict banner */}
       <div className={`flex items-center gap-3 rounded-xl border p-3 mb-4 ${cfg.bannerBg}`}>
         <div className={`h-8 w-8 rounded-lg ${cfg.iconBg} flex items-center justify-center shrink-0`}>
           <Zap className="h-4 w-4 text-white" />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="font-extrabold text-[var(--ink)] text-sm">
+          <div className="font-extrabold text-(--ink) text-sm">
             AI Verdict: <span className={cfg.textColor}>{cfg.label}</span>
           </div>
           {aiNotes && (
-            <div className="text-xs text-[var(--text-secondary)] mt-0.5 leading-relaxed">{aiNotes}</div>
+            <div className="text-xs text-(--text-secondary) mt-0.5 leading-relaxed">{aiNotes}</div>
           )}
         </div>
         <div className="text-right shrink-0">
           <div className={`text-2xl font-black leading-none ${cfg.textColor}`}>{conf}%</div>
-          <div className="text-[0.62rem] text-[var(--text-muted)] mt-0.5">confidence</div>
+          <div className="text-[0.62rem] text-(--text-muted) mt-0.5">confidence</div>
         </div>
       </div>
 
       {/* Confidence bar */}
       <div className="mb-4">
-        <div className="h-1.5 rounded-full bg-[var(--border)] overflow-hidden">
+        <div className="h-1.5 rounded-full bg-(--border) overflow-hidden">
           <div
             className={`h-full rounded-full transition-all ${cfg.barColor}`}
             style={{ width: `${conf}%` }}
@@ -156,6 +177,7 @@ export default function AIEvidencePanel({
           badgeCls="bg-emerald-50 text-emerald-700"
           photoUrl={beforePhotoUrl}
           flagged={false}
+          onClick={() => setLightboxIndex(beforePhotoUrl ? 0 : null)}
         />
         <PhotoBox
           label="Return"
@@ -163,8 +185,9 @@ export default function AIEvidencePanel({
           badge="Flagged"
           badgeCls="bg-red-50 text-red-600"
           photoUrl={afterPhotoUrl}
-          flagged={!!aiVerdict && aiVerdict !== "borrower_favored"}
+          flagged={aiVerdict === "damaged"}
           confidence={aiConfidence}
+          onClick={() => setLightboxIndex(beforePhotoUrl ? 1 : 0)}
         />
       </div>
     </div>

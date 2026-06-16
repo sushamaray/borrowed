@@ -49,13 +49,29 @@
       "Bash(curl -s http://localhost:3000/api/auth/providers)",
       "Bash(curl -v http://localhost:3000/api/auth/session)",
       "Bash(curl -s http://localhost:3000/api/auth/session -H \"Cookie: next-auth.session-token=test\")",
-      "Bash(node -e \"const d = require\\('./lib/generated/prisma/index.js'\\); console.log\\('OK'\\)\")"
+      "Bash(node -e \"const d = require\\('./lib/generated/prisma/index.js'\\); console.log\\('OK'\\)\")",
+      "Bash(dir /b \"d:\\\\Niloy All Major Projects\\\\Software-Engineering-Project\")",
+      "Bash(mkdir -p \"d:/Niloy All Major Projects/Software-Engineering-Project/app/api/products/images/[id]\")",
+      "Bash(mkdir \"d:/Niloy All Major Projects/Software-Engineering-Project/app/api/products/[id]\")",
+      "Bash(rm -r \"d:/Niloy All Major Projects/Software-Engineering-Project/app/api/products/[id]\")",
+      "Bash(mkdir -p \"d:/Niloy All Major Projects/Software-Engineering-Project/app/api/condition-photos/[id]\")",
+      "Bash(curl -s http://localhost:3000/api/test-gemini)",
+      "Bash(curl -s http://localhost:3001/api/test-gemini)",
+      "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/api/test-gemini\" -UseBasicParsing)",
+      "Bash(mkdir -p \"d:/Niloy All Major Projects/Software-Engineering-Project/app/api/conversations/[id]/dispute-context\")",
+      "Bash(mkdir -p \"d:/Niloy All Major Projects/Software-Engineering-Project/app/api/borrow-orders/[id]/dispute-info\")"
     ],
     "additionalDirectories": [
       "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\users",
       "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\admin\\trail",
       "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\users\\[id]",
-      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\admin\\reports"
+      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\admin\\reports",
+      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\products\\images",
+      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\products",
+      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\products\\[id]",
+      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\condition-photos",
+      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\conversations\\[id]",
+      "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\borrow-orders\\[id]"
     ]
   }
 }

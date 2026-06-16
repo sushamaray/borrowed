@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import {
   Calendar,
+  Camera,
   Check,
   ChevronDown,
   ChevronUp,
@@ -19,6 +20,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import FallbackImage from "@/components/FallbackImage";
 import CategoryPicker from "@/components/dashboard/CategoryPicker";
+import DamageReportCard from "@/components/dashboard/DamageReportCard";
 import { getCategoryForSub } from "@/lib/categories";
 
 // ── Existing types ────────────────────────────────────────────────────────────
@@ -30,6 +32,11 @@ interface BorrowCheckout {
   returnedAt: string | null;
   endDate: string | null;
   notes: string | null;
+  aiDamageVerdict:    string | null;
+  aiDamageConfidence: number | null;
+  aiDamageNotes:      string | null;
+  aiDamageCheckedAt:  string | null;
+  conditionPhotos:    { id: string; role: string }[];
   product: {
     id: string;
     name: string;
@@ -348,6 +355,8 @@ export default function MyBorrowsPage() {
   const [returnRating, setReturnRating] = useState(5);
   const [returnAnon, setReturnAnon] = useState(false);
   const [returnSubmitting, setReturnSubmitting] = useState(false);
+  const [returnPhotoFile, setReturnPhotoFile] = useState<File | null>(null);
+  const [returnPhotoPreview, setReturnPhotoPreview] = useState<string | null>(null);
 
   // ── My Requests tab state ──────────────────────────────────────────────────
   const [myReqs, setMyReqs] = useState<BorrowRequestItem[]>([]);
@@ -405,27 +414,43 @@ export default function MyBorrowsPage() {
   const openReturn = (order: BorrowCheckout) => {
     setReturnTarget(order);
     setReturnUseFor(""); setReturnLocation(""); setReturnTags([]); setReturnRating(5); setReturnAnon(false);
+    setReturnPhotoFile(null); setReturnPhotoPreview(null);
   };
 
-  const closeReturn = () => setReturnTarget(null);
+  const closeReturn = () => {
+    setReturnTarget(null);
+    setReturnPhotoFile(null);
+    setReturnPhotoPreview(null);
+  };
 
   const submitReturn = async () => {
     if (!returnTarget || returnSubmitting) return;
     if (!returnUseFor.trim()) return;
+    if (!returnPhotoFile) {
+      toast.error("Please upload a photo of the item's condition");
+      return;
+    }
     setReturnSubmitting(true);
     try {
+      const fd = new FormData();
+      fd.append("useFor", returnUseFor.trim());
+      if (returnLocation.trim()) fd.append("location", returnLocation.trim());
+      fd.append("tags", JSON.stringify(returnTags));
+      fd.append("itemRating", String(returnRating));
+      fd.append("anonymous", String(returnAnon));
+      fd.append("afterPhoto", returnPhotoFile);
+
       const res = await fetch(`/api/borrow-orders/${returnTarget.id}/return`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          useFor: returnUseFor.trim(),
-          location: returnLocation.trim() || undefined,
-          tags: returnTags,
-          itemRating: returnRating,
-          anonymous: returnAnon,
-        }),
+        body: fd,
       });
-      if (res.ok) { closeReturn(); void fetchAll(); }
+      if (res.ok) {
+        closeReturn();
+        void fetchAll();
+      } else {
+        const d = await res.json().catch(() => ({})) as { error?: string };
+        toast.error(d.error ?? "Failed to submit return");
+      }
     } finally { setReturnSubmitting(false); }
   };
 
@@ -650,22 +675,35 @@ export default function MyBorrowsPage() {
               <p className="text-[0.88rem] text-[var(--text-muted)]">No past borrows yet</p>
             </div>
           ) : (
-            <div className="overflow-hidden rounded-[18px] border border-[var(--border)] bg-white shadow-[0_6px_20px_rgba(12,32,30,0.06)]">
+            <div className="space-y-2">
               {pastOrders.map((order, i) => (
-                <div key={order.id}
-                  className={`flex items-center gap-4 px-6 py-4 ${i < pastOrders.length - 1 ? "border-b border-[#e3dcf3]" : ""}`}>
-                  <div className={`h-11 w-11 flex-shrink-0 rounded-[11px] ${GRADIENTS[i % GRADIENTS.length]}`} />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[0.9rem] font-bold text-[var(--ink)]">{order.product.name}</p>
-                    <p className="text-[0.78rem] text-[var(--text-muted)]">
-                      From {lenderDisplayName(order.lender)}
-                      {order.returnedAt && ` · Returned ${new Date(order.returnedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}`}
-                    </p>
+                <div key={order.id} className="overflow-hidden rounded-[18px] border border-[var(--border)] bg-white shadow-[0_4px_12px_rgba(12,32,30,0.05)]">
+                  <div className={`flex items-center gap-4 px-6 py-4 ${order.aiDamageVerdict ? "border-b border-[#e3dcf3]" : ""}`}>
+                    <div className={`h-11 w-11 shrink-0 rounded-[11px] ${GRADIENTS[i % GRADIENTS.length]}`} />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[0.9rem] font-bold text-(--ink)">{order.product.name}</p>
+                      <p className="text-[0.78rem] text-(--text-muted)">
+                        From {lenderDisplayName(order.lender)}
+                        {order.returnedAt && ` · Returned ${new Date(order.returnedAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}`}
+                      </p>
+                    </div>
+                    <StarRating rating={5} />
+                    <span className="shrink-0 rounded-full bg-(--success-soft) px-3 py-1 text-[0.75rem] font-bold text-(--success)">
+                      Returned
+                    </span>
                   </div>
-                  <StarRating rating={5} />
-                  <span className="flex-shrink-0 rounded-full bg-[var(--success-soft)] px-3 py-1 text-[0.75rem] font-bold text-[var(--success)]">
-                    Returned
-                  </span>
+                  {order.aiDamageVerdict && (
+                    <div className="px-6 pb-4">
+                      <DamageReportCard
+                        aiDamageVerdict={order.aiDamageVerdict}
+                        aiDamageConfidence={order.aiDamageConfidence}
+                        aiDamageNotes={order.aiDamageNotes}
+                        aiDamageCheckedAt={order.aiDamageCheckedAt}
+                        beforePhotoId={order.conditionPhotos.find(p => p.role === "before")?.id ?? null}
+                        afterPhotoId={order.conditionPhotos.find(p => p.role === "after")?.id ?? null}
+                      />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -800,6 +838,32 @@ export default function MyBorrowsPage() {
               </div>
             </div>
 
+            <div className="mb-4">
+              <label className="mb-1.5 block text-[0.78rem] font-black uppercase tracking-[0.08em] text-[var(--text-muted)]">
+                Item condition photo <span className="text-red-400">*</span>
+              </label>
+              <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-(--border) bg-(--surface-soft) p-4 transition-colors hover:border-(--primary)">
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const f = e.target.files?.[0] ?? null;
+                    setReturnPhotoFile(f);
+                    setReturnPhotoPreview(f ? URL.createObjectURL(f) : null);
+                  }}
+                />
+                {returnPhotoPreview ? (
+                  <img src={returnPhotoPreview} alt="Return condition photo" className="h-28 w-full rounded-lg object-cover" />
+                ) : (
+                  <div className="py-2 text-center">
+                    <Camera className="mx-auto mb-1 h-6 w-6 text-(--text-muted)" />
+                    <span className="text-xs text-(--text-muted)">Tap to add a photo of the item</span>
+                  </div>
+                )}
+              </label>
+            </div>
+
             <button
               onClick={() => setReturnAnon((v) => !v)}
               className="mb-5 flex items-center gap-2 text-[0.8rem] font-bold text-[var(--text-muted)]"
@@ -812,7 +876,7 @@ export default function MyBorrowsPage() {
 
             <button
               onClick={submitReturn}
-              disabled={returnSubmitting || !returnUseFor.trim()}
+              disabled={returnSubmitting || !returnUseFor.trim() || !returnPhotoFile}
               className="w-full rounded-full bg-[linear-gradient(135deg,#3b2a80,#6d5bba)] py-3.5 text-[0.95rem] font-black text-white disabled:opacity-50"
             >
               {returnSubmitting ? "Submitting…" : "Submit Return"}

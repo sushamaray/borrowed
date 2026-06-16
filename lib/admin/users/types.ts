@@ -113,6 +113,7 @@ export interface UserDetail {
     createdAt: string;
     reporterName: string;
     reporterId: string;
+    readByAdmin: boolean;
   }[];
   trailEntries: {
     id: string;

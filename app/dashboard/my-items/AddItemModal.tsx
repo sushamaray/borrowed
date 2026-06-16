@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Plus, X, CheckCircle2, XCircle, MapPin, Pencil } from "lucide-react";
+import { ImagePlus, Plus, X, CheckCircle2, XCircle, MapPin, Pencil } from "lucide-react";
 import toast from "react-hot-toast";
 import CategoryPicker from "@/components/dashboard/CategoryPicker";
 import { getCategoryForSub } from "@/lib/categories";
@@ -150,10 +150,12 @@ export default function AddItemModal({
     deposit: "",
     compensationMajor: "",
     compensationMinor: "",
-    imageUrl: "",
   });
   const [features, setFeatures] = useState<string[]>([]);
   const [drawbacks, setDrawbacks] = useState<string[]>([]);
+  const [imageFiles, setImageFiles] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Fetch user location whenever the modal opens
   useEffect(() => {
@@ -185,24 +187,21 @@ export default function AddItemModal({
 
     setIsSubmitting(true);
     try {
-      const response = await fetch("/api/lent-items", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name.trim(),
-          category: formData.category || undefined,
-          subcategory: formData.subcategory || undefined,
-          description: formData.description.trim() || undefined,
-          location: formData.location.trim() || undefined,
-          pricePerDay: Number(formData.pricePerDay),
-          deposit: formData.deposit ? Number(formData.deposit) : undefined,
-          compensationMajor: formData.compensationMajor.trim() || undefined,
-          compensationMinor: formData.compensationMinor.trim() || undefined,
-          imageUrl: formData.imageUrl.trim() || undefined,
-          features: features.map((f) => f.trim()).filter(Boolean),
-          drawbacks: drawbacks.map((d) => d.trim()).filter(Boolean),
-        }),
-      });
+      const fd = new FormData();
+      fd.append("name", formData.name.trim());
+      if (formData.category)          fd.append("category", formData.category);
+      if (formData.subcategory)       fd.append("subcategory", formData.subcategory);
+      if (formData.description.trim()) fd.append("description", formData.description.trim());
+      if (formData.location.trim())   fd.append("location", formData.location.trim());
+      fd.append("pricePerDay", String(Number(formData.pricePerDay)));
+      if (formData.deposit)           fd.append("deposit", String(Number(formData.deposit)));
+      if (formData.compensationMajor.trim()) fd.append("compensationMajor", formData.compensationMajor.trim());
+      if (formData.compensationMinor.trim()) fd.append("compensationMinor", formData.compensationMinor.trim());
+      fd.append("features",  JSON.stringify(features.map((f) => f.trim()).filter(Boolean)));
+      fd.append("drawbacks", JSON.stringify(drawbacks.map((d) => d.trim()).filter(Boolean)));
+      imageFiles.forEach((file) => fd.append("images", file));
+
+      const response = await fetch("/api/lent-items", { method: "POST", body: fd });
 
       if (!response.ok) {
         const error = await response.json() as { error?: string };
@@ -210,9 +209,11 @@ export default function AddItemModal({
       }
 
       toast.success("Item added successfully");
-      setFormData({ name: "", category: "", subcategory: "", description: "", location: "", pricePerDay: "", deposit: "", compensationMajor: "", compensationMinor: "", imageUrl: "" });
+      setFormData({ name: "", category: "", subcategory: "", description: "", location: "", pricePerDay: "", deposit: "", compensationMajor: "", compensationMinor: "" });
       setFeatures([]);
       setDrawbacks([]);
+      setImageFiles([]);
+      setImagePreviews([]);
       setIsOpen(false);
       window.location.reload();
     } catch (error) {
@@ -413,18 +414,59 @@ export default function AddItemModal({
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="imageUrl" className="block text-sm font-semibold text-(--foreground)">
-                  Image URL
+                <label className="block text-sm font-semibold text-(--foreground)">
+                  Photos <span className="text-xs font-normal text-(--text-muted)">(up to 5)</span>
                 </label>
+
+                {imagePreviews.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {imagePreviews.map((src, i) => (
+                      <div key={i} className="relative h-20 w-20 rounded-xl overflow-hidden border border-[var(--border)]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={src} alt="" className="h-full w-full object-cover" />
+                        {!isSubmitting && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const next = imageFiles.filter((_, idx) => idx !== i);
+                              setImageFiles(next);
+                              setImagePreviews(next.map((f) => URL.createObjectURL(f)));
+                            }}
+                            className="absolute top-0.5 right-0.5 rounded-full bg-black/60 p-0.5 text-white hover:bg-black/80"
+                          >
+                            <X className="h-3 w-3" />
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {imageFiles.length < 5 && (
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isSubmitting}
+                    className="flex items-center gap-2 rounded-2xl border border-dashed border-[var(--border)] px-4 py-3 text-sm text-(--text-muted) hover:border-(--primary) hover:text-(--primary) transition-colors disabled:opacity-50 w-full"
+                  >
+                    <ImagePlus className="h-4 w-4" />
+                    {imageFiles.length === 0 ? "Add photos" : "Add more photos"}
+                  </button>
+                )}
+
                 <input
-                  id="imageUrl"
-                  type="url"
-                  name="imageUrl"
-                  value={formData.imageUrl}
-                  onChange={handleInputChange}
-                  placeholder="https://example.com/image.jpg"
-                  className="w-full rounded-2xl border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-sm text-(--foreground) placeholder-(--text-muted) transition-colors focus:border-(--primary) focus:outline-none"
-                  disabled={isSubmitting}
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  className="hidden"
+                  onChange={(e) => {
+                    const selected = Array.from(e.target.files ?? []);
+                    const next = [...imageFiles, ...selected].slice(0, 5);
+                    setImageFiles(next);
+                    setImagePreviews(next.map((f) => URL.createObjectURL(f)));
+                    e.target.value = "";
+                  }}
                 />
               </div>
 

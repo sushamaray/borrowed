@@ -11,8 +11,10 @@ import {
   X,
   Zap,
   Loader2,
+  ShieldAlert,
 } from "lucide-react";
 import ItemShareModal from "@/components/dashboard/ItemShareModal";
+import RaiseDisputeModal from "@/app/dashboard/my-items/RaiseDisputeModal";
 import CategoryPicker from "@/components/dashboard/CategoryPicker";
 import { LocationPickerModal } from "@/components/LocationPickerModal";
 
@@ -47,6 +49,15 @@ interface LentItemForShare {
 
 const MESSAGE_MAX_LENGTH = 1000;
 const NEW_CONV_ID = "__new__";
+
+type CheckoutCtx = {
+  id: string;
+  deposit: number | null;
+  returnedAt: string | null;
+  hasDispute: boolean;
+  product: { name: string };
+  conditionPhotos: { id: string; role: string }[];
+} | null;
 
 // ── Avatar ─────────────────────────────────────────────────────────────────────
 
@@ -477,6 +488,7 @@ export default function MessagesInner() {
   const searchParams = useSearchParams();
   const requestedConvId = searchParams.get("conversationId");
   const requestedUserId = searchParams.get("userId");
+  const requestedCheckoutId = searchParams.get("checkoutId");
   const emergencyMode = searchParams.get("emergency") === "true";
   const emergencyItem = searchParams.get("item") ?? "";
 
@@ -492,6 +504,9 @@ export default function MessagesInner() {
   const [showItemOfferModal, setShowItemOfferModal] = useState(false);
   const [submittingCard, setSubmittingCard] = useState(false);
   const [emergencyDismissed, setEmergencyDismissed] = useState(false);
+  const [checkoutCtx, setCheckoutCtx] = useState<CheckoutCtx>(null);
+  const [showDisputeModal, setShowDisputeModal] = useState(false);
+  const [orangeBannerDismissed, setOrangeBannerDismissed] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const socketRef = useRef<Socket | null>(null);
@@ -589,6 +604,15 @@ export default function MessagesInner() {
 
     return () => { socket.disconnect(); socketRef.current = null; };
   }, []);
+
+  // Fetch checkout context when navigating from a damage-flagged item
+  useEffect(() => {
+    if (!requestedCheckoutId) return;
+    fetch(`/api/borrow-orders/${requestedCheckoutId}/dispute-info`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((ctx) => setCheckoutCtx(ctx as CheckoutCtx))
+      .catch(() => {});
+  }, [requestedCheckoutId]);
 
   // Join active conversation room
   useEffect(() => {
@@ -828,6 +852,13 @@ export default function MessagesInner() {
     activeConv.id !== NEW_CONV_ID &&
     (requestedUserId ? activeConv.with.id === requestedUserId : true);
 
+  // Orange "damage discussion" mode: navigated from a damage-flagged item
+  const isOrangeMode =
+    !!requestedCheckoutId &&
+    !!activeConv &&
+    !!requestedUserId &&
+    activeConv.with.id === requestedUserId;
+
   // ─────────────────────────────────────────────────────────────────────────────
 
   return (
@@ -862,12 +893,15 @@ export default function MessagesInner() {
             ) : (
               convs.map((c) => {
                 const isActive = activeId === c.id;
+                const isOrangeCard = isActive && isOrangeMode;
                 return (
                   <button
                     key={c.id}
                     onClick={() => selectConv(c.id)}
                     className={`flex w-full items-start gap-3 border-l-[3px] px-[1.1rem] py-[0.9rem] text-left transition-colors ${
-                      isActive ? "border-l-[#3b2a80] bg-[#f2eefb]" : "border-l-transparent bg-transparent hover:bg-[#f8f7fc]"
+                      isActive && isOrangeCard ? "border-l-orange-500 bg-orange-50"
+                      : isActive              ? "border-l-[#3b2a80] bg-[#f2eefb]"
+                      :                         "border-l-transparent bg-transparent hover:bg-[#f8f7fc]"
                     }`}
                   >
                     <Avatar initials={c.with.avatar} size={40} />
@@ -876,9 +910,16 @@ export default function MessagesInner() {
                         <span className="text-[0.88rem] font-black text-[var(--ink)]">{c.with.name}</span>
                         <span className="flex-shrink-0 text-[0.7rem] text-[var(--text-muted)]">{c.time}</span>
                       </div>
-                      <p className="mt-0.5 max-w-[140px] overflow-hidden text-ellipsis whitespace-nowrap text-[0.78rem] text-[var(--text-muted)]">
-                        {c.lastMsg}
-                      </p>
+                      {isOrangeCard ? (
+                        <span className="mt-0.5 inline-flex items-center gap-1 text-[0.72rem] font-bold text-orange-700">
+                          <ShieldAlert className="h-3 w-3" />
+                          {checkoutCtx?.hasDispute ? "Dispute raised" : "Damage discussion"}
+                        </span>
+                      ) : (
+                        <p className="mt-0.5 max-w-[140px] overflow-hidden text-ellipsis whitespace-nowrap text-[0.78rem] text-[var(--text-muted)]">
+                          {c.lastMsg}
+                        </p>
+                      )}
                     </div>
                     {c.unread > 0 && (
                       <span className="mt-0.5 flex-shrink-0 rounded-full bg-[var(--primary)] px-1.5 py-[2px] text-[0.65rem] font-black text-white">
@@ -893,7 +934,7 @@ export default function MessagesInner() {
         </div>
 
         {/* Chat window */}
-        <div className="flex flex-1 flex-col bg-[var(--background)]">
+        <div className={`flex flex-1 flex-col bg-[var(--background)] ${isOrangeMode ? "ring-2 ring-inset ring-orange-300" : ""}`}>
           {!activeConv ? (
             <div className="flex flex-1 items-center justify-center text-[var(--text-muted)]">
               <div className="text-center">
@@ -909,21 +950,66 @@ export default function MessagesInner() {
           ) : (
             <>
               {/* Chat header */}
-              <div className="flex flex-shrink-0 items-center gap-3.5 border-b border-[var(--border)] bg-white px-6 py-4">
+              <div className={`flex flex-shrink-0 items-center gap-3.5 border-b px-6 py-4 ${
+                isOrangeMode ? "border-orange-200 bg-orange-50" : "border-[var(--border)] bg-white"
+              }`}>
                 <Avatar initials={activeConv.with.avatar} size={38} />
-                <div className="flex-1">
+                <div className="flex-1 min-w-0">
                   <p className="text-[0.92rem] font-black text-[var(--ink)]">{activeConv.with.name}</p>
-                  <p className="text-[0.75rem] text-[var(--text-muted)]">
-                    {activeConv.id === NEW_CONV_ID ? "New conversation" : activeConv.with.handle}
-                  </p>
+                  {isOrangeMode ? (
+                    <span className="inline-flex items-center gap-1 text-[0.72rem] font-bold text-orange-700">
+                      <ShieldAlert className="h-3 w-3" />
+                      {checkoutCtx?.hasDispute ? "Dispute raised · under review" : "Damage discussion"}
+                    </span>
+                  ) : (
+                    <p className="text-[0.75rem] text-[var(--text-muted)]">
+                      {activeConv.id === NEW_CONV_ID ? "New conversation" : activeConv.with.handle}
+                    </p>
+                  )}
                 </div>
-                <button className="flex items-center gap-1.5 rounded-full bg-[var(--surface-soft)] px-4 py-2 text-[0.8rem] font-bold text-[var(--primary)]">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="M9 21V9" />
-                  </svg>
-                  View Borrow
-                </button>
+                {isOrangeMode && checkoutCtx && !checkoutCtx.hasDispute && (
+                  <button
+                    onClick={() => setShowDisputeModal(true)}
+                    className="flex items-center gap-1.5 rounded-full bg-red-50 px-4 py-2 text-[0.8rem] font-bold text-red-600 hover:bg-red-100 transition-colors"
+                  >
+                    <ShieldAlert className="h-3.5 w-3.5" /> Raise Dispute
+                  </button>
+                )}
               </div>
+
+              {/* Orange damage-context banner */}
+              {isOrangeMode && !orangeBannerDismissed && (
+                <div className="flex-shrink-0 border-b border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50 px-5 py-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-xl bg-orange-100">
+                      <ShieldAlert className="h-4 w-4 text-orange-600" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      {checkoutCtx?.hasDispute ? (
+                        <>
+                          <p className="text-[0.82rem] font-black text-orange-900">Dispute raised</p>
+                          <p className="text-[0.72rem] text-orange-700">Being reviewed by our team — messages from this chat are included</p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="text-[0.82rem] font-black text-orange-900">Damage discussion</p>
+                          <p className="text-[0.72rem] text-orange-700">
+                            {checkoutCtx
+                              ? `Discussing ${checkoutCtx.product.name} — if unresolved, raise a dispute above`
+                              : "This chat is linked to a damage report — messages here can be included in a dispute"}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <button
+                      onClick={() => setOrangeBannerDismissed(true)}
+                      className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-lg text-orange-400 transition-colors hover:text-orange-700"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* Emergency banner */}
               {showEmergencyBanner && (
@@ -1115,6 +1201,17 @@ export default function MessagesInner() {
           partnerName={activeConv.with.name}
           onClose={() => setShowItemOfferModal(false)}
           onSend={handleItemOfferSubmit}
+        />
+      )}
+      {showDisputeModal && checkoutCtx && (
+        <RaiseDisputeModal
+          checkout={checkoutCtx}
+          onClose={() => setShowDisputeModal(false)}
+          onSuccess={() => {
+            setShowDisputeModal(false);
+            // Flip hasDispute immediately so button disappears + banner updates
+            setCheckoutCtx((prev) => prev ? { ...prev, hasDispute: true } : prev);
+          }}
         />
       )}
     </>

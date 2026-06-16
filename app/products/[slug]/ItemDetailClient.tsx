@@ -1,15 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   ArrowLeft, MapPin, Star, ShieldCheck, ShoppingCart,
-  Calendar, MessageSquare, Sparkles, ChevronRight, Check,
+  Calendar, MessageSquare, Sparkles, ChevronLeft, ChevronRight, Check,
   Flame, Gem, Heart, Mountain, Palette, Plane, Sprout, Target,
   CheckCircle2, XCircle,
 } from "lucide-react";
 import UserProfileModal from "@/components/dashboard/UserProfileModal";
 import FallbackImage from "@/components/FallbackImage";
+import ImageLightbox from "@/components/ImageLightbox";
 import type { ProductWithFeatureList } from "@/lib/products";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -40,6 +41,117 @@ interface TrailData {
   badges: Badge[];
   locations: string[];
   total: number;
+}
+
+// ── Image Carousel ────────────────────────────────────────────────────────────
+
+function ImageCarousel({ images, alt, trailCount }: { images: string[]; alt: string; trailCount: number }) {
+  const [current, setCurrent] = useState(0);
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const wasDragged = useRef(false);
+  const total = images.length;
+
+  function prev() { setCurrent((c) => (c - 1 + total) % total); }
+  function next() { setCurrent((c) => (c + 1) % total); }
+
+  function onPointerDown(e: React.PointerEvent) { setDragStart(e.clientX); wasDragged.current = false; }
+  function onPointerUp(e: React.PointerEvent) {
+    if (dragStart === null) return;
+    const delta = e.clientX - dragStart;
+    if (Math.abs(delta) > 10) wasDragged.current = true;
+    if (total > 1) {
+      if (delta < -40) next();
+      else if (delta > 40) prev();
+    }
+    setDragStart(null);
+  }
+  function onCarouselClick() {
+    if (!wasDragged.current && images.length > 0) setLightboxIndex(current);
+  }
+
+  return (
+    <>
+    {lightboxIndex !== null && (
+      <ImageLightbox
+        images={images}
+        index={lightboxIndex}
+        alt={alt}
+        onClose={() => setLightboxIndex(null)}
+        onJump={(i) => { setLightboxIndex(i); setCurrent(i); }}
+      />
+    )}
+    <div className="relative mb-6 h-[280px] overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#ece7fa,#f2eefb)] select-none cursor-zoom-in"
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+      onClick={onCarouselClick}
+    >
+      {/* Images */}
+      {total === 0 ? (
+        <div className="h-full w-full" />
+      ) : (
+        images.map((src, i) => (
+          <div
+            key={src}
+            className={`absolute inset-0 transition-opacity duration-300 ${i === current ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+          >
+            <FallbackImage src={src} alt={alt} fill sizes="(max-width: 900px) 100vw, 50vw" className="object-cover" />
+          </div>
+        ))
+      )}
+
+      {/* Prev / Next arrows — only when >1 image */}
+      {total > 1 && (
+        <>
+          <button
+            onClick={(e) => { e.stopPropagation(); prev(); }}
+            className="absolute left-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 transition-colors"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); next(); }}
+            className="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-black/60 transition-colors"
+            aria-label="Next image"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </>
+      )}
+
+      {/* Borrow count chip */}
+      <div className="absolute bottom-3 left-3 rounded-full bg-black/45 px-2.5 py-1 text-[0.72rem] font-semibold text-white/90">
+        {trailCount} borrow{trailCount !== 1 ? "s" : ""}
+      </div>
+
+      {/* Dot indicators */}
+      {total > 1 && (
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={(e) => { e.stopPropagation(); setCurrent(i); }}
+              aria-label={`Go to image ${i + 1}`}
+              className={`rounded-full transition-all duration-200 ${
+                i === current
+                  ? "bg-white w-4 h-2"
+                  : "bg-white/50 w-2 h-2 hover:bg-white/75"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Counter badge (top-right) */}
+      {total > 1 && (
+        <div className="absolute top-3 right-3 rounded-full bg-black/45 px-2.5 py-1 text-[0.72rem] font-semibold text-white/90">
+          {current + 1} / {total}
+        </div>
+      )}
+    </div>
+    </>
+  );
 }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
@@ -272,20 +384,14 @@ export default function ItemDetailClient({
         {/* Left panel */}
         <div className="rounded-[20px] border border-[#e3dcf3] bg-white p-7 shadow-[0_12px_40px_rgba(59,42,128,0.07)]">
 
-          {/* Image */}
-          <div className="relative mb-6 h-[280px] overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#ece7fa,#f2eefb)]">
-            <FallbackImage
-              src={product.imageUrl ?? ""}
-              alt={product.name}
-              fill
-              sizes="(max-width: 900px) 100vw, 50vw"
-              className="object-cover"
-            />
-            {/* Borrow count chip */}
-            <div className="absolute bottom-3 left-3 rounded-full bg-black/45 px-2.5 py-1 text-[0.72rem] font-semibold text-white/90">
-              {trailCount} borrow{trailCount !== 1 ? "s" : ""}
-            </div>
-          </div>
+          {/* Image carousel */}
+          <ImageCarousel
+            images={product.images.length > 0
+              ? product.images.map((img) => `/api/products/images/${img.id}`)
+              : product.imageUrl ? [product.imageUrl] : []}
+            alt={product.name}
+            trailCount={trailCount}
+          />
 
           {/* Category pill */}
           <span className="rounded-full bg-[#f2eefb] px-3 py-[3px] text-[0.75rem] font-extrabold text-[#31236a]">
@@ -635,7 +741,7 @@ export default function ItemDetailClient({
             {similarProducts.map((p) => (
               <Link key={p.id} href={p.lentItemId ? `/dashboard/items/${p.lentItemId}` : `/products/${p.slug}`} className="block overflow-hidden rounded-2xl border border-[#e3dcf3] bg-white no-underline shadow-[0_4px_16px_rgba(59,42,128,0.06)]">
                 <div className="relative h-[140px] bg-[#f2eefb]">
-                  <FallbackImage src={p.imageUrl ?? ""} alt={p.name} fill sizes="22vw" className="object-cover" />
+                  <FallbackImage src={p.images[0] ? `/api/products/images/${p.images[0].id}` : (p.imageUrl ?? "")} alt={p.name} fill sizes="22vw" className="object-cover" />
                 </div>
                 <div className="p-4">
                   <div className="mb-1 text-[0.9rem] font-extrabold text-[#1b1530]">{p.name}</div>

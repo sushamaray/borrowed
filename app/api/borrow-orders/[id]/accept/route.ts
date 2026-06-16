@@ -3,13 +3,35 @@ import { prisma } from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const session = await auth();
     if (!session?.user?.id) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const formData = await request.formData();
+    const photoFile = formData.get("beforePhoto") as File | null;
+
+    if (!photoFile) {
+      return NextResponse.json(
+        { error: "beforePhoto is required" },
+        { status: 400 },
+      );
+    }
+    if (!photoFile.type.startsWith("image/")) {
+      return NextResponse.json(
+        { error: "Invalid image type" },
+        { status: 400 },
+      );
+    }
+    if (photoFile.size > 10 * 1024 * 1024) {
+      return NextResponse.json(
+        { error: "Image too large (max 10MB)" },
+        { status: 400 },
+      );
     }
 
     const { id } = await params;
@@ -27,8 +49,18 @@ export async function PATCH(
     if (checkout.lenderId !== session.user.id) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     if (checkout.status !== "pending") return NextResponse.json({ error: "Not pending" }, { status: 409 });
 
+    const photoBuffer = Buffer.from(await photoFile.arrayBuffer());
+
     await prisma.$transaction([
       prisma.borrowCheckout.update({ where: { id }, data: { status: "accepted" } }),
+      prisma.conditionPhoto.create({
+        data: {
+          checkoutId: id,
+          role: "before",
+          data: photoBuffer,
+          mimeType: photoFile.type || "image/jpeg",
+        },
+      }),
       ...(checkout.lentItemId
         ? [prisma.lentItem.update({ where: { id: checkout.lentItemId }, data: { status: "borrowed" } })]
         : []),

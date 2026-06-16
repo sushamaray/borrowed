@@ -66,6 +66,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
           },
           orderBy: { createdAt: "desc" },
         },
+        images: { select: { id: true, order: true }, orderBy: { order: "asc" } },
       },
     });
 
@@ -92,6 +93,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
       features: parseJson(p.features),
       drawbacks: parseJson(p.drawbacks),
       imageUrl: p.imageUrl,
+      images: p.images,
       compensationMajor: p.compensationMajor,
       compensationMinor: p.compensationMinor,
       lenderNote: p.lenderNote,

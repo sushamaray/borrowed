@@ -24,6 +24,16 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
 /**
+ * Model ProductImage
+ * 
+ */
+export type ProductImage = $Result.DefaultSelection<Prisma.$ProductImagePayload>
+/**
+ * Model ConditionPhoto
+ * 
+ */
+export type ConditionPhoto = $Result.DefaultSelection<Prisma.$ConditionPhotoPayload>
+/**
  * Model LentItem
  * 
  */
@@ -326,6 +336,26 @@ export class PrismaClient<
     * ```
     */
   get product(): Prisma.ProductDelegate<ExtArgs>;
+
+  /**
+   * `prisma.productImage`: Exposes CRUD operations for the **ProductImage** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProductImages
+    * const productImages = await prisma.productImage.findMany()
+    * ```
+    */
+  get productImage(): Prisma.ProductImageDelegate<ExtArgs>;
+
+  /**
+   * `prisma.conditionPhoto`: Exposes CRUD operations for the **ConditionPhoto** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ConditionPhotos
+    * const conditionPhotos = await prisma.conditionPhoto.findMany()
+    * ```
+    */
+  get conditionPhoto(): Prisma.ConditionPhotoDelegate<ExtArgs>;
 
   /**
    * `prisma.lentItem`: Exposes CRUD operations for the **LentItem** model.
@@ -999,6 +1029,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Product: 'Product',
+    ProductImage: 'ProductImage',
+    ConditionPhoto: 'ConditionPhoto',
     LentItem: 'LentItem',
     BorrowRequest: 'BorrowRequest',
     BorrowRequestOffer: 'BorrowRequestOffer',
@@ -1037,7 +1069,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "product" | "lentItem" | "borrowRequest" | "borrowRequestOffer" | "borrowCheckout" | "notification" | "mentor" | "mentorBooking" | "conversation" | "conversationParticipant" | "message" | "cartItem" | "account" | "session" | "verificationToken" | "authenticator" | "itemTrailEntry" | "trailReaction" | "borrowerReview" | "userReport" | "idVerification" | "dispute" | "disputeResolution" | "disputeEvent"
+      modelProps: "user" | "product" | "productImage" | "conditionPhoto" | "lentItem" | "borrowRequest" | "borrowRequestOffer" | "borrowCheckout" | "notification" | "mentor" | "mentorBooking" | "conversation" | "conversationParticipant" | "message" | "cartItem" | "account" | "session" | "verificationToken" | "authenticator" | "itemTrailEntry" | "trailReaction" | "borrowerReview" | "userReport" | "idVerification" | "dispute" | "disputeResolution" | "disputeEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1170,6 +1202,138 @@ export namespace Prisma {
           count: {
             args: Prisma.ProductCountArgs<ExtArgs>
             result: $Utils.Optional<ProductCountAggregateOutputType> | number
+          }
+        }
+      }
+      ProductImage: {
+        payload: Prisma.$ProductImagePayload<ExtArgs>
+        fields: Prisma.ProductImageFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductImageFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductImageFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          findFirst: {
+            args: Prisma.ProductImageFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductImageFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          findMany: {
+            args: Prisma.ProductImageFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>[]
+          }
+          create: {
+            args: Prisma.ProductImageCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          createMany: {
+            args: Prisma.ProductImageCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ProductImageDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          update: {
+            args: Prisma.ProductImageUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductImageDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductImageUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ProductImageUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductImagePayload>
+          }
+          aggregate: {
+            args: Prisma.ProductImageAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductImage>
+          }
+          groupBy: {
+            args: Prisma.ProductImageGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductImageGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductImageCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductImageCountAggregateOutputType> | number
+          }
+        }
+      }
+      ConditionPhoto: {
+        payload: Prisma.$ConditionPhotoPayload<ExtArgs>
+        fields: Prisma.ConditionPhotoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ConditionPhotoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConditionPhotoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ConditionPhotoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConditionPhotoPayload>
+          }
+          findFirst: {
+            args: Prisma.ConditionPhotoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConditionPhotoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ConditionPhotoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConditionPhotoPayload>
+          }
+          findMany: {
+            args: Prisma.ConditionPhotoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConditionPhotoPayload>[]
+          }
+          create: {
+            args: Prisma.ConditionPhotoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConditionPhotoPayload>
+          }
+          createMany: {
+            args: Prisma.ConditionPhotoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ConditionPhotoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConditionPhotoPayload>
+          }
+          update: {
+            args: Prisma.ConditionPhotoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConditionPhotoPayload>
+          }
+          deleteMany: {
+            args: Prisma.ConditionPhotoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ConditionPhotoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ConditionPhotoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ConditionPhotoPayload>
+          }
+          aggregate: {
+            args: Prisma.ConditionPhotoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateConditionPhoto>
+          }
+          groupBy: {
+            args: Prisma.ConditionPhotoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ConditionPhotoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ConditionPhotoCountArgs<ExtArgs>
+            result: $Utils.Optional<ConditionPhotoCountAggregateOutputType> | number
           }
         }
       }
@@ -3090,6 +3254,7 @@ export namespace Prisma {
    */
 
   export type ProductCountOutputType = {
+    images: number
     lentItems: number
     offers: number
     checkouts: number
@@ -3097,6 +3262,7 @@ export namespace Prisma {
   }
 
   export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    images?: boolean | ProductCountOutputTypeCountImagesArgs
     lentItems?: boolean | ProductCountOutputTypeCountLentItemsArgs
     offers?: boolean | ProductCountOutputTypeCountOffersArgs
     checkouts?: boolean | ProductCountOutputTypeCountCheckoutsArgs
@@ -3112,6 +3278,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the ProductCountOutputType
      */
     select?: ProductCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountImagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductImageWhereInput
   }
 
   /**
@@ -3220,6 +3393,37 @@ export namespace Prisma {
    */
   export type BorrowRequestCountOutputTypeCountOffersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BorrowRequestOfferWhereInput
+  }
+
+
+  /**
+   * Count Type BorrowCheckoutCountOutputType
+   */
+
+  export type BorrowCheckoutCountOutputType = {
+    conditionPhotos: number
+  }
+
+  export type BorrowCheckoutCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    conditionPhotos?: boolean | BorrowCheckoutCountOutputTypeCountConditionPhotosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BorrowCheckoutCountOutputType without action
+   */
+  export type BorrowCheckoutCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BorrowCheckoutCountOutputType
+     */
+    select?: BorrowCheckoutCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BorrowCheckoutCountOutputType without action
+   */
+  export type BorrowCheckoutCountOutputTypeCountConditionPhotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConditionPhotoWhereInput
   }
 
 
@@ -5374,6 +5578,7 @@ export namespace Prisma {
     createdById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    images?: boolean | Product$imagesArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     lentItems?: boolean | Product$lentItemsArgs<ExtArgs>
     offers?: boolean | Product$offersArgs<ExtArgs>
@@ -5405,6 +5610,7 @@ export namespace Prisma {
   }
 
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    images?: boolean | Product$imagesArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     lentItems?: boolean | Product$lentItemsArgs<ExtArgs>
     offers?: boolean | Product$offersArgs<ExtArgs>
@@ -5416,6 +5622,7 @@ export namespace Prisma {
   export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Product"
     objects: {
+      images: Prisma.$ProductImagePayload<ExtArgs>[]
       createdBy: Prisma.$UserPayload<ExtArgs>
       lentItems: Prisma.$LentItemPayload<ExtArgs>[]
       offers: Prisma.$BorrowRequestOfferPayload<ExtArgs>[]
@@ -5781,6 +5988,7 @@ export namespace Prisma {
    */
   export interface Prisma__ProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    images<T extends Product$imagesArgs<ExtArgs> = {}>(args?: Subset<T, Product$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany"> | Null>
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     lentItems<T extends Product$lentItemsArgs<ExtArgs> = {}>(args?: Subset<T, Product$lentItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LentItemPayload<ExtArgs>, T, "findMany"> | Null>
     offers<T extends Product$offersArgs<ExtArgs> = {}>(args?: Subset<T, Product$offersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BorrowRequestOfferPayload<ExtArgs>, T, "findMany"> | Null>
@@ -6132,6 +6340,26 @@ export namespace Prisma {
   }
 
   /**
+   * Product.images
+   */
+  export type Product$imagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    where?: ProductImageWhereInput
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    cursor?: ProductImageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[]
+  }
+
+  /**
    * Product.lentItems
    */
   export type Product$lentItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6223,6 +6451,1809 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProductInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProductImage
+   */
+
+  export type AggregateProductImage = {
+    _count: ProductImageCountAggregateOutputType | null
+    _avg: ProductImageAvgAggregateOutputType | null
+    _sum: ProductImageSumAggregateOutputType | null
+    _min: ProductImageMinAggregateOutputType | null
+    _max: ProductImageMaxAggregateOutputType | null
+  }
+
+  export type ProductImageAvgAggregateOutputType = {
+    order: number | null
+  }
+
+  export type ProductImageSumAggregateOutputType = {
+    order: number | null
+  }
+
+  export type ProductImageMinAggregateOutputType = {
+    id: string | null
+    productId: string | null
+    data: Buffer | null
+    mimeType: string | null
+    order: number | null
+  }
+
+  export type ProductImageMaxAggregateOutputType = {
+    id: string | null
+    productId: string | null
+    data: Buffer | null
+    mimeType: string | null
+    order: number | null
+  }
+
+  export type ProductImageCountAggregateOutputType = {
+    id: number
+    productId: number
+    data: number
+    mimeType: number
+    order: number
+    _all: number
+  }
+
+
+  export type ProductImageAvgAggregateInputType = {
+    order?: true
+  }
+
+  export type ProductImageSumAggregateInputType = {
+    order?: true
+  }
+
+  export type ProductImageMinAggregateInputType = {
+    id?: true
+    productId?: true
+    data?: true
+    mimeType?: true
+    order?: true
+  }
+
+  export type ProductImageMaxAggregateInputType = {
+    id?: true
+    productId?: true
+    data?: true
+    mimeType?: true
+    order?: true
+  }
+
+  export type ProductImageCountAggregateInputType = {
+    id?: true
+    productId?: true
+    data?: true
+    mimeType?: true
+    order?: true
+    _all?: true
+  }
+
+  export type ProductImageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductImage to aggregate.
+     */
+    where?: ProductImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProductImages
+    **/
+    _count?: true | ProductImageCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductImageAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductImageSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductImageMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductImageMaxAggregateInputType
+  }
+
+  export type GetProductImageAggregateType<T extends ProductImageAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductImage]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductImage[P]>
+      : GetScalarType<T[P], AggregateProductImage[P]>
+  }
+
+
+
+
+  export type ProductImageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductImageWhereInput
+    orderBy?: ProductImageOrderByWithAggregationInput | ProductImageOrderByWithAggregationInput[]
+    by: ProductImageScalarFieldEnum[] | ProductImageScalarFieldEnum
+    having?: ProductImageScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductImageCountAggregateInputType | true
+    _avg?: ProductImageAvgAggregateInputType
+    _sum?: ProductImageSumAggregateInputType
+    _min?: ProductImageMinAggregateInputType
+    _max?: ProductImageMaxAggregateInputType
+  }
+
+  export type ProductImageGroupByOutputType = {
+    id: string
+    productId: string
+    data: Buffer
+    mimeType: string
+    order: number
+    _count: ProductImageCountAggregateOutputType | null
+    _avg: ProductImageAvgAggregateOutputType | null
+    _sum: ProductImageSumAggregateOutputType | null
+    _min: ProductImageMinAggregateOutputType | null
+    _max: ProductImageMaxAggregateOutputType | null
+  }
+
+  type GetProductImageGroupByPayload<T extends ProductImageGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductImageGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductImageGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductImageGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductImageGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductImageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    productId?: boolean
+    data?: boolean
+    mimeType?: boolean
+    order?: boolean
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productImage"]>
+
+
+  export type ProductImageSelectScalar = {
+    id?: boolean
+    productId?: boolean
+    data?: boolean
+    mimeType?: boolean
+    order?: boolean
+  }
+
+  export type ProductImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    product?: boolean | ProductDefaultArgs<ExtArgs>
+  }
+
+  export type $ProductImagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProductImage"
+    objects: {
+      product: Prisma.$ProductPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      productId: string
+      data: Buffer
+      mimeType: string
+      order: number
+    }, ExtArgs["result"]["productImage"]>
+    composites: {}
+  }
+
+  type ProductImageGetPayload<S extends boolean | null | undefined | ProductImageDefaultArgs> = $Result.GetResult<Prisma.$ProductImagePayload, S>
+
+  type ProductImageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ProductImageFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ProductImageCountAggregateInputType | true
+    }
+
+  export interface ProductImageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductImage'], meta: { name: 'ProductImage' } }
+    /**
+     * Find zero or one ProductImage that matches the filter.
+     * @param {ProductImageFindUniqueArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductImageFindUniqueArgs>(args: SelectSubset<T, ProductImageFindUniqueArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ProductImage that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ProductImageFindUniqueOrThrowArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductImageFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductImageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ProductImage that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageFindFirstArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductImageFindFirstArgs>(args?: SelectSubset<T, ProductImageFindFirstArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ProductImage that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageFindFirstOrThrowArgs} args - Arguments to find a ProductImage
+     * @example
+     * // Get one ProductImage
+     * const productImage = await prisma.productImage.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductImageFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductImageFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ProductImages that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProductImages
+     * const productImages = await prisma.productImage.findMany()
+     * 
+     * // Get first 10 ProductImages
+     * const productImages = await prisma.productImage.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productImageWithIdOnly = await prisma.productImage.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductImageFindManyArgs>(args?: SelectSubset<T, ProductImageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ProductImage.
+     * @param {ProductImageCreateArgs} args - Arguments to create a ProductImage.
+     * @example
+     * // Create one ProductImage
+     * const ProductImage = await prisma.productImage.create({
+     *   data: {
+     *     // ... data to create a ProductImage
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductImageCreateArgs>(args: SelectSubset<T, ProductImageCreateArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ProductImages.
+     * @param {ProductImageCreateManyArgs} args - Arguments to create many ProductImages.
+     * @example
+     * // Create many ProductImages
+     * const productImage = await prisma.productImage.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductImageCreateManyArgs>(args?: SelectSubset<T, ProductImageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ProductImage.
+     * @param {ProductImageDeleteArgs} args - Arguments to delete one ProductImage.
+     * @example
+     * // Delete one ProductImage
+     * const ProductImage = await prisma.productImage.delete({
+     *   where: {
+     *     // ... filter to delete one ProductImage
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductImageDeleteArgs>(args: SelectSubset<T, ProductImageDeleteArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ProductImage.
+     * @param {ProductImageUpdateArgs} args - Arguments to update one ProductImage.
+     * @example
+     * // Update one ProductImage
+     * const productImage = await prisma.productImage.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductImageUpdateArgs>(args: SelectSubset<T, ProductImageUpdateArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ProductImages.
+     * @param {ProductImageDeleteManyArgs} args - Arguments to filter ProductImages to delete.
+     * @example
+     * // Delete a few ProductImages
+     * const { count } = await prisma.productImage.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductImageDeleteManyArgs>(args?: SelectSubset<T, ProductImageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProductImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProductImages
+     * const productImage = await prisma.productImage.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductImageUpdateManyArgs>(args: SelectSubset<T, ProductImageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ProductImage.
+     * @param {ProductImageUpsertArgs} args - Arguments to update or create a ProductImage.
+     * @example
+     * // Update or create a ProductImage
+     * const productImage = await prisma.productImage.upsert({
+     *   create: {
+     *     // ... data to create a ProductImage
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProductImage we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductImageUpsertArgs>(args: SelectSubset<T, ProductImageUpsertArgs<ExtArgs>>): Prisma__ProductImageClient<$Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of ProductImages.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageCountArgs} args - Arguments to filter ProductImages to count.
+     * @example
+     * // Count the number of ProductImages
+     * const count = await prisma.productImage.count({
+     *   where: {
+     *     // ... the filter for the ProductImages we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductImageCountArgs>(
+      args?: Subset<T, ProductImageCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductImageCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProductImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductImageAggregateArgs>(args: Subset<T, ProductImageAggregateArgs>): Prisma.PrismaPromise<GetProductImageAggregateType<T>>
+
+    /**
+     * Group by ProductImage.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductImageGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductImageGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductImageGroupByArgs['orderBy'] }
+        : { orderBy?: ProductImageGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductImageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductImageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProductImage model
+   */
+  readonly fields: ProductImageFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProductImage.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductImageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProductImage model
+   */ 
+  interface ProductImageFieldRefs {
+    readonly id: FieldRef<"ProductImage", 'String'>
+    readonly productId: FieldRef<"ProductImage", 'String'>
+    readonly data: FieldRef<"ProductImage", 'Bytes'>
+    readonly mimeType: FieldRef<"ProductImage", 'String'>
+    readonly order: FieldRef<"ProductImage", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProductImage findUnique
+   */
+  export type ProductImageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where: ProductImageWhereUniqueInput
+  }
+
+  /**
+   * ProductImage findUniqueOrThrow
+   */
+  export type ProductImageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where: ProductImageWhereUniqueInput
+  }
+
+  /**
+   * ProductImage findFirst
+   */
+  export type ProductImageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where?: ProductImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductImages.
+     */
+    cursor?: ProductImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductImages.
+     */
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[]
+  }
+
+  /**
+   * ProductImage findFirstOrThrow
+   */
+  export type ProductImageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImage to fetch.
+     */
+    where?: ProductImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProductImages.
+     */
+    cursor?: ProductImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProductImages.
+     */
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[]
+  }
+
+  /**
+   * ProductImage findMany
+   */
+  export type ProductImageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter, which ProductImages to fetch.
+     */
+    where?: ProductImageWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProductImages to fetch.
+     */
+    orderBy?: ProductImageOrderByWithRelationInput | ProductImageOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProductImages.
+     */
+    cursor?: ProductImageWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProductImages from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProductImages.
+     */
+    skip?: number
+    distinct?: ProductImageScalarFieldEnum | ProductImageScalarFieldEnum[]
+  }
+
+  /**
+   * ProductImage create
+   */
+  export type ProductImageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProductImage.
+     */
+    data: XOR<ProductImageCreateInput, ProductImageUncheckedCreateInput>
+  }
+
+  /**
+   * ProductImage createMany
+   */
+  export type ProductImageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProductImages.
+     */
+    data: ProductImageCreateManyInput | ProductImageCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProductImage update
+   */
+  export type ProductImageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProductImage.
+     */
+    data: XOR<ProductImageUpdateInput, ProductImageUncheckedUpdateInput>
+    /**
+     * Choose, which ProductImage to update.
+     */
+    where: ProductImageWhereUniqueInput
+  }
+
+  /**
+   * ProductImage updateMany
+   */
+  export type ProductImageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProductImages.
+     */
+    data: XOR<ProductImageUpdateManyMutationInput, ProductImageUncheckedUpdateManyInput>
+    /**
+     * Filter which ProductImages to update
+     */
+    where?: ProductImageWhereInput
+  }
+
+  /**
+   * ProductImage upsert
+   */
+  export type ProductImageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProductImage to update in case it exists.
+     */
+    where: ProductImageWhereUniqueInput
+    /**
+     * In case the ProductImage found by the `where` argument doesn't exist, create a new ProductImage with this data.
+     */
+    create: XOR<ProductImageCreateInput, ProductImageUncheckedCreateInput>
+    /**
+     * In case the ProductImage was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductImageUpdateInput, ProductImageUncheckedUpdateInput>
+  }
+
+  /**
+   * ProductImage delete
+   */
+  export type ProductImageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+    /**
+     * Filter which ProductImage to delete.
+     */
+    where: ProductImageWhereUniqueInput
+  }
+
+  /**
+   * ProductImage deleteMany
+   */
+  export type ProductImageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProductImages to delete
+     */
+    where?: ProductImageWhereInput
+  }
+
+  /**
+   * ProductImage without action
+   */
+  export type ProductImageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductImage
+     */
+    select?: ProductImageSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductImageInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ConditionPhoto
+   */
+
+  export type AggregateConditionPhoto = {
+    _count: ConditionPhotoCountAggregateOutputType | null
+    _min: ConditionPhotoMinAggregateOutputType | null
+    _max: ConditionPhotoMaxAggregateOutputType | null
+  }
+
+  export type ConditionPhotoMinAggregateOutputType = {
+    id: string | null
+    checkoutId: string | null
+    role: string | null
+    data: Buffer | null
+    mimeType: string | null
+    createdAt: Date | null
+  }
+
+  export type ConditionPhotoMaxAggregateOutputType = {
+    id: string | null
+    checkoutId: string | null
+    role: string | null
+    data: Buffer | null
+    mimeType: string | null
+    createdAt: Date | null
+  }
+
+  export type ConditionPhotoCountAggregateOutputType = {
+    id: number
+    checkoutId: number
+    role: number
+    data: number
+    mimeType: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ConditionPhotoMinAggregateInputType = {
+    id?: true
+    checkoutId?: true
+    role?: true
+    data?: true
+    mimeType?: true
+    createdAt?: true
+  }
+
+  export type ConditionPhotoMaxAggregateInputType = {
+    id?: true
+    checkoutId?: true
+    role?: true
+    data?: true
+    mimeType?: true
+    createdAt?: true
+  }
+
+  export type ConditionPhotoCountAggregateInputType = {
+    id?: true
+    checkoutId?: true
+    role?: true
+    data?: true
+    mimeType?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ConditionPhotoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConditionPhoto to aggregate.
+     */
+    where?: ConditionPhotoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConditionPhotos to fetch.
+     */
+    orderBy?: ConditionPhotoOrderByWithRelationInput | ConditionPhotoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ConditionPhotoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConditionPhotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConditionPhotos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ConditionPhotos
+    **/
+    _count?: true | ConditionPhotoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ConditionPhotoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ConditionPhotoMaxAggregateInputType
+  }
+
+  export type GetConditionPhotoAggregateType<T extends ConditionPhotoAggregateArgs> = {
+        [P in keyof T & keyof AggregateConditionPhoto]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateConditionPhoto[P]>
+      : GetScalarType<T[P], AggregateConditionPhoto[P]>
+  }
+
+
+
+
+  export type ConditionPhotoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConditionPhotoWhereInput
+    orderBy?: ConditionPhotoOrderByWithAggregationInput | ConditionPhotoOrderByWithAggregationInput[]
+    by: ConditionPhotoScalarFieldEnum[] | ConditionPhotoScalarFieldEnum
+    having?: ConditionPhotoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ConditionPhotoCountAggregateInputType | true
+    _min?: ConditionPhotoMinAggregateInputType
+    _max?: ConditionPhotoMaxAggregateInputType
+  }
+
+  export type ConditionPhotoGroupByOutputType = {
+    id: string
+    checkoutId: string
+    role: string
+    data: Buffer
+    mimeType: string
+    createdAt: Date
+    _count: ConditionPhotoCountAggregateOutputType | null
+    _min: ConditionPhotoMinAggregateOutputType | null
+    _max: ConditionPhotoMaxAggregateOutputType | null
+  }
+
+  type GetConditionPhotoGroupByPayload<T extends ConditionPhotoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ConditionPhotoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ConditionPhotoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ConditionPhotoGroupByOutputType[P]>
+            : GetScalarType<T[P], ConditionPhotoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ConditionPhotoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    checkoutId?: boolean
+    role?: boolean
+    data?: boolean
+    mimeType?: boolean
+    createdAt?: boolean
+    checkout?: boolean | BorrowCheckoutDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["conditionPhoto"]>
+
+
+  export type ConditionPhotoSelectScalar = {
+    id?: boolean
+    checkoutId?: boolean
+    role?: boolean
+    data?: boolean
+    mimeType?: boolean
+    createdAt?: boolean
+  }
+
+  export type ConditionPhotoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    checkout?: boolean | BorrowCheckoutDefaultArgs<ExtArgs>
+  }
+
+  export type $ConditionPhotoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ConditionPhoto"
+    objects: {
+      checkout: Prisma.$BorrowCheckoutPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      checkoutId: string
+      role: string
+      data: Buffer
+      mimeType: string
+      createdAt: Date
+    }, ExtArgs["result"]["conditionPhoto"]>
+    composites: {}
+  }
+
+  type ConditionPhotoGetPayload<S extends boolean | null | undefined | ConditionPhotoDefaultArgs> = $Result.GetResult<Prisma.$ConditionPhotoPayload, S>
+
+  type ConditionPhotoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ConditionPhotoFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ConditionPhotoCountAggregateInputType | true
+    }
+
+  export interface ConditionPhotoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ConditionPhoto'], meta: { name: 'ConditionPhoto' } }
+    /**
+     * Find zero or one ConditionPhoto that matches the filter.
+     * @param {ConditionPhotoFindUniqueArgs} args - Arguments to find a ConditionPhoto
+     * @example
+     * // Get one ConditionPhoto
+     * const conditionPhoto = await prisma.conditionPhoto.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ConditionPhotoFindUniqueArgs>(args: SelectSubset<T, ConditionPhotoFindUniqueArgs<ExtArgs>>): Prisma__ConditionPhotoClient<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ConditionPhoto that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ConditionPhotoFindUniqueOrThrowArgs} args - Arguments to find a ConditionPhoto
+     * @example
+     * // Get one ConditionPhoto
+     * const conditionPhoto = await prisma.conditionPhoto.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ConditionPhotoFindUniqueOrThrowArgs>(args: SelectSubset<T, ConditionPhotoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ConditionPhotoClient<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ConditionPhoto that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConditionPhotoFindFirstArgs} args - Arguments to find a ConditionPhoto
+     * @example
+     * // Get one ConditionPhoto
+     * const conditionPhoto = await prisma.conditionPhoto.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ConditionPhotoFindFirstArgs>(args?: SelectSubset<T, ConditionPhotoFindFirstArgs<ExtArgs>>): Prisma__ConditionPhotoClient<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ConditionPhoto that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConditionPhotoFindFirstOrThrowArgs} args - Arguments to find a ConditionPhoto
+     * @example
+     * // Get one ConditionPhoto
+     * const conditionPhoto = await prisma.conditionPhoto.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ConditionPhotoFindFirstOrThrowArgs>(args?: SelectSubset<T, ConditionPhotoFindFirstOrThrowArgs<ExtArgs>>): Prisma__ConditionPhotoClient<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ConditionPhotos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConditionPhotoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ConditionPhotos
+     * const conditionPhotos = await prisma.conditionPhoto.findMany()
+     * 
+     * // Get first 10 ConditionPhotos
+     * const conditionPhotos = await prisma.conditionPhoto.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const conditionPhotoWithIdOnly = await prisma.conditionPhoto.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ConditionPhotoFindManyArgs>(args?: SelectSubset<T, ConditionPhotoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ConditionPhoto.
+     * @param {ConditionPhotoCreateArgs} args - Arguments to create a ConditionPhoto.
+     * @example
+     * // Create one ConditionPhoto
+     * const ConditionPhoto = await prisma.conditionPhoto.create({
+     *   data: {
+     *     // ... data to create a ConditionPhoto
+     *   }
+     * })
+     * 
+     */
+    create<T extends ConditionPhotoCreateArgs>(args: SelectSubset<T, ConditionPhotoCreateArgs<ExtArgs>>): Prisma__ConditionPhotoClient<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ConditionPhotos.
+     * @param {ConditionPhotoCreateManyArgs} args - Arguments to create many ConditionPhotos.
+     * @example
+     * // Create many ConditionPhotos
+     * const conditionPhoto = await prisma.conditionPhoto.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ConditionPhotoCreateManyArgs>(args?: SelectSubset<T, ConditionPhotoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ConditionPhoto.
+     * @param {ConditionPhotoDeleteArgs} args - Arguments to delete one ConditionPhoto.
+     * @example
+     * // Delete one ConditionPhoto
+     * const ConditionPhoto = await prisma.conditionPhoto.delete({
+     *   where: {
+     *     // ... filter to delete one ConditionPhoto
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ConditionPhotoDeleteArgs>(args: SelectSubset<T, ConditionPhotoDeleteArgs<ExtArgs>>): Prisma__ConditionPhotoClient<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ConditionPhoto.
+     * @param {ConditionPhotoUpdateArgs} args - Arguments to update one ConditionPhoto.
+     * @example
+     * // Update one ConditionPhoto
+     * const conditionPhoto = await prisma.conditionPhoto.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ConditionPhotoUpdateArgs>(args: SelectSubset<T, ConditionPhotoUpdateArgs<ExtArgs>>): Prisma__ConditionPhotoClient<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ConditionPhotos.
+     * @param {ConditionPhotoDeleteManyArgs} args - Arguments to filter ConditionPhotos to delete.
+     * @example
+     * // Delete a few ConditionPhotos
+     * const { count } = await prisma.conditionPhoto.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ConditionPhotoDeleteManyArgs>(args?: SelectSubset<T, ConditionPhotoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ConditionPhotos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConditionPhotoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ConditionPhotos
+     * const conditionPhoto = await prisma.conditionPhoto.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ConditionPhotoUpdateManyArgs>(args: SelectSubset<T, ConditionPhotoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ConditionPhoto.
+     * @param {ConditionPhotoUpsertArgs} args - Arguments to update or create a ConditionPhoto.
+     * @example
+     * // Update or create a ConditionPhoto
+     * const conditionPhoto = await prisma.conditionPhoto.upsert({
+     *   create: {
+     *     // ... data to create a ConditionPhoto
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ConditionPhoto we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ConditionPhotoUpsertArgs>(args: SelectSubset<T, ConditionPhotoUpsertArgs<ExtArgs>>): Prisma__ConditionPhotoClient<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of ConditionPhotos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConditionPhotoCountArgs} args - Arguments to filter ConditionPhotos to count.
+     * @example
+     * // Count the number of ConditionPhotos
+     * const count = await prisma.conditionPhoto.count({
+     *   where: {
+     *     // ... the filter for the ConditionPhotos we want to count
+     *   }
+     * })
+    **/
+    count<T extends ConditionPhotoCountArgs>(
+      args?: Subset<T, ConditionPhotoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ConditionPhotoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ConditionPhoto.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConditionPhotoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ConditionPhotoAggregateArgs>(args: Subset<T, ConditionPhotoAggregateArgs>): Prisma.PrismaPromise<GetConditionPhotoAggregateType<T>>
+
+    /**
+     * Group by ConditionPhoto.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ConditionPhotoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ConditionPhotoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ConditionPhotoGroupByArgs['orderBy'] }
+        : { orderBy?: ConditionPhotoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ConditionPhotoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetConditionPhotoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ConditionPhoto model
+   */
+  readonly fields: ConditionPhotoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ConditionPhoto.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ConditionPhotoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    checkout<T extends BorrowCheckoutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckoutDefaultArgs<ExtArgs>>): Prisma__BorrowCheckoutClient<$Result.GetResult<Prisma.$BorrowCheckoutPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ConditionPhoto model
+   */ 
+  interface ConditionPhotoFieldRefs {
+    readonly id: FieldRef<"ConditionPhoto", 'String'>
+    readonly checkoutId: FieldRef<"ConditionPhoto", 'String'>
+    readonly role: FieldRef<"ConditionPhoto", 'String'>
+    readonly data: FieldRef<"ConditionPhoto", 'Bytes'>
+    readonly mimeType: FieldRef<"ConditionPhoto", 'String'>
+    readonly createdAt: FieldRef<"ConditionPhoto", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ConditionPhoto findUnique
+   */
+  export type ConditionPhotoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which ConditionPhoto to fetch.
+     */
+    where: ConditionPhotoWhereUniqueInput
+  }
+
+  /**
+   * ConditionPhoto findUniqueOrThrow
+   */
+  export type ConditionPhotoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which ConditionPhoto to fetch.
+     */
+    where: ConditionPhotoWhereUniqueInput
+  }
+
+  /**
+   * ConditionPhoto findFirst
+   */
+  export type ConditionPhotoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which ConditionPhoto to fetch.
+     */
+    where?: ConditionPhotoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConditionPhotos to fetch.
+     */
+    orderBy?: ConditionPhotoOrderByWithRelationInput | ConditionPhotoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConditionPhotos.
+     */
+    cursor?: ConditionPhotoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConditionPhotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConditionPhotos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConditionPhotos.
+     */
+    distinct?: ConditionPhotoScalarFieldEnum | ConditionPhotoScalarFieldEnum[]
+  }
+
+  /**
+   * ConditionPhoto findFirstOrThrow
+   */
+  export type ConditionPhotoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which ConditionPhoto to fetch.
+     */
+    where?: ConditionPhotoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConditionPhotos to fetch.
+     */
+    orderBy?: ConditionPhotoOrderByWithRelationInput | ConditionPhotoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ConditionPhotos.
+     */
+    cursor?: ConditionPhotoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConditionPhotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConditionPhotos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ConditionPhotos.
+     */
+    distinct?: ConditionPhotoScalarFieldEnum | ConditionPhotoScalarFieldEnum[]
+  }
+
+  /**
+   * ConditionPhoto findMany
+   */
+  export type ConditionPhotoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    /**
+     * Filter, which ConditionPhotos to fetch.
+     */
+    where?: ConditionPhotoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ConditionPhotos to fetch.
+     */
+    orderBy?: ConditionPhotoOrderByWithRelationInput | ConditionPhotoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ConditionPhotos.
+     */
+    cursor?: ConditionPhotoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ConditionPhotos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ConditionPhotos.
+     */
+    skip?: number
+    distinct?: ConditionPhotoScalarFieldEnum | ConditionPhotoScalarFieldEnum[]
+  }
+
+  /**
+   * ConditionPhoto create
+   */
+  export type ConditionPhotoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ConditionPhoto.
+     */
+    data: XOR<ConditionPhotoCreateInput, ConditionPhotoUncheckedCreateInput>
+  }
+
+  /**
+   * ConditionPhoto createMany
+   */
+  export type ConditionPhotoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ConditionPhotos.
+     */
+    data: ConditionPhotoCreateManyInput | ConditionPhotoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ConditionPhoto update
+   */
+  export type ConditionPhotoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ConditionPhoto.
+     */
+    data: XOR<ConditionPhotoUpdateInput, ConditionPhotoUncheckedUpdateInput>
+    /**
+     * Choose, which ConditionPhoto to update.
+     */
+    where: ConditionPhotoWhereUniqueInput
+  }
+
+  /**
+   * ConditionPhoto updateMany
+   */
+  export type ConditionPhotoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ConditionPhotos.
+     */
+    data: XOR<ConditionPhotoUpdateManyMutationInput, ConditionPhotoUncheckedUpdateManyInput>
+    /**
+     * Filter which ConditionPhotos to update
+     */
+    where?: ConditionPhotoWhereInput
+  }
+
+  /**
+   * ConditionPhoto upsert
+   */
+  export type ConditionPhotoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ConditionPhoto to update in case it exists.
+     */
+    where: ConditionPhotoWhereUniqueInput
+    /**
+     * In case the ConditionPhoto found by the `where` argument doesn't exist, create a new ConditionPhoto with this data.
+     */
+    create: XOR<ConditionPhotoCreateInput, ConditionPhotoUncheckedCreateInput>
+    /**
+     * In case the ConditionPhoto was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ConditionPhotoUpdateInput, ConditionPhotoUncheckedUpdateInput>
+  }
+
+  /**
+   * ConditionPhoto delete
+   */
+  export type ConditionPhotoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    /**
+     * Filter which ConditionPhoto to delete.
+     */
+    where: ConditionPhotoWhereUniqueInput
+  }
+
+  /**
+   * ConditionPhoto deleteMany
+   */
+  export type ConditionPhotoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ConditionPhotos to delete
+     */
+    where?: ConditionPhotoWhereInput
+  }
+
+  /**
+   * ConditionPhoto without action
+   */
+  export type ConditionPhotoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
   }
 
 
@@ -9175,11 +11206,13 @@ export namespace Prisma {
   export type BorrowCheckoutAvgAggregateOutputType = {
     totalPrice: number | null
     deposit: number | null
+    aiDamageConfidence: number | null
   }
 
   export type BorrowCheckoutSumAggregateOutputType = {
     totalPrice: number | null
     deposit: number | null
+    aiDamageConfidence: number | null
   }
 
   export type BorrowCheckoutMinAggregateOutputType = {
@@ -9198,6 +11231,10 @@ export namespace Prisma {
     returnedAt: Date | null
     cancelledBy: string | null
     status: string | null
+    aiDamageVerdict: string | null
+    aiDamageConfidence: number | null
+    aiDamageNotes: string | null
+    aiDamageCheckedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9218,6 +11255,10 @@ export namespace Prisma {
     returnedAt: Date | null
     cancelledBy: string | null
     status: string | null
+    aiDamageVerdict: string | null
+    aiDamageConfidence: number | null
+    aiDamageNotes: string | null
+    aiDamageCheckedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -9239,6 +11280,10 @@ export namespace Prisma {
     returnedAt: number
     cancelledBy: number
     status: number
+    aiDamageVerdict: number
+    aiDamageConfidence: number
+    aiDamageNotes: number
+    aiDamageCheckedAt: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -9248,11 +11293,13 @@ export namespace Prisma {
   export type BorrowCheckoutAvgAggregateInputType = {
     totalPrice?: true
     deposit?: true
+    aiDamageConfidence?: true
   }
 
   export type BorrowCheckoutSumAggregateInputType = {
     totalPrice?: true
     deposit?: true
+    aiDamageConfidence?: true
   }
 
   export type BorrowCheckoutMinAggregateInputType = {
@@ -9271,6 +11318,10 @@ export namespace Prisma {
     returnedAt?: true
     cancelledBy?: true
     status?: true
+    aiDamageVerdict?: true
+    aiDamageConfidence?: true
+    aiDamageNotes?: true
+    aiDamageCheckedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9291,6 +11342,10 @@ export namespace Prisma {
     returnedAt?: true
     cancelledBy?: true
     status?: true
+    aiDamageVerdict?: true
+    aiDamageConfidence?: true
+    aiDamageNotes?: true
+    aiDamageCheckedAt?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -9312,6 +11367,10 @@ export namespace Prisma {
     returnedAt?: true
     cancelledBy?: true
     status?: true
+    aiDamageVerdict?: true
+    aiDamageConfidence?: true
+    aiDamageNotes?: true
+    aiDamageCheckedAt?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -9420,6 +11479,10 @@ export namespace Prisma {
     returnedAt: Date | null
     cancelledBy: string | null
     status: string
+    aiDamageVerdict: string | null
+    aiDamageConfidence: number | null
+    aiDamageNotes: string | null
+    aiDamageCheckedAt: Date | null
     createdAt: Date
     updatedAt: Date
     _count: BorrowCheckoutCountAggregateOutputType | null
@@ -9460,6 +11523,10 @@ export namespace Prisma {
     returnedAt?: boolean
     cancelledBy?: boolean
     status?: boolean
+    aiDamageVerdict?: boolean
+    aiDamageConfidence?: boolean
+    aiDamageNotes?: boolean
+    aiDamageCheckedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     borrower?: boolean | UserDefaultArgs<ExtArgs>
@@ -9470,6 +11537,8 @@ export namespace Prisma {
     trailEntry?: boolean | BorrowCheckout$trailEntryArgs<ExtArgs>
     borrowerReview?: boolean | BorrowCheckout$borrowerReviewArgs<ExtArgs>
     dispute?: boolean | BorrowCheckout$disputeArgs<ExtArgs>
+    conditionPhotos?: boolean | BorrowCheckout$conditionPhotosArgs<ExtArgs>
+    _count?: boolean | BorrowCheckoutCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["borrowCheckout"]>
 
 
@@ -9490,6 +11559,10 @@ export namespace Prisma {
     returnedAt?: boolean
     cancelledBy?: boolean
     status?: boolean
+    aiDamageVerdict?: boolean
+    aiDamageConfidence?: boolean
+    aiDamageNotes?: boolean
+    aiDamageCheckedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
@@ -9503,6 +11576,8 @@ export namespace Prisma {
     trailEntry?: boolean | BorrowCheckout$trailEntryArgs<ExtArgs>
     borrowerReview?: boolean | BorrowCheckout$borrowerReviewArgs<ExtArgs>
     dispute?: boolean | BorrowCheckout$disputeArgs<ExtArgs>
+    conditionPhotos?: boolean | BorrowCheckout$conditionPhotosArgs<ExtArgs>
+    _count?: boolean | BorrowCheckoutCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $BorrowCheckoutPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9516,6 +11591,7 @@ export namespace Prisma {
       trailEntry: Prisma.$ItemTrailEntryPayload<ExtArgs> | null
       borrowerReview: Prisma.$BorrowerReviewPayload<ExtArgs> | null
       dispute: Prisma.$DisputePayload<ExtArgs> | null
+      conditionPhotos: Prisma.$ConditionPhotoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -9534,6 +11610,10 @@ export namespace Prisma {
       returnedAt: Date | null
       cancelledBy: string | null
       status: string
+      aiDamageVerdict: string | null
+      aiDamageConfidence: number | null
+      aiDamageNotes: string | null
+      aiDamageCheckedAt: Date | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["borrowCheckout"]>
@@ -9884,6 +11964,7 @@ export namespace Prisma {
     trailEntry<T extends BorrowCheckout$trailEntryArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$trailEntryArgs<ExtArgs>>): Prisma__ItemTrailEntryClient<$Result.GetResult<Prisma.$ItemTrailEntryPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     borrowerReview<T extends BorrowCheckout$borrowerReviewArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$borrowerReviewArgs<ExtArgs>>): Prisma__BorrowerReviewClient<$Result.GetResult<Prisma.$BorrowerReviewPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     dispute<T extends BorrowCheckout$disputeArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$disputeArgs<ExtArgs>>): Prisma__DisputeClient<$Result.GetResult<Prisma.$DisputePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    conditionPhotos<T extends BorrowCheckout$conditionPhotosArgs<ExtArgs> = {}>(args?: Subset<T, BorrowCheckout$conditionPhotosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConditionPhotoPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9929,6 +12010,10 @@ export namespace Prisma {
     readonly returnedAt: FieldRef<"BorrowCheckout", 'DateTime'>
     readonly cancelledBy: FieldRef<"BorrowCheckout", 'String'>
     readonly status: FieldRef<"BorrowCheckout", 'String'>
+    readonly aiDamageVerdict: FieldRef<"BorrowCheckout", 'String'>
+    readonly aiDamageConfidence: FieldRef<"BorrowCheckout", 'Float'>
+    readonly aiDamageNotes: FieldRef<"BorrowCheckout", 'String'>
+    readonly aiDamageCheckedAt: FieldRef<"BorrowCheckout", 'DateTime'>
     readonly createdAt: FieldRef<"BorrowCheckout", 'DateTime'>
     readonly updatedAt: FieldRef<"BorrowCheckout", 'DateTime'>
   }
@@ -10302,6 +12387,26 @@ export namespace Prisma {
      */
     include?: DisputeInclude<ExtArgs> | null
     where?: DisputeWhereInput
+  }
+
+  /**
+   * BorrowCheckout.conditionPhotos
+   */
+  export type BorrowCheckout$conditionPhotosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ConditionPhoto
+     */
+    select?: ConditionPhotoSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConditionPhotoInclude<ExtArgs> | null
+    where?: ConditionPhotoWhereInput
+    orderBy?: ConditionPhotoOrderByWithRelationInput | ConditionPhotoOrderByWithRelationInput[]
+    cursor?: ConditionPhotoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConditionPhotoScalarFieldEnum | ConditionPhotoScalarFieldEnum[]
   }
 
   /**
@@ -23353,6 +25458,7 @@ export namespace Prisma {
     description: string | null
     status: string | null
     createdAt: Date | null
+    readByAdmin: boolean | null
   }
 
   export type UserReportMaxAggregateOutputType = {
@@ -23363,6 +25469,7 @@ export namespace Prisma {
     description: string | null
     status: string | null
     createdAt: Date | null
+    readByAdmin: boolean | null
   }
 
   export type UserReportCountAggregateOutputType = {
@@ -23373,6 +25480,7 @@ export namespace Prisma {
     description: number
     status: number
     createdAt: number
+    readByAdmin: number
     _all: number
   }
 
@@ -23385,6 +25493,7 @@ export namespace Prisma {
     description?: true
     status?: true
     createdAt?: true
+    readByAdmin?: true
   }
 
   export type UserReportMaxAggregateInputType = {
@@ -23395,6 +25504,7 @@ export namespace Prisma {
     description?: true
     status?: true
     createdAt?: true
+    readByAdmin?: true
   }
 
   export type UserReportCountAggregateInputType = {
@@ -23405,6 +25515,7 @@ export namespace Prisma {
     description?: true
     status?: true
     createdAt?: true
+    readByAdmin?: true
     _all?: true
   }
 
@@ -23488,6 +25599,7 @@ export namespace Prisma {
     description: string | null
     status: string
     createdAt: Date
+    readByAdmin: boolean
     _count: UserReportCountAggregateOutputType | null
     _min: UserReportMinAggregateOutputType | null
     _max: UserReportMaxAggregateOutputType | null
@@ -23515,6 +25627,7 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     createdAt?: boolean
+    readByAdmin?: boolean
     reporter?: boolean | UserDefaultArgs<ExtArgs>
     reported?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userReport"]>
@@ -23528,6 +25641,7 @@ export namespace Prisma {
     description?: boolean
     status?: boolean
     createdAt?: boolean
+    readByAdmin?: boolean
   }
 
   export type UserReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23549,6 +25663,7 @@ export namespace Prisma {
       description: string | null
       status: string
       createdAt: Date
+      readByAdmin: boolean
     }, ExtArgs["result"]["userReport"]>
     composites: {}
   }
@@ -23927,6 +26042,7 @@ export namespace Prisma {
     readonly description: FieldRef<"UserReport", 'String'>
     readonly status: FieldRef<"UserReport", 'String'>
     readonly createdAt: FieldRef<"UserReport", 'DateTime'>
+    readonly readByAdmin: FieldRef<"UserReport", 'Boolean'>
   }
     
 
@@ -28235,6 +30351,29 @@ export namespace Prisma {
   export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
 
 
+  export const ProductImageScalarFieldEnum: {
+    id: 'id',
+    productId: 'productId',
+    data: 'data',
+    mimeType: 'mimeType',
+    order: 'order'
+  };
+
+  export type ProductImageScalarFieldEnum = (typeof ProductImageScalarFieldEnum)[keyof typeof ProductImageScalarFieldEnum]
+
+
+  export const ConditionPhotoScalarFieldEnum: {
+    id: 'id',
+    checkoutId: 'checkoutId',
+    role: 'role',
+    data: 'data',
+    mimeType: 'mimeType',
+    createdAt: 'createdAt'
+  };
+
+  export type ConditionPhotoScalarFieldEnum = (typeof ConditionPhotoScalarFieldEnum)[keyof typeof ConditionPhotoScalarFieldEnum]
+
+
   export const LentItemScalarFieldEnum: {
     id: 'id',
     productId: 'productId',
@@ -28297,6 +30436,10 @@ export namespace Prisma {
     returnedAt: 'returnedAt',
     cancelledBy: 'cancelledBy',
     status: 'status',
+    aiDamageVerdict: 'aiDamageVerdict',
+    aiDamageConfidence: 'aiDamageConfidence',
+    aiDamageNotes: 'aiDamageNotes',
+    aiDamageCheckedAt: 'aiDamageCheckedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -28497,7 +30640,8 @@ export namespace Prisma {
     reason: 'reason',
     description: 'description',
     status: 'status',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    readByAdmin: 'readByAdmin'
   };
 
   export type UserReportScalarFieldEnum = (typeof UserReportScalarFieldEnum)[keyof typeof UserReportScalarFieldEnum]
@@ -28657,6 +30801,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Bytes'
+   */
+  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+    
+
+
+  /**
    * Reference to a field of type 'Decimal'
    */
   export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
@@ -28667,13 +30818,6 @@ export namespace Prisma {
    * Reference to a field of type 'SessionFormat'
    */
   export type EnumSessionFormatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SessionFormat'>
-    
-
-
-  /**
-   * Reference to a field of type 'Bytes'
-   */
-  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
     
 
 
@@ -28933,6 +31077,7 @@ export namespace Prisma {
     createdById?: StringFilter<"Product"> | string
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
+    images?: ProductImageListRelationFilter
     createdBy?: XOR<UserRelationFilter, UserWhereInput>
     lentItems?: LentItemListRelationFilter
     offers?: BorrowRequestOfferListRelationFilter
@@ -28959,6 +31104,7 @@ export namespace Prisma {
     createdById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    images?: ProductImageOrderByRelationAggregateInput
     createdBy?: UserOrderByWithRelationInput
     lentItems?: LentItemOrderByRelationAggregateInput
     offers?: BorrowRequestOfferOrderByRelationAggregateInput
@@ -28988,6 +31134,7 @@ export namespace Prisma {
     createdById?: StringFilter<"Product"> | string
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
+    images?: ProductImageListRelationFilter
     createdBy?: XOR<UserRelationFilter, UserWhereInput>
     lentItems?: LentItemListRelationFilter
     offers?: BorrowRequestOfferListRelationFilter
@@ -29043,6 +31190,123 @@ export namespace Prisma {
     createdById?: StringWithAggregatesFilter<"Product"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
+  }
+
+  export type ProductImageWhereInput = {
+    AND?: ProductImageWhereInput | ProductImageWhereInput[]
+    OR?: ProductImageWhereInput[]
+    NOT?: ProductImageWhereInput | ProductImageWhereInput[]
+    id?: StringFilter<"ProductImage"> | string
+    productId?: StringFilter<"ProductImage"> | string
+    data?: BytesFilter<"ProductImage"> | Buffer
+    mimeType?: StringFilter<"ProductImage"> | string
+    order?: IntFilter<"ProductImage"> | number
+    product?: XOR<ProductRelationFilter, ProductWhereInput>
+  }
+
+  export type ProductImageOrderByWithRelationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    order?: SortOrder
+    product?: ProductOrderByWithRelationInput
+  }
+
+  export type ProductImageWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ProductImageWhereInput | ProductImageWhereInput[]
+    OR?: ProductImageWhereInput[]
+    NOT?: ProductImageWhereInput | ProductImageWhereInput[]
+    productId?: StringFilter<"ProductImage"> | string
+    data?: BytesFilter<"ProductImage"> | Buffer
+    mimeType?: StringFilter<"ProductImage"> | string
+    order?: IntFilter<"ProductImage"> | number
+    product?: XOR<ProductRelationFilter, ProductWhereInput>
+  }, "id">
+
+  export type ProductImageOrderByWithAggregationInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    order?: SortOrder
+    _count?: ProductImageCountOrderByAggregateInput
+    _avg?: ProductImageAvgOrderByAggregateInput
+    _max?: ProductImageMaxOrderByAggregateInput
+    _min?: ProductImageMinOrderByAggregateInput
+    _sum?: ProductImageSumOrderByAggregateInput
+  }
+
+  export type ProductImageScalarWhereWithAggregatesInput = {
+    AND?: ProductImageScalarWhereWithAggregatesInput | ProductImageScalarWhereWithAggregatesInput[]
+    OR?: ProductImageScalarWhereWithAggregatesInput[]
+    NOT?: ProductImageScalarWhereWithAggregatesInput | ProductImageScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProductImage"> | string
+    productId?: StringWithAggregatesFilter<"ProductImage"> | string
+    data?: BytesWithAggregatesFilter<"ProductImage"> | Buffer
+    mimeType?: StringWithAggregatesFilter<"ProductImage"> | string
+    order?: IntWithAggregatesFilter<"ProductImage"> | number
+  }
+
+  export type ConditionPhotoWhereInput = {
+    AND?: ConditionPhotoWhereInput | ConditionPhotoWhereInput[]
+    OR?: ConditionPhotoWhereInput[]
+    NOT?: ConditionPhotoWhereInput | ConditionPhotoWhereInput[]
+    id?: StringFilter<"ConditionPhoto"> | string
+    checkoutId?: StringFilter<"ConditionPhoto"> | string
+    role?: StringFilter<"ConditionPhoto"> | string
+    data?: BytesFilter<"ConditionPhoto"> | Buffer
+    mimeType?: StringFilter<"ConditionPhoto"> | string
+    createdAt?: DateTimeFilter<"ConditionPhoto"> | Date | string
+    checkout?: XOR<BorrowCheckoutRelationFilter, BorrowCheckoutWhereInput>
+  }
+
+  export type ConditionPhotoOrderByWithRelationInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    role?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    createdAt?: SortOrder
+    checkout?: BorrowCheckoutOrderByWithRelationInput
+  }
+
+  export type ConditionPhotoWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ConditionPhotoWhereInput | ConditionPhotoWhereInput[]
+    OR?: ConditionPhotoWhereInput[]
+    NOT?: ConditionPhotoWhereInput | ConditionPhotoWhereInput[]
+    checkoutId?: StringFilter<"ConditionPhoto"> | string
+    role?: StringFilter<"ConditionPhoto"> | string
+    data?: BytesFilter<"ConditionPhoto"> | Buffer
+    mimeType?: StringFilter<"ConditionPhoto"> | string
+    createdAt?: DateTimeFilter<"ConditionPhoto"> | Date | string
+    checkout?: XOR<BorrowCheckoutRelationFilter, BorrowCheckoutWhereInput>
+  }, "id">
+
+  export type ConditionPhotoOrderByWithAggregationInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    role?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    createdAt?: SortOrder
+    _count?: ConditionPhotoCountOrderByAggregateInput
+    _max?: ConditionPhotoMaxOrderByAggregateInput
+    _min?: ConditionPhotoMinOrderByAggregateInput
+  }
+
+  export type ConditionPhotoScalarWhereWithAggregatesInput = {
+    AND?: ConditionPhotoScalarWhereWithAggregatesInput | ConditionPhotoScalarWhereWithAggregatesInput[]
+    OR?: ConditionPhotoScalarWhereWithAggregatesInput[]
+    NOT?: ConditionPhotoScalarWhereWithAggregatesInput | ConditionPhotoScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ConditionPhoto"> | string
+    checkoutId?: StringWithAggregatesFilter<"ConditionPhoto"> | string
+    role?: StringWithAggregatesFilter<"ConditionPhoto"> | string
+    data?: BytesWithAggregatesFilter<"ConditionPhoto"> | Buffer
+    mimeType?: StringWithAggregatesFilter<"ConditionPhoto"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ConditionPhoto"> | Date | string
   }
 
   export type LentItemWhereInput = {
@@ -29316,6 +31580,10 @@ export namespace Prisma {
     returnedAt?: DateTimeNullableFilter<"BorrowCheckout"> | Date | string | null
     cancelledBy?: StringNullableFilter<"BorrowCheckout"> | string | null
     status?: StringFilter<"BorrowCheckout"> | string
+    aiDamageVerdict?: StringNullableFilter<"BorrowCheckout"> | string | null
+    aiDamageConfidence?: FloatNullableFilter<"BorrowCheckout"> | number | null
+    aiDamageNotes?: StringNullableFilter<"BorrowCheckout"> | string | null
+    aiDamageCheckedAt?: DateTimeNullableFilter<"BorrowCheckout"> | Date | string | null
     createdAt?: DateTimeFilter<"BorrowCheckout"> | Date | string
     updatedAt?: DateTimeFilter<"BorrowCheckout"> | Date | string
     borrower?: XOR<UserRelationFilter, UserWhereInput>
@@ -29326,6 +31594,7 @@ export namespace Prisma {
     trailEntry?: XOR<ItemTrailEntryNullableRelationFilter, ItemTrailEntryWhereInput> | null
     borrowerReview?: XOR<BorrowerReviewNullableRelationFilter, BorrowerReviewWhereInput> | null
     dispute?: XOR<DisputeNullableRelationFilter, DisputeWhereInput> | null
+    conditionPhotos?: ConditionPhotoListRelationFilter
   }
 
   export type BorrowCheckoutOrderByWithRelationInput = {
@@ -29345,6 +31614,10 @@ export namespace Prisma {
     returnedAt?: SortOrderInput | SortOrder
     cancelledBy?: SortOrderInput | SortOrder
     status?: SortOrder
+    aiDamageVerdict?: SortOrderInput | SortOrder
+    aiDamageConfidence?: SortOrderInput | SortOrder
+    aiDamageNotes?: SortOrderInput | SortOrder
+    aiDamageCheckedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     borrower?: UserOrderByWithRelationInput
@@ -29355,6 +31628,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryOrderByWithRelationInput
     borrowerReview?: BorrowerReviewOrderByWithRelationInput
     dispute?: DisputeOrderByWithRelationInput
+    conditionPhotos?: ConditionPhotoOrderByRelationAggregateInput
   }
 
   export type BorrowCheckoutWhereUniqueInput = Prisma.AtLeast<{
@@ -29377,6 +31651,10 @@ export namespace Prisma {
     returnedAt?: DateTimeNullableFilter<"BorrowCheckout"> | Date | string | null
     cancelledBy?: StringNullableFilter<"BorrowCheckout"> | string | null
     status?: StringFilter<"BorrowCheckout"> | string
+    aiDamageVerdict?: StringNullableFilter<"BorrowCheckout"> | string | null
+    aiDamageConfidence?: FloatNullableFilter<"BorrowCheckout"> | number | null
+    aiDamageNotes?: StringNullableFilter<"BorrowCheckout"> | string | null
+    aiDamageCheckedAt?: DateTimeNullableFilter<"BorrowCheckout"> | Date | string | null
     createdAt?: DateTimeFilter<"BorrowCheckout"> | Date | string
     updatedAt?: DateTimeFilter<"BorrowCheckout"> | Date | string
     borrower?: XOR<UserRelationFilter, UserWhereInput>
@@ -29387,6 +31665,7 @@ export namespace Prisma {
     trailEntry?: XOR<ItemTrailEntryNullableRelationFilter, ItemTrailEntryWhereInput> | null
     borrowerReview?: XOR<BorrowerReviewNullableRelationFilter, BorrowerReviewWhereInput> | null
     dispute?: XOR<DisputeNullableRelationFilter, DisputeWhereInput> | null
+    conditionPhotos?: ConditionPhotoListRelationFilter
   }, "id" | "borrowRequestOfferId">
 
   export type BorrowCheckoutOrderByWithAggregationInput = {
@@ -29406,6 +31685,10 @@ export namespace Prisma {
     returnedAt?: SortOrderInput | SortOrder
     cancelledBy?: SortOrderInput | SortOrder
     status?: SortOrder
+    aiDamageVerdict?: SortOrderInput | SortOrder
+    aiDamageConfidence?: SortOrderInput | SortOrder
+    aiDamageNotes?: SortOrderInput | SortOrder
+    aiDamageCheckedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BorrowCheckoutCountOrderByAggregateInput
@@ -29435,6 +31718,10 @@ export namespace Prisma {
     returnedAt?: DateTimeNullableWithAggregatesFilter<"BorrowCheckout"> | Date | string | null
     cancelledBy?: StringNullableWithAggregatesFilter<"BorrowCheckout"> | string | null
     status?: StringWithAggregatesFilter<"BorrowCheckout"> | string
+    aiDamageVerdict?: StringNullableWithAggregatesFilter<"BorrowCheckout"> | string | null
+    aiDamageConfidence?: FloatNullableWithAggregatesFilter<"BorrowCheckout"> | number | null
+    aiDamageNotes?: StringNullableWithAggregatesFilter<"BorrowCheckout"> | string | null
+    aiDamageCheckedAt?: DateTimeNullableWithAggregatesFilter<"BorrowCheckout"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"BorrowCheckout"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"BorrowCheckout"> | Date | string
   }
@@ -30434,6 +32721,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"UserReport"> | string | null
     status?: StringFilter<"UserReport"> | string
     createdAt?: DateTimeFilter<"UserReport"> | Date | string
+    readByAdmin?: BoolFilter<"UserReport"> | boolean
     reporter?: XOR<UserRelationFilter, UserWhereInput>
     reported?: XOR<UserRelationFilter, UserWhereInput>
   }
@@ -30446,6 +32734,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    readByAdmin?: SortOrder
     reporter?: UserOrderByWithRelationInput
     reported?: UserOrderByWithRelationInput
   }
@@ -30461,6 +32750,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"UserReport"> | string | null
     status?: StringFilter<"UserReport"> | string
     createdAt?: DateTimeFilter<"UserReport"> | Date | string
+    readByAdmin?: BoolFilter<"UserReport"> | boolean
     reporter?: XOR<UserRelationFilter, UserWhereInput>
     reported?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
@@ -30473,6 +32763,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    readByAdmin?: SortOrder
     _count?: UserReportCountOrderByAggregateInput
     _max?: UserReportMaxOrderByAggregateInput
     _min?: UserReportMinOrderByAggregateInput
@@ -30489,6 +32780,7 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"UserReport"> | string | null
     status?: StringWithAggregatesFilter<"UserReport"> | string
     createdAt?: DateTimeWithAggregatesFilter<"UserReport"> | Date | string
+    readByAdmin?: BoolWithAggregatesFilter<"UserReport"> | boolean
   }
 
   export type IdVerificationWhereInput = {
@@ -31142,6 +33434,7 @@ export namespace Prisma {
     lenderNote?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageCreateNestedManyWithoutProductInput
     createdBy: UserCreateNestedOneWithoutProductsInput
     lentItems?: LentItemCreateNestedManyWithoutProductInput
     offers?: BorrowRequestOfferCreateNestedManyWithoutProductInput
@@ -31168,6 +33461,7 @@ export namespace Prisma {
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutProductInput
     offers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutProductInput
     checkouts?: BorrowCheckoutUncheckedCreateNestedManyWithoutProductInput
@@ -31192,6 +33486,7 @@ export namespace Prisma {
     lenderNote?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUpdateManyWithoutProductNestedInput
     createdBy?: UserUpdateOneRequiredWithoutProductsNestedInput
     lentItems?: LentItemUpdateManyWithoutProductNestedInput
     offers?: BorrowRequestOfferUpdateManyWithoutProductNestedInput
@@ -31218,6 +33513,7 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutProductNestedInput
     offers?: BorrowRequestOfferUncheckedUpdateManyWithoutProductNestedInput
     checkouts?: BorrowCheckoutUncheckedUpdateManyWithoutProductNestedInput
@@ -31284,6 +33580,123 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductImageCreateInput = {
+    id?: string
+    data: Buffer
+    mimeType: string
+    order?: number
+    product: ProductCreateNestedOneWithoutImagesInput
+  }
+
+  export type ProductImageUncheckedCreateInput = {
+    id?: string
+    productId: string
+    data: Buffer
+    mimeType: string
+    order?: number
+  }
+
+  export type ProductImageUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    product?: ProductUpdateOneRequiredWithoutImagesNestedInput
+  }
+
+  export type ProductImageUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ProductImageCreateManyInput = {
+    id?: string
+    productId: string
+    data: Buffer
+    mimeType: string
+    order?: number
+  }
+
+  export type ProductImageUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ProductImageUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ConditionPhotoCreateInput = {
+    id?: string
+    role: string
+    data: Buffer
+    mimeType: string
+    createdAt?: Date | string
+    checkout: BorrowCheckoutCreateNestedOneWithoutConditionPhotosInput
+  }
+
+  export type ConditionPhotoUncheckedCreateInput = {
+    id?: string
+    checkoutId: string
+    role: string
+    data: Buffer
+    mimeType: string
+    createdAt?: Date | string
+  }
+
+  export type ConditionPhotoUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    checkout?: BorrowCheckoutUpdateOneRequiredWithoutConditionPhotosNestedInput
+  }
+
+  export type ConditionPhotoUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConditionPhotoCreateManyInput = {
+    id?: string
+    checkoutId: string
+    role: string
+    data: Buffer
+    mimeType: string
+    createdAt?: Date | string
+  }
+
+  export type ConditionPhotoUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConditionPhotoUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    checkoutId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LentItemCreateInput = {
@@ -31564,6 +33977,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
@@ -31574,6 +33991,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateInput = {
@@ -31593,11 +34011,16 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUpdateInput = {
@@ -31612,6 +34035,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
@@ -31622,6 +34049,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateInput = {
@@ -31641,11 +34069,16 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutCreateManyInput = {
@@ -31665,6 +34098,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -31681,6 +34118,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -31702,6 +34143,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -32715,6 +35160,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     createdAt?: Date | string
+    readByAdmin?: boolean
     reporter: UserCreateNestedOneWithoutReportsMadeInput
     reported: UserCreateNestedOneWithoutReportsReceivedInput
   }
@@ -32727,6 +35173,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     createdAt?: Date | string
+    readByAdmin?: boolean
   }
 
   export type UserReportUpdateInput = {
@@ -32735,6 +35182,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
     reporter?: UserUpdateOneRequiredWithoutReportsMadeNestedInput
     reported?: UserUpdateOneRequiredWithoutReportsReceivedNestedInput
   }
@@ -32747,6 +35195,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserReportCreateManyInput = {
@@ -32757,6 +35206,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     createdAt?: Date | string
+    readByAdmin?: boolean
   }
 
   export type UserReportUpdateManyMutationInput = {
@@ -32765,6 +35215,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserReportUncheckedUpdateManyInput = {
@@ -32775,6 +35226,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IdVerificationCreateInput = {
@@ -33641,9 +36093,19 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type ProductImageListRelationFilter = {
+    every?: ProductImageWhereInput
+    some?: ProductImageWhereInput
+    none?: ProductImageWhereInput
+  }
+
   export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type ProductImageOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ProductCountOrderByAggregateInput = {
@@ -33772,9 +36234,90 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type BytesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesFilter<$PrismaModel> | Buffer
+  }
+
   export type ProductRelationFilter = {
     is?: ProductWhereInput
     isNot?: ProductWhereInput
+  }
+
+  export type ProductImageCountOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    order?: SortOrder
+  }
+
+  export type ProductImageAvgOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
+  export type ProductImageMaxOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    order?: SortOrder
+  }
+
+  export type ProductImageMinOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    order?: SortOrder
+  }
+
+  export type ProductImageSumOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
+  export type BytesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBytesFilter<$PrismaModel>
+    _max?: NestedBytesFilter<$PrismaModel>
+  }
+
+  export type BorrowCheckoutRelationFilter = {
+    is?: BorrowCheckoutWhereInput
+    isNot?: BorrowCheckoutWhereInput
+  }
+
+  export type ConditionPhotoCountOrderByAggregateInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    role?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ConditionPhotoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    role?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ConditionPhotoMinOrderByAggregateInput = {
+    id?: SortOrder
+    checkoutId?: SortOrder
+    role?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type LentItemCountOrderByAggregateInput = {
@@ -33950,6 +36493,16 @@ export namespace Prisma {
     isNot?: DisputeWhereInput | null
   }
 
+  export type ConditionPhotoListRelationFilter = {
+    every?: ConditionPhotoWhereInput
+    some?: ConditionPhotoWhereInput
+    none?: ConditionPhotoWhereInput
+  }
+
+  export type ConditionPhotoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type BorrowCheckoutCountOrderByAggregateInput = {
     id?: SortOrder
     borrowerId?: SortOrder
@@ -33967,6 +36520,10 @@ export namespace Prisma {
     returnedAt?: SortOrder
     cancelledBy?: SortOrder
     status?: SortOrder
+    aiDamageVerdict?: SortOrder
+    aiDamageConfidence?: SortOrder
+    aiDamageNotes?: SortOrder
+    aiDamageCheckedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -33974,6 +36531,7 @@ export namespace Prisma {
   export type BorrowCheckoutAvgOrderByAggregateInput = {
     totalPrice?: SortOrder
     deposit?: SortOrder
+    aiDamageConfidence?: SortOrder
   }
 
   export type BorrowCheckoutMaxOrderByAggregateInput = {
@@ -33992,6 +36550,10 @@ export namespace Prisma {
     returnedAt?: SortOrder
     cancelledBy?: SortOrder
     status?: SortOrder
+    aiDamageVerdict?: SortOrder
+    aiDamageConfidence?: SortOrder
+    aiDamageNotes?: SortOrder
+    aiDamageCheckedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -34012,6 +36574,10 @@ export namespace Prisma {
     returnedAt?: SortOrder
     cancelledBy?: SortOrder
     status?: SortOrder
+    aiDamageVerdict?: SortOrder
+    aiDamageConfidence?: SortOrder
+    aiDamageNotes?: SortOrder
+    aiDamageCheckedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -34019,6 +36585,7 @@ export namespace Prisma {
   export type BorrowCheckoutSumOrderByAggregateInput = {
     totalPrice?: SortOrder
     deposit?: SortOrder
+    aiDamageConfidence?: SortOrder
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -34586,11 +37153,6 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type BorrowCheckoutRelationFilter = {
-    is?: BorrowCheckoutWhereInput
-    isNot?: BorrowCheckoutWhereInput
-  }
-
   export type BorrowerReviewCountOrderByAggregateInput = {
     id?: SortOrder
     borrowCheckoutId?: SortOrder
@@ -34637,6 +37199,7 @@ export namespace Prisma {
     description?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    readByAdmin?: SortOrder
   }
 
   export type UserReportMaxOrderByAggregateInput = {
@@ -34647,6 +37210,7 @@ export namespace Prisma {
     description?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    readByAdmin?: SortOrder
   }
 
   export type UserReportMinOrderByAggregateInput = {
@@ -34657,6 +37221,7 @@ export namespace Prisma {
     description?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    readByAdmin?: SortOrder
   }
 
   export type BytesNullableFilter<$PrismaModel = never> = {
@@ -36020,6 +38585,13 @@ export namespace Prisma {
     deleteMany?: DisputeResolutionScalarWhereInput | DisputeResolutionScalarWhereInput[]
   }
 
+  export type ProductImageCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput> | ProductImageCreateWithoutProductInput[] | ProductImageUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[]
+    createMany?: ProductImageCreateManyProductInputEnvelope
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutProductsInput = {
     create?: XOR<UserCreateWithoutProductsInput, UserUncheckedCreateWithoutProductsInput>
     connectOrCreate?: UserCreateOrConnectWithoutProductsInput
@@ -36052,6 +38624,13 @@ export namespace Prisma {
     connectOrCreate?: ItemTrailEntryCreateOrConnectWithoutProductInput | ItemTrailEntryCreateOrConnectWithoutProductInput[]
     createMany?: ItemTrailEntryCreateManyProductInputEnvelope
     connect?: ItemTrailEntryWhereUniqueInput | ItemTrailEntryWhereUniqueInput[]
+  }
+
+  export type ProductImageUncheckedCreateNestedManyWithoutProductInput = {
+    create?: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput> | ProductImageCreateWithoutProductInput[] | ProductImageUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[]
+    createMany?: ProductImageCreateManyProductInputEnvelope
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
   }
 
   export type LentItemUncheckedCreateNestedManyWithoutProductInput = {
@@ -36096,6 +38675,20 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type ProductImageUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput> | ProductImageCreateWithoutProductInput[] | ProductImageUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[]
+    upsert?: ProductImageUpsertWithWhereUniqueWithoutProductInput | ProductImageUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductImageCreateManyProductInputEnvelope
+    set?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    disconnect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    delete?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    update?: ProductImageUpdateWithWhereUniqueWithoutProductInput | ProductImageUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductImageUpdateManyWithWhereWithoutProductInput | ProductImageUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
   }
 
   export type UserUpdateOneRequiredWithoutProductsNestedInput = {
@@ -36162,6 +38755,20 @@ export namespace Prisma {
     deleteMany?: ItemTrailEntryScalarWhereInput | ItemTrailEntryScalarWhereInput[]
   }
 
+  export type ProductImageUncheckedUpdateManyWithoutProductNestedInput = {
+    create?: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput> | ProductImageCreateWithoutProductInput[] | ProductImageUncheckedCreateWithoutProductInput[]
+    connectOrCreate?: ProductImageCreateOrConnectWithoutProductInput | ProductImageCreateOrConnectWithoutProductInput[]
+    upsert?: ProductImageUpsertWithWhereUniqueWithoutProductInput | ProductImageUpsertWithWhereUniqueWithoutProductInput[]
+    createMany?: ProductImageCreateManyProductInputEnvelope
+    set?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    disconnect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    delete?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    connect?: ProductImageWhereUniqueInput | ProductImageWhereUniqueInput[]
+    update?: ProductImageUpdateWithWhereUniqueWithoutProductInput | ProductImageUpdateWithWhereUniqueWithoutProductInput[]
+    updateMany?: ProductImageUpdateManyWithWhereWithoutProductInput | ProductImageUpdateManyWithWhereWithoutProductInput[]
+    deleteMany?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
+  }
+
   export type LentItemUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<LentItemCreateWithoutProductInput, LentItemUncheckedCreateWithoutProductInput> | LentItemCreateWithoutProductInput[] | LentItemUncheckedCreateWithoutProductInput[]
     connectOrCreate?: LentItemCreateOrConnectWithoutProductInput | LentItemCreateOrConnectWithoutProductInput[]
@@ -36216,6 +38823,38 @@ export namespace Prisma {
     update?: ItemTrailEntryUpdateWithWhereUniqueWithoutProductInput | ItemTrailEntryUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: ItemTrailEntryUpdateManyWithWhereWithoutProductInput | ItemTrailEntryUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: ItemTrailEntryScalarWhereInput | ItemTrailEntryScalarWhereInput[]
+  }
+
+  export type ProductCreateNestedOneWithoutImagesInput = {
+    create?: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutImagesInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type BytesFieldUpdateOperationsInput = {
+    set?: Buffer
+  }
+
+  export type ProductUpdateOneRequiredWithoutImagesNestedInput = {
+    create?: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutImagesInput
+    upsert?: ProductUpsertWithoutImagesInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutImagesInput, ProductUpdateWithoutImagesInput>, ProductUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type BorrowCheckoutCreateNestedOneWithoutConditionPhotosInput = {
+    create?: XOR<BorrowCheckoutCreateWithoutConditionPhotosInput, BorrowCheckoutUncheckedCreateWithoutConditionPhotosInput>
+    connectOrCreate?: BorrowCheckoutCreateOrConnectWithoutConditionPhotosInput
+    connect?: BorrowCheckoutWhereUniqueInput
+  }
+
+  export type BorrowCheckoutUpdateOneRequiredWithoutConditionPhotosNestedInput = {
+    create?: XOR<BorrowCheckoutCreateWithoutConditionPhotosInput, BorrowCheckoutUncheckedCreateWithoutConditionPhotosInput>
+    connectOrCreate?: BorrowCheckoutCreateOrConnectWithoutConditionPhotosInput
+    upsert?: BorrowCheckoutUpsertWithoutConditionPhotosInput
+    connect?: BorrowCheckoutWhereUniqueInput
+    update?: XOR<XOR<BorrowCheckoutUpdateToOneWithWhereWithoutConditionPhotosInput, BorrowCheckoutUpdateWithoutConditionPhotosInput>, BorrowCheckoutUncheckedUpdateWithoutConditionPhotosInput>
   }
 
   export type ProductCreateNestedOneWithoutLentItemsInput = {
@@ -36550,6 +39189,13 @@ export namespace Prisma {
     connect?: DisputeWhereUniqueInput
   }
 
+  export type ConditionPhotoCreateNestedManyWithoutCheckoutInput = {
+    create?: XOR<ConditionPhotoCreateWithoutCheckoutInput, ConditionPhotoUncheckedCreateWithoutCheckoutInput> | ConditionPhotoCreateWithoutCheckoutInput[] | ConditionPhotoUncheckedCreateWithoutCheckoutInput[]
+    connectOrCreate?: ConditionPhotoCreateOrConnectWithoutCheckoutInput | ConditionPhotoCreateOrConnectWithoutCheckoutInput[]
+    createMany?: ConditionPhotoCreateManyCheckoutInputEnvelope
+    connect?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
+  }
+
   export type ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput = {
     create?: XOR<ItemTrailEntryCreateWithoutBorrowCheckoutInput, ItemTrailEntryUncheckedCreateWithoutBorrowCheckoutInput>
     connectOrCreate?: ItemTrailEntryCreateOrConnectWithoutBorrowCheckoutInput
@@ -36566,6 +39212,13 @@ export namespace Prisma {
     create?: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
     connectOrCreate?: DisputeCreateOrConnectWithoutCheckoutInput
     connect?: DisputeWhereUniqueInput
+  }
+
+  export type ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput = {
+    create?: XOR<ConditionPhotoCreateWithoutCheckoutInput, ConditionPhotoUncheckedCreateWithoutCheckoutInput> | ConditionPhotoCreateWithoutCheckoutInput[] | ConditionPhotoUncheckedCreateWithoutCheckoutInput[]
+    connectOrCreate?: ConditionPhotoCreateOrConnectWithoutCheckoutInput | ConditionPhotoCreateOrConnectWithoutCheckoutInput[]
+    createMany?: ConditionPhotoCreateManyCheckoutInputEnvelope
+    connect?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput = {
@@ -36642,6 +39295,20 @@ export namespace Prisma {
     update?: XOR<XOR<DisputeUpdateToOneWithWhereWithoutCheckoutInput, DisputeUpdateWithoutCheckoutInput>, DisputeUncheckedUpdateWithoutCheckoutInput>
   }
 
+  export type ConditionPhotoUpdateManyWithoutCheckoutNestedInput = {
+    create?: XOR<ConditionPhotoCreateWithoutCheckoutInput, ConditionPhotoUncheckedCreateWithoutCheckoutInput> | ConditionPhotoCreateWithoutCheckoutInput[] | ConditionPhotoUncheckedCreateWithoutCheckoutInput[]
+    connectOrCreate?: ConditionPhotoCreateOrConnectWithoutCheckoutInput | ConditionPhotoCreateOrConnectWithoutCheckoutInput[]
+    upsert?: ConditionPhotoUpsertWithWhereUniqueWithoutCheckoutInput | ConditionPhotoUpsertWithWhereUniqueWithoutCheckoutInput[]
+    createMany?: ConditionPhotoCreateManyCheckoutInputEnvelope
+    set?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
+    disconnect?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
+    delete?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
+    connect?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
+    update?: ConditionPhotoUpdateWithWhereUniqueWithoutCheckoutInput | ConditionPhotoUpdateWithWhereUniqueWithoutCheckoutInput[]
+    updateMany?: ConditionPhotoUpdateManyWithWhereWithoutCheckoutInput | ConditionPhotoUpdateManyWithWhereWithoutCheckoutInput[]
+    deleteMany?: ConditionPhotoScalarWhereInput | ConditionPhotoScalarWhereInput[]
+  }
+
   export type ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput = {
     create?: XOR<ItemTrailEntryCreateWithoutBorrowCheckoutInput, ItemTrailEntryUncheckedCreateWithoutBorrowCheckoutInput>
     connectOrCreate?: ItemTrailEntryCreateOrConnectWithoutBorrowCheckoutInput
@@ -36670,6 +39337,20 @@ export namespace Prisma {
     delete?: DisputeWhereInput | boolean
     connect?: DisputeWhereUniqueInput
     update?: XOR<XOR<DisputeUpdateToOneWithWhereWithoutCheckoutInput, DisputeUpdateWithoutCheckoutInput>, DisputeUncheckedUpdateWithoutCheckoutInput>
+  }
+
+  export type ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput = {
+    create?: XOR<ConditionPhotoCreateWithoutCheckoutInput, ConditionPhotoUncheckedCreateWithoutCheckoutInput> | ConditionPhotoCreateWithoutCheckoutInput[] | ConditionPhotoUncheckedCreateWithoutCheckoutInput[]
+    connectOrCreate?: ConditionPhotoCreateOrConnectWithoutCheckoutInput | ConditionPhotoCreateOrConnectWithoutCheckoutInput[]
+    upsert?: ConditionPhotoUpsertWithWhereUniqueWithoutCheckoutInput | ConditionPhotoUpsertWithWhereUniqueWithoutCheckoutInput[]
+    createMany?: ConditionPhotoCreateManyCheckoutInputEnvelope
+    set?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
+    disconnect?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
+    delete?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
+    connect?: ConditionPhotoWhereUniqueInput | ConditionPhotoWhereUniqueInput[]
+    update?: ConditionPhotoUpdateWithWhereUniqueWithoutCheckoutInput | ConditionPhotoUpdateWithWhereUniqueWithoutCheckoutInput[]
+    updateMany?: ConditionPhotoUpdateManyWithWhereWithoutCheckoutInput | ConditionPhotoUpdateManyWithWhereWithoutCheckoutInput[]
+    deleteMany?: ConditionPhotoScalarWhereInput | ConditionPhotoScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutNotificationsInput = {
@@ -37634,6 +40315,23 @@ export namespace Prisma {
     gte?: InputJsonValue
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
+
+  export type NestedBytesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesFilter<$PrismaModel> | Buffer
+  }
+
+  export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Buffer | BytesFieldRefInput<$PrismaModel>
+    in?: Buffer[]
+    notIn?: Buffer[]
+    not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Buffer
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBytesFilter<$PrismaModel>
+    _max?: NestedBytesFilter<$PrismaModel>
+  }
   export type NestedJsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -37860,6 +40558,7 @@ export namespace Prisma {
     lenderNote?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageCreateNestedManyWithoutProductInput
     lentItems?: LentItemCreateNestedManyWithoutProductInput
     offers?: BorrowRequestOfferCreateNestedManyWithoutProductInput
     checkouts?: BorrowCheckoutCreateNestedManyWithoutProductInput
@@ -37884,6 +40583,7 @@ export namespace Prisma {
     lenderNote?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutProductInput
     offers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutProductInput
     checkouts?: BorrowCheckoutUncheckedCreateNestedManyWithoutProductInput
@@ -38017,6 +40717,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     lender: UserCreateNestedOneWithoutCheckoutsAsLenderInput
@@ -38026,6 +40730,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutBorrowerInput = {
@@ -38044,11 +40749,16 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutBorrowerInput = {
@@ -38073,6 +40783,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
@@ -38082,6 +40796,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutLenderInput = {
@@ -38100,11 +40815,16 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutLenderInput = {
@@ -38391,6 +41111,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     createdAt?: Date | string
+    readByAdmin?: boolean
     reported: UserCreateNestedOneWithoutReportsReceivedInput
   }
 
@@ -38401,6 +41122,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     createdAt?: Date | string
+    readByAdmin?: boolean
   }
 
   export type UserReportCreateOrConnectWithoutReporterInput = {
@@ -38419,6 +41141,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     createdAt?: Date | string
+    readByAdmin?: boolean
     reporter: UserCreateNestedOneWithoutReportsMadeInput
   }
 
@@ -38429,6 +41152,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     createdAt?: Date | string
+    readByAdmin?: boolean
   }
 
   export type UserReportCreateOrConnectWithoutReportedInput = {
@@ -38957,6 +41681,10 @@ export namespace Prisma {
     returnedAt?: DateTimeNullableFilter<"BorrowCheckout"> | Date | string | null
     cancelledBy?: StringNullableFilter<"BorrowCheckout"> | string | null
     status?: StringFilter<"BorrowCheckout"> | string
+    aiDamageVerdict?: StringNullableFilter<"BorrowCheckout"> | string | null
+    aiDamageConfidence?: FloatNullableFilter<"BorrowCheckout"> | number | null
+    aiDamageNotes?: StringNullableFilter<"BorrowCheckout"> | string | null
+    aiDamageCheckedAt?: DateTimeNullableFilter<"BorrowCheckout"> | Date | string | null
     createdAt?: DateTimeFilter<"BorrowCheckout"> | Date | string
     updatedAt?: DateTimeFilter<"BorrowCheckout"> | Date | string
   }
@@ -39257,6 +41985,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"UserReport"> | string | null
     status?: StringFilter<"UserReport"> | string
     createdAt?: DateTimeFilter<"UserReport"> | Date | string
+    readByAdmin?: BoolFilter<"UserReport"> | boolean
   }
 
   export type UserReportUpsertWithWhereUniqueWithoutReportedInput = {
@@ -39444,6 +42173,30 @@ export namespace Prisma {
     resolvedAt?: DateTimeFilter<"DisputeResolution"> | Date | string
   }
 
+  export type ProductImageCreateWithoutProductInput = {
+    id?: string
+    data: Buffer
+    mimeType: string
+    order?: number
+  }
+
+  export type ProductImageUncheckedCreateWithoutProductInput = {
+    id?: string
+    data: Buffer
+    mimeType: string
+    order?: number
+  }
+
+  export type ProductImageCreateOrConnectWithoutProductInput = {
+    where: ProductImageWhereUniqueInput
+    create: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductImageCreateManyProductInputEnvelope = {
+    data: ProductImageCreateManyProductInput | ProductImageCreateManyProductInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserCreateWithoutProductsInput = {
     id?: string
     name?: string | null
@@ -39623,6 +42376,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
@@ -39632,6 +42389,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutProductInput = {
@@ -39650,11 +42408,16 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutProductInput = {
@@ -39707,6 +42470,33 @@ export namespace Prisma {
   export type ItemTrailEntryCreateManyProductInputEnvelope = {
     data: ItemTrailEntryCreateManyProductInput | ItemTrailEntryCreateManyProductInput[]
     skipDuplicates?: boolean
+  }
+
+  export type ProductImageUpsertWithWhereUniqueWithoutProductInput = {
+    where: ProductImageWhereUniqueInput
+    update: XOR<ProductImageUpdateWithoutProductInput, ProductImageUncheckedUpdateWithoutProductInput>
+    create: XOR<ProductImageCreateWithoutProductInput, ProductImageUncheckedCreateWithoutProductInput>
+  }
+
+  export type ProductImageUpdateWithWhereUniqueWithoutProductInput = {
+    where: ProductImageWhereUniqueInput
+    data: XOR<ProductImageUpdateWithoutProductInput, ProductImageUncheckedUpdateWithoutProductInput>
+  }
+
+  export type ProductImageUpdateManyWithWhereWithoutProductInput = {
+    where: ProductImageScalarWhereInput
+    data: XOR<ProductImageUpdateManyMutationInput, ProductImageUncheckedUpdateManyWithoutProductInput>
+  }
+
+  export type ProductImageScalarWhereInput = {
+    AND?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
+    OR?: ProductImageScalarWhereInput[]
+    NOT?: ProductImageScalarWhereInput | ProductImageScalarWhereInput[]
+    id?: StringFilter<"ProductImage"> | string
+    productId?: StringFilter<"ProductImage"> | string
+    data?: BytesFilter<"ProductImage"> | Buffer
+    mimeType?: StringFilter<"ProductImage"> | string
+    order?: IntFilter<"ProductImage"> | number
   }
 
   export type UserUpsertWithoutProductsInput = {
@@ -39884,6 +42674,250 @@ export namespace Prisma {
     data: XOR<ItemTrailEntryUpdateManyMutationInput, ItemTrailEntryUncheckedUpdateManyWithoutProductInput>
   }
 
+  export type ProductCreateWithoutImagesInput = {
+    id?: string
+    slug: string
+    name: string
+    category: string
+    subcategory?: string | null
+    location: string
+    pricePerDay: number
+    deposit?: number | null
+    description: string
+    features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
+    imageUrl?: string | null
+    compensationMajor?: string | null
+    compensationMinor?: string | null
+    lenderNote?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutProductsInput
+    lentItems?: LentItemCreateNestedManyWithoutProductInput
+    offers?: BorrowRequestOfferCreateNestedManyWithoutProductInput
+    checkouts?: BorrowCheckoutCreateNestedManyWithoutProductInput
+    trailEntries?: ItemTrailEntryCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateWithoutImagesInput = {
+    id?: string
+    slug: string
+    name: string
+    category: string
+    subcategory?: string | null
+    location: string
+    pricePerDay: number
+    deposit?: number | null
+    description: string
+    features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
+    imageUrl?: string | null
+    compensationMajor?: string | null
+    compensationMinor?: string | null
+    lenderNote?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    lentItems?: LentItemUncheckedCreateNestedManyWithoutProductInput
+    offers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutProductInput
+    checkouts?: BorrowCheckoutUncheckedCreateNestedManyWithoutProductInput
+    trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutImagesInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>
+  }
+
+  export type ProductUpsertWithoutImagesInput = {
+    update: XOR<ProductUpdateWithoutImagesInput, ProductUncheckedUpdateWithoutImagesInput>
+    create: XOR<ProductCreateWithoutImagesInput, ProductUncheckedCreateWithoutImagesInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutImagesInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutImagesInput, ProductUncheckedUpdateWithoutImagesInput>
+  }
+
+  export type ProductUpdateWithoutImagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    pricePerDay?: IntFieldUpdateOperationsInput | number
+    deposit?: NullableIntFieldUpdateOperationsInput | number | null
+    description?: StringFieldUpdateOperationsInput | string
+    features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
+    compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
+    lenderNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutProductsNestedInput
+    lentItems?: LentItemUpdateManyWithoutProductNestedInput
+    offers?: BorrowRequestOfferUpdateManyWithoutProductNestedInput
+    checkouts?: BorrowCheckoutUpdateManyWithoutProductNestedInput
+    trailEntries?: ItemTrailEntryUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutImagesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
+    subcategory?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: StringFieldUpdateOperationsInput | string
+    pricePerDay?: IntFieldUpdateOperationsInput | number
+    deposit?: NullableIntFieldUpdateOperationsInput | number | null
+    description?: StringFieldUpdateOperationsInput | string
+    features?: JsonNullValueInput | InputJsonValue
+    drawbacks?: JsonNullValueInput | InputJsonValue
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    compensationMajor?: NullableStringFieldUpdateOperationsInput | string | null
+    compensationMinor?: NullableStringFieldUpdateOperationsInput | string | null
+    lenderNote?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lentItems?: LentItemUncheckedUpdateManyWithoutProductNestedInput
+    offers?: BorrowRequestOfferUncheckedUpdateManyWithoutProductNestedInput
+    checkouts?: BorrowCheckoutUncheckedUpdateManyWithoutProductNestedInput
+    trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type BorrowCheckoutCreateWithoutConditionPhotosInput = {
+    id?: string
+    originType: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    totalPrice?: number | null
+    deposit?: number | null
+    notes?: string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: Date | string | null
+    cancelledBy?: string | null
+    status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
+    lender: UserCreateNestedOneWithoutCheckoutsAsLenderInput
+    product: ProductCreateNestedOneWithoutCheckoutsInput
+    lentItem?: LentItemCreateNestedOneWithoutCheckoutsInput
+    offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
+    trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+  }
+
+  export type BorrowCheckoutUncheckedCreateWithoutConditionPhotosInput = {
+    id?: string
+    borrowerId: string
+    lenderId: string
+    productId: string
+    lentItemId?: string | null
+    borrowRequestOfferId?: string | null
+    originType: string
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    totalPrice?: number | null
+    deposit?: number | null
+    notes?: string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: Date | string | null
+    cancelledBy?: string | null
+    status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+  }
+
+  export type BorrowCheckoutCreateOrConnectWithoutConditionPhotosInput = {
+    where: BorrowCheckoutWhereUniqueInput
+    create: XOR<BorrowCheckoutCreateWithoutConditionPhotosInput, BorrowCheckoutUncheckedCreateWithoutConditionPhotosInput>
+  }
+
+  export type BorrowCheckoutUpsertWithoutConditionPhotosInput = {
+    update: XOR<BorrowCheckoutUpdateWithoutConditionPhotosInput, BorrowCheckoutUncheckedUpdateWithoutConditionPhotosInput>
+    create: XOR<BorrowCheckoutCreateWithoutConditionPhotosInput, BorrowCheckoutUncheckedCreateWithoutConditionPhotosInput>
+    where?: BorrowCheckoutWhereInput
+  }
+
+  export type BorrowCheckoutUpdateToOneWithWhereWithoutConditionPhotosInput = {
+    where?: BorrowCheckoutWhereInput
+    data: XOR<BorrowCheckoutUpdateWithoutConditionPhotosInput, BorrowCheckoutUncheckedUpdateWithoutConditionPhotosInput>
+  }
+
+  export type BorrowCheckoutUpdateWithoutConditionPhotosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    originType?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalPrice?: NullableIntFieldUpdateOperationsInput | number | null
+    deposit?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
+    lender?: UserUpdateOneRequiredWithoutCheckoutsAsLenderNestedInput
+    product?: ProductUpdateOneRequiredWithoutCheckoutsNestedInput
+    lentItem?: LentItemUpdateOneWithoutCheckoutsNestedInput
+    offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
+    trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+  }
+
+  export type BorrowCheckoutUncheckedUpdateWithoutConditionPhotosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    borrowerId?: StringFieldUpdateOperationsInput | string
+    lenderId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    lentItemId?: NullableStringFieldUpdateOperationsInput | string | null
+    borrowRequestOfferId?: NullableStringFieldUpdateOperationsInput | string | null
+    originType?: StringFieldUpdateOperationsInput | string
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    totalPrice?: NullableIntFieldUpdateOperationsInput | number | null
+    deposit?: NullableIntFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    damageReport?: NullableJsonNullValueInput | InputJsonValue
+    returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+  }
+
   export type ProductCreateWithoutLentItemsInput = {
     id?: string
     slug: string
@@ -39902,6 +42936,7 @@ export namespace Prisma {
     lenderNote?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageCreateNestedManyWithoutProductInput
     createdBy: UserCreateNestedOneWithoutProductsInput
     offers?: BorrowRequestOfferCreateNestedManyWithoutProductInput
     checkouts?: BorrowCheckoutCreateNestedManyWithoutProductInput
@@ -39927,6 +42962,7 @@ export namespace Prisma {
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
     offers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutProductInput
     checkouts?: BorrowCheckoutUncheckedCreateNestedManyWithoutProductInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutProductInput
@@ -40078,6 +43114,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
@@ -40087,6 +43127,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutLentItemInput = {
@@ -40105,11 +43146,16 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutLentItemInput = {
@@ -40193,6 +43239,7 @@ export namespace Prisma {
     lenderNote?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUpdateManyWithoutProductNestedInput
     createdBy?: UserUpdateOneRequiredWithoutProductsNestedInput
     offers?: BorrowRequestOfferUpdateManyWithoutProductNestedInput
     checkouts?: BorrowCheckoutUpdateManyWithoutProductNestedInput
@@ -40218,6 +43265,7 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
     offers?: BorrowRequestOfferUncheckedUpdateManyWithoutProductNestedInput
     checkouts?: BorrowCheckoutUncheckedUpdateManyWithoutProductNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutProductNestedInput
@@ -40701,6 +43749,7 @@ export namespace Prisma {
     lenderNote?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageCreateNestedManyWithoutProductInput
     createdBy: UserCreateNestedOneWithoutProductsInput
     lentItems?: LentItemCreateNestedManyWithoutProductInput
     checkouts?: BorrowCheckoutCreateNestedManyWithoutProductInput
@@ -40726,6 +43775,7 @@ export namespace Prisma {
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutProductInput
     checkouts?: BorrowCheckoutUncheckedCreateNestedManyWithoutProductInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutProductInput
@@ -40853,6 +43903,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
@@ -40862,6 +43916,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutOfferInput = {
@@ -40880,11 +43935,16 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutOfferInput = {
@@ -40966,6 +44026,7 @@ export namespace Prisma {
     lenderNote?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUpdateManyWithoutProductNestedInput
     createdBy?: UserUpdateOneRequiredWithoutProductsNestedInput
     lentItems?: LentItemUpdateManyWithoutProductNestedInput
     checkouts?: BorrowCheckoutUpdateManyWithoutProductNestedInput
@@ -40991,6 +44052,7 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutProductNestedInput
     checkouts?: BorrowCheckoutUncheckedUpdateManyWithoutProductNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutProductNestedInput
@@ -41130,6 +44192,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
@@ -41139,6 +44205,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutOfferInput = {
@@ -41157,11 +44224,16 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput
   }
 
   export type UserCreateWithoutCheckoutsAsBorrowerInput = {
@@ -41392,6 +44464,7 @@ export namespace Prisma {
     lenderNote?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageCreateNestedManyWithoutProductInput
     createdBy: UserCreateNestedOneWithoutProductsInput
     lentItems?: LentItemCreateNestedManyWithoutProductInput
     offers?: BorrowRequestOfferCreateNestedManyWithoutProductInput
@@ -41417,6 +44490,7 @@ export namespace Prisma {
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutProductInput
     offers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutProductInput
     trailEntries?: ItemTrailEntryUncheckedCreateNestedManyWithoutProductInput
@@ -41582,6 +44656,32 @@ export namespace Prisma {
   export type DisputeCreateOrConnectWithoutCheckoutInput = {
     where: DisputeWhereUniqueInput
     create: XOR<DisputeCreateWithoutCheckoutInput, DisputeUncheckedCreateWithoutCheckoutInput>
+  }
+
+  export type ConditionPhotoCreateWithoutCheckoutInput = {
+    id?: string
+    role: string
+    data: Buffer
+    mimeType: string
+    createdAt?: Date | string
+  }
+
+  export type ConditionPhotoUncheckedCreateWithoutCheckoutInput = {
+    id?: string
+    role: string
+    data: Buffer
+    mimeType: string
+    createdAt?: Date | string
+  }
+
+  export type ConditionPhotoCreateOrConnectWithoutCheckoutInput = {
+    where: ConditionPhotoWhereUniqueInput
+    create: XOR<ConditionPhotoCreateWithoutCheckoutInput, ConditionPhotoUncheckedCreateWithoutCheckoutInput>
+  }
+
+  export type ConditionPhotoCreateManyCheckoutInputEnvelope = {
+    data: ConditionPhotoCreateManyCheckoutInput | ConditionPhotoCreateManyCheckoutInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutCheckoutsAsBorrowerInput = {
@@ -41835,6 +44935,7 @@ export namespace Prisma {
     lenderNote?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUpdateManyWithoutProductNestedInput
     createdBy?: UserUpdateOneRequiredWithoutProductsNestedInput
     lentItems?: LentItemUpdateManyWithoutProductNestedInput
     offers?: BorrowRequestOfferUpdateManyWithoutProductNestedInput
@@ -41860,6 +44961,7 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutProductNestedInput
     offers?: BorrowRequestOfferUncheckedUpdateManyWithoutProductNestedInput
     trailEntries?: ItemTrailEntryUncheckedUpdateManyWithoutProductNestedInput
@@ -42050,6 +45152,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     resolution?: DisputeResolutionUncheckedUpdateOneWithoutDisputeNestedInput
     events?: DisputeEventUncheckedUpdateManyWithoutDisputeNestedInput
+  }
+
+  export type ConditionPhotoUpsertWithWhereUniqueWithoutCheckoutInput = {
+    where: ConditionPhotoWhereUniqueInput
+    update: XOR<ConditionPhotoUpdateWithoutCheckoutInput, ConditionPhotoUncheckedUpdateWithoutCheckoutInput>
+    create: XOR<ConditionPhotoCreateWithoutCheckoutInput, ConditionPhotoUncheckedCreateWithoutCheckoutInput>
+  }
+
+  export type ConditionPhotoUpdateWithWhereUniqueWithoutCheckoutInput = {
+    where: ConditionPhotoWhereUniqueInput
+    data: XOR<ConditionPhotoUpdateWithoutCheckoutInput, ConditionPhotoUncheckedUpdateWithoutCheckoutInput>
+  }
+
+  export type ConditionPhotoUpdateManyWithWhereWithoutCheckoutInput = {
+    where: ConditionPhotoScalarWhereInput
+    data: XOR<ConditionPhotoUpdateManyMutationInput, ConditionPhotoUncheckedUpdateManyWithoutCheckoutInput>
+  }
+
+  export type ConditionPhotoScalarWhereInput = {
+    AND?: ConditionPhotoScalarWhereInput | ConditionPhotoScalarWhereInput[]
+    OR?: ConditionPhotoScalarWhereInput[]
+    NOT?: ConditionPhotoScalarWhereInput | ConditionPhotoScalarWhereInput[]
+    id?: StringFilter<"ConditionPhoto"> | string
+    checkoutId?: StringFilter<"ConditionPhoto"> | string
+    role?: StringFilter<"ConditionPhoto"> | string
+    data?: BytesFilter<"ConditionPhoto"> | Buffer
+    mimeType?: StringFilter<"ConditionPhoto"> | string
+    createdAt?: DateTimeFilter<"ConditionPhoto"> | Date | string
   }
 
   export type UserCreateWithoutNotificationsInput = {
@@ -44380,6 +47510,7 @@ export namespace Prisma {
     lenderNote?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageCreateNestedManyWithoutProductInput
     createdBy: UserCreateNestedOneWithoutProductsInput
     lentItems?: LentItemCreateNestedManyWithoutProductInput
     offers?: BorrowRequestOfferCreateNestedManyWithoutProductInput
@@ -44405,6 +47536,7 @@ export namespace Prisma {
     createdById: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    images?: ProductImageUncheckedCreateNestedManyWithoutProductInput
     lentItems?: LentItemUncheckedCreateNestedManyWithoutProductInput
     offers?: BorrowRequestOfferUncheckedCreateNestedManyWithoutProductInput
     checkouts?: BorrowCheckoutUncheckedCreateNestedManyWithoutProductInput
@@ -44454,6 +47586,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
@@ -44463,6 +47599,7 @@ export namespace Prisma {
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutTrailEntryInput = {
@@ -44482,10 +47619,15 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutTrailEntryInput = {
@@ -44651,6 +47793,7 @@ export namespace Prisma {
     lenderNote?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUpdateManyWithoutProductNestedInput
     createdBy?: UserUpdateOneRequiredWithoutProductsNestedInput
     lentItems?: LentItemUpdateManyWithoutProductNestedInput
     offers?: BorrowRequestOfferUpdateManyWithoutProductNestedInput
@@ -44676,6 +47819,7 @@ export namespace Prisma {
     createdById?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutProductNestedInput
     offers?: BorrowRequestOfferUncheckedUpdateManyWithoutProductNestedInput
     checkouts?: BorrowCheckoutUncheckedUpdateManyWithoutProductNestedInput
@@ -44737,6 +47881,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
@@ -44746,6 +47894,7 @@ export namespace Prisma {
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutTrailEntryInput = {
@@ -44765,10 +47914,15 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput
   }
 
   export type UserUpsertWithoutTrailEntriesInput = {
@@ -45206,6 +48360,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
@@ -45215,6 +48373,7 @@ export namespace Prisma {
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutBorrowerReviewInput = {
@@ -45234,10 +48393,15 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     dispute?: DisputeUncheckedCreateNestedOneWithoutCheckoutInput
+    conditionPhotos?: ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutBorrowerReviewInput = {
@@ -45478,6 +48642,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
@@ -45487,6 +48655,7 @@ export namespace Prisma {
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutBorrowerReviewInput = {
@@ -45506,10 +48675,15 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput
   }
 
   export type UserUpsertWithoutLenderReviewsInput = {
@@ -46394,6 +49568,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     borrower: UserCreateNestedOneWithoutCheckoutsAsBorrowerInput
@@ -46403,6 +49581,7 @@ export namespace Prisma {
     offer?: BorrowRequestOfferCreateNestedOneWithoutCheckoutInput
     trailEntry?: ItemTrailEntryCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewCreateNestedOneWithoutBorrowCheckoutInput
+    conditionPhotos?: ConditionPhotoCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutUncheckedCreateWithoutDisputeInput = {
@@ -46422,10 +49601,15 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     trailEntry?: ItemTrailEntryUncheckedCreateNestedOneWithoutBorrowCheckoutInput
     borrowerReview?: BorrowerReviewUncheckedCreateNestedOneWithoutBorrowCheckoutInput
+    conditionPhotos?: ConditionPhotoUncheckedCreateNestedManyWithoutCheckoutInput
   }
 
   export type BorrowCheckoutCreateOrConnectWithoutDisputeInput = {
@@ -46822,6 +50006,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
@@ -46831,6 +50019,7 @@ export namespace Prisma {
     offer?: BorrowRequestOfferUpdateOneWithoutCheckoutNestedInput
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutDisputeInput = {
@@ -46850,10 +50039,15 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput
   }
 
   export type UserUpsertWithoutDisputesRaisedInput = {
@@ -47740,6 +50934,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -47760,6 +50958,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -47857,6 +51059,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     createdAt?: Date | string
+    readByAdmin?: boolean
   }
 
   export type UserReportCreateManyReportedInput = {
@@ -47866,6 +51069,7 @@ export namespace Prisma {
     description?: string | null
     status?: string
     createdAt?: Date | string
+    readByAdmin?: boolean
   }
 
   export type NotificationCreateManyUserInput = {
@@ -48050,6 +51254,7 @@ export namespace Prisma {
     lenderNote?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUpdateManyWithoutProductNestedInput
     lentItems?: LentItemUpdateManyWithoutProductNestedInput
     offers?: BorrowRequestOfferUpdateManyWithoutProductNestedInput
     checkouts?: BorrowCheckoutUpdateManyWithoutProductNestedInput
@@ -48074,6 +51279,7 @@ export namespace Prisma {
     lenderNote?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    images?: ProductImageUncheckedUpdateManyWithoutProductNestedInput
     lentItems?: LentItemUncheckedUpdateManyWithoutProductNestedInput
     offers?: BorrowRequestOfferUncheckedUpdateManyWithoutProductNestedInput
     checkouts?: BorrowCheckoutUncheckedUpdateManyWithoutProductNestedInput
@@ -48172,6 +51378,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     lender?: UserUpdateOneRequiredWithoutCheckoutsAsLenderNestedInput
@@ -48181,6 +51391,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutBorrowerInput = {
@@ -48199,11 +51410,16 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateManyWithoutBorrowerInput = {
@@ -48222,6 +51438,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -48238,6 +51458,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
@@ -48247,6 +51471,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutLenderInput = {
@@ -48265,11 +51490,16 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateManyWithoutLenderInput = {
@@ -48288,6 +51518,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -48562,6 +51796,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
     reported?: UserUpdateOneRequiredWithoutReportsReceivedNestedInput
   }
 
@@ -48572,6 +51807,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserReportUncheckedUpdateManyWithoutReporterInput = {
@@ -48581,6 +51817,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserReportUpdateWithoutReportedInput = {
@@ -48589,6 +51826,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
     reporter?: UserUpdateOneRequiredWithoutReportsMadeNestedInput
   }
 
@@ -48599,6 +51837,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserReportUncheckedUpdateManyWithoutReportedInput = {
@@ -48608,6 +51847,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    readByAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type NotificationUpdateWithoutUserInput = {
@@ -48844,6 +52084,13 @@ export namespace Prisma {
     resolvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ProductImageCreateManyProductInput = {
+    id?: string
+    data: Buffer
+    mimeType: string
+    order?: number
+  }
+
   export type LentItemCreateManyProductInput = {
     id?: string
     lenderId: string
@@ -48877,6 +52124,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -48894,6 +52145,27 @@ export namespace Prisma {
     isPublic?: boolean
     anonymous?: boolean
     createdAt?: Date | string
+  }
+
+  export type ProductImageUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ProductImageUncheckedUpdateWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ProductImageUncheckedUpdateManyWithoutProductInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type LentItemUpdateWithoutProductInput = {
@@ -48967,6 +52239,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
@@ -48976,6 +52252,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutProductInput = {
@@ -48994,11 +52271,16 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateManyWithoutProductInput = {
@@ -49017,6 +52299,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -49091,6 +52377,10 @@ export namespace Prisma {
     returnedAt?: Date | string | null
     cancelledBy?: string | null
     status?: string
+    aiDamageVerdict?: string | null
+    aiDamageConfidence?: number | null
+    aiDamageNotes?: string | null
+    aiDamageCheckedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -49143,6 +52433,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     borrower?: UserUpdateOneRequiredWithoutCheckoutsAsBorrowerNestedInput
@@ -49152,6 +52446,7 @@ export namespace Prisma {
     trailEntry?: ItemTrailEntryUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateWithoutLentItemInput = {
@@ -49170,11 +52465,16 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     trailEntry?: ItemTrailEntryUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     borrowerReview?: BorrowerReviewUncheckedUpdateOneWithoutBorrowCheckoutNestedInput
     dispute?: DisputeUncheckedUpdateOneWithoutCheckoutNestedInput
+    conditionPhotos?: ConditionPhotoUncheckedUpdateManyWithoutCheckoutNestedInput
   }
 
   export type BorrowCheckoutUncheckedUpdateManyWithoutLentItemInput = {
@@ -49193,6 +52493,10 @@ export namespace Prisma {
     returnedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     cancelledBy?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    aiDamageVerdict?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageConfidence?: NullableFloatFieldUpdateOperationsInput | number | null
+    aiDamageNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    aiDamageCheckedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -49279,6 +52583,38 @@ export namespace Prisma {
     lenderId?: StringFieldUpdateOperationsInput | string
     message?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConditionPhotoCreateManyCheckoutInput = {
+    id?: string
+    role: string
+    data: Buffer
+    mimeType: string
+    createdAt?: Date | string
+  }
+
+  export type ConditionPhotoUpdateWithoutCheckoutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConditionPhotoUncheckedUpdateWithoutCheckoutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConditionPhotoUncheckedUpdateManyWithoutCheckoutInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Buffer
+    mimeType?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -49460,6 +52796,10 @@ export namespace Prisma {
      */
     export type BorrowRequestCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = BorrowRequestCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use BorrowCheckoutCountOutputTypeDefaultArgs instead
+     */
+    export type BorrowCheckoutCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = BorrowCheckoutCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use MentorCountOutputTypeDefaultArgs instead
      */
     export type MentorCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = MentorCountOutputTypeDefaultArgs<ExtArgs>
@@ -49483,6 +52823,14 @@ export namespace Prisma {
      * @deprecated Use ProductDefaultArgs instead
      */
     export type ProductArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ProductDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ProductImageDefaultArgs instead
+     */
+    export type ProductImageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ProductImageDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ConditionPhotoDefaultArgs instead
+     */
+    export type ConditionPhotoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ConditionPhotoDefaultArgs<ExtArgs>
     /**
      * @deprecated Use LentItemDefaultArgs instead
      */

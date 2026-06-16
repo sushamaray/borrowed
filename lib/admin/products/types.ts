@@ -13,6 +13,7 @@ export interface ProductListItem {
   pricePerDay: number;
   deposit: number | null;
   imageUrl: string | null;
+  images: { id: string; order: number }[];
   createdAt: string;
   createdBy: { id: string; name: string };
   lentItemCount: number;
@@ -44,6 +45,7 @@ export interface ProductDetail {
   features: string[];
   drawbacks: string[];
   imageUrl: string | null;
+  images: { id: string; order: number }[];
   compensationMajor: string | null;
   compensationMinor: string | null;
   lenderNote: string | null;

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { Search, LogOut } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
 
 const NAV_TABS = [
   { label: "Cases",   href: "/admin/disputes" },
@@ -86,6 +86,13 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           <div className="h-8 w-8 rounded-lg bg-[linear-gradient(135deg,#3b2a80,#6d5bba)] flex items-center justify-center text-white text-[0.67rem] font-black shrink-0 shadow-[0_2px_8px_rgba(59,42,128,0.3)]">
             {initials}
           </div>
+          <button
+            onClick={() => signOut({ callbackUrl: "/login" })}
+            title="Sign out"
+            className="h-8 w-8 rounded-lg flex items-center justify-center text-(--text-muted) hover:text-red-500 hover:bg-red-50 transition-all duration-150 shrink-0"
+          >
+            <LogOut className="h-4 w-4" />
+          </button>
         </div>
       </header>
 

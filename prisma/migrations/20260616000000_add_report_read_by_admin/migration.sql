@@ -1,0 +1,1 @@
+ALTER TABLE `UserReport` ADD COLUMN `readByAdmin` BOOLEAN NOT NULL DEFAULT false;

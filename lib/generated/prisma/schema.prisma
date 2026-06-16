@@ -55,6 +55,8 @@ model User {
   trailReactions           TrailReaction[]
   lenderReviews            BorrowerReview[]          @relation("LenderReviews")
   borrowerReviews          BorrowerReview[]          @relation("BorrowerReviews")
+  reportsMade              UserReport[]              @relation("ReportsMade")
+  reportsReceived          UserReport[]              @relation("ReportsReceived")
   notifications            Notification[]
   idVerification           IdVerification?
   disputesRaised           Dispute[]                 @relation("DisputeRaisedBy")
@@ -68,24 +70,25 @@ model User {
 // request. One Product can back multiple LentItem rows over time (reuse).
 
 model Product {
-  id                String   @id @default(cuid())
-  slug              String   @unique
+  id                String         @id @default(cuid())
+  slug              String         @unique
   name              String
   category          String
   subcategory       String?
   location          String
   pricePerDay       Int
   deposit           Int?
-  description       String   @db.Text
-  features          Json     @default("[]")
-  drawbacks         Json     @default("[]")
+  description       String         @db.Text
+  features          Json           @default("[]")
+  drawbacks         Json           @default("[]")
   imageUrl          String?
+  images            ProductImage[]
   compensationMajor String?
   compensationMinor String?
-  lenderNote        String?  @db.Text
+  lenderNote        String?        @db.Text
   createdById       String
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
 
   createdBy    User                 @relation("ProductCreator", fields: [createdById], references: [id], onDelete: Cascade)
   lentItems    LentItem[]
@@ -95,6 +98,35 @@ model Product {
 
   @@index([createdById])
   @@index([category])
+}
+
+// ── ProductImage — multiple images per product ────────────────────────────────
+
+model ProductImage {
+  id        String @id @default(cuid())
+  productId String
+  data      Bytes  @db.LongBlob
+  mimeType  String
+  order     Int    @default(0)
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+// ── ConditionPhoto — before/after borrow condition images ────────────────────
+
+model ConditionPhoto {
+  id         String   @id @default(cuid())
+  checkoutId String
+  role       String // "before" | "after"
+  data       Bytes    @db.LongBlob
+  mimeType   String
+  createdAt  DateTime @default(now())
+
+  checkout BorrowCheckout @relation(fields: [checkoutId], references: [id], onDelete: Cascade)
+
+  @@index([checkoutId])
 }
 
 // ── LentItem — Side A listing ────────────────────────────────────────────────
@@ -190,17 +222,22 @@ model BorrowCheckout {
   cancelledBy          String? // "borrower" | "lender"
   status               String    @default("pending")
   // "pending" | "accepted" | "active" | "returned" | "rejected" | "cancelled"
+  aiDamageVerdict      String? // "damaged" | "no_damage" | "unclear"
+  aiDamageConfidence   Float?
+  aiDamageNotes        String?   @db.Text
+  aiDamageCheckedAt    DateTime?
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
 
-  borrower       User                @relation("CheckoutBorrower", fields: [borrowerId], references: [id], onDelete: Cascade)
-  lender         User                @relation("CheckoutLender", fields: [lenderId], references: [id], onDelete: Cascade)
-  product        Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
-  lentItem       LentItem?           @relation(fields: [lentItemId], references: [id], onDelete: SetNull)
-  offer          BorrowRequestOffer? @relation(fields: [borrowRequestOfferId], references: [id], onDelete: SetNull)
-  trailEntry     ItemTrailEntry?
-  borrowerReview BorrowerReview?
-  dispute        Dispute?
+  borrower        User                @relation("CheckoutBorrower", fields: [borrowerId], references: [id], onDelete: Cascade)
+  lender          User                @relation("CheckoutLender", fields: [lenderId], references: [id], onDelete: Cascade)
+  product         Product             @relation(fields: [productId], references: [id], onDelete: Cascade)
+  lentItem        LentItem?           @relation(fields: [lentItemId], references: [id], onDelete: SetNull)
+  offer           BorrowRequestOffer? @relation(fields: [borrowRequestOfferId], references: [id], onDelete: SetNull)
+  trailEntry      ItemTrailEntry?
+  borrowerReview  BorrowerReview?
+  dispute         Dispute?
+  conditionPhotos ConditionPhoto[]
 
   @@index([borrowerId])
   @@index([lenderId])
@@ -439,6 +476,27 @@ model BorrowerReview {
 
   @@index([lenderId])
   @@index([borrowerId])
+}
+
+// ── User Reports ──────────────────────────────────────────────────────────────
+
+model UserReport {
+  id             String   @id @default(cuid())
+  reporterId     String
+  reportedUserId String
+  reason         String
+  description    String?  @db.Text
+  status         String   @default("pending")
+  createdAt      DateTime @default(now())
+
+  readByAdmin Boolean @default(false)
+
+  reporter User @relation("ReportsMade", fields: [reporterId], references: [id])
+  reported User @relation("ReportsReceived", fields: [reportedUserId], references: [id])
+
+  @@index([reportedUserId])
+  @@index([reporterId])
+  @@index([status])
 }
 
 // ── ID Verification ───────────────────────────────────────────────────────────

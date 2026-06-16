@@ -15,16 +15,30 @@ export async function PATCH(
     }
 
     const { reportId } = await params;
-    const body = (await request.json()) as { status?: unknown };
-    const status = body.status as string;
+    const body = (await request.json()) as { status?: unknown; readByAdmin?: unknown };
 
-    if (!VALID_STATUSES.includes(status as typeof VALID_STATUSES[number])) {
-      return NextResponse.json({ error: "status must be 'reviewed' or 'dismissed'" }, { status: 400 });
+    const data: { status?: string; readByAdmin?: boolean } = {};
+
+    if (body.status !== undefined) {
+      const status = body.status as string;
+      if (!VALID_STATUSES.includes(status as typeof VALID_STATUSES[number])) {
+        return NextResponse.json({ error: "status must be 'reviewed' or 'dismissed'" }, { status: 400 });
+      }
+      data.status = status;
+      data.readByAdmin = true;
+    }
+
+    if (body.readByAdmin !== undefined) {
+      data.readByAdmin = Boolean(body.readByAdmin);
+    }
+
+    if (Object.keys(data).length === 0) {
+      return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
     }
 
     await prisma.userReport.update({
       where: { id: reportId },
-      data: { status },
+      data,
     });
 
     return NextResponse.json({ ok: true });

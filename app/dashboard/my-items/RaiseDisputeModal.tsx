@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { X, ShieldAlert, AlertTriangle } from "lucide-react";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 type Checkout = {
   id: string;
   deposit: number | null;
   product: { name: string };
+  conditionPhotos: { id: string; role: string }[];
 };
 
 export default function RaiseDisputeModal({
@@ -21,10 +23,13 @@ export default function RaiseDisputeModal({
 }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [beforePhotoUrl, setBeforePhotoUrl] = useState("");
-  const [afterPhotoUrl, setAfterPhotoUrl] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
+
+  const beforeId = checkout.conditionPhotos.find((p) => p.role === "before")?.id;
+  const afterId  = checkout.conditionPhotos.find((p) => p.role === "after")?.id;
+  const beforePhotoUrl = beforeId ? `/api/condition-photos/${beforeId}` : undefined;
+  const afterPhotoUrl  = afterId  ? `/api/condition-photos/${afterId}`  : undefined;
 
   useEffect(() => {
     const prev = document.body.style.overflow;
@@ -49,8 +54,8 @@ export default function RaiseDisputeModal({
           checkoutId: checkout.id,
           title: title.trim(),
           description: description.trim(),
-          beforePhotoUrl: beforePhotoUrl.trim() || undefined,
-          afterPhotoUrl: afterPhotoUrl.trim() || undefined,
+          beforePhotoUrl,
+          afterPhotoUrl,
         }),
       });
 
@@ -141,31 +146,41 @@ export default function RaiseDisputeModal({
             </div>
           </div>
 
-          {/* Photo URLs (optional) */}
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="mb-1.5 block text-xs font-bold text-[var(--text-secondary)]">
-                Pickup photo URL (optional)
-              </label>
-              <input
-                type="url"
-                value={beforePhotoUrl}
-                onChange={(e) => setBeforePhotoUrl(e.target.value)}
-                placeholder="https://…"
-                className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-xs text-[var(--ink)] placeholder:text-[var(--text-muted)] focus:border-[var(--primary)] focus:outline-none transition-colors"
-              />
+          {/* Condition photos — auto-attached */}
+          <div>
+            <div className="mb-1.5 flex items-center gap-2">
+              <span className="text-xs font-bold text-[var(--text-secondary)]">Condition Photos</span>
+              <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[0.65rem] font-bold text-emerald-700">Auto-attached</span>
             </div>
-            <div>
-              <label className="mb-1.5 block text-xs font-bold text-[var(--text-secondary)]">
-                Return photo URL (optional)
-              </label>
-              <input
-                type="url"
-                value={afterPhotoUrl}
-                onChange={(e) => setAfterPhotoUrl(e.target.value)}
-                placeholder="https://…"
-                className="w-full rounded-xl border border-[var(--border)] bg-[var(--surface-soft)] px-3 py-2 text-xs text-[var(--ink)] placeholder:text-[var(--text-muted)] focus:border-[var(--primary)] focus:outline-none transition-colors"
-              />
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <p className="mb-1 text-[0.65rem] font-semibold text-[var(--text-muted)] uppercase tracking-wide">Pickup photo</p>
+                {beforePhotoUrl ? (
+                  <img
+                    src={beforePhotoUrl}
+                    alt="Pickup condition"
+                    className="h-28 w-full rounded-xl object-cover border border-[var(--border)]"
+                  />
+                ) : (
+                  <div className="flex h-28 items-center justify-center rounded-xl border border-dashed border-[var(--border)] bg-[var(--surface-soft)] text-xs text-[var(--text-muted)]">
+                    No photo
+                  </div>
+                )}
+              </div>
+              <div>
+                <p className="mb-1 text-[0.65rem] font-semibold text-[var(--text-muted)] uppercase tracking-wide">Return photo</p>
+                {afterPhotoUrl ? (
+                  <img
+                    src={afterPhotoUrl}
+                    alt="Return condition"
+                    className="h-28 w-full rounded-xl object-cover border border-[var(--border)]"
+                  />
+                ) : (
+                  <div className="flex h-28 items-center justify-center rounded-xl border border-dashed border-[var(--border)] bg-[var(--surface-soft)] text-xs text-[var(--text-muted)]">
+                    No photo
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

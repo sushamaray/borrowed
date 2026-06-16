@@ -39,7 +39,9 @@ export async function GET(request: Request) {
         ...(itemSearchOR ? { OR: itemSearchOR } : {}),
       },
       include: {
-        product: true,
+        product: {
+          include: { images: { select: { id: true }, orderBy: { order: "asc" }, take: 1 } },
+        },
         lender: {
           select: { firstName: true, lastName: true, userName: true },
         },
@@ -57,7 +59,9 @@ export async function GET(request: Request) {
       pricePerDay: item.product.pricePerDay,
       deposit: item.product.deposit,
       description: item.product.description,
-      imageUrl: item.product.imageUrl,
+      imageUrl: item.product.images[0]
+        ? `/api/products/images/${item.product.images[0].id}`
+        : item.product.imageUrl,
       lenderName:
         item.lender.firstName && item.lender.lastName
           ? `${item.lender.firstName} ${item.lender.lastName}`

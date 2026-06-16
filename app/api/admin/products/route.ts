@@ -56,6 +56,7 @@ export async function GET(req: Request) {
         pricePerDay: true,
         deposit: true,
         imageUrl: true,
+        images: { select: { id: true, order: true }, orderBy: { order: "asc" }, take: 1 },
         createdAt: true,
         createdBy: {
           select: { id: true, name: true, firstName: true, userName: true },
@@ -79,6 +80,7 @@ export async function GET(req: Request) {
       pricePerDay: p.pricePerDay,
       deposit: p.deposit,
       imageUrl: p.imageUrl,
+      images: p.images,
       createdAt: p.createdAt.toISOString(),
       createdBy: { id: p.createdBy.id, name: displayName(p.createdBy) },
       lentItemCount: p._count.lentItems,
