@@ -59,7 +59,16 @@
       "Bash(curl -s http://localhost:3001/api/test-gemini)",
       "PowerShell(Invoke-WebRequest -Uri \"http://localhost:3000/api/test-gemini\" -UseBasicParsing)",
       "Bash(mkdir -p \"d:/Niloy All Major Projects/Software-Engineering-Project/app/api/conversations/[id]/dispute-context\")",
-      "Bash(mkdir -p \"d:/Niloy All Major Projects/Software-Engineering-Project/app/api/borrow-orders/[id]/dispute-info\")"
+      "Bash(mkdir -p \"d:/Niloy All Major Projects/Software-Engineering-Project/app/api/borrow-orders/[id]/dispute-info\")",
+      "Bash(cp Borrowed_Project_Report.docx Borrowed_Project_Report_backup.docx)",
+      "Bash(pip install *)",
+      "Bash(python -)",
+      "Bash(python _restructure_report.py)",
+      "Bash(python _add_features.py)",
+      "Bash(grep -i '~\\\\$Borrowed')",
+      "Bash(python _add_geo.py)",
+      "Bash(python _rewrite_sec4.py)",
+      "Bash(python _rewrite_sec5.py)"
     ],
     "additionalDirectories": [
       "d:\\Niloy All Major Projects\\Software-Engineering-Project\\app\\api\\users",
